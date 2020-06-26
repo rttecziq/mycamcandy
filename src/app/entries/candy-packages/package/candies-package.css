@@ -1,0 +1,37 @@
+.title {
+	color: #CF305A;
+	margin-top:	-10px;
+	font-weight: bold;
+}
+
+.content {
+	text-align: center;
+	padding: 10px 10px;
+}
+
+.content-with-line-height {
+	text-align: center;
+	padding: 10px 10px;
+	line-height: 4.5;
+}
+
+.candy-image {
+	text-align: left;
+}
+
+.buy-button {
+	background-color: #617F9E;
+}
+
+.btn {
+	border-color: #617F9E;
+}
+
+.bonus_candy {
+	color: #CF305A;
+}
+
+.candy-box {
+	padding-left: 100px;
+	padding-right: 100px;
+}

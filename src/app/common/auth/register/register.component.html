@@ -1,0 +1,51 @@
+<div class="main body-img" style="background-image: url(../../../assets/img/bg-video-default.jpg);">
+    <div class="overlay section-spacing pt-120">
+        <div class="signup-form">
+            <div class="right-align">
+                <a routerLink="/login" [queryParams]="{uType : uType}" class="forgot">{{'sign_in' | translate}}<i class="fa fa-chevron-right signin-arrow"></i></a>
+            </div>
+            <div class="clear-both"></div>
+            <!--<h2 class="signup-head center-align top">StreamNow</h2> -->
+            <div class="Spacer-8 top"></div>
+            <!-- SOCIAL LOGIN SECTION STARTS -->
+            <div class="row" *ngIf="google_status || fb_status">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 google" *ngIf="google_status">
+                    <button class="google-signin" type="button" (click)="socialLogin('google')"><i class="fa fa-google icon"></i>{{'signin_with_google' | translate}}</button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 facebook" *ngIf="fb_status">
+                     <button class="facebook-signin" type="button" (click)="socialLogin('facebook')"><i class="fa fa-facebook icon"></i>{{'signin_with_facebook' | translate}}</button>
+                </div>
+            </div>
+            <span *ngIf="google_status || fb_status">
+                <!-- SOCIAL LOGIN SECTION ENDS -->
+                <div class="Spacer-8"></div>
+                <h3 class="signup-line center-align">{{'or' | translate}}</h3>
+            </span>
+            <!-- FORM STARTS -->
+
+            <form class="" #userRegistrationForm="ngForm" (ngSubmit)="userRegistration(userRegistrationForm)">
+                <div class="md-form form-lg">
+                    <input type="text" id="username" class="form-control form-control-lg" [(ngModel)]="user.name" required name="name" minlength="2" maxlength="128" autocomplete="off">
+                    <label for="username">{{'name' | translate}}</label>
+                </div>
+                <div class="md-form form-lg">
+                    <input type="email" id="email" class="form-control form-control-lg" [(ngModel)]="user.email" name="email" required autocomplete="off">
+                    <label for="email">email</label>
+                </div>
+                <div class="md-form form-lg">
+                    <input type="password" id="password" class="form-control form-control-lg" [(ngModel)]="user.password" name="password" required minlength="6" title="Enter Minimum 6 character" autocomplete="off">
+                    <label for="password">password</label>
+                </div>
+                <div class="md-form form-lg">
+                    <input type="password" id="confirm_password" class="form-control form-control-lg" [(ngModel)]="user.password_confirmation" name="password_confirmation" required minlength="6" title="Enter Minimum 6 character" autocomplete="off">
+                    <label for="confirm_password">{{'confirm_password' | translate}}</label>
+                </div>
+                
+                <div class="center-align">
+                    <button class="btn width-200" type="submit" [disabled]="!userRegistrationForm.valid">SignUp</button>
+                </div>
+            </form>
+            <!-- FORM ENDS -->
+        </div>
+    </div>
+</div>

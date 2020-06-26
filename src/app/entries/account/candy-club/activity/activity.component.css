@@ -1,0 +1,103 @@
+/********************User end Activity Start**********************/
+
+.profile-background .container{
+  background: #fff;
+  padding:0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.user-profile-list{
+  margin:0px;
+}
+.list-group-item:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+.list-group-item:first-child {
+  border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+.user-profile-list a{
+  color:#484747!important;
+}
+.post-body img{width: 150px;}
+.float-left{
+  float: left;
+}
+.float-right{
+  float: right;
+}
+.profile-primary-div ul li{background: #ffbf0047;border-color: #ffc107;}
+.user-profile-list a:hover li{
+  background-color: #ffc107;
+    border-color: #ffc107;
+    color: #fff;
+}
+.user-profile-list li{text-align: center;}
+.user-profile-list li i.fa{font-size:22px;}
+.user-profile-list a:hover li.active{
+  background-color: #ffc107;
+    border-color: #ffc107;
+    color: #fff;
+}
+.user-profile-list li.active{
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+/***Sidebar menu End**/
+
+.mt-3{margin-top: 2rem;}
+.mt-5{margin-top: 3rem;}
+.p-2{padding: .5rem;}
+.bg-light{background: #f7f7f7;}
+
+.user-row{background: #efefef;margin-top: 10px;}
+.user-pic img{
+  padding:10px;
+  position: absolute;
+  top:-100px;
+}
+.actions{
+  margin-right: 10px;
+    margin-top: -37px;
+}
+.actions .dropdown-menu{left: -110px}
+#post-on-wall{
+  margin: 3rem 0rem;
+  box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;
+}
+#uploaded-file{
+  width: 25px;
+  position: absolute;
+  left: 55px;
+  opacity: 0;
+  top: 20.5%;
+}
+.user-activity{
+    height: 500px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.post-footer-option .list-unstyled {
+    display: inline-flex;
+}
+.post-footer-option .list-unstyled li a{padding: 10px}
+
+@media screen and (max-width: 767px){
+  .user-pic img {
+    position: relative;
+    top: unset;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+.desc, .username{text-align: center;}
+}
+@media screen and (max-width: 991px) and (min-width: 768px){
+  .user-pic img {
+    top: -65px;
+}
+}
+/********************User end Activity End**********************/

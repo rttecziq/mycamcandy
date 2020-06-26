@@ -1,0 +1,40 @@
+<!-- MAIN SECTION STARTS -->
+<div class="sec-padding left-spacing1">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-1 col-lg-10">
+            <!-- <div class="public-video-header">PRICING AND PLANS</div> -->
+            <h3 class="heading-element">Candies Packages</h3>
+            <!-- PRICING AND PLANS SECTION STARTS -->
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 top-margin candy-box" *ngFor="let package of packages">
+                    <div class="white-bg" [ngClass]="{'content-with-line-height': package.bonus_candies <= 0, 'content': package.bonus_candies > 0}">
+                        <div class="candy-image">
+                            <img src="../../../assets/img/candy.png"/>
+                        </div>
+                        <div>
+                            <h2 class="title">{{package.title}}</h2>
+                            <h6 class="bonus_candy" *ngIf="package.bonus_candies > 0">
+                                + {{package.bonus_candies}} Candies Bonus
+                            </h6>
+                            <h3 class="text-bold">{{package.currency}}{{package.amount}}</h3>
+                        </div>
+                        <div class="Spacer-5"></div>
+                        <a [routerLink]="['/buy_candies']" [queryParams]="{candies_package_id : package.candies_package_id}">
+                            <button class="btn btn-block btn-flat mb-10 buy-button" type="button" >BUY CANDIES</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- PRICING AND PLAN SECTION ENDS -->
+        </div>
+    </div>
+    <div class="Spacer-10"></div>
+
+    <div class="no_result_class text-center" *ngIf="packages.length <= 0">
+        <div>
+            <h3 class="tab-head text-center">No Candies packages found</h3>
+            <img class="noresult-img" src="../../../assets/img/no-result.gif">
+        </div>
+    </div>
+</div>
+<!-- MAIN SECTION ENDS -->

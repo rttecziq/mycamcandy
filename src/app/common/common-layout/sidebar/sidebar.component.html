@@ -1,0 +1,65 @@
+<!-- SIDE NAVIGATION BAR STARTS -->
+<div class="side-menubar">
+    <ul class="side-menubar1">
+        <li class="side-men" >
+            <a routerLink="/" [routerLinkActive]="['active-pink']" [routerLinkActiveOptions]="{exact:true}">
+                <i class="fa fa-home sidemenu-icon"></i>
+            </a>
+            <ul class="sidenav">
+                <li>{{'home_text' | translate}}</li>
+            </ul>
+        </li>
+        
+        <li class="side-men" >
+            <a routerLink="/vod-videos" [routerLinkActive]="['active-pink']" [routerLinkActiveOptions]="{exact:true}" class="grey-icon">
+                <img src="../../../assets/img/video-grey.png" class="sidemenu-img">
+            </a>
+            <a routerLink="/vod-videos" [routerLinkActive]="['active-pink']" [routerLinkActiveOptions]="{exact:true}" class="pink-icon">
+                <img src="../../../assets/img/video-pink.png" class="sidemenu-img">
+            </a>
+            <ul class="sidenav">
+                <li>VOD Videos</li>
+            </ul>
+        </li>
+        
+        <li class="side-men" >
+            <a routerLink="/live-tv" [routerLinkActive]="['active-pink']" [routerLinkActiveOptions]="{exact:true}" class="grey-icon">
+                <img src="../../../assets/img/live-video-grey.png" class="sidemenu-img">
+            </a>
+            <a routerLink="/live-tv" [routerLinkActive]="['active-pink']" [routerLinkActiveOptions]="{exact:true}" class="pink-icon">
+                <img src="../../../assets/img/live-video-pink.png" class="sidemenu-img">
+            </a>
+            <ul class="sidenav">
+                <li>live TV</li>
+            </ul>
+        </li>
+        
+        <li class="side-men" *ngIf="isUserExists">
+            <a routerLink="/settings" [routerLinkActive]="['active-pink']" [routerLinkActiveOptions]="{exact:true}">
+                <i class="fa fa-cog sidemenu-icon" ></i>
+            </a>
+            <ul class="sidenav">
+                <li>Settings</li>
+            </ul>
+        </li>
+       
+        <li class="side-men" *ngIf="isUserExists && is_content_creator && user_type">
+            <a routerLink="/broadcast" [routerLinkActive]="['active-pink']" [routerLinkActiveOptions]="{exact:true}">
+                <i class="fa fa-globe sidemenu-icon" ></i>
+            </a>
+            <ul class="sidenav">
+                <li>Broadcast Yourself</li>
+            </ul>
+        </li>
+        
+        <li class="side-men">
+            <a routerLink="/choose-login" *ngIf="!isUserExists"><i class="fa fa-sign-in sidemenu-icon" ></i></a>
+            <a (click)="logout()" *ngIf="isUserExists"><i class="fa fa-sign-out sidemenu-icon" ></i></a>
+            <ul class="sidenav">
+                <li *ngIf="!isUserExists">Login / Register</li>
+                <li *ngIf="isUserExists">Logout</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<!-- SIDE NAVIGATION BAR ENDS -->

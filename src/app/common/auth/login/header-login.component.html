@@ -1,0 +1,29 @@
+<div class="nav-item form-li mx-auto">
+    <form *ngIf="!this.isLogged()" (ngSubmit)="userAuthentication(userName.value, Password.value)" class="form-inline my-2 my-lg-0 ml-auto justify-content-center" id="custom_member_login_form" #loginForm="ngForm">
+      <div class="form-group">
+        <label>Username</label>
+          <input class="form-control mr-sm-2" type="text" name="user" id="user" placeholder="Username" #userName ngModel autocomplete="off">
+      </div>
+      <div class="form-group">
+          <div class="forgot_pass_mcc">
+            <label>Password</label>
+          <input class="form-control mr-sm-2" type="password" name="password" id="password" placeholder="Password" #Password ngModel autocomplete="off">
+          <p class="forgot_mcc">
+            <!-- <a routerLink="/forgot-password" [queryParams]="{uType : uType}">{{'forgot_password' | translate}}?</a> -->
+            <a href="javascript:void(0)"  data-toggle="modal" data-target="#forgot-popup">Forgot Password?</a>
+          </p>
+          </div>
+      </div>
+      <div class="form-group">
+          <button class="btn btn-sm my-2 my-sm-0" type="submit" [disabled]="!loginForm.valid">{{'login' | translate}}</button>
+      </div>
+      <div class="form-group">
+        <div class="checkbox">
+          <label><input type="checkbox" value="">Keep me logged in</label>
+        </div>
+      </div>
+      <div class="">
+        <a routerLink="/signup" class="create-account">Create New Account</a>
+      </div>
+    </form>
+</div>

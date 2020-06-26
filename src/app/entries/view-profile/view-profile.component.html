@@ -1,0 +1,396 @@
+<div *ngIf="!user_details.is_block">
+
+    <!--PROFLE SECTION STARTS-->
+    <div class="profile-bg-image left-spacing1" [style.background-image]="user_details.cover ? 'url(' + user_details.cover + ')' : '../../../assets/img/pro-bg.jpg'">
+        <div class="profile-bg-overlay">
+            <div class="container">
+                <div class="Spacer-25 hidden-xs"></div>
+                <div class="Spacer-18 visible-xs"></div>
+                <div class=" row">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 center-align">
+                        <div class="profile-image" [style.background-image]="user_details.picture ? 'url(' + user_details.picture + ')' : '../../../assets/img/pro-img.jpg'">
+                            <img src="../../../assets/img/play.png" class="live-icon" *ngIf="user_details.is_userLive">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8 white-text">
+                        <div class="Spacer-10"></div>
+                        <h1 class="signup-head">{{user_details.name}}</h1>
+                        <div class="Spacer-5"></div>
+                        <h4 class="signup-head">
+                            <a class="pro-head">
+                                Followers - {{user_details.no_of_followers}}
+                            </a>
+                            <a class="left-spacing pro-head">
+                                Following - {{user_details.no_of_followings}}
+                            </a>        
+                        </h4>
+                        <div class="Spacer-3"></div>
+                        <hr>
+                        <div class="Spacer-3"></div>
+                        <div *ngIf="isLoggedInUser && userId != peer_id">        
+                            <span *ngIf="!user_details.is_block">
+                                <button class="btn2 width-150" type="button" *ngIf="!user_details.is_follow" (click)="followUser(user_details.id, '', '')"><i class="fa fa-user-plus icon"></i>Follow</button>
+                                <button class="btn2 width-150" type="button" *ngIf="user_details.is_follow" (click)="unFollowUser(user_details.id, '', '')"><i class="fa fa-user-times icon"></i>Unfollow</button>
+                            </span>
+                            <span *ngIf="user_details.is_block">
+                                <button class="btn2 width-150" type="button" *ngIf="!user_details.is_follow" disabled title="You blocked the user"><i class="fa fa-user-plus icon"></i>Follow</button>
+                                <button class="btn2 width-150" type="button" *ngIf="user_details.is_follow" disabled title="You blocked the user"><i class="fa fa-user-times icon"></i>Unfollow</button>
+                            </span>
+                            <div class="Spacer-3 visible-xs"></div>
+                            <button class="btn3 width-150" type="button" *ngIf="!user_details.is_block" data-toggle="modal" data-target="#block_user"><i class="fa fa-ban icon"></i>Block</button>
+                            <button class="btn3 width-150" type="button" *ngIf="user_details.is_block" data-toggle="modal" data-target="#unblock_user"><i class="fa fa-ban icon"></i>UnBlock</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="Spacer-10"></div>
+            <div class="overlay1 container">
+                <ul class="nav nav-tabs profile-tab" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#about_details" aria-controls="home" role="tab" data-toggle="tab" class="white-text hidden-xs">About</a>
+                        <a href="#about_details" aria-controls="home" role="tab" data-toggle="tab" class="white-text visible-xs"><i class="fa fa-info"></i></a>
+                    </li>
+                    <li role="presentation" *ngIf="user_details.is_content_creator">
+                        <a href="#gallery" aria-controls="gallery" role="tab" data-toggle="tab" class="white-text hidden-xs">gallery</a>
+                        <a href="#gallery" aria-controls="gallery" role="tab" data-toggle="tab" class="white-text visible-xs" ><i class="fa fa-picture-o"></i></a>
+                    </li>
+                    <li role="presentation" >
+                        <a href="#followers" aria-controls="followers" role="tab" data-toggle="tab" class="white-text hidden-xs">Followers</a>
+                        <a href="#followers" aria-controls="followers" role="tab" data-toggle="tab" class="white-text visible-xs" ><i class="fa fa fa-users"></i></a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#following" aria-controls="settings" role="tab" data-toggle="tab" class="white-text hidden-xs">Following</a>
+                        <a href="#following" aria-controls="settings" role="tab" data-toggle="tab" class="white-text visible-xs" ><i class="fa fa fa-user-plus"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--PROFILE SECTION ENDS-->
+
+    <!-- TAB CONTENT STARTS -->
+    <div class="tab-content left-spacing1">
+        <!-- ABOUT TAB STARTS-->
+        <div id="about_details" class=" tab-pane fade in active zero-padding">
+            <div class="container top-bottom-spacing padd">
+                <h3 class="tab-head">About me</h3>
+                <h5 *ngIf="user_details.description" class="about-text" [innerHTML]="user_details.description"></h5>
+                <h4 *ngIf="user_details.description == ''">No Description Found</h4>
+                
+                <h3 class="mb-0" *ngIf="user_details.private_videos || user_details.public_videos">Videos</h3>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 top-margin">
+                        <div *ngIf="user_details.private_videos">
+                            <div class="live-video-box mb-0" *ngFor="let data of user_details.private_videos">
+                                <div class="public-img" [style.background-image]="data.snapshot ? 'url(' + data.snapshot + ')' : null">
+                                    <a routerLink="/join-video" [queryParams]="{video_id : data.video_id}">
+                                        <div class="playbtn1">
+                                            <div class="white-btn-play1"><img src="../../../assets/img/play-btn.png"></div>
+                                            <div class="pink-btn-play1"><img src="../../../assets/img/play-btn-pink.png"></div>
+                                        </div>
+                                    </a>
+                                    <div class="video-amount" *ngIf="data.amount > 0">
+                                        <h5 class="no-margin">{{data.currency}}{{data.amount}}</h5>
+                                    </div>
+                                    <div class="watch-count">
+                                        <h5 class="h5-s user-name m-0"><i class="fa fa-eye icon"></i>{{data.viewers}} Views</h5>
+                                    </div>
+                                </div>
+                                <div class="user-profile spacing">
+                                    <h4 class="h4-s user-name text-bold overflow">{{data.title}}</h4>
+                                    <h5 class="h5-s user-name text-grey-clr overflow"> {{data.name}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="user_details.public_videos">
+                            <div class="live-video-box mb-0" *ngFor="let data of user_details.public_videos">
+                                <div class="public-img" [style.background-image]="data.snapshot ? 'url(' + data.snapshot + ')' : null">
+                                    <a routerLink="/join-video" [queryParams]="{video_id : data.video_id}">
+                                        <div class="playbtn1">
+                                            <div class="white-btn-play1"><img src="../../../assets/img/play-btn.png"></div>
+                                            <div class="pink-btn-play1"><img src="../../../assets/img/play-btn-pink.png"></div>
+                                        </div>
+                                    </a>
+                                    <div class="video-amount" *ngIf="data.amount > 0">
+                                        <h5 class="no-margin">{{data.currency}}{{data.amount}}</h5>
+                                    </div>
+                                    <div class="watch-count">
+                                        <h5 class="h5-s user-name m-0"><i class="fa fa-eye icon"></i>{{data.viewers}} Views</h5>
+                                    </div>
+                                </div>
+                                <div class="user-profile spacing">
+                                    <h4 class="h4-s user-name text-bold overflow">{{data.title}}</h4>
+                                    <h5 class="h5-s user-name text-grey-clr overflow"> {{data.name}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ABOUT TAB ENDS -->
+
+        <!-- gallery -->
+        <div id="gallery" class=" tab-pane fade zero-padding">
+            <div class="container top-bottom-spacing padd">
+                <div class="">
+                    <h3 class="tab-head">Description</h3>
+                    <h5 class="about-text mt-0">{{user_details.gallery_description}}</h5>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3" *ngFor="let gallery of galleries;">
+                            <a class="example-image-link" href="{{gallery.image}}" data-lightbox="example-set" >
+                                <img class="example-image" src="{{gallery.image}}" alt=""/>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="Spacer-10"></div>
+                    <!-- section loader -->
+                    <div class="loader" *ngIf="showGalleryLoader">
+                        <div class="spin"></div>
+                        <div class="bounce"></div>
+                    </div>
+                    <div class="text-center" *ngIf="galleries.length > 0 && galleryDatasAvailable > 0">
+                        <button class="show-more-btn" (click)="showMoreGalleries()">show more</button>
+                    </div>
+
+                    <div class="no_result_class text-center" *ngIf="galleries.length <= 0">
+                        <div>
+                            <h3 class="tab-head text-center">No Photos found</h3>
+                            <img class="noresult-img" src="../../../assets/img/no-result.gif">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- gallery -->
+
+        <!-- FOLLOWERS TAB STARTS -->
+        <div id="followers" class=" tab-pane fade zero-padding">
+            <div class="container">
+                <!-- FOLLOWERS LIST STARTS -->
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 top-margin bottom-space" *ngFor="let follower of followers;let i = index;">
+                        <div class="live-video-box mb-0">
+                            <!-- For other user profile-->
+                            <a routerLink="/view-profile" [queryParams]="{peer_id : follower.follower_id}" *ngIf="follower.status >= 0">
+                                <div class="followers-img" [style.background-image]="'url('+follower.picture+')'"></div>
+                            </a>
+
+                            <!-- For Logged in  user profile-->
+
+                            <a routerLink="/profile" *ngIf="follower.status == -1">
+                                <div class="followers-img" [style.background-image]="'url('+follower.picture+')'"></div>
+                            </a>
+
+                            <div class="user-profile spacing">
+
+                                <!-- For other user profile-->
+
+                                <a routerLink="/view-profile" [queryParams]="{peer_id : follower.follower_id}" *ngIf="follower.status >= 0">
+                                        <h4 class="h4-s user-name text-bold overflow">{{follower.name}}</h4>
+                                </a> 
+
+                                <!-- For Logged in  user profile-->
+                                <a routerLink="/profile" *ngIf="follower.status == -1">
+                                    <h4 class="h4-s user-name text-bold overflow">{{follower.name}}</h4>
+                                </a>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
+                                        <h4 class="h4-s user-name blue-clr mt-5 mb-15 overflow"><i class="fa fa-eye icon"></i>{{follower.no_of_followers}} Followers</h4>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7" *ngIf="!follower.is_block && isLoggedInUser">
+                                        <button class=" btn-default btn-follow right-align left" type="button" *ngIf="!follower.status" (click)="followUser(follower.follower_id, 'follower', i)"><i class="fa fa-user-plus icon"></i> Follow</button>
+                                        <button class=" btn-default btn-follow right-align left" type="button" *ngIf="follower.status == 1" (click)="unFollowUser(follower.follower_id, 'follower', i)"><i class="fa fa-user-times icon"></i> Unfollow</button>
+                                        <button class=" btn-default btn-follow right-align left" type="button" *ngIf="follower.status == -1"><i class="fa fa-smile-o icon"></i> You</button>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7" *ngIf="follower.is_block && follower.status >= 0 && isLoggedInUser">
+                                        <button class=" btn-default btn-follow right-align left" type="button" (click)="unBlockUser(follower.follower_id, 'follower', i)"><i class="fa fa-ban icon"></i> Unblock</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <!-- section loader -->
+                <div class="loader" *ngIf="showFollowersLoader">
+                    <div class="spin"></div>
+                    <div class="bounce"></div>
+                </div>
+                <div class="text-center" *ngIf="followersSkipCount > 0 && followerDatasAvailable > 0">
+                    <button class="show-more-btn mt-20" (click)="showMoreFollowers()">show more</button>
+                </div>
+                
+                <!-- FOLLWERS LIST ENDS -->
+            </div>
+            <div class="Spacer-10"></div>
+
+            <div class="no_result_class text-center" *ngIf="followers.length <= 0">
+                <div>
+                    <h3 class="tab-head text-center">No Followers found</h3>
+                    <img class="noresult-img" src="../../../assets/img/no-result.gif">
+                </div>
+            </div>
+        </div>
+        <!-- FOLLOWERS TAB ENDS -->
+
+        <!-- FOLLOWING TAB STARTS -->
+        <div id="following" class=" tab-pane fade zero-padding">
+            <div class="container">
+                <!-- FOLLWING TAB LIST STARTS -->
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 top-margin bottom-space" *ngFor="let following of followings;let i = index;">
+                        <div class="user-profile text-center box-shadow">
+
+                            <!-- For other user profile-->
+                            <a routerLink="/view-profile" [queryParams]="{peer_id : following.follower_id}" *ngIf="following.status >= 0">
+                                <div class="profile-user-img"> 
+                                    <div class="img-circle  following-img" [style.background-image]="'url(' + following.picture + ')'"></div>
+                                </div>
+                            
+                                <h4 class="h4-s user-name text-bold text-overflow">	{{following.name}}</h4>
+                            </a>
+
+                            <!-- For Logged in  user profile-->
+
+                            <a routerLink="/profile" *ngIf="following.status == -1">
+                                <div class="profile-user-img"> 
+                                    <div class="img-circle  following-img" [style.background-image]="'url(' + following.picture + ')'"></div>
+                                </div>
+                            
+                                <h4 class="h4-s user-name text-bold text-overflow">	{{following.name}}</h4>
+                            </a>
+                            
+
+                            <span *ngIf="!following.is_block && isLoggedInUser">
+                                <button class=" btn2 mb-10 mt-10" type="button" *ngIf="!following.status" (click)="followUser(following.follower_id, 'following', i)"><i class="fa fa-user-plus icon"></i> Follow</button>
+                                <button class=" btn2 mb-10 mt-10" type="button" *ngIf="following.status == 1" (click)="unFollowUser(following.follower_id, 'following', i)"><i class="fa fa-user-times icon"></i> Unfollow</button>
+                                <button class=" btn2 mb-10 mt-10" type="button" *ngIf="following.status == -1"><i class="fa fa-smile-o icon"></i> You</button>
+                            </span>
+
+                            <button class="btn2 mb-10 mt-10" type="button" *ngIf="following.is_block && following.status >= 0 && isLoggedInUser" (click)="unBlockUser(following.follower_id, 'following', i)"><i class="fa fa-ban icon"></i> Un Block</button>
+
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- section loader -->
+                <div class="loader" *ngIf="showFollowingLoader">
+                    <div class="spin"></div>
+                    <div class="bounce"></div>
+                </div>
+                <div class="text-center" *ngIf="followings.length > 0 && followingDatasAvailable > 0">
+                    <button class="show-more-btn mt-20" (click)="showMoreFollowings()">show more</button>
+                </div>
+
+                <!-- FOLLWING TAB LIST ENDS -->
+            </div>
+            <div class="Spacer-10"></div>
+
+            <div class="no_result_class text-center" *ngIf="followings.length <= 0">
+                <div>
+                    <h3 class="tab-head text-center">No Following Users found</h3>
+                    <img class="noresult-img" src="../../../assets/img/no-result.gif">
+                </div>
+            </div>
+        </div>
+        <!-- FOLLOWING TAB ENDS  -->
+    </div>
+    <!-- TAB CONTENT ENDS -->
+
+    <!-- Block Content -->
+    <div class="modal fade white-text top1" id="block_user" role="dialog">
+        <div class="modal-dialog">
+            <!-- MODAL CONTENT STARTS-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" id="confirm_button_close">&times;</button>
+                    <h3 class="modal-title">Confirm Block</h3>
+                </div>
+                <div class="modal-body profile-bg-image" style="background-image: url(../../../assets/img/pro-bg1.jpg)">   
+                    <div class="light-blue-bg modal-body1">
+                            <!--(click)="blockUser(user_details.id, '', '')" <button class="btn2 width-120" type="submit">SAVE</button>
+                            <div class="Spacer-3 visible-xs"></div>
+                            <button class="btn3 width-120" type="button" (click)="resetForm()">CANCEL</button>-->
+                        
+                        <h4>Are you sure you want to block {{user_details.name}}?</h4>
+
+                        <div class="Spacer-3 visible-xs"></div>
+
+                        <h4>{{user_details.name}} will no longer be able to:</h4>
+
+                        <ul>
+                            <li><i class="fa fa-arrow-right"></i> See things you post on your timeline</li>
+                            <li><i class="fa fa-arrow-right"></i> Start a conversation with you</li>
+                            <li><i class="fa fa-arrow-right"></i> Add you as a follower</li>
+                        </ul>
+
+                        <div class="Spacer-3 visible-xs"></div>
+
+                        <h4>If you are following the User, blocking "{{user_details.name}}" will result in unfollowing the user.</h4>
+
+                        <button class="btn2 width-120" type="button" (click)="blockUser(user_details.id, '', '')">Block</button>
+
+                    </div>
+                </div>
+            </div>
+                <!-- MODAL CONTENT ENDS -->
+        </div>
+    </div>
+
+    <!--Un Block Content -->
+    <div class="modal fade white-text top1" id="unblock_user" role="dialog">
+            <div class="modal-dialog">
+                <!-- MODAL CONTENT STARTS-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" id="unblock_button_close">&times;</button>
+                        <h3 class="modal-title">Unblock {{user_details.name}}</h3>
+                    </div>
+                    <div class="modal-body profile-bg-image" style="background-image: url(../../../assets/img/pro-bg1.jpg)">   
+                        <div class="light-blue-bg modal-body1">
+                                <!--(click)="blockUser(user_details.id, '', '')" <button class="btn2 width-120" type="submit">SAVE</button>
+                                <div class="Spacer-3 visible-xs"></div>
+                                <button class="btn3 width-120" type="button" (click)="resetForm()">CANCEL</button>-->
+                            
+                            <h4>Are you sure you want to unblock {{user_details.name}}?</h4>
+        
+                            <div class="Spacer-3 visible-xs"></div>
+        
+                            <ul>
+                                <li><i class="fa fa-arrow-right"></i>{{user_details.name}} may be able to see your timeline or contact you.</li>
+                                <li><i class="fa fa-arrow-right"></i> Start a conversation with you</li>
+                                <li><i class="fa fa-arrow-right"></i> Add you as a follower</li>
+                            </ul>
+        
+                            <div class="Spacer-3 visible-xs"></div>
+        
+                            <h4>If you’re unblocking {{user_details.name}} , you will get notification of him/her activites.</h4>
+        
+                            <button class="btn2 width-120" type="button" (click)="unBlockUser(user_details.id, '', '')">Unblock</button>
+        
+                        </div>
+                    </div>
+                </div>
+                    <!-- MODAL CONTENT ENDS -->
+            </div>
+    </div>
+
+</div>
+
+<div *ngIf="user_details.is_block">
+    <div class="container">
+        <div class="video-content text-center" style="width: 100%;">
+
+
+            <img src="../../../assets/img/oh_no.png" />
+            <h1 class="h4-s text-bold top">Sorry, "{{user_details.name}}" timeline isn’t available at the moment</h1>
+        
+            <div class="watched-user">The link you followed may have expired, or the profile may blocked by you.</div>
+            <br>
+            <a class="btn2 width-120" routerLink="/">Go Home</a>
+        </div>
+    </div>
+</div>

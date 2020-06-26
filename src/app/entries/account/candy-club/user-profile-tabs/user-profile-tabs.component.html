@@ -1,0 +1,62 @@
+<div class="">
+  <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 mt-3">
+    <div class="profile-primary-div">
+      
+      <ul class="list-group user-profile-list">
+        <a routerLink="/candy-club/about"><li class="list-group-item active"><i class="fa fa-user float-left" aria-hidden="true"></i> <span class="link">About</span></li></a>
+        <a routerLink="/candy-club/activity"><li class="list-group-item"><i class=" fa fa-pencil-square-o float-left" aria-hidden="true"></i>  <span class="link">Activity</span></li></a>
+        <a routerLink="#"><li class="list-group-item"><i class="fa fa-envelope float-left" aria-hidden="true"></i>  <span class="link">Message</span></li></a>
+        <a href="#"><li class="list-group-item"><i class="fa fa-video-camera float-left" aria-hidden="true"></i>  <span class="link">Live Cam</span></li></a>
+        <a href="#"><li class="list-group-item"><i class="fa fa-file-photo-o float-left" aria-hidden="true"></i>  <span class="link">My Fan Club Photos</span></li></a>
+        <a href="#"><li class="list-group-item"><i class="fa fa-file-video-o float-left" aria-hidden="true"></i>  <span class="link">My Fan Club Videos</span></li></a>
+        <a routerLink="/candy-club/vip-membership"><li class="list-group-item"><i class="fa fa-flower-o float-left" aria-hidden="true"></i>  <span class="link">Buy Vip Membership</span></li></a>
+      </ul>
+    </div>
+  </div>
+  <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 mt-3">
+    <div class="img-container user-cover">
+      <div *ngIf="user_cover_picture">
+        <img [src]="user_cover_picture" class="img-responsive user-cover-photo">
+      </div>
+    <!-- <div class="centered">
+      <i class="fa fa-camera upload-button-cover-pic"></i>
+      <input class="cover-pic-upload" type="file"/>
+    </div> -->
+    </div>
+    <div class="user-row">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <div class="user-pic">
+            <div *ngIf="user_profile_picture">
+              <img [src]="user_profile_picture" class="img-responsive img-circle profile-picture">
+            </div>
+            <!-- <div class="p-image">
+               <i class="fa fa-camera upload-button-profile-pic"></i>
+                <input class="profile-pic-upload" type="file"/>
+             </div> -->
+          </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+          <div class="username">
+            <h3> {{ user_details.name }}  <i class="fa fa-circle" style="font-size: 16px;color: #0bb30b;"></i></h3>
+          </div>
+          <div class="actions float-right">
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-cog" aria-hidden="true" style="font-size:28px"></i></a>
+                <ul class="dropdown-menu">
+                  <li><a routerLink="/candy-club/edit-profile">Edit Profile</a></li>
+                  <li><a routerLink="/account">My Account</a></li>
+                  <li><a (click)="logout()" role="button">Logout</a></li>
+                  <li><a role="button" class="dropdown-toggle" type="button" data-toggle="dropdown">Cancel</a></li>
+                </ul>
+              </div>
+          </div>
+          <div class="desc">
+            <p class="p-2">{{ user_details.description }}</p>
+          </div>
+        </div>
+      </div>
+      </div>
+  
+    </div>
+  </div>

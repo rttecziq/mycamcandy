@@ -1,0 +1,253 @@
+<div class="container-fluid">
+  <div class="container">
+    <div class="row" id="account-row">
+      <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 grid mt-5">
+        <div class="text-center">
+          <img [src]="user_profile_picture" class="img-fluid img-circle mx-auto" style="width:150px;">
+       </div>
+          <h5 class="text-center"><a href="#" class="text-danger">{{ user_details.name }}</a></h5>
+          <p class="text-center"><a href="#">View Profile</a></p>
+          <ul class="nav nav-tabs" id="myTab" role="tablist" style="width:100%">
+            <li class="nav-item">
+               <a class="nav-link active" data-toggle="tab" href="#account" role="tab" aria-controls="account">
+               <i class="fa fa-user" aria-hidden="true" style="font-size: 24px"></i>&nbsp;&nbsp;
+               <span class="ml-3">Account</span> 
+               <i class="fa fa-angle-right float-right" aria-hidden="true" style="font-size: 24px"></i>&nbsp;&nbsp;
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" data-toggle="tab" href="#change" role="tab" aria-controls="change">
+               <i class="fa fa-cog" aria-hidden="true" style="font-size: 24px"></i>&nbsp;&nbsp;
+               <span class="ml-3">Change Password</span> 
+               <i class="fa fa-angle-right float-right" aria-hidden="true" style="font-size: 24px"></i>&nbsp;&nbsp;
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" data-toggle="tab" href="#privacy" role="tab" aria-controls="privacy">
+               <i class="fa fa-lock" aria-hidden="true" style="font-size: 24px"></i>&nbsp;&nbsp;
+               <span class="ml-3">Privacy</span> 
+               <i class="fa fa-angle-right float-right" aria-hidden="true" style="font-size: 24px"></i>&nbsp;&nbsp;
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" data-toggle="tab" href="#notification" role="tab" aria-controls="notification">
+               <i class="fa fa-envelope" aria-hidden="true" style="font-size: 24px"></i>&nbsp;&nbsp;
+               <span class="ml-3">Notifications</span> 
+               <i class="fa fa-angle-right float-right" aria-hidden="true" style="font-size: 24px"></i>&nbsp;&nbsp;
+               </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" data-toggle="tab" href="#web" role="tab" aria-controls="web">
+               <i class="fa fa-bell" aria-hidden="true" style="font-size: 24px"></i>&nbsp;&nbsp;
+               <span class="ml-3">Web notifications</span> 
+               <i class="fa fa-angle-right float-right" aria-hidden="true" style="font-size: 24px"></i>&nbsp;&nbsp;
+            </a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" data-toggle="tab" href="#delete-account" role="tab" aria-controls="delete-account">
+               <i class="fa fa-trash" aria-hidden="true" style="font-size: 24px"></i>&nbsp;&nbsp;
+               <span class="ml-3">Delete Account</span>
+               <i class="fa fa-angle-right float-right" aria-hidden="true" style="font-size: 24px"></i>&nbsp;&nbsp;
+            </a>
+            </li> 
+      </ul>
+      </div>
+      <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 grid mt-5">
+        <div class="tab-content">
+          <div class="tab-pane active" id="account" role="tabpanel">
+             <i class="fa fa-user text-secondary" style="font-size: 23px"> </i>&nbsp;&nbsp; <span class="bold text-secondary mt-3">Account</span>
+             <form class="black-text mt-3" id="form3" #updateProfileForm="ngForm" (ngSubmit)="updateProfileFn(updateProfileForm)" enctype="multipart/form-data">
+                <div class="form-group">
+                   <label class="bold">Username</label>
+                   <input type="text" id="name" class="form-control" name="name" [(ngModel)]="user_details.name" readonly>
+                </div>
+                <div class="form-group">
+                   <label class="bold">First Name</label>
+                   <input type="text" id="first_name" class="form-control" name="first_name" [(ngModel)]="user_details.first_name" required>
+                </div>
+                <div class="form-group">
+                   <label class="bold">Last Name</label>
+                   <input type="text" id="first_name" class="form-control" name="last_name" [(ngModel)]="user_details.last_name" required>
+                </div>
+                <div class="form-group">
+                   <label class="bold">E-Mail Address</label>
+                   <input type="email" id="email" class="form-control" [(ngModel)]="user_details.email" name="email" required>
+                </div>
+                <div class="form-group">
+                   <input type="submit" class="btn btn-lg btn-warning" value="Update Account" />
+                </div>
+             </form>
+          </div>
+          <div class="tab-pane" id="change" role="tabpanel">
+             <i class="fa fa-asterisk text-secondary" style="font-size: 23px"></i>&nbsp;&nbsp; <span class="bold text-secondary">Change Password</span>
+             <form class="black-text mt-3" #changePasswordForm="ngForm" (ngSubmit)="changePasswordFn(changePasswordForm)" id="form2">
+                <div class="form-group">
+                   <label class="bold">Current Password</label>
+                   <input type="password" id="current" class="form-control" #old_password ngModel name="old_password">
+                </div>
+                <div class="form-group">
+                   <label class="bold">New Password</label>
+                   <input type="password" id="new" class="form-control" #password ngModel name="password">
+                </div>
+                <div class="form-group">
+                   <label class="bold">Confirm Password</label>
+                   <input type="password" id="confirm" class="form-control" #password_confirmation ngModel name="password_confirmation">
+                </div>
+                <div class="form-group">
+                   <input type="submit" class="btn btn-lg btn-warning" value="Update Password">
+                </div>
+             </form>
+          </div>
+          <div class="tab-pane" id="privacy" role="tabpanel">
+             <i class="fa fa-lock text-secondary" style="font-size: 23px"></i>&nbsp;&nbsp; <span class="bold text-secondary">Privacy</span>
+             <form method="POST" class="mt-3">
+                <div class="form-group">
+                   <label class="bold">Profile Privacy <i class="fa fa-question-circle-o text-secondary" data-toggle="tooltip" data-placement="top" title="Who can see your public profile?" aria-hidden="true"></i>&nbsp;&nbsp;</label>
+                   <select class="form-control" name="profile_privacy" id="profile_privacy">
+                      <option value="Everyone">Everyone</option>
+                      <option value="Only me">Only me</option>
+                      <option value="Only people I follow can view my profile">Only people I follow can view my profile</option>
+                      <option value="Followers">Followers</option>
+                   </select>
+                </div>
+                <div class="form-group">
+                   <label class="bold">Hide my profile from directory <i class="fa fa-question-circle-o text-secondary" data-toggle="tooltip" data-placement="top" title="Here you can hide yourself from appearing in public directory" aria-hidden="true"></i>&nbsp;&nbsp;</label>
+                   <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" id="hide_profile" name="hide_profile" value="Yes">Yes
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" id="hide_profile" name="hide_profile" value="No">No
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                   <label class="bold">Who can see your activity wall?</label>
+                   <select class="form-control" name="activity_wall" id="activity_wall">
+                      <option value="Public">Public</option>
+                      <option value="Only me">Only me</option>
+                      <option value="Members">Members</option>
+                      <option value="Followers">Followers</option>
+                      <option value="People I follow">People I follow</option>
+                   </select>
+                </div>
+                <div class="form-group">
+                   <label class="bold">Hide my online status? <i class="fa fa-question-circle-o text-secondary" data-toggle="tooltip" data-placement="top" title="Do you want other people to see that you are online?" aria-hidden="true"></i>&nbsp;&nbsp;</label>
+                   <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" id="online_status" name="online_status" value="Yes">Yes
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" id="online_status" name="online_status" value="No">No
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                   <label class="bold">Who can send me private messages?</label>
+                   <select class="form-control" name="private_messages" id="private_messages">
+                      <option value="Everyone">Everyone</option>
+                      <option value="Nobody">Nobody</option>
+                      <option value="Only people I follow">Only people I follow</option>
+                      <option value="Followers">Followers</option>
+                   </select>
+                </div>
+                <div class="form-group">
+                   <input type="button" class="btn btn-lg btn-warning" name="update_privacy" id="update_privacy" value="Update Privacy">
+                </div>
+             </form>
+          </div>
+          <div class="tab-pane" id="notification" role="tabpanel">
+             <i class="fa fa-envelope text-secondary" style="font-size: 23px"></i>&nbsp;&nbsp; <span class="bold text-secondary">Notifications</span>
+             <form class="black-text mt-3" #emailNotifySettingForm="ngForm" (ngSubmit)="emailNotificationFn(emailNotifySettingForm)" id="form4">
+                <div class="form-group">
+                   <label class="bold">Email me when </label>
+                   <div class="checkbox">
+                    <label><input type="checkbox" #email_private_message="ngModel" name="email_private_message" [(ngModel)]="notification_details.email_private_message">Someone sends me a private message</label>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" #email_on_follow="ngModel" name="email_on_follow" [(ngModel)]="notification_details.email_on_follow">I'm followed by someone new</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                   <input type="submit" class="btn btn-lg btn-warning" value="Update Notification">
+                  </div>
+             </form>
+          </div>
+          <div class="tab-pane" id="web" role="tabpanel">
+             <i class="fa fa-bell text-secondary" style="font-size: 23px"></i>&nbsp;&nbsp; <span class="bold text-secondary">Web Notifications</span>
+             <form class="black-text mt-3" #webNotificationSettingForm="ngForm" (ngSubmit)="webNotificationFn(webNotificationSettingForm)" id="form5">
+                <div class="form-group">
+                   <label class="bold">Receiving Notifications</label>
+                   <div class="checkbox">
+                    <label><input type="checkbox" #membership_level_change="ngModel" name="membership_level_change" [(ngModel)]="notification_details.membership_level_change">When my membership level is changed</label>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" #member_comment_reply="ngModel" name="member_comment_reply" [(ngModel)]="notification_details.member_comment_reply">When a member replies to one of my comments</label>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" #member_post_comment="ngModel" name="member_post_comment" [(ngModel)]="notification_details.member_post_comment">When a member comments on my posts</label>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" #guest_post_comment="ngModel" name="guest_post_comment" [(ngModel)]="notification_details.guest_post_comment">When a guest comments on my posts</label>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" #member_profile_view="ngModel" name="member_profile_view" [(ngModel)]="notification_details.member_profile_view">When a member views my profile</label>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" #guest_profile_view="ngModel" name="guest_profile_view" [(ngModel)]="notification_details.guest_profile_view">When a guest views my profile</label>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" #member_topic_reply="ngModel" name="member_topic_reply" [(ngModel)]="notification_details.member_topic_reply">When a member replies to one of my topics</label>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" #guest_topic_reply="ngModel" name="guest_topic_reply" [(ngModel)]="notification_details.guest_topic_reply">When a guest replies to one of my topics</label>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" #private_message="ngModel" name="private_message" [(ngModel)]="notification_details.private_message">When someone sends a private message to me</label>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" #gift_receive="ngModel" name="gift_receive" [(ngModel)]="notification_details.gift_receive">When you receive a gift</label>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" #follow="ngModel" name="follow" [(ngModel)]="notification_details.follow">When someone follows me</label>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" #wall_post="ngModel" name="wall_post" [(ngModel)]="notification_details.wall_post">When someone publish a post on my wall</label>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" #comment_post="ngModel" name="comment_post" [(ngModel)]="notification_details.comment_post">When someone comments on your post</label>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" #post_like="ngModel" name="post_like" [(ngModel)]="notification_details.post_like">When someone likes your post</label>
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" #mention_me="ngModel" name="mention_me" [(ngModel)]="notification_details.mention_me">When someone mentions me</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                   <input type="submit" class="btn btn-lg btn-warning" value="Update Settings">
+                </div>
+             </form>
+          </div>
+          <div class="tab-pane" id="delete-account" role="tabpanel">
+            <i class="fa fa-trash text-secondary" style="font-size: 23px"></i>&nbsp;&nbsp; <span class="bold text-secondary">Delete Account</span>
+            <form class="black-text mt-3" id="form1"  #deleteAccountForm="ngForm" (ngSubmit)="deleteAccountFn(deleteAccountForm)" >
+               <div class="form-group">
+                  <p>Are you sure you want to delete your account? This will erase all of your account data from the site. To Delete your account enter your password below</p>
+                  <label class="bold">Password </label>
+                  <input type="password" id="delete-pass" class="form-control form-control-lg" name="password" #password ngModel required >
+               </div>
+               <div class="form-group">
+                  <input type="submit" class="btn btn-lg btn-warning" value="Delete Account">
+                 </div>
+            </form>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

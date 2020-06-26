@@ -1,0 +1,158 @@
+<!--MAIN SECTION STARTS-->
+<div class="">
+    <div class="row m-0">
+        <!-- BRAODCAST IMAGE SECTION STARTS -->
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 top-margin p-0">
+            <div class="sec-padding left-spacing1">
+                <div class="relative">
+                    <img src="../../../assets/img/stream.jpg" class="img-responsive broadcast-img" >
+                    <div class="broadcast-btn">
+                        <button class="btn" type="button" data-toggle="modal" data-target="#myModal" *ngIf="!is_ongoing_call_present">START BROADCASTING</button>
+                        <button class="btn" type="button" data-toggle="modal" data-target="#ongoing_call" *ngIf="is_ongoing_call_present">CLEAR ONGOING STREAMING</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- BROADCAST IMAGE SECTION ENDS -->
+
+        <!-- CHAT SECTION STARTS -->
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 p-0 fixed-chat">
+            <div class="panel panel-default ">
+                <div class="panel-heading white-text"><i class="fa fa-commenting icon"></i>Chat</div>
+                <div class="panel-body chat-container">
+                    
+                </div>
+                <div class="panel-footer">
+                    <form>
+                        <div class="input-group">
+                            <input  type="text" class="form-control broad-form" placeholder="Type your message here..." disabled>
+                            <span class="input-group-addon broad-icon"><i class="fa fa-paper-plane"></i></span>   
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- CHAT SECTION ENDS -->
+    </div>
+</div>
+<!--MAIN SECTION ENDS-->
+
+<!-- BROADCAST FORM STARTS -->
+<div class="modal fade white-text" id="myModal" role="dialog" >
+    <div class="modal-dialog">
+        <!-- MODAL CONTENT STARTS-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Let's broadcast</h4>
+            </div>
+            <div class="modal-body profile-bg-image" style="background-image: url(../../../assets/img/pro-bg1.jpg)">   
+                <div class="light-blue-bg modal-body1">
+                    <form id="form" #streamingBroadcastingForm="ngForm" (ngSubmit)="saveBroadcasting(streamingBroadcastingForm)">
+                        <!-- <div class="input input--hoshi content1">
+                            <input class="input__field input__field--hoshi" type="text" id="title" name="title" [(ngModel)]="broadcast.title"/>
+                            <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="Title" data-content="Title">
+                                <span class="input__label-content input__label-content--hoshi">Title</span>
+                            </label>
+                        </div>
+                        <div class="Spacer-6"></div> -->
+                        <div class="md-form form-lg">
+                            <input type="text" id="title" class="form-control form-control-lg" name="title" [(ngModel)]="broadcast.title">
+                            <label for="title">Title</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3 zero-padding" for="optradio1">Mode:</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline width-100">
+                                    <input type="radio" id="optradio1" class="option-input radio" name="type"  checked="checked" [(ngModel)]="broadcast.type" [value]="'public'">Public
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" id="optradio1" class="option-input radio" name="type" [(ngModel)]="broadcast.type" [value]="'private'">Private
+                                </label>
+                            </div>
+                        </div>
+                        <div class="clear-both"></div>
+                        <div class="Spacer-6"></div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3 zero-padding" for="optradio">Payment:</label>
+                            <div class="col-sm-8">
+                                <label class="radio-inline width-100">
+                                    <input type="radio" id="optradio" checked="checked" class="option-input radio" name="payment_status" [(ngModel)]="broadcast.payment_status" [value]="0">Free
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" id="optradio" class="option-input radio" name="payment_status" [(ngModel)]="broadcast.payment_status" [value]="1">Paid
+                                </label>
+                            </div>
+                        </div>
+                        <div class="clear-both"></div>
+                        <!-- <div class="input input--hoshi content1" [style.display]="broadcast.payment_status == 0 ?'none':'inherit'">
+                            <input class="input__field input__field--hoshi" type="text" id="title" name="amount" [(ngModel)]="broadcast.amount"/>
+                            <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="Amount" data-content="Amount">
+                                <span class="input__label-content input__label-content--hoshi">Amount</span>
+                            </label>
+                        </div>
+                        <div class="clear-both"></div> -->
+                        <div class="md-form form-lg" [style.display]="broadcast.payment_status == 0 ?'none':'inherit'">
+                            <input type="text" id="amount" class="form-control form-control-lg" name="amount" [(ngModel)]="broadcast.amount">
+                            <label for="amount" class="active">amount</label>
+                        </div>
+                        <!-- <div class="input input--hoshi content1">
+                            <textarea class="input__field input__field--hoshi" type="text" id="desc" name="description" [(ngModel)]="broadcast.description"></textarea>
+                            <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="desc" data-content="Description">
+                                <span class="input__label-content input__label-content--hoshi">Description</span>
+                            </label>
+                        </div>
+                        <div class="Spacer-3"></div> -->
+
+                        <div class="md-form form-lg">
+                                
+                            <select class="form-control form-control-lg" name="live_group_id" [(ngModel)]="broadcast.live_group_id">
+                                <option value="0" selected>Select Group</option>
+                                <option *ngFor="let group of groups_list" [value]="group.live_group_id">{{group.live_group_name}}</option>
+                            </select>
+                        </div>
+                        <div class="md-form form-lg">
+                                <textarea type="text" id="desc" class="form-control md-textarea" rows="3" name="description" [(ngModel)]="broadcast.description"></textarea>
+                                <label for="desc">Description</label>
+                        </div>
+                       
+                        <div class="text-center">        
+                            <button class="btn2 width-120" type="submit">Save</button>
+                            <div class="Spacer-3 visible-xs"></div>
+                            <button class="btn3 width-120" type="button" (click)="resetForm()">Clear</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+          <!-- MODAL CONTENT ENDS -->
+    </div>
+</div>
+<!-- BROAD CAST FORM ENDS -->
+<!-- BROADCAST FORM STARTS -->
+<div class="modal fade white-text" id="ongoing_call" role="dialog" >
+        <div class="modal-dialog">
+            <!-- MODAL CONTENT STARTS-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" id="clear_ongoing_streaming_button">&times;</button>
+                    <h4 class="modal-title">CLEAR ONGOING STREAMING</h4>
+                </div>
+                <div class="modal-body profile-bg-image" style="background-image: url(../../../assets/img/pro-bg1.jpg)">   
+                    <div class="light-blue-bg modal-body1">
+                        <h4>You have an ongoing live broadcast, Please end it first. Do you want to delete and proceed to Start a New Broadcast?.</h4>
+                        
+                        <div class="Spacer-3"></div>
+                        <div class="text-center">        
+                            <button class="btn2 width-120" type="button" (click)="clearOngoingStreaming()">Proceed</button>
+                            <div class="Spacer-3 visible-xs"></div>
+                            <button class="btn3 width-120" type="button" data-dismiss="modal">CANCEL</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+              <!-- MODAL CONTENT ENDS -->
+        </div>
+    </div>
+    <!-- BROAD CAST FORM ENDS -->

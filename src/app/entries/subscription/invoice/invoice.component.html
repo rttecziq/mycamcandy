@@ -1,0 +1,80 @@
+<!-- MAIN SECTION STARTS -->
+<div class="left-spacing1 sec-padding" >
+    <div class="row ">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8  col-md-offset-2 col-lg-offset-3 col-lg-6">
+
+            <div class="invoice-img" style="background-image: url(../../../assets/img/preview.png);">
+                <div class="invoice-overlay">
+                    <h1 class="invoice-head m-0">INVOICE</h1>
+                </div>
+            </div>
+            <div class="white-bg spacing1 shadow bottom-radius">
+                <!-- <h4 class="captalize m-0"><span class="theme-color">Video-title &nbsp; : </span>&nbsp;  hello world ...!!</h4> -->
+                <div class="invoice-media">
+                    <div class="invoice-left">
+                        <img src="../../../assets/img/preview.png" class="media-object invoice-video-img">
+                    </div>
+                    <div class="invoice-body">
+                        <h4 class="invoice-heading">{{invoice_details.title}}</h4>
+                        <p class="invoice-text">{{invoice_details.description}}</p>
+                    </div>
+                </div>
+                
+                <!-- coupon -->
+                <div class="" *ngIf="invoice_details.amount">
+
+                    <p class="invoice-line"></p>
+
+                    <h4 class="m-0">Coupon</h4>
+                    <div class="input-group coupon-form">
+                        <input type="text" class="form-control" name="coupon_code" placeholder="Coupon code" [(ngModel)]="coupon_code">
+                        <span class="input-group-addon" style="cursor: pointer;" (click)="applyCouponForSubscription(coupon_code)">Apply</span>
+                    </div>
+                </div>
+                <!-- coupon -->
+                <p class="invoice-line"></p>
+                <h4 class="m-0">Price Details</h4>
+                <div class="top-spacing1"></div>
+                <div class="table-responsive">
+                    <table class="table table-bordered text-right" >
+                        <tbody>
+                                <tr>
+                                <td>Amount</td>
+                                <td>{{invoice_details.currency}}{{invoice_details.amount}}</td>
+                                </tr>
+                                <tr *ngIf="is_coupon">
+                                <td>Coupon Amount ({{coupon_details.original_coupon_amount}})</td>
+                                <td>{{invoice_details.currency}}{{coupon_details.coupon_amount}}</td>
+                                </tr>
+                                <tr *ngIf="is_coupon">
+                                <td>Total</td>
+                                <td>{{invoice_details.currency}}<span class="total_remaining_amount">{{coupon_details.remaining_amount}}</span></td>
+                                </tr>
+                                <tr *ngIf="!is_coupon">
+                                <td>Total</td>
+                                <td>{{invoice_details.currency}}<span class="total_remaining_amount">{{invoice_details.amount}}</span></td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div *ngIf="invoice_details.amount">
+                    <h4 class="m-0">choose payment method</h4>
+                    <div class="spacing">
+                        <label class="radio-inline width-100">
+                            <input type="radio" id="optradio1" class="option-input radio" name="type" checked="checked" [(ngModel)]="type" [value]="1">Paypal
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" id="optradio1" class="option-input radio" name="type" [(ngModel)]="type" [value]="2">card
+                        </label>
+                    </div>
+                </div>
+                <div class="text-right"><!-- routerLink="/payment-success"-->
+                    
+                    <button class="btn2 width-120 captalize" (click)="payNow(coupon_code, type)" type="button" id="pay_now_button">pay now</button>
+                    
+                </div>
+            </div>
+                
+        </div>
+    </div>
+</div>

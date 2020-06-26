@@ -1,0 +1,28 @@
+<div class="group-sidebar">
+    <div class="sidebar-header">
+        <h3>Groups</h3>
+    </div>
+    
+    <div class="display-inline group-sec">
+        <a routerLink="/create-group">
+            <div class="group-left">
+                <img src="../../../../../assets/img/create-group.png" class="add-participant-img">
+            </div>
+            <div class="group-right">
+                <h4 class="mt-15">Create group</h4>
+            </div>
+        </a>
+    </div>
+    
+    <div class="display-inline group-sec"  *ngFor="let group of group_list.groups">
+        <a routerLink="/view-group" [queryParams]="{id : group.live_group_id}">
+            <div class="group-left">
+                <img src="{{group.live_group_picture}}" onError="this.src='../../../../../assets/img/pro-bg.jpg'" class="add-participant-img">
+            </div>
+            <div class="group-right">
+                <h4 class="mt-4 mb-4 black-txt ">{{group.live_group_name}}</h4>
+                <p class="m-0">{{group.total_members}} members</p>
+            </div>
+        </a>
+    </div>
+</div>

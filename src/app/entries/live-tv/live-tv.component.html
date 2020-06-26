@@ -1,0 +1,55 @@
+<div class="sec-padding left-spacing1">
+    <h3 class="heading-element">Live TV videos</h3>
+
+    <div class="row">
+        <div class="col-md-8">
+            <form class="black-text">
+                <div class="Spacer-2"></div>
+                <div class="md-form form-lg mb-15">
+                    <input type="text" id="search" class="form-control form-control-lg" (keydown.enter)="onKeyEnter($event.target.value)" #search_term ngModel name="search_term">
+                    <label for="search" [ngClass]="{'active' : search_term}">search</label>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="Spacer-10"></div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" *ngFor="let tv_video of tv_videos">
+            <div class="live-video-box">
+                <div class="public-img" [style.background-image] = "'url('+tv_video.image+')'">
+                    <a routerLink="/live-tv/view" [queryParams]="{id : tv_video.custom_live_video_id}">
+                        <div class="playbtn1">
+                            <div class="white-btn-play1"><img src="../../../assets/img/play-btn.png"></div>
+                            <div class="pink-btn-play1"><img src="../../../assets/img/play-btn-pink.png"></div>
+                        </div>
+                    </a>
+                    <!--<div class="video-amount">
+                        <h5 class="no-margin">$10.00</h5>
+                    </div>-->
+                </div>
+                <div class="user-profile spacing">
+                    <h4 class="h4-s user-name text-bold overflow">{{tv_video.title}}</h4>
+                    <a routerLink="/view-profile" [queryParams]="{peer_id : tv_video.user_id}"><h5 class="h5-s user-name overflow text-grey-clr">{{tv_video.user_name}} </h5></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loader" *ngIf="showLoader">
+        <div class="spin"></div>
+        <div class="bounce"></div>
+    </div>
+
+    <div class="text-center" *ngIf="skipCount > 0">
+        <button class="show-more-btn" (click)="showMore()">show more</button>
+    </div>
+
+    <div class="no_result_class text-center" *ngIf="skipCount <= 0">
+        <div>
+            <h3 class="tab-head text-center">No Live Tv Videos found</h3>
+            <img class="noresult-img" src="../../../assets/img/no-result.gif">
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,35 @@
+<div class="left-spacing1">
+    <div class="row m-0">
+        <div class="col-sm-7 col-md-8 col-lg-8 p-0">
+            
+            <form class="black-text" #createGroupForm="ngForm" (ngSubmit)="createGroup(createGroupForm)" enctype="multipart/form-data">
+                <div [style.background-image]="'url(' + picture + ')'" class="group-bg-img" (click)="triggerFileField()" style="cursor:pointer">
+                    <div class="group-bg-img-overlay">
+                        <img src="../../../../../assets/img/camera.png" class="camera-edit-img">
+                    </div>
+                </div>
+
+                <input type="file" id="picture" name="picture" [(ngModel)]="group_details.picture" accept="image/png,image/jpeg" (change)="handlePicture($event.target.files)" style="display:none" required/>
+
+                <div class="sec-padding ">
+                    <h2 class="group-heading">Create Groups</h2>
+                    
+                        <div class="md-form form-lg">
+                            <input type="text" id="group-name" class="form-control form-control-lg" name="name" [(ngModel)]="group_details.name" required>
+                            <label for="group-name">Group name</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="group-desc" class="form-control md-textarea" rows="3" name="description" [(ngModel)]="group_details.description" required></textarea>
+                            <label for="group-desc">Group description</label>
+                        </div>
+                        <div class="text-right">
+                            <button class="btn width-150">Create</button>
+                        </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-5 col-md-4 col-lg-4 p-0 relative"> 
+            <group-sidebar></group-sidebar>
+        </div>
+    </div>
+</div>

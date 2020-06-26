@@ -1,0 +1,23 @@
+<!-- MAIN SECTION STARTS -->
+<div class="left-spacing1 sec-padding">
+    <div class="row ">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8  col-md-offset-2 col-lg-offset-3 col-lg-6">
+            <div class="payment-success text-center">
+                <div class="success-img" style="background-image: url(../../../assets/img/success.gif);"></div>
+                <h4 class="bold captalize">your payment has been successful ..!!</h4>
+                <p class="captalize">You can now watch videos</p>
+                <div class="text-center top-padding">
+                    <a routerLink="/join-video" [queryParams]="{video_id : video_id}" *ngIf="video_id">
+                        <button class="btn2 width-200  captalize">watch video</button>
+                    </a>
+
+                    <a routerLink="/vod-view" [queryParams]="{id : vod_id}" *ngIf="vod_id">
+                        <button class="btn2 width-200  captalize">watch video</button>
+                    </a>
+
+                    <!-- <a routerLink="/broadcast" *ngIf="subscription_id"><button class="btn2 width-200  captalize">Go Live</button></a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+<!-- MAIN SECTION STRATS -->
+<div class="sec-padding left-spacing1">
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="redeems-sec redeems">
+                <div style="background-image:url('../../../assets/img/gold-plate.png')" class="redeems-img">
+                    <h3 class="gold-clr">{{redeem_details.currency}}{{redeem_details.remaining}}</h3>
+                </div>
+                <h3 class="mt-0">redeems</h3>
+                <h4 class="redeem-text">Hey, Do you want to redeem your balance? If so, please click “send Redeem” button. Admin will process your payment ASAP.</h4>
+                <div class="mt-10 mb-15 text-right"><a style="cursor: pointer;" class="btn2" (click)="sendRedeemRequest()" *ngIf="redeem_details.remaining">Send Redeem</a></div>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="redeems-sec redeems">
+                <!-- timeline -->
+                <div class="timeline">
+                    <!-- 1 -->
+                    <div class="timeline-item" *ngFor="let redeem_request of redeem_requests">
+                        <div class="timeline-bar">
+                            <div class="version"></div>
+                        </div>
+                        <div class="redeem-content">
+                            <ul>
+                                <li>
+                                    <p class="text-grey-clr m-0">Sent date: {{redeem_request.requested_date}}</p>
+                                    <h4 class="redeem-amount">Redeem amount: <span class="bold">{{redeem_request.currency}}{{redeem_request.paid_amount}}</span></h4>
+                                    <p class="text-grey-clr mt-0">Requested Amount: {{redeem_request.currency}}{{redeem_request.request_amount}}</p>
+                                    <p class="text-grey-clr mt-0">paid date: {{redeem_request.paid_date}}</p>
+                                    <p class="text-grey-clr mt-0">Status: {{redeem_request.redeem_status}}</p>
+                                    <button class="btn-default btn-follow" *ngIf="redeem_request.redeem_cancel_status" (click)="cancelRedeemRequest(redeem_request.redeem_request_id)">cancel</button>
+                                </li>
+                                <li *ngIf="redeem_request.status == 2"><img src="../../../assets/img/paid.png"></li>
+                                <li *ngIf="redeem_request.status < 2"><img src="../../../assets/img/pending.png"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="no_result_class text-center" *ngIf="redeem_requests.length <= 0">
+                            <div>
+                                <h3 class="tab-head text-center">No Redeem History found</h3>
+                                <img class="noresult-img" src="../../../assets/img/no-result.gif">
+                            </div>
+                    </div>
+                </div>        
+                <!-- <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>Redeem amount</td>
+                                <td>$498.50</td>
+                            </tr>
+                            <tr>
+                                <td>Sent date</td>
+                                <td>8th July, 18</td>
+                            </tr>
+                            <tr>
+                                <td>Paid amount</td>
+                                <td>$498.50</td>
+                            </tr>
+                            <tr>
+                                <td>Paid date</td>
+                                <td>20th July, 18</td>
+                            </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td><span class="label label-success">Paid</span></td>
+                            </tr>
+                            <tr>
+                                <td>Action</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MAIN SECTION ENDS -->

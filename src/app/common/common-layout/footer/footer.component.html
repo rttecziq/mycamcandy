@@ -1,0 +1,122 @@
+<!-- BOTTOM HEIGHT SECTION STARTS-->
+<!-- <div class="bottomheight"></div> -->
+<!--BOTTOM HEIGHT ENDS-->
+
+<!-- FOOTER STARTS-->
+<div class="footer" id="footer_sec1">
+    <div class=""> 
+        <!-- uncomment when we create pages from admin <div class="row">
+            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" *ngFor="let pages of pages_list">
+                <ul class="footer-list">
+                    <li class="" *ngFor="let page of pages">
+                        <a [routerLink]="['/page']" [queryParams]="{page_id:page.id}">{{page.heading}}</a>
+                    </li>
+                        COMMENT below <LI> BY STREAMHASH 
+                        <li class="">
+                            <a class="pointer" data-toggle="modal" data-target="#language">Language</a>
+                        </li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-lg-offset-2 col-md-offset-2 ">
+                <h4 class="mt-0 footer-head">Contact address</h4>
+                <div class="display-inline">
+                    <div class="footer-left">
+                        <i class="fa fa-map-marker"></i>
+                    </div> 
+                    <div class="footer-right">
+                        <p>{{admin.address}}</p>
+                    </div>
+                </div>
+                <div class="display-inline">
+                    <div class="footer-left">
+                        <i class="fa fa-phone"></i>
+                    </div> 
+                    <div class="footer-right">
+                        <p>{{admin.mobile}}</p>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        
+
+        
+        <!-- <p class="footer-line"></p> -->
+
+        <!-- CUSTOM FOOTER CONTENT -->
+        <app-footer-content></app-footer-content>
+
+        <!-- NOT REQUIRED AS OF NOW 
+            <div class="row center">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <i class="fa fa-copyright icon grey" ></i>
+                <span class="grey">Copyright 2019 All rights reserved.</span>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right icon-center">
+                <a target="_blank" class="social-share" *ngIf="facebook_link" href="{{facebook_link}}">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x grey fb"></i>
+                        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                <a target="_blank" class="social-share" *ngIf="twitter_link" href="{{twitter_link}}">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x grey twitter"></i>
+                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                <a target="_blank" class="social-share" *ngIf="linkedin_link" href="{{linkedin_link}}">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x grey linkedin"></i>
+                        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                <a target="_blank" class="social-share" *ngIf="google_plus_link" href="{{google_plus_link}}">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x grey google"></i>
+                        <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                <a target="_blank" class="social-share" *ngIf="pinterest_link" href="{{pinterest_link}}">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x grey pinterest"></i>
+                        <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+            </div>
+        </div> -->
+
+
+    </div>
+</div>
+<!--FOOTER ENDS ALREADY COMMENTED BY STREAMHASH-->
+<!--
+<div class="modal fade" id="language" role="dialog">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" id="language_close">&times;</button>
+            <h4 class="mt-0">Choose language</h4>
+
+            <form (ngSubmit)="switchLanguage(language_name.value)">
+                <div class="form-group size-16">
+                    <div class="mt-20 pl-20">
+                        <label class="radio-inline">
+                            <input type="radio" value="en" id="optradio1" class="option-input radio" name="language_name" checked="checked" #language_name ngModel>English 
+                        </label>
+                    </div>
+                    <div class="top pl-20">
+                        <label class="radio-inline">
+                            <input type="radio" value="fr" id="optradio1" class="option-input radio" name="language_name" #language_name ngModel>French
+                        </label>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <button class="btn">submit</button>
+                </div>
+            </form>
+        </div>
+      </div>
+      
+    </div>
+</div>-->

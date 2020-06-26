@@ -1,0 +1,81 @@
+<!-- MAIN SECTION STRATS -->
+<div class="sec-padding left-spacing1">
+    <div class="public-video-header top-margin">search result "{{term}}"</div>
+    <div>
+        <h4 class="search-element">users <a routerLink="/users/search" [queryParams]="{q:term}" class="pull-right">see all</a></h4>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 top-margin" *ngFor="let searchUser of searchUsers">
+                <div class="user-profile text-center box-shadow">
+                    <a routerLink="/view-profile" [queryParams]="{peer_id:searchUser.follower_id}">
+                        <div class="profile-user-img"> 
+                            <div class="img-circle  following-img" [style.background-image]="'url('+searchUser.picture+')'"></div>
+                        </div>
+                        <h4 class="h4-s user-name text-bold text-overflow mb-17">{{searchUser.name}}</h4>
+                    </a>
+                    <div class="clearfix"></div>
+                </div>
+            </div>  
+        </div>
+    </div>
+    
+    <div class="Spacer-10"></div>
+    <div>
+        <h4 class="search-element mt-0 mb-30">live videos <a routerLink="/live-videos/search" [queryParams]="{q:term}" class="pull-right">see all</a></h4>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" *ngFor="let searchVideo of searchVideos">
+                <div class="live-video-box">
+                    <div class="public-img" [style.background-image] = "'url('+searchVideo.snapshot+')'">
+                        <a routerLink="/vod-view">
+                            <div class="playbtn1">
+                                <div class="white-btn-play1"><img src="../../../assets/img/play-btn.png"></div>
+                                <div class="pink-btn-play1"><img src="../../../assets/img/play-btn-pink.png"></div>
+                            </div>
+                        </a>
+                        <div class="video-amount" *ngIf="searchVideo.payment_status">
+                            <h5 class="no-margin">{{searchVideo.currency}}{{searchVideo.amount}}</h5>
+                        </div>
+                        <div class="watch-count">
+                            <h5 class="h5-s user-name m-0"><i class="fa fa-eye icon"></i>{{searchVideo.viewers}}</h5>
+                        </div>
+                    </div>
+                    <div class="user-profile spacing">
+                        <h4 class="h4-s user-name text-bold overflow">{{searchVideo.title}}</h4>
+                        <a href=""><h5 class="h5-s user-name overflow text-grey-clr">{{searchVideo.name}} </h5></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h4 class="search-element mt-0 mb-30">live tv <a routerLink="/live-tv/search" [queryParams]="{q:term}" class="pull-right">see all</a></h4>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4"  *ngFor="let live_tv of searchLiveTV">
+                <div class="live-video-box">
+                    <div class="public-img" [style.background-image] = "'url('+live_tv.image+')'">
+                        <a routerLink="/vod-view">
+                            <div class="playbtn1">
+                                <div class="white-btn-play1"><img src="../../../assets/img/play-btn.png"></div>
+                                <div class="pink-btn-play1"><img src="../../../assets/img/play-btn-pink.png"></div>
+                            </div>
+                        </a>
+                        <div class="p-10 text-right">
+                            <span class="label label-success">Live</span>
+                        </div>
+                        <!--<div class="video-amount">
+                            <h5 class="no-margin">$10.00</h5>
+                        </div>
+                        <div class="watch-count">
+                            <h5 class="h5-s user-name m-0"><i class="fa fa-eye icon"></i>25</h5>
+                        </div> -->
+                    </div>
+                    <div class="user-profile spacing">
+                        <h4 class="h4-s user-name text-bold overflow">{{live_tv.title}}</h4>
+                        <a href=""><h5 class="h5-s user-name overflow text-grey-clr">{{live_tv.user_name}} </h5></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- MAIN SECTION ENDS -->

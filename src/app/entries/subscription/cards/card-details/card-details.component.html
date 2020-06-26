@@ -1,0 +1,46 @@
+<div class="left-spacing1 sec-padding">
+    <!-- <div class="Spacer-10"></div> -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-1 col-lg-10">
+            <!-- <div class="public-video-header">PRICING AND PLANS</div> -->
+            <h3 class="heading-element">card details</h3>
+            <div class="Spacer-10"></div>
+            <div class="row m-0">
+                <div class="addcard-bgimg col-md-5 col-lg-5 p-0" style="background-image: url(../../../assets/img/pro-bg1.jpg);">
+                    <div class="addcard-bg-overlay">
+                        <div class="text-center">
+                            <img src="../../../assets/img/payment.png" class="payment-card-img">
+                        </div>
+                    </div>
+                </div>
+                <div class="addcard-form col-md-7 col-lg-7">
+                    <div class="added-card">
+                        <div *ngFor="let card_detail of card_details">
+                            <div class="display-inline">
+                                <div class="payment-left">
+                                    <img src="../../../assets/img/credit-card.png">
+                                </div>
+                                <div class="payment-right">
+                                    <a class="pull-right" style="cursor: pointer;" *ngIf="card_detail.is_default == 0" (click)="deleteCard(card_detail.card_id)"><i class="fa fa-trash"></i></a>
+                                    <h5>XXXX XXXX XXXX {{card_detail.last_four}}</h5>
+                                    <a class="green-clr" *ngIf="card_detail.is_default == 1">default card</a>
+                                    <a style="cursor: pointer;" class="red-clr" *ngIf="card_detail.is_default == 0" (click)="setAsDefault(card_detail.card_id)">set as default</a>
+                                </div>
+                            </div>
+                            <p class="line1 mb-17"></p>
+                        </div>
+
+                        <div class="display-inline">
+                            <div class="payment-left">
+                                <img src="../../../assets/img/credit-card-plus.png">
+                            </div>
+                            <div class="payment-right">
+                                <a routerLink="/add-card" class="addcard">add card</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

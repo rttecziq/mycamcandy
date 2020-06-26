@@ -1,0 +1,67 @@
+<!-- MAIN SECTION STARTS -->
+<div class="left-spacing1 sec-padding" >
+    <div class="row ">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8  col-md-offset-2 col-lg-offset-3 col-lg-6">
+
+            <div class="invoice-img" style="background-image: url(../../../assets/img/preview.png);">
+                <div class="invoice-overlay">
+                    <h1 class="invoice-head m-0">Buy Candies</h1>
+                </div>
+            </div>
+            <div class="white-bg spacing1 shadow bottom-radius">
+                <div class="invoice-media">
+                    <div class="invoice-left">
+                        <img src="../../../assets/img/preview.png" class="media-object invoice-video-img">
+                    </div>
+                    <div class="invoice-body">
+                        <h4 class="invoice-heading">{{invoice_details.title}}</h4>
+                        <h6 class="bonus_candy" *ngIf="invoice_details.bonus_candies > 0">
+                            + {{invoice_details.bonus_candies}} Candies Bonus
+                        </h6>
+                    </div>
+                </div>
+                
+                <p class="invoice-line"></p>
+                <h4 class="m-0">Price Details</h4>
+                <div class="top-spacing1"></div>
+                <div class="table-responsive">
+                    <table class="table table-bordered text-right" >
+                        <tbody>
+                            <tr>
+                              <td>Amount</td>
+                              <td>{{invoice_details.currency}}{{invoice_details.amount}}</td>
+                            </tr>
+                            <tr>
+                              <td>Total</td>
+                              <td>{{invoice_details.currency}}<span class="total_remaining_amount">{{invoice_details.amount}}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div *ngIf="invoice_details.amount">
+                    <h4 class="m-0">Choose payment method</h4>
+                    <div class="spacing">
+                        <label class="radio-inline">
+                            <input 
+                              type="radio"
+                              id="optradio1"
+                              class="option-input radio"
+                              name="type"
+                              [(ngModel)]="type"
+                              [value]="2"
+                              checked="checked"
+                            /> Stripe (through Credit/Debit Card)
+                        </label>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <a [routerLink]="['/candies-package']" class="btn2 width-120 captalize pull-left">
+                      Cancel
+                    </a>
+                    <button class="btn2 width-120 captalize" (click)="payNow(type)" type="button" id="pay_now_button">pay now</button>
+                </div>
+            </div>
+                
+        </div>
+    </div>
+</div>

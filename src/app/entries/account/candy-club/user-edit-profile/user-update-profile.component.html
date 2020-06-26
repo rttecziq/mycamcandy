@@ -1,0 +1,201 @@
+<div class="container-fluid profile-background">
+  <div class="container mb-3">    
+     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 mt-3">
+        <div class="profile-primary-div">
+           <ul class="list-group user-profile-list">
+              <a routerLink="/candy-club/about">
+                 <li class="list-group-item active"><i class="fa fa-user float-left" aria-hidden="true"></i> <span class="link">About</span></li>
+              </a>
+              <a routerLink="/candy-club/activity">
+                 <li class="list-group-item"><i class=" fa fa-pencil-square-o float-left" aria-hidden="true"></i>  <span class="link">Activity</span></li>
+              </a>
+              <a href="#">
+                 <li class="list-group-item"><i class="fa fa-envelope float-left" aria-hidden="true"></i>  <span class="link">Message</span></li>
+              </a>
+              <a href="#">
+                 <li class="list-group-item"><i class="fa fa-video-camera float-left" aria-hidden="true"></i>  <span class="link">Live Cam</span></li>
+              </a>
+              <a href="#">
+                 <li class="list-group-item"><i class="fa fa-file-photo-o float-left" aria-hidden="true"></i>  <span class="link">My Fan Club Photos</span></li>
+              </a>
+              <a href="#">
+                 <li class="list-group-item"><i class="fa fa-file-video-o float-left" aria-hidden="true"></i>  <span class="link">My Fan Club Videos</span></li>
+              </a>
+              <a routerLink="/candy-club/vip-membership">
+               <li class="list-group-item"><i class="fa fa-flower-o float-left" aria-hidden="true"></i>  <span class="link">Buy Vip Membership</span></li>
+              </a>
+           </ul>
+        </div>
+     </div> 
+     <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 mt-3">
+        <div class="img-container user-cover">
+           <div *ngIf="user_cover_picture">
+              <img [src]="user_cover_picture" class="img-responsive user-cover-photo">
+              <div class="centered">
+
+                <div class="dropdown">
+                  <a class="dropdown-toggle" role="button" type="button" data-toggle="dropdown"><i class="fa fa-camera upload-button-cover-pic"></i>
+                  </a>
+                  <ul class="dropdown-menu">              
+                    <li>
+                      <input type="file" id="file-1" class="inputfile inputfile-2 d-none mycover" accept="image/png,image/jpeg" data-multiple-caption="{count} files selected" (change)="handleCoverPicture($event.target.files)"/>
+                      <a (click)="openCoverFile()" role="button">Change Picture</a></li>
+
+                      <li><a role="button" (click)="removeCoverPicture()">Remove Picture</a></li>
+                  </ul>
+                </div>  
+                               
+              </div>
+              
+           </div>
+        </div>
+        <div class="user-row">
+           <div class="row">
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                 <div class="user-pic">
+                    <div *ngIf="user_profile_picture">
+                       <img [src]="user_profile_picture" class="img-responsive img-circle profile-picture">
+                    </div>
+                    <div class="p-image">
+                       <div class="dropdown">
+                        <a class="dropdown-toggle" role="button" type="button" data-toggle="dropdown"><i class="fa fa-camera upload-button-cover-pic"></i>
+                        </a>
+                        <ul class="dropdown-menu">              
+                          <li>
+                            <input type="file" id="file-2" class="inputfile inputfile-2 d-none myprofile" accept="image/png,image/jpeg" data-multiple-caption="{count} files selected" (change)="handleProfilePicture($event.target.files)"/>
+                            <a (click)="openProfileFile()" role="button">Change Picture</a></li>
+                          <li><a role="button" (click)="removeProfilePicture()">Remove Picture</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                 </div>
+              </div>
+            <form id="form4" #updateDescriptionForm="ngForm" (ngSubmit)="updateDescriptionFn(updateDescriptionForm)">
+              <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                 <div class="username">
+                    <a href="">
+                       <h3>{{ user_details.name }}  <i class="fa fa-circle" style="font-size: 16px;color: #0bb30b;"></i></h3>
+                    </a>
+                 </div>
+                 <div class="actions float-right">
+                 <input type="submit" value="submit" /> 
+                 <!-- <i class="fa fa-check text-info" aria-hidden="true" style="font-size:28px"></i> -->
+                 </div>
+                 <div class="form-group">
+                    <textarea class="form-control" placeholder="Description" [(ngModel)]="user_details.description" name="description"></textarea>
+                 </div>
+              </div>
+            </form>
+           </div>
+        </div>
+        <form class="black-text" id="form3" #updateProfileForm="ngForm" (ngSubmit)="updateUserModelPreferenceFn(updateProfileForm)">
+        <div class="row mt-5 mb-5">
+           <div class="col-lg-6 col-md-6 col-sm-6 mt-4">
+               <div class="form-group">
+                  <label class="bold">Gender</label>
+                  <select class="selectpicker form-control" name="gender" [(ngModel)]="user_details.gender">
+                     <option value="">Nothing selected</option>
+                     <option *ngFor="let gender of preferences.gender" [value]="gender">{{gender}}</option>
+                  </select>
+               </div>
+           </div>
+           <div class="col-lg-6 col-md-6 col-sm-6 mt-4">
+              <div class="form-group">
+                 <label class="bold">Orientation</label>
+                 <select class="selectpicker form-control" name="orientation" [(ngModel)]="user_details.orientation">
+                    <option value="">Nothing selected</option>
+                    <option *ngFor="let orientation of preferences.orientation" [value]="orientation">{{orientation}}</option>
+                 </select>
+              </div>
+           </div>
+        </div>
+        <div class="mt-3">
+           <h1 class="text-center text-info">MY MODEL PREFERENCES</h1>
+           <div class="clear"></div>
+              <div class="row mt-5">
+                 <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                       <label class="bold">Body type </label>
+                       <select class="selectpicker form-control" name="body_type" [(ngModel)]="user_details.body_type">
+                           <option value="">Nothing selected</option>
+                           <option *ngFor="let body_type of preferences.body_type" [value]="body_type">{{body_type}}</option>
+                       </select>
+                    </div>
+                 </div>
+                 <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                       <label class="bold">Ethnicity</label>
+                       <select class="selectpicker form-control" name="ethnicity" [(ngModel)]="user_details.ethnicity">
+                          <option value="">Nothing selected</option>
+                          <option *ngFor="let ethnicity of preferences.ethnicity" [value]="ethnicity">{{ethnicity}}</option>
+                       </select>
+                    </div>
+                 </div>
+                 <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                       <label class="bold">Age</label>
+                       <select class="selectpicker form-control" name="age"  [(ngModel)]="user_details.age">
+                          <option value="">Nothing selected</option>
+                          <option *ngFor="let age of preferences.age" [value]="age">{{age}}</option> 
+                       </select>
+                    </div>
+                 </div>
+                 <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                       <label class="bold">Hair Color</label>
+                       <select class="selectpicker form-control" name="hair_color" [(ngModel)]="user_details.hair_color">
+                          <option value="">Nothing selected</option>
+                          <option *ngFor="let hair_color of preferences.hair_color" [value]="hair_color">{{hair_color}}</option>
+                       </select>
+                    </div>
+                 </div>
+                 <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                       <label class="bold">Breasts</label>
+                       <select class="selectpicker form-control" name="breast" [(ngModel)]="user_details.breast">
+                          <option value="">Nothing selected</option>
+                          <option *ngFor="let breast of preferences.breast" [value]="breast">{{breast}}</option>
+                       </select>
+                    </div>
+                 </div>
+                 <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                       <label class="bold">Hair length</label>
+                       <select class="selectpicker form-control" name="hair_length" [(ngModel)]="user_details.hair_length">
+                          <option value="">Nothing selected</option>
+                          <option *ngFor="let hair_length of preferences.hair_length" [value]="hair_length">{{hair_length}}</option>
+                       </select>
+                    </div>
+                 </div>
+                 <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                       <label class="bold">Breast size</label>
+                       <select class="selectpicker form-control" name="breast_size" [(ngModel)]="user_details.breast_size">
+                          <option value="">Nothing selected</option>
+                          <option *ngFor="let breast_size of preferences.breast_size" [value]="breast_size">{{breast_size}}</option>
+                       </select>
+                    </div>
+                 </div>
+                 <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                       <label class="bold">Body hair</label>
+                       <select class="selectpicker form-control" name="body_hair" [(ngModel)]="user_details.body_hair">
+                          <option value="">Nothing selected</option>
+                          <option *ngFor="let body_hair of preferences.body_hair" [value]="body_hair">{{body_hair}}</option>
+                       </select>
+                    </div>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-lg-6 col-md-6 mt-3">
+                    <input type="submit" class="btn btn-info" value="Update Profile" style="width:100%">
+                 </div>
+                 <div class="col-lg-6 col-md-6 mt-3">
+                    <input type="button" class="btn" value="Cancel" (click)="resetForm()" style="width:100%;background: #ccc">
+                 </div>
+              </div>
+        </div>
+      </form>
+     </div>     
+  </div>
+</div>

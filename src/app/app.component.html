@@ -1,0 +1,19 @@
+<div class="loader-sec" *ngIf="loading">
+    <div class="pong-loader"></div>
+</div>
+
+<div class="loader-sec-android" *ngIf="android_loading">
+    <div class="android-loader">
+        <div id="spinningTextG">
+            <div id="spinningTextG_1" class="spinningTextG">L</div>
+            <div id="spinningTextG_2" class="spinningTextG">o</div>
+            <div id="spinningTextG_3" class="spinningTextG">a</div>
+            <div id="spinningTextG_4" class="spinningTextG">d</div>
+            <div id="spinningTextG_5" class="spinningTextG">i</div>
+            <div id="spinningTextG_6" class="spinningTextG">n</div>
+            <div id="spinningTextG_7" class="spinningTextG">g</div>
+        </div>
+    </div>
+</div>
+
+<router-outlet (deactivate)="onDeactivate()" (activate)='onActivate($event)'></router-outlet>

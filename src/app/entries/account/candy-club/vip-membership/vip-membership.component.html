@@ -1,0 +1,55 @@
+<div class="container profile-background">
+
+  <!--Common user's profile tab -->
+<user-profile-tabs></user-profile-tabs>
+        
+    <div class="row">
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+          <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+            
+              <!-- MAIN SECTION STARTS -->
+                  <div class="col-12">
+                      <div class="">
+                          <!-- <div class="public-video-header">PRICING AND PLANS</div> -->
+                          <h3 class="heading-element text-center mt-2">VIP subscriptions</h3>
+                          <!-- PRICING AND PLANS SECTION STARTS -->
+                          <div class="row">
+                              <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 top-margin" *ngFor="let subscription of subscriptions">
+                                  <div class="box-shadow" *ngIf="subscription.type === 'VIP'">
+                                      <div class="subscription-bg" style="background-image: url(../../../assets/img/pro-bg1.jpg);">
+                                          <div [ngClass]="{'subscription-overlay' : subscription.popular_status == 0, 'subscription-overlay1' : subscription.popular_status == 1}">
+                                              <h3 class="sub-head">{{subscription.title}}</h3>
+                                              <h2 class="sub-head text-bold">{{subscription.currency}}{{subscription.amount}}/<span class="small-text">{{subscription.plan}} months</span></h2>
+                                          </div>
+                                      </div>
+                                      <div class="white-bg" [ngClass]="{'subscription-content' : subscription.popular_status == 0, 'subscription-content1' : subscription.popular_status == 1}">
+                                          <div class="subscription-content-text">
+                                              <h4 class="sub-head text-grey-clr size-16">{{subscription.description}}</h4>
+                                          </div>
+                                          <div class="Spacer-5"></div>
+                                          <a [routerLink]="['/invoice']" [queryParams]= "{subscription_id : subscription.subscription_id}">
+                                              <button class="btn2 width-120 mb-10" type="button" >PAY NOW</button>
+                                          </a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                        
+                          <!-- PRICING AND PLAN SECTION ENDS -->
+                      </div>
+                  </div>
+                  <div class="Spacer-10"></div>
+
+                  <div class="no_result_class text-center" *ngIf="subscriptions.length <= 0">
+                      <div>
+                          <h3 class="tab-head text-center">No Subscriptions found</h3>
+                          <img class="noresult-img" src="../../../assets/img/no-result.gif">
+                      </div>
+                    </div>
+                <!-- MAIN SECTION ENDS -->
+
+          </div>
+    </div>
+
+
+</div>

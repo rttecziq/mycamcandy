@@ -1,0 +1,12 @@
+export const Constant = {
+
+    LIVE_STREAM_STARTED : 'LIVE_STREAM_STARTED',
+
+    USER_FOLLOW : 'USER_FOLLOW',
+
+    USER_JOIN_VIDEO : 'USER_JOIN_VIDEO',
+
+    USER_GROUP_ADD : 'USER_GROUP_ADD'
+
+
+}

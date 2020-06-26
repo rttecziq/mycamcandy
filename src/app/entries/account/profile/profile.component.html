@@ -1,0 +1,382 @@
+ <!-- PROFILE SECTION STARTS -->
+ <div class="profile-bg-image left-spacing1" [style.background-image]="user_details.cover ? 'url(' + user_details.cover + ')' : null">
+    <div class="profile-bg-overlay">
+        <div class="container">
+            <div class="pull-right">
+                <a class="btn2 mt-15 pointer" (click)="becomeStreamer()" *ngIf="!is_content_creator">Become Streamer</a>
+            </div>
+            <div class="Spacer-25 hidden-xs"></div>
+            <div class="Spacer-18 visible-xs"></div>
+            <div class=" row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 center-align">
+                    <div [style.background-image]="user_details.picture ? 'url(' + user_details.picture + ')' : null" class="user-profile1">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8 white-text">
+                    <div class="Spacer-10"></div>
+                    <h1 class="signup-head">{{user_details.name}}</h1>
+                    <div class="Spacer-5"></div>
+                    <h3 class="signup-head">{{user_details.email}}</h3>
+                    <div class="Spacer-5"></div>
+                    <h4 class="signup-head">
+                        <a routerLink="/followers" class="pro-head">
+                            Followers - {{user_details.no_of_followers}}
+                        </a>
+                        <a routerLink="/followings" class="left-spacing pro-head">
+                            Following - {{user_details.no_of_followings}}
+                        </a>
+                    </h4>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="Spacer-10"></div>
+        <!-- NAVIGATION TABS STARTS -->
+        <div class="overlay1 container">
+            <ul class="nav nav-tabs profile-tab" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#about" aria-controls="home" role="tab" data-toggle="tab" class="white-text hidden-xs">About</a>
+                    <a href="#about" aria-controls="home" role="tab" data-toggle="tab" class="white-text visible-xs"><i class="fa fa-info"></i></a>
+                </li>
+                <li role="presentation">
+                    <a href="#blocked" aria-controls="home" role="tab" data-toggle="tab" class="white-text hidden-xs">Blocked list</a>
+                    <a href="#blocked" aria-controls="home" role="tab" data-toggle="tab" class="white-text visible-xs"><i class="fa fa-ban"></i></a>
+                </li>
+                <li role="presentation" class="right-align">
+                    <a href="#delete" aria-controls="messages" role="tab" data-toggle="tab" class="white-text hidden-xs">Delete Account</a>
+                    <a href="#delete" aria-controls="messages" role="tab" data-toggle="tab" class="white-text visible-xs" ><i class="fa fa-trash"></i></a>
+                </li>
+                <li role="presentation" class="right-align" *ngIf="user_details.login_by == 'manual'">
+                    <a href="#change" aria-controls="settings" role="tab" data-toggle="tab" class="white-text hidden-xs">Change Password</a>
+                    <a href="#change" aria-controls="settings" role="tab" data-toggle="tab" class="white-text visible-xs" ><i class="fa fa-key"></i></a>
+                </li>
+                <li role="presentation" class="right-align">
+                    <a href="#update" aria-controls="settings" role="tab" data-toggle="tab" class="white-text hidden-xs">Update Profile</a>
+                    <a href="#update" aria-controls="settings" role="tab" data-toggle="tab" class="white-text visible-xs" ><i class="fa fa-pencil-square-o"></i></a>
+                </li>
+                <li role="presentation" class="right-align" *ngIf="is_content_creator">
+                    <a href="#gallery" aria-controls="settings" role="tab" data-toggle="tab" class="white-text hidden-xs">Gallery</a>
+                    <a href="#gallery" aria-controls="settings" role="tab" data-toggle="tab" class="white-text visible-xs" ><i class="fa fa-picture-o"></i></a>
+                </li>
+            </ul>
+        </div>
+        <!-- NAVIGATION TABS ENDS -->
+    </div>
+</div>
+<!-- PROFILE SECTION ENDS -->
+
+<!-- TAB CONTENT STARTS -->
+<div class="tab-content left-spacing1">
+    <!-- ABOUT CONTENT STARTS -->
+    <div id="about" class="tab-pane fade in active zero-padding">
+        <div class="container">
+            <div class="top-bottom-spacing">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" *ngIf="is_content_creator">
+                        <div class="dashboard-card">
+                            <div class="dashboard-head">
+                                <i class="fa fa-usd"></i>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="dashboard-details">
+                                <h3 class="dashboard-details-head">Subscription info</h3>
+                                <span *ngIf="user_details.no_of_days_left">
+                                    <!-- <p>Amount:{{user_details.currency}}{{user_details.amount_paid}}</p>
+                                    <p>Expiry Days : {{user_details.no_of_days_left}} days.</p> -->
+                                    <h4 class="mt-0">Premium</h4>
+                                    <p>
+                                        <span><i class="fa fa-money mr-5"></i>{{user_details.currency}}{{user_details.amount_paid}}</span>
+                                        <span class="pull-right"><i class="fa fa-clock-o mr-5"></i>{{user_details.no_of_days_left}} days.</span>
+                                    </p>
+                                </span>
+
+                                <span *ngIf="!user_details.no_of_days_left">
+                                    <p>No Subscription Details found</p>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        <div class="dashboard-card">
+                            <div class="dashboard-head">
+                                <i class="fa fa-money"></i>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="dashboard-details">
+                                <h3 class="dashboard-details-head">payment info</h3>
+                                <span *ngIf="user_details.total_user_amount">
+                                    <p>Total : {{user_details.currency}}{{user_details.total_user_amount}}/{{user_details.no_of_paid_videos}} videos.</p>
+                                    <p>Received : {{user_details.currency}}{{user_details.paid_amount}}</p>
+                                    <p>Pending : {{user_details.currency}}{{user_details.remaining_amount}}</p>
+                                </span>
+                                <span *ngIf="!user_details.total_user_amount">
+                                    <p>No Payments found</p>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" *ngIf="is_content_creator">
+                        <div class="dashboard-card">
+                            <div class="dashboard-head">
+                                <i class="fa fa-video-camera"></i>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="dashboard-details">
+                                <h3 class="dashboard-details-head">Videos info</h3>
+                                <p *ngIf="user_details.total_videos">Total :{{user_details.total_videos}} videos</p>
+                                <p *ngIf="user_details.total_videos == 0">No Videos Found</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="tab-head top">About me</h3>
+                    <h5 *ngIf="user_details.description" class="about-text" [innerHTML]="user_details.description"></h5>
+                    <h4 class="about-text" *ngIf="user_details.description == ''">  
+                        No description Found
+                    </h4>
+                    <!-- modal -->
+                    <!--Confirm model popup <button data-toggle="modal" data-target="#myModal" class="btn1">click</button>
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content confirmation">
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="mt-0">what is lorem ipsum</h4>
+                                    <p class="text-grey-clr">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                                    <div class="mt-20 text-right">
+                                        <button class="btn2">Submit</button> 
+                                        <button class="btn1">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- modal -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ABOUT SECTION ENDS -->
+
+    <!-- blocked section -->
+    <div id="blocked" class="tab-pane fade zero-padding">
+        <div class="container">
+            <div class="top-bottom-spacing pt-0">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 top-margin" *ngFor="let blocker of blockers;let i = index;">
+                        <div class="user-profile text-center box-shadow">
+                            <a routerLink="/view-profile" [queryParams]="{peer_id : blocker.blocked_user_id}">
+                                <div  class="profile-user-img">
+                                    <div  class="img-circle  following-img" [style.background-image]="blocker.picture ? 'url(' + blocker.picture + ')' : null">
+                                    </div>
+                                </div>
+                                <h4  class="h4-s user-name text-bold text-overflow">{{blocker.name}}</h4>
+                            </a>
+                            <button  class="btn2 width-120 mb-20 mt-10" type="button" (click)="unBlockUser(blocker.blocked_user_id, 'blocker', i)" id="blocker_{{i}}">Unblock</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="Spacer-10"></div>
+                 <!-- section loader -->
+                <div class="loader" *ngIf="showBlockerLoader">
+                    <div class="spin"></div>
+                    <div class="bounce"></div>
+                </div>
+                <div class="text-center" *ngIf="blockersSkipCount && blockerDatasAvailable > 0">
+                    <button class="show-more-btn" (click)="showMoreBlockers()">show more</button>
+                </div>
+                <div class="no_result_class text-center" *ngIf="!blockersSkipCount">
+                    <div>
+                        <h3 class="tab-head text-center">No Blockers found</h3>
+                        <img class="noresult-img" src="../../../assets/img/no-result.gif">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- blocked section -->
+    
+    <!-- DELETE ACCOUNT SECTION STARTS -->
+    <div id="delete" class=" tab-pane fade zero-padding">
+        <div class="container">
+            <div class="top-bottom-spacing row">
+                <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+                    <h3 class="tab-head">We are sad to see you go</h3>
+                    <h5 class="tab-head text-grey-clr">Note: Once your account is deleted, you would be losing your history and video details.</h5>
+                    <form class="black-text" id="form1"  #deleteAccountForm="ngForm" (ngSubmit)="deleteAccountFn(deleteAccountForm)" >
+                       
+                        <div class="md-form form-lg" *ngIf="user_details.login_by == 'manual'">
+                            <input type="password" id="delete-pass" class="form-control form-control-lg" name="password" #password ngModel pattern=".{6,}" title="Minimum should be 6 characters" required >
+                            <label for="delete-pass">Password</label>
+                        </div>
+                        <div class="Spacer-8"></div>
+                        <div class="center-align">
+                            <button class="btn2 width-120" type="submit">Delete</button>
+                            <div class="Spacer-3 visible-xs"></div>
+                            <button *ngIf="user_details.login_by == 'manual'" class="btn1 width-120" type="button" (click)="resetForm()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- DELETE ACCOUNT SECTION ENDS -->
+    <!-- CHANGE PASSWORD SECTION STARTS -->
+    <div id="change" class="container-fluid tab-pane fade zero-padding">
+        <div class="container">
+            <div class="top-bottom-spacing row">
+                <h3 class="signup-head center-align">Change Password</h3>
+                <h5 class="tab-head text-grey-clr text-center mt-15">Note: Once you changed password, your session will logout.</h5>
+                <div class="col-xs-12  col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+                    <form class="black-text" #changePasswordForm="ngForm" (ngSubmit)="changePasswordFn(changePasswordForm)" id="form2">
+                        <div class="md-form form-lg">
+                            <input type="password" id="current" class="form-control form-control-lg" #old_password ngModel name="old_password" pattern=".{6,}" required="" title="Minimum should be 6 characters">
+                            <label for="current">Current Password</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <input type="password" id="new" class="form-control form-control-lg" #password ngModel name="password" pattern=".{6,}" required="" title="Minimum should be 6 characters">
+                            <label for="new">New password</label>
+                        </div>
+                        <div class="md-form form-lg">
+                            <input type="password" id="confirm" class="form-control form-control-lg" #password_confirmation ngModel name="password_confirmation" pattern=".{6,}" required="" title="Minimum should be 6 characters">
+                            <label for="confirm">Confirm Password</label>
+                        </div>
+                        <div class="center-align">
+                            <button class="btn2 width-120" type="submit">Submit</button>
+                            <div class="Spacer-3 visible-xs"></div>
+                            <button class="btn1 width-120" type="button" (click)="resetForm()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CHNAGE PASSWORD SECTION ENDS -->
+    <!-- UPDATE PROFILE SECTION STARTS -->
+    <div id="update" class="container-fluid tab-pane fade zero-padding">
+        <div class="container">
+            <div class="top-bottom-spacing">
+                <form class="black-text" id="form3" #updateProfileForm="ngForm" (ngSubmit)="updateProfileFn(updateProfileForm)" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 center-align">
+                            <div [style.background-image]="user_profile_picture ? 'url(' + user_profile_picture + ')' : null" class="user-profile1"></div>
+                            <div>
+                                <label  class="tab-label center-align size-16">Upload a different photo</label>
+                                <input type="file" id="file-1" class="inputfile inputfile-2 none" accept="image/png,image/jpeg" data-multiple-caption="{count} files selected" (change)="handleProfilePicture($event.target.files)"/>
+                                <label for="file-1">
+                                    <i class="fa fa-upload"></i>&nbsp;
+                                    <span>Choose a file&hellip;</span>
+                                </label>
+                            </div>
+                            <div [style.background-image]="user_cover_picture ? 'url(' + user_cover_picture + ')' : null" class="user-profile1"></div>
+                            <div>
+                                <label class="tab-label size-16">Change Cover Image</label>
+                                <input type="file" id="file-2"  class="inputfile inputfile-2 none" accept="image/png,image/jpeg" data-multiple-caption="{count} files selected" (change)="handleCoverPicture($event.target.files)"/>
+                                <label for="file-2">
+                                    <i class="fa fa-upload"></i>&nbsp;
+                                    <span>Choose a file&hellip;</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-offset-1 col-md-6 col-lg-offset-1 col-lg-6">
+                            <div>
+                                <div class="md-form form-lg">
+                                    <input type="text" id="name" class="form-control form-control-lg" name="name" [(ngModel)]="user_details.name" required>
+                                    <label for="name" [ngClass]="{'active' : user_details.name != ''}">Name</label>
+                                </div>
+                                <div class="md-form form-lg">
+                                    <input type="email" id="email" class="form-control form-control-lg" [(ngModel)]="user_details.email" name="email" readonly>
+                                    <label for="email" [ngClass]="{'active' : user_details.email != ''}">Email</label>
+                                </div>
+                                <div class="md-form form-lg">
+                                    <textarea type="text" id="about" class="form-control md-textarea" rows="3" [(ngModel)]="user_details.description" name="description"></textarea>
+                                    <label for="about" [ngClass]="{'active' : user_details.description != ''}">About</label>
+                                </div>
+                                <div class="center-align">
+                                    <button class="btn2 width-120" type="submit">Save</button>
+                                   <!-- <div class="Spacer-3 visible-xs"></div>
+                                    <button class="btn1 width-120" (click)="updateProfileReset()">Cancel</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- UPDATE PROFILE SECTION ENDS -->
+
+    <!-- gallery -->
+    <div id="gallery" class="container-fluid tab-pane fade zero-padding">
+        <div class="container">
+            <div class="top-bottom-spacing">
+
+                <div class="text-right">
+                    <button class="btn2 width-200" data-toggle="modal" data-target="#upload">upload</button>
+                </div>
+                <div class="Spacer-10"></div>
+                <h3 class="tab-head">Description</h3>
+                <h5 class="about-text mt-0">{{user_details.gallery_description}}</h5>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 relative" *ngFor="let gallery_picture of gallery_pictures;let i = index" id="gallery_pic_{{i}}">
+                        <a class="example-image-link" href="{{gallery_picture.image}}" data-lightbox="example-set" ><img class="example-image" src="{{gallery_picture.image}}" alt=""/></a>
+                        <div class="delete-img"><a style="cursor: pointer;" (click)="deleteGalleryPicture(gallery_picture.gallery_id, i)"><i class="fa fa-trash"></i></a></div>
+                    </div>
+                </div>
+                <div class="no_result_class text-center" *ngIf="!gallery_pictures.length">
+                    <div>
+                        <h3 class="tab-head text-center">No photos found</h3>
+                        <img class="noresult-img" src="../../../assets/img/no-result.gif">
+                    </div>
+                </div>
+                <!-- upload -->
+                <div class="Spacer-10"></div>
+                <!-- section loader -->
+                <div class="loader" *ngIf="showGalleryLoader">
+                    <div class="spin"></div>
+                    <div class="bounce"></div>
+                </div>
+                <div class="text-center" *ngIf="gallerySkipCount > 0 && galleryDatasAvailable > 0">
+                    <button class="show-more-btn" (click)="showMoreGallery()">show more</button>
+                </div>
+
+                <!-- modal -->
+                <div class="modal fade" id="upload" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content confirmation">
+                            <div class="modal-body">
+                                <form id="gallery-form" class="black-text" #gallery_form="ngForm" (ngSubmit)="galleryForm(gallery_form)" enctype="multipart/form-data">
+                                    <button type="button" class="close" data-dismiss="modal" id="upload_close">&times;</button>
+                                    <h4 class="mt-0 size-20">Upload an Image</h4>
+                                    <div class="md-form form-lg">
+                                        <textarea type="text" id="about" class="form-control md-textarea" rows="3" [(ngModel)]="user_details.gallery_description" name="gallery_description" required></textarea>
+                                        <label for="about" class="active">Description</label>
+                                    </div>
+                                    <div>
+                                        <label  class="tab-label center-align size-16 mt-0">Upload a different photo</label>
+                                        <input type="file" id="image" name="image[]" #image ngModel class="inputfile inputfile-2 none" accept="image/png,image/jpeg" data-multiple-caption="{count} files selected" (change)="handleGalleryPicture($event)" multiple required/>
+                                        <label for="image" class="gal-upload">
+                                            <i class="fa fa-upload"></i>&nbsp;
+                                            <span>Upload an Image&hellip;</span>
+                                        </label>
+                                    </div>
+                                    <div class="mt-20 text-right">
+                                        <button class="btn2 mright-20">Submit</button> 
+                                        <button class="btn1" type="button" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- modal -->
+
+            </div>
+        </div>
+    </div>
+    <!-- gallery -->
+</div>
+<!-- TAB CONTENT ENDS -->
+

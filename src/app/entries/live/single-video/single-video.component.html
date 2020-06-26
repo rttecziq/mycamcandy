@@ -1,0 +1,185 @@
+<!--MAIN SECTION STARTS-->
+<div class="">
+  <div class="row m-0">
+    <!-- BRAODCAST IMAGE SECTION STARTS -->
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 p-0">
+      <div class="left-spacing1 sec-padding">
+        <div class="text-danger" *ngIf="isStreaming > 0">
+          <p>
+            Note : You are now streaming live. Therefore the header and sidebar
+            will be disabled. Once the live streaming has stopped, it will be
+            enabled again.
+          </p>
+        </div>
+
+        <!--<video id="example1" class="video-js vjs-default-skin vjs-big-play-centered" style="width:100%;height:350px;"
+                    controls width="700" height="350"
+                    poster="http://placeimg.com/640/264/any"
+                    data-setup='{"controls":true}'>
+                    <source  src="../../../assets/video/video.mp4" type='video/mp4' />
+                </video> -->
+
+        <div id="videos-container" class="web">
+          <div id="defaultImage">
+            <img src="{{ video_details.snapshot }}" />
+            <div class="video-loader">
+              <iframe
+                width="100"
+                height="100"
+                class="single-video-loader"
+                style="border:0px solid transparent !important;height:104px;width:100px;overflow:hidden;"
+                src="https://lottiefiles.com/iframe/1562-play-button"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: none">
+          <button id="snapshot_id" (click)="snapShotFn()">snapshot</button>
+
+          <textarea id="snapshot"></textarea>
+
+          <video id="videoInput" autoplay></video>
+
+          <textarea id="rtpSdp">
+v=0
+                   o=- 0 0 IN IP4 {{ wowza_ip_address }}
+                   s=Kurento
+                   c=IN IP4 {{ wowza_ip_address }}
+                   t=0 0
+                   m=video {{ port_no }} RTP/AVP 100
+                   a=rtpmap:100 H264/90000
+                 </textarea
+          >
+        </div>
+
+        <div class="white-bg spacing1 shadow">
+          <div class="display-inline">
+            <div class="pull-left">
+              <a hre="#"
+                ><button class="btn btn-default btn-block btn-br size-14 mr-5">
+                  {{ video_details.type }}
+                </button></a
+              >
+              <a hre="#"
+                ><button class="btn btn-default btn-block btn-br size-14 mr-5">
+                  <i class="fa fa-eye"></i> &nbsp; {{ viewer_cnt }}
+                </button></a
+              >
+              <a hre="#"
+                ><button
+                  class="btn btn-default btn-block btn-br size-14 mr-5 width-35"
+                >
+                  <i class="fa fa-facebook"></i></button
+              ></a>
+              <a hre="#"
+                ><button class="btn btn-default btn-block btn-br size-14 mr-5 ">
+                  <i class="fa fa-twitter"></i></button
+              ></a>
+              <a hre="#"
+                ><button
+                  class="btn btn-default btn-block btn-br size-14 pull-right"
+                  *ngIf="video_details.amount > 0"
+                >
+                  {{ video_details.currency }}{{ video_details.amount }}
+                </button></a
+              >
+            </div>
+            <div class="pull-right">
+              <button
+                class="btn btn-default btn-block btn-br size-14 mr-5"
+                type="button"
+                id="open-room"
+                (click)="openRoom()"
+              >
+                Go Live
+              </button>
+              <button
+                class="btn btn-default btn-block btn-br size-14 mr-5"
+                type="button"
+                id="stop-live"
+                (click)="stopLive()"
+                style="display: none;"
+              >
+                Stop Live
+              </button>
+              <button
+                type="button"
+                id="start-live"
+                (click)="liveStatus()"
+                style="display: none;"
+              >
+                live start
+              </button>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <h4 class="captalize">
+            Streaming by
+            <span class="theme-clr">{{ video_details.name }} </span>
+          </h4>
+          <h4 class="captalize" *ngIf="video_details.live_group_id > 0">
+            Group Name -
+            <span class="theme-clr">{{ video_details.live_group_name }} </span>
+          </h4>
+          <h3 class="captalize mt-15">{{ video_details.title }}</h3>
+          <p class="m-0 text-grey-clr">{{ video_details.description }}</p>
+        </div>
+      </div>
+    </div>
+    <!-- BROADCAST IMAGE SECTION ENDS -->
+
+    <!-- CHAT SECTION STARTS -->
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 p-0 fixed-chat">
+      <div class="panel panel-default ">
+        <div class="panel-heading white-text">
+          <i class="fa fa-commenting icon"></i>Chat
+        </div>
+        <div
+          class="panel-body chat-container"
+          #scrollMe
+          [scrollTop]="scrollMe.scrollHeight"
+        >
+          <span *ngFor="let chat_message of chat_messages">
+            <!-- LEFT ALIGNED MEDIA OBJECT-->
+            <div class="media">
+              <div class="media-left">
+                <img
+                  src="{{ chat_message.userpicture }}"
+                  class="media-object media1"
+                />
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">{{ chat_message.username }}</h4>
+                <p>{{ chat_message.message }}</p>
+              </div>
+            </div>
+            <hr />
+          </span>
+        </div>
+        <div class="panel-footer">
+          <form>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control broad-form"
+                placeholder="Type your message here..."
+                name="message"
+                [(ngModel)]="messageContent"
+                (keyup.enter)="sendMessage(messageContent)"
+                maxlength="128"
+              />
+              <span
+                class="input-group-addon broad-icon"
+                (click)="sendMessage(messageContent)"
+                ><i class="fa fa-paper-plane"></i
+              ></span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- CHAT SECTION ENDS -->
+  </div>
+</div>
+<!--MAIN SECTION ENDS-->

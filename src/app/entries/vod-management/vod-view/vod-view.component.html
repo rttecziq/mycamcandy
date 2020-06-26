@@ -1,0 +1,136 @@
+<!-- MAIN SECTION STARTS -->
+<div class="sec-padding left-spacing1">
+    <div class="row">
+        <!-- BRAODCAST IMAGE SECTION STARTS -->
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-8 top-margin">
+            <!--<video id="example1" class="video-js vjs-default-skin vjs-big-play-centered" style="width:100%;height:350px;"
+                controls width="700" height="350"
+                poster="http://placeimg.com/640/264/any"
+                data-setup='{"controls":true}'>
+                <source  src="../../../assets/video/video.mp4" type='video/mp4' />
+            </video> -->
+            <div id="videos-container" width="700" height="350">
+                
+            </div>
+            <div class="white-bg spacing1 shadow" style="margin-top:-5px;">
+                <div class="">
+                    
+                    <a *ngIf="userId == vod_view.user_id" routerLink="/edit-video" [queryParams]="{video_id : vod_view.vod_id}">
+                        <button class="btn btn-br size-14 mr-5 width-35">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                    </a>
+                    <a *ngIf="userId == vod_view.user_id" (click)="deleteVODvideo($event,vod_view.vod_id)" style="cursor: pointer;">
+                        <button class="btn btn-br size-14 mr-5 width-35">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </a>
+                    <a *ngIf="userId == vod_view.user_id" (click)="changeVODstatus($event, vod_view.vod_id)" style="cursor: pointer;">
+                        <button class="btn btn-br size-14 mr-5 width-35">
+                            <i class="fa fa-close" *ngIf="vod_view.status"></i>
+                            <i class="fa fa-check" *ngIf="!vod_view.status"></i>
+                        </button>
+                    </a>
+                    <a *ngIf="userId == vod_view.user_id" data-toggle="modal" data-target="#set_ppv">
+                        <button class="btn btn-br size-14 mr-5">
+                            Set PPV
+                        </button>
+                    </a>
+
+                    <a *ngIf="vod_view.amount > 0">
+                        <button class="btn btn-br size-14 mr-5">
+                            {{vod_view.currency}}{{vod_view.amount}}
+                        </button>
+                    </a>
+                </div>
+                <h4 class="captalize">Uploaded by  <a routerLink="/view-profile" [queryParams]="{peer_id : vod_view.user_id}"><span class="theme-clr">{{vod_view.user_name}} </span></a></h4>
+                <h3 class="captalize">{{vod_view.title}}</h3>
+                <p class="m-0 text-grey-clr">{{vod_view.description}}</p>
+            </div>
+        </div>
+    </div>
+    <h4 class="captalize mb-30 mt-30">recently uploaded</h4>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" *ngFor="let vod_video of vod_videos">
+            <div class="live-video-box">
+                <div class="public-img" [style.background-image] = "'url('+vod_video.image+')'">
+                    <a routerLink="/vod-view" [queryParams]="{id : vod_video.unique_id}">
+                        <div class="playbtn1">
+                            <div class="white-btn-play1">
+                                <img src="../../../assets/img/play-btn.png">
+                            </div>
+                            <div class="pink-btn-play1">
+                                <img src="../../../assets/img/play-btn-pink.png">
+                            </div>
+                        </div>
+                    </a>
+                    <div class="video-amount" *ngIf="vod_video.amount > 0">
+                        <h5 class="no-margin">{{vod_video.currency}}{{vod_video.amount}}</h5>
+                    </div>
+                </div>
+                <div class="user-profile spacing">
+                    <h4 class="h4-s user-name text-bold overflow">{{vod_video.title}}</h4>
+                    <h5 class="h5-s user-name overflow text-grey-clr">{{vod_video.description}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="text-center">
+        <button class="show-more-btn">show more</button>
+    </div>-->
+</div>
+
+<!-- BROADCAST FORM STARTS -->
+<div class="modal fade white-text top1" id="set_ppv" role="dialog" >
+    <div class="modal-dialog">
+        <!-- MODAL CONTENT STARTS-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" id="clear_ppv_streaming_button">&times;</button>
+                <h4 class="modal-title">PAY PER VIEW</h4>
+            </div>
+            <div class="modal-body profile-bg-image" style="background-image: url(../../../assets/img/pro-bg1.jpg)">   
+                <div class="light-blue-bg modal-body1">
+
+                    <form method="post" #setPPVForm="ngForm" (ngSubmit)="setPPV(setPPVForm)">
+
+                        <input type="hidden" id="type_of_user" [(ngModel)]="ppv.type_of_user" name="type_of_user">
+
+                        <input type="hidden" id="video_id" [(ngModel)]="ppv.video_id" name="video_id">
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 zero-padding" for="optradio">Subscription type:</label>
+                            <div class="col-sm-4">
+                                <label class="radio-inline">
+                                    <input checked="checked" class="option-input radio" id="optradio" name="type_of_subscription" type="radio" [(ngModel)]="ppv.type_of_subscription" [value]="1">One time payment
+                                </label>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="radio-inline">
+                                    <input class="option-input radio" id="optradio" name="type_of_subscription" type="radio" [(ngModel)]="ppv.type_of_subscription" [value]="2">Recurring payment
+                                </label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="Spacer-5"></div>
+                        <div class="md-form form-lg mb-15">
+                            <input type="number" name="amount" id="amount" class="form-control form-control-lg" maxlength="4" [(ngModel)]="ppv.amount">
+                            <label for="search"  [ngClass]="{'active' : ppv.amount >= 0}">amount</label>
+                        </div>
+                        
+                        <div class="Spacer-10"></div>
+                       
+                        <div class="pull-right">
+                            <button class="btn2 width-120" type="submit">Set PPV</button>
+                        </div>
+                        <div class="pull-left" *ngIf="vod_view.amount > 0">
+                            <button class="btn2" type="button" (click)="removePPV(vod_view.vod_id)">Remove PPV</button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+            <!-- MODAL CONTENT ENDS -->
+    </div>
+</div>

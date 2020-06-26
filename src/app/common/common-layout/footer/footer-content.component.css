@@ -1,0 +1,22 @@
+
+footer{
+    background: #f1f1f1;
+    text-align: center;
+    color: #363636;
+    padding-left: 10%;
+    padding-right: 10%;
+    font-size: 13px;
+  }
+  footer ul{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 15px;
+  }
+  footer hr{margin: 0;}
+  footer ul li a{
+    color:#363636!important;
+    padding: 7px 10px;
+  }
+  footer p{font-size: 12px;}

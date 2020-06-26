@@ -1,0 +1,168 @@
+<!-- MAIN SECTION STARTS -->
+<div class="sec-padding left-spacing1">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-1 col-lg-10">
+            <!-- <div class="public-video-header">SUBSCRIBED PLANS</div> -->
+            <h3 class="heading-element">{{'my_subscriptions' | translate}}</h3>
+            <!-- PRICING AND PLANS SECTION STARTS -->
+
+            <div class="row myplans" *ngFor="let subscribed_plan of subscribed_plans;let first = first;let i = index;">
+                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 p-0 relative">
+                    <a class="close-ribbon" *ngIf="first"></a>
+                    <div  class="subscription-bg" style="background-image: url(../../../assets/img/pro-bg1.jpg);">
+                        <div [ngClass]="{'subscription-overlay' : subscribed_plan.popular_status == 0, 'subscription-overlay1' : subscribed_plan.popular_status == 1}" class="height-200">
+                            <div class="text-center">  
+                                <h3 class="sub-head mt-0">{{subscribed_plan.title}}</h3>
+                                <h2 class="sub-head text-bold">{{subscribed_plan.currency}}{{subscribed_plan.amount}}/<span class="small-text">{{subscribed_plan.plan}} months</span></h2>
+                                <div *ngIf="subscribed_plan.show_autorenewal_options">
+                                    <div class="" *ngIf="subscribed_plan.show_pause_autorenewal">
+                                        <p class="mt-15">
+                                            <a data-toggle="modal" data-target="#pause_autorenewal" class="white-btn pointer">Pause Autorenewal</a>
+                                        </p>
+                                    </div>
+
+                                    <div class="" *ngIf="subscribed_plan.show_enable_autorenewal">
+                                        <p class="mt-15">
+                                            <a data-toggle="modal" data-target="#enable_autorenewal" class="white-btn pointer">Enable Autorenewal</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7 p-0">
+                    <div class="myplan">
+                        <div class="myplan-details">
+                            <h4 class="sub-desc"><span class="black-clr bold">Expires On: </span>{{subscribed_plan.expiry_date}}</h4>
+                            <h4 class="sub-desc"><span class="black-clr bold">Description: </span>{{subscribed_plan.description}}</h4>
+                            <h4 class="sub-desc" *ngIf="subscribed_plan.is_cancelled && subscribed_plan.cancel_reason"><span class="black-clr bold">Cancel Reason: </span>{{subscribed_plan.cancel_reason}}</h4>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td>payment id</td>
+                                            <td>{{subscribed_plan.payment_id}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>payment mode</td>
+                                            <td>{{subscribed_plan.payment_mode}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>is coupon applied</td>
+                                            <td>{{subscribed_plan.is_coupon_applied > 0 ? 'Yes' : 'No'}}</td>
+                                        </tr>
+                                        <tr *ngIf="subscribed_plan.coupon_amount > 0">
+                                            <td>coupon code</td>
+                                            <td>{{subscribed_plan.coupon_code}}</td>
+                                        </tr>
+                                        <tr *ngIf="subscribed_plan.coupon_amount <= 0 && subscribed_plan.is_coupon_applied > 0">
+                                            <td>Reason for Coupon</td>
+                                            <td>{{subscribed_plan.coupon_reason}}</td>
+                                        </tr>
+                                        <tr *ngIf="subscribed_plan.is_coupon_applied > 0">
+                                            <td>amount</td>
+                                            <td>{{subscribed_plan.currency}}{{subscribed_plan.subscription_amount}}</td>
+                                        </tr>
+                                        <tr *ngIf="subscribed_plan.is_coupon_applied > 0">
+                                            <td>coupon amount</td>
+                                            <td>{{subscribed_plan.currency}}{{subscribed_plan.coupon_amount}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>total paid amount</td>
+                                            <td>{{subscribed_plan.currency}}{{subscribed_plan.amount}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+
+            <div class="Spacer-10"></div>
+            <div class="loader" *ngIf="showLoader">
+                <div class="spin"></div>
+                <div class="bounce"></div>
+            </div>
+            <div class="text-center" *ngIf="skipCount > 0 && datasAvailable > 0">
+                <button class="show-more-btn" (click)="showMore()">show more</button>
+            </div>
+        </div>
+    </div>
+    <div class="Spacer-10"></div>
+
+    <div class="no_result_class text-center" *ngIf="skipCount <= 0">
+        <div>
+            <h3 class="tab-head text-center">You aren't subscribed to any plans</h3>
+            <img class="noresult-img" src="../../../assets/img/no-result.gif">
+        </div>
+    </div>
+</div>
+<!-- MAIN SECTION ENDS -->
+
+<!-- BROADCAST FORM STARTS -->
+<div class="modal fade white-text top1" id="pause_autorenewal" role="dialog" >
+    <div class="modal-dialog">
+        <!-- MODAL CONTENT STARTS-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" id="pause_autorenewal_close">&times;</button>
+                <h4 class="modal-title">Pause Autorenewal</h4>
+            </div>
+            <div class="modal-body profile-bg-image" style="background-image: url(../../../assets/img/pro-bg1.jpg)">   
+                <div class="light-blue-bg modal-body1">
+                    <div class="Spacer-3"></div>
+                    <h4 class="tab-head mb-0">Pause your subscription autorenewal to take a break on the payment</h4>
+
+                    <form id="form" #pauseAutosubscription="ngForm">
+                        <!-- <div class="input input--hoshi content1">
+                            <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="desc" data-content="Description">
+                                <span class="input__label-content input__label-content--hoshi">Enter Cancel Reason</span>
+                            </label>
+                            <div class="clearfix"></div>
+                            <textarea class="input__field input__field--hoshi" type="text" id="desc" name="cancel_reason" [(ngModel)]="cancel_reason" required></textarea>
+                        </div>
+                        <div class="Spacer-3"></div> -->
+                        <div class="md-form form-lg">
+                            <textarea class="form-control md-textarea" type="text" id="desc" name="cancel_reason" #cancel_reason ngModel required rows="3"></textarea>
+                            <label for="desc">Enter the reason for cancellation</label>
+                        </div>
+                        <div class="text-center">        
+                            <button class="btn2 width-120" type="button" (click)="pauseAutorenewal()">SAVE</button>
+                            <div class="Spacer-3 visible-xs"></div>
+                            <button class="btn3 width-120" type="button" data-dismiss="modal">CANCEL</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- BROADCAST FORM STARTS -->
+<div class="modal fade white-text top1" id="enable_autorenewal" role="dialog" >
+    <div class="modal-dialog">
+        <!-- MODAL CONTENT STARTS-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" id="enable_autorenewal_close">&times;</button>
+                <h4 class="modal-title">Enable Autorenewal</h4>
+            </div>
+            <div class="modal-body profile-bg-image" style="background-image: url(../../../assets/img/pro-bg1.jpg)">   
+                <div class="light-blue-bg modal-body1">
+                    <div class="Spacer-3"></div>
+                    <h4 class="tab-head">Your subscription autorenewal is paused. Please activate autorenewal and enjoy your videos</h4>
+                    <div class="Spacer-4"></div>
+                    <div class="text-center">        
+                        <button class="btn2 width-120" type="button" (click)="enableAutorenewal()">Enable</button>
+                        <div class="Spacer-3 visible-xs"></div>
+                        <button class="btn3 width-120" type="button" data-dismiss="modal">CANCEL</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

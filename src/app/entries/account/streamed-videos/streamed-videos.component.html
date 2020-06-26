@@ -1,0 +1,55 @@
+<!-- MAIN SECTION STARTS -->
+<div class="sec-padding left-spacing1">
+    <!-- <div class="public-video-header top-margin">STREAMED VIDEOS</div> -->
+    <h3 class="heading-element">streaming history</h3>
+    <div class="Spacer-10"></div>
+    <!-- FOLLOERS LIST STARTS -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" *ngFor="let streamed_video of streamed_videos">
+            <div class="live-video-box">
+                <div class="total-revenue-sec" *ngIf="streamed_video.amount > 0">
+                    <div class="total-revenue-amount">Total Revenue:&nbsp;<span class="black-clr">{{streamed_video.currency}}{{streamed_video.earnings}}</span></div>
+                </div>
+                <div class="paid-video-img" [style.background-image] = "'url('+streamed_video.picture+')'">
+                    <div class="p-10 text-right">
+                        <span class="label label-success">{{streamed_video.type}}</span>
+                    </div>
+                    <div class="video-amount" *ngIf="streamed_video.amount > 0">
+                        <h5 class="no-margin">{{streamed_video.currency}}{{streamed_video.amount}}</h5>
+                    </div>
+                    <div class="watch-count">
+                        <h5 class="h5-s user-name m-0"><i class="fa fa-eye icon"></i>{{streamed_video.viewer_cnt}}</h5>
+                    </div>
+                </div>
+                <div class="user-profile spacing">
+                    <h4 class="h4-s user-name text-bold overflow">{{streamed_video.title}}</h4> 
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-7 ">
+                            <span class="label label-success">{{streamed_video.video_status}}</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5 text-right">
+                            <h5 class="h5-s user-name text-grey-clr mt-5 overflow"><i class="fa fa-clock-o icon"></i>{{streamed_video.streamed_at}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FOLLOWERS LIST ENDS -->
+    <div class="loader" *ngIf="showLoader">
+        <div class="spin"></div>
+        <div class="bounce"></div>
+    </div>
+
+    <div class="text-center" *ngIf="skipCount > 0 && datasAvailable > 0">
+        <button class="show-more-btn"  (click)="showMore()">show more</button>
+    </div>
+
+    <div class="no_result_class text-center" *ngIf="skipCount <= 0">
+        <div>
+            <h3 class="tab-head text-center">No streaming history found</h3>
+            <img class="noresult-img" src="../../../assets/img/no-result.gif">
+        </div>
+    </div>
+</div>
+        <!-- MAIN SECTION ENDS -->

@@ -1,0 +1,56 @@
+<!-- MAIN SECTION STARTS -->
+<div class="sec-padding left-spacing1">
+    <h3 class="heading-element">edit video</h3>
+
+    <div>
+        <div class="top-bottom-spacing">
+                <form class="black-text" id="form3" #livetvVideoForm="ngForm" (ngSubmit)="saveLiveTV(livetvVideoForm)">
+
+                <input type="hidden" id="live_video_id" name="live_video_id" [(ngModel)]="live_tv_obj.live_video_id"/>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 center-align">
+                        <div style="background-image:url(../../../../assets/img/bg-2.jpg)" class="user-profile1"></div>
+                        <div>
+                            <label  class="tab-label center-align size-16">Upload image*</label>
+                            <input type="file" name="image" id="file-1" class="inputfile inputfile-2 none" [(ngModel)]="live_tv_obj.image" (change)="handleLiveTvImage($event.target.files)" accept="image/jpeg,image/png"/>
+                            <label for="file-1">
+                                <i class="fa fa-upload"></i>&nbsp;
+                                <span>Choose a file&hellip;</span>
+                            </label>
+                            <h6 class="note">please enter .png .jpeg .jpg images only. Upload Rectangle images 4:3 Ratio Ex: 400 * 300</h6>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                        <div class="md-form form-lg">
+                            <input type="text" id="title" class="form-control form-control-lg" name="title" [(ngModel)]="live_tv_obj.title">
+                            <label for="title">title*</label>
+                        </div>
+
+                        <div class="md-form form-lg">
+                            <input type="text" id="rtmp" class="form-control form-control-lg" name="rtmp_video_url" [(ngModel)]="live_tv_obj.rtmp_video_url">
+                            <label for="rtmp">RTMP Video url*</label>
+                        </div>
+
+                        <div class="md-form form-lg">
+                            <input type="text" id="hls" class="form-control form-control-lg" name="hls_video_url" [(ngModel)]="live_tv_obj.hls_video_url">
+                            <label for="title">HLS Video url*</label>
+                        </div>
+                       
+                        <div class="md-form form-lg">
+                            <textarea type="text" id="desc" class="form-control md-textarea" rows="3" name="description" [(ngModel)]="live_tv_obj.description"></textarea>
+                            <label for="desc">description*</label>
+                        </div>
+                        <div class="Spacer-5"></div>
+                        <div class="text-right">
+                            <button class="btn" type="submit" id="upload_button">SUBMIT</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

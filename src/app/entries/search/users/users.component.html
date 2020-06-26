@@ -1,0 +1,33 @@
+<div class="sec-padding left-spacing1">
+    <!-- <div class="public-video-header top-margin">search result "a"</div> -->
+    <h3 class="heading-element">search result of "{{term}}"</h3>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 top-margin" *ngFor="let user of users">
+            <div class="user-profile text-center box-shadow">
+                <a routerLink="/view-profile" [queryParams]="{peer_id : user.follower_id}">
+                    <div class="profile-user-img"> 
+                        <div class="img-circle  following-img" [style.background-image] = "'url('+user.picture+')'"></div>
+                    </div>
+                    <h4 class="h4-s user-name text-bold text-overflow mb-17">{{user.name}}</h4>
+                </a>
+                <div class="clearfix"></div>
+            </div>
+        </div> 
+    </div>
+    <div class="Spacer-10"></div>
+    <div class="loader" *ngIf="showLoader">
+        <div class="spin"></div>
+        <div class="bounce"></div>
+    </div>
+
+    <div class="text-center" *ngIf="skipCount > 0">
+        <button class="show-more-btn" (click)="showMore()">show more</button>
+    </div>
+
+    <div class="no_result_class text-center" *ngIf="skipCount <= 0">
+        <div>
+            <h3 class="tab-head text-center">No users found</h3>
+            <img class="noresult-img" src="../../../assets/img/no-result.gif">
+        </div>
+    </div>
+</div>

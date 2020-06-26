@@ -1,0 +1,144 @@
+<div class="container-fluid signup">
+	<div class="row" id="signup-row">
+		<div class="col-lg-5 col-md-5 col-sm-5">
+			<h2>Connect to the Most Interactive Webcam Community!</h2>
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+					<img src="./assets/img/signup/2.jpg" class="img-responsive img-circle shadow">
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+					<img src="./assets/img/signup/3.jpg" class="img-responsive img-circle">
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+					<img src="./assets/img/signup/4.jpg" class="img-responsive img-circle">
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+					<img src="./assets/img/signup/5.jpg" class="img-responsive img-circle">
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+					<img src="./assets/img/signup/6.jpg" class="img-responsive img-circle">
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt-3">
+					<img src="./assets/img/signup/7.jpg" class="img-responsive img-circle">
+				</div>
+			</div>
+			<p class="mt-3">We're more than a webcam powerhouse, we are an interactive, fun community. Chat, send private messages, mingle and find sexy models that are perfect for *you*!</p>
+		</div>
+		<div class="col-lg-7 col-md-7 col-sm-7">
+			<h2>Create a Free Account</h2>
+			<h4>It's Free Now and Forever!</h4>
+			<form #userRegistrationForm="ngForm" (ngSubmit)="userRegistration(userRegistrationForm)">
+				<div class="form-group">
+					<label for="username">Username</label><span class="text-danger" *ngIf="name.invalid">*</span>
+					<input type="text" id="username" class="form-control form-control-lg" [(ngModel)]="user.name" #name="ngModel" required name="name" maxlength="50" autocomplete="off">
+				</div>
+				<div class="form-group">
+					<label>First name</label><span class="text-danger" *ngIf="first_name.invalid">*</span>
+					<input type="text" id="first_name" class="form-control form-control-lg" [(ngModel)]="user.first_name" #first_name="ngModel" required name="first_name" maxlength="50" autocomplete="off">
+				</div>
+				<div class="form-group">
+					<label>Last name</label><span class="text-danger" *ngIf="last_name.invalid">*</span>
+					<input type="text" id="last_name" class="form-control form-control-lg" [(ngModel)]="user.last_name" #last_name="ngModel"  required name="last_name" maxlength="50" autocomplete="off">
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label><span class="text-danger" *ngIf="password.invalid">*</span>
+					<input type="password" id="password" class="form-control form-control-lg" [(ngModel)]="user.password" #password="ngModel" name="password" required autocomplete="off">
+				</div>
+				<div class="form-group">
+					<label for="email">Email</label><span class="text-danger" *ngIf="email.invalid">*</span>
+					<input type="email" id="email" class="form-control form-control-lg" [(ngModel)]="user.email" #email="ngModel" name="email" required autocomplete="off">
+				</div>
+				<div class="form-group">
+					<label>Confirm Email</label><span class="text-danger" *ngIf="email_confirmation.invalid">*</span>
+					<input type="email" id="confirm_email" class="form-control form-control-lg" [(ngModel)]="user.email_confirmation" #email_confirmation="ngModel" name="email_confirmation" required autocomplete="off">
+				</div>
+				<div class="terms_div">
+					<div class="membertandc">
+						<p class="mtcparaleft">StreamVertigo Inc.</p>
+						<p class="mtcpararight">Terms of Use</p>
+						<p class="mtctoptitle">PLEASE CAREFULLY READ THESE TERMS OF USE (“TERMS”) CAREFULLY.</p>
+						<p class="mtcpara">By entering and using the “Site” You agree to be bound by these Terms. These terms are a binding agreement between You and Stream Vertigo Inc. and it’s affiliates (also referred to herein as “Stream Vertigo,” “We”, “Us”, “Company,” or “Our,” “Site”). </p>
+						<p class="mtcpara">REQUIRED AGE. To visit our website or make an account through the Site, you must be at least 18 years old and the age of majority and legal consent in the region in which you live. If you are not at least 18 years old and the age of majority and legal consent in the region in which you live, you must immediately leave our Site.</p>
+						<p class="mtctitle"> 1.	Agreement to Terms of Use</p>
+						<p class="mtcpara">These Terms of Use (“Terms”) constitute binding agreement between StreamVertigo Inc. and its users, (“User(s)”, “You,” “Guest,” “Member” or “Your”). You may be subject to additional terms and conditions that may apply when You use affiliate or third-party services or software. If you do not agree to be bound by these Terms of Use, then you must exit our website and quit Your use our Services. </p>
+						<p class="mtctitle">2.	Changes to Terms of Use and Service</p>
+						<p class="mtcpara">THESE TERMS MAY BE ALTERED OR AMDED BY US IN OUR DISCRETION WITH OR WITHOUT NOTICE, AT ANY TIME. In addition, we reserve the right to cease providing all or any portion of the Services at and time with or without notice. All changes to these Terms of Use are effective as of the “Last Revised” date. Continued use of our Website or Services after the Last Revised date constitutes Your acceptance of and agreement to be bound by those changes. Be sure to update yourself with these terms periodically to ensure familiarity with the most current version of these Terms.</p>
+						<p class="mtctitle">3.	Privacy Policy</p>
+						<p class="mtcpara">We honor Your privacy and are devoted to protecting it through Our compliance with the policies and procedures as established in our Privacy Policy. StreamVertigo Inc., does not knowingly collect contact or personal information from any persons who is not Legally of Age. Please refer to our Privacy Policy to understand the procedures we put forth to help protect your Personal Information. The date of the last revision to our Privacy Policy is noted at the bottom of our Privacy Policy.</p>
+						<p class="mtctitle">4.	Account Information</p>
+						<p class="mtcpara">This site is provided as a platform to provide Services to “Performers” where they may provide Services to the Guests of the site through an audio, textual, and visual communication system (“Chat Room”). </p>
+						<p class="mtcpara">In order to take part in or receive certain Services, You will be required to create an account with Us. By doing so You may be subject to Additional Terms relevant to such Services. Additional Terms will be accessible to You on the website or may be presented to you as Additional Terms when you sign up for or access such Services.</p>
+						<p class="mtcpara">By becoming a registered Member you agree to receive commercial emails about the services and products of the site and its affiliates.</p>
+						<p class="mtcpara">Your account is for your personal use only; you may not permit others to use your account for any purpose. You must keep your username and password confidential and must not disclose them to any person. You may not assign or transfer any of your rights or obligations under these Terms of Use to any person or entity. You agree to take full accountability for all activities that occur under Your account username and password. You must contact our customer service team instantly if you believe there has been unauthorized use of your account or any violation of these Terms.</p>
+						<p class="mtcpara">You hereby agree to provide Us with true, complete, and up-to-date information regarding your registration and billing information. Any User providing with information that is not true, complete, and up to date, shall not be allowed to continue to use the Site and may be subjected to civil and criminal liability.</p>
+						<p class="mtcpara">You also agree that We have no liability for any losses, damages, liabilities, or expenses you may incur due to any unauthorized use of your account and you agree to hold us innocent for any such unlawful use. We reserve the right to create accounts for quality control and administrative purposes.</p>
+						<p class="mtctitle">5.	Use of Services</p>
+						<p class="mtcindentleft">a.	The Site and Services may not be accessed or used in any country or location where it would be prohibited by law, could be deemed as a violation of any law, regulation, rule, or custom. The Company holds the right to restrict access to the site to Guests in any country or location at any time for any reason whatsoever and shall not be held liable in any way by and Guest for the loss of StreamVertigo Credits or loss of access.</p>
+						<p class="mtcindentleft">b.	Once a Guest has made an account, they will have the option to purchase candies, credits, tokens, digital items or goods which may be redeemed for solely for specified Services (“Credits”). Once Credits are purchased a Member may enter a Performers profile and send Credits to the performer in the Public Chat Room in return for Services that adhere to the sites usage policy and Performers Code of Conduct.   It must be noted that Credit purchased through StreamVertigo does not grant you any rights or Credits to any of Our affiliated sites and is solely a payment method and does not comprise of a right, service, or good in itself.</p>
+						<p class="mtcindentleft">c.	By using the Services of the Site, You understand and are aware that You may come across content that may be deemed as mature, offensive, vulgar, and distasteful. You agree and fully assume all risk of loss and any risk of personal damage that may arise from your interaction with Our Services and Performers. This includes but is not limited to any online or offline communication and personal interactions with others (such as dating). It is solely your responsibly to take all and any necessary precautions when interacting with any persons you may meet through our Services. You further agree that and acknowledge that your communications with other Guests and Performers through our Services are public and not private forms of communication. We strongly advise that you take precaution before disclosing any information that may be directly linked to you personally. We are not and will not be held responsible for information that you choose to disclose about yourself. You also agree that We have no liability for any losses, damages, liabilities, or expenses you may incur due to any form of communication or actions with use of your account and you agree to hold us innocent for any such unlawful use. </p>
+						<p class="mtcindentleft">d.	You understand and acknowledge that StreamVertigo does not and cannot control the information and content transmitted by Performers or any of the information and content transmitted via Chat Rooms, this includes but is not limited to audio, visual, and textual information.</p>
+						<p class="mtcindentleft">e.	We reserve the right to remove, block, transmit, and disclose any content we deem necessary that is posted by You that may be in violation of these Terms or harmful to any persons using the Services provided. We also reserve the right to monitor all transactions and postings of “Personal Information,” as described in our Privacy Policy, in order to prevent violations of these Terms.</p>
+						<p class="mtctitle">6.	Refunds</p>
+						<p class="mtcindentleft">a.	Certain Services may require you to make on-time payments or prepay certain amounts for candies, credits, tokens, digital items or goods Credits as well as any used balances may not be redeemed for cash and may not be returned or forfeited for a cash refund, except as may be required by applicable law. Credits and unused balances are non-transferrable. No refunds will be made by cash or check.</p>
+						<p class="mtcindentleft">b.	If you happen to subscribe to a Performers “Fan Club” and the Performer is no longer active or has blocked you, we will not issue a refund for this. WE WILL ALSO NOT PROVIDE ANY REFUNDS OR CREDITS FOR AMOUNTS PREPAID BY YOU AND YOU WILL NOT RECEIVE A REFUND FOR ANY UNUSED SUBSCRIPTION.</p>
+						<p class="mtctitle">7.	Foreign Transaction Fees</p>
+						<p class="mtcindentleft">a.	We may use credit card processors, merchant accounts, or banks outside of the United States in order to process your transactions. Because of this, in some cases your bank may charge you a foreign transaction fee or charge. Before purchasing anything through Our Site please be sure to check with your bank regarding foreign transaction fees that may be associated with our Services and Site.</p>
+						<p class="mtctitle">8.	Consent to Store Your Card Numbers</p>
+						<p class="mtcindentleft">a.	In order to manage your reoccurring subscription purchase and future transactions on Our Site, it is required that we store your credit car number. Your credit card numbers will be stored securely in formats included but not limited to encryption, coding, or tokenization.</p>
+						<p class="mtctitle">9.	Subscription Fees</p>
+						<p class="mtcindentleft">a.	Some Services such as Subscriptions are subject to a “Subscription Fees” or “Additional Fees.” These Additional Fees will be presented to you before completion of a purchase. Subscription Fees will occur once subscription is purchased and will only be a one-time charge. When purchasing Subscriptions there are reoccurring periodic charges explained upon subscription purchase. You acknowledge that your subscription has a one-time fee upon purchase and a recurring payment component, and you agree to pay to all recurring charges prior to cancellation.</p>
+						<p class="mtctitle">10.	Noncommercial Use.</p>
+						<p class="mtcindentleft">a.	The Company Services are made available for your personal, noncommercial use. You may not advertise or solicit any user or member to buy or sell any products or services through StreamVertigo Services. If a Member is found sending or posting unsolicited bulk emails, “spam” through the Services We provide, we reserve all rights, claims, and causes of action we may have.</p>
+						<p class="mtctitle">11.	Proprietary Rights</p>
+						<p class="mtcindentleft">a.	All information and content provided through the Services, including but not limited to, the text, data, software, manuscripts, graphics, photographs, sounds, videos, interactive features, blogs, posts, feedback, messages, and other materials (collectively, “Content”) and trademarks, service marks, and logos contained therein are owned by Us or licensed to us is subject to copyright and other intellectual property rights under United States and foreign laws. All content is provided to you exclusively for your information and personal, non-commercial use. You agree to not engage in the use of copying, editing, publishing, transmitting, or uploading this content in any way. In addition, you also agree to not to interfere with any security related features of the Services, Content, or features that confine the use of or copying of any Content. Any content provided by you is hereby licensed by you to the Company, and you shall have no claims, demands or suits in this respect.</p>
+						<p class="mtcindentleft">b.	By submitting content and/or information to any "public area" on the Site, such as forums or message centers, you allow the Company the continued, irreversible, non-exclusive rights and license to use, modify, adapt, publish, reproduce, translate, create secondary works from, allocate, communicate to the public, perform and display the content and/or the information and/or to incorporate it in other works in any form, media or technology, for the full term of any rights that may exist for such content.</p>
+						<p class="mtctitle">12.	Additional Representations and Warranties</p>
+						<p class="mtcpara">Under penalty of perjury, You further represent and warrant to us the statements listed below:</p>
+						<p class="mtcindentleft">(a)	That you will not permit or provide access or use of any of the Sites Services or Your account to any person under 18 years old and the age of majority and legal consent in the region in which you live.</p>
+						<p class="mtcindentleft">(b)	Your account information is current, complete and accurate. You will keep all information up to date and complete. This includes but is not limited to (billing address, credit card number, or expiration date)</p>
+						<p class="mtcindentleft">(c)	Your use of the Services is and will follow all applicable laws, rules, regulations, ordinances, or customs.</p>
+						<p class="mtcindentleft">(d)	You will not use any robot, spider, scraper or other automated measures to access or use the Services, cause harm to us or Our affiliated entities, manipulate our program, or replicate our intellectual property in any manner.</p>
+						<p class="mtcpara">It is important to note that we do not conduct criminal background screenings on our users.</p>
+						<p class="mtctitle">13.	Termination</p>
+						<p class="mtcindentleft">a.	We reserve the right to terminate or restrict your access to Our Services, without notice or liability, for any reason whatsoever.</p>
+						<p class="mtcindentleft">b.	We may terminate your account and any membership and/ or subscription of any Member’s account that is deemed to be fraudulent or high-risk.  In addition, we reserve the right to report to and cooperate with law enforcement with respect to any potential fraud claims. </p>
+						<p class="mtcindentleft">c.	In the event that Your account is terminated or canceled, you will not be entitled to any refund (including but not limited to any unused Subscription Fees or other prepaid amounts) will be granted.</p>
+						<p class="mtcindentleft">d.	Active members may not allow former members to use their Accounts. Any delinquent or unpaid accounts may contact our Customer Service Department to resolve issues before re-registering with our website. Any members using multiple accounts without prior written permission from Us will have their accounts terminated.</p>
+						<p class="mtctitle">14.	Disclaimer of Warranties</p>
+						<p class="mtcpara">YOU AGREE YOUR USE OF OUR SERVICES SHALL BE AT YOUR SOLE RISK. THE SERVICES ARE PROVIDED ON AN “AS-IS” AND “AS AVAILABLE” BASIS, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED TO THE ABSOLUTE POSSIBLE PERMITTED BY LAW. WE AND OUR EMPLOYEES, AFFILIATES, RELATED COMPANIES, STUDIOS AND OTHER REPRESENTATIVES, RELINQUISH ANY AND ALL WARRANTIES, INCLUDING, BUT NOT LIMITED TO: IMPLIED WARRANTIES OF MERCHANTABILITY, TITLE, FITNESS FOR A PARTICULAR PURPOSE, SECURITY, ACCURACY, RELAIBILITY, COMPLETENESS, USEFULNESS, OR NON-INFRINGEMENT OR INTELLECTUAL PROPERTY, AND OTHERS. </p>
+						<p class="mtcpara">WE DO NOT WARRANT ANY ERRORS BY US OR FOR ANY LOSS OR DAMAGE OF ANY KIND ACQUIRED BY ANY THIRD-PARTY AS A RESULT OF THE USE OF THE SERVICE OR ANY CONTENT POSTED, EMAILED, TRANSMITTED, OR OTHERWISE MADE ACCESSIBLE VIA THE SERVICE. IN ADDITION, WE HOLD NO ACCOUNTABILITY FOR ANY UNAUTHORIZED ACCESS TO OR USE OF OUR SECURE SERVERS AND/OR ANY AND ALL PERSONAL INFORMATION AND/OR FINANCIAL INFORMATION STORED WITHIN.</p>
+						<p class="mtcpara">WE CANNOT GUARANTEE AND DO NOT PROMISE ANY DEFINITE RESULTS FROM USE OF THE SERVICES. WITHOUT LIMITING THE AFOREMENTIONED TERMS, WE DO NOT GUARANTEE THAT THE SERVICES WILL BE UNINTERRUPTED OR ERROR-FREE.</p>
+						<p class="mtcpara">WE ASSUME NO LIABILITY OR OBLIGATION FOR ANY ERRORS OR INNACURACIES OF CONTENT, PERSONAL INJURY, OR PROPERTY DAMAGE OF ANY NATURE WHATSOEVER RESULTING FROM YOUR ACCESS TO AND USE OF THE SERVICES. WE DO NOT GAURANTEE THAT DEFECTS IN THE SITE WILL BE CORRECTED. IT IS YOUR SOLE RESPONSIBILITY TO ENSURE THAT YOUR INFORMATION OR SYSTEM IS PROTECTED BY ANTI-VIRUS, IF THE SITE OR ANY SERVICES ARE CONTAMINATED OR INFECTED.</p>
+						<p class="mtcpara">WE DO NOT AUTHORIZE, RECOMMEND, OR GAURANTEE, OR UNDERTAKE RESPONSIBILITY FOR ANY PRODUCT OR SERVICE ADVERTISED OR OFFERED BY A THIRD PARTY THROUGH THE SERVICE OR APPEARING ON OUR WEBSITE IN ANY ADVERTISING FASHION OR THERE OTHERWISE. WE WILL NOT BE HELD RESPONSIBLE FOR ANY TRANSACTIONS MADE BETWEEN YOU AND A THIRD-PARTY PROVIDER OF ANY PRODUCTS AND SERVICES. </p>
+						<p class="mtctitle">15.	Limitation of Liability	</p>
+						<p class="mtcpara">IN NO EVENT WILL WE OR AFFILIATES, SUPPLIERS, OR THE COMPANY’S AFFILIATES /SUPPLIERS’, DIRECTORS, EMPLOYEES, SHAREHOLDERS, STUDIOS, REPRESENTATIVES, LICENSORS, OR SUCCESSORS, BE LIABLE TO YOU OR TO ANY THIRD-PARTY WHATSOEVER FOR ANY INDIRECT, CONSEQUENTIAL, INCIDENTAL, SPECIAL, PUNITIVE, EXEMPLARY DAMAGES WHATSOEVER (WHETHER BASED ON WARRANTY, CONTRACT, TORT, OR ANY OTHER LEGAL THEORY AND WHETHER OR NOT WE ARE ADVISED OF THE POSSIBILITY OF SUCH INDEMNITIES OR SUCH INDEMNITIES ARE FORESEEABLE.</p>
+						<p class="mtcpara">YOU FURTHER AGREE TO IDEMNIFY US AND HOLD US INNOCENT TOWARDS ANY CLAIMS, DAMAGES, LIABILTY AND EXPENSES IN THE EVENT THAT YOU FIND ANOTHER USERS’ CONTENT TO BE INNACURATE OR HARMFUL OR ANY ILLEGAL CONDUCT OF ANY THIRD-PARTY AND THAT THE RISK OF HARM OR DAMAGE FROM THE FOREGOING RESTS ENTIRELY WITH YOU.</p>
+						<p class="mtcpara">IN THE CASE YOU CLAIM THERE WAS ANY ISSUE WITH YOUR USE OF THE SERVICES, YOU AGREE THAT YOUR SOLE REMEDY SHALL BE TO SEEK REIMBURSEMENT FOR ANY FUNDS PAID FOR THE SERVICE, AND WE SHALL HAVE SOLE DISCRETION TO DETERMINE IF ANY PORTION OF YOUR FUNDS SHOULD BE REIMBURSED TO YOU. </p>
+						<p class="mtcpara">YOU AND WE AGREE THAT ANY REASON OF ACTION ARISING OUT OF OR RELATED TO THE SERVICE IN ANY WAY MUST BE COMMENCED WITHIN ONE (1) YEAR AFTER THE CAUSE OF ACTION ARISES. OTHERWISE, SUCH CAUSE OF ACTION IS PERMANENTLY LOCKED. BOTH PARTIES EXPRESSLY AGREE TO WAIVE THEIR RIGHTS TO ANY LONGER STATUTE OF LIMITATIONS.</p>
+						<p class="mtctitle">16.	Indemnification</p>
+						<p class="mtcpara">You shall insure and hold the Company, managers, owners, shareholders, directors, employees, related companies, studios, and other representatives harmless from any damage, liability, claim, demand, or expense. This includes but is not limited to, judicious attorney fees, made by any third-party by reason of or arising from: Your use of and access to the Services or use of Your account by any other person; Your violation of any term of these Terms and Conditions; Your violation of any third-party right including any copyright, trademark, patent, other intellectual property rights, privacy rights, or any other right; Any action by You which is deemed careless or wrongful.</p>
+						<p class="mtctitle">17.	Notices</p>
+						<p class="mtcpara">We may distribute notices by means of electronic messages through the site, by a general posting on the Site or by the email you have provided to Us at the time you registered or an address you have provided. Any legal and other notices shall be delivered to the “Company Address” listed below in section 15.</p>
+						<p class="mtctitle">18.	Waiver</p>
+						<p class="mtcpara">Failure to agree to any part of these Terms shall not institute a waiver of any Term hereof. No waiver of a breach of any agreement to these Terms shall constitute a waiver of any prior, coexisting or subsequent breach of the same or any other agreement hereof. Unless granted in writing by an authorized representative or director of the Company, shall no User be entitled to waive any term of these Terms and Conditions.</p>
+						<p class="mtctitle">19.	Agreement Binding</p>
+						<p class="mtcpara">These Terms and Conditions shall constitute the entire agreement between You and Us. This agreement surpasses any prior agreements, writings, or communications between You and Us with consideration to the matters described in the Terms and Conditions.</p>
+						<p class="mtctitle">20.	Company Address</p>
+						<p class="mtctitle">StreamVertigo Inc.</p>
+						<p class="mtctitle">1350 E. Flamingo Road, #746</p>
+						<p class="mtctitle">Las Vegas, Nevada 89119</p>
+						<p class="mtctitleright">Last Updated: March 20, 2019</p>
+					</div>
+				</div>
+				<h4 class="mt-3"><span class="text-danger" *ngIf="agree_signup.invalid">*</span> Agreement to Terms of Use</h4>
+				<div class="checkbox">
+				    <label><input type="checkbox" #agree_signup="ngModel" name="agree_signup" [(ngModel)]="user.agree_signup" required> Check here to indicate that you have read and agree to the Terms of Use.</label>
+				</div>
+				<div class="form-group">
+					<input type="submit" class="registerbutton" name="submit" id="submit" value="Create account" [disabled]="!userRegistrationForm.valid">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<common-footer></common-footer>

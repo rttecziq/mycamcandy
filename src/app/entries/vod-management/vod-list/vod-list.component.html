@@ -1,0 +1,98 @@
+<!-- MAIN SECTION STARTS -->
+<div class="sec-padding left-spacing1">
+    <!-- <div class="public-video-header top-margin">vod list</div> -->
+    <div class="row">
+        <div class="col-sm-9">
+            <h3 class="heading-element">VOD Manager</h3>
+        </div>
+        <div class="col-sm-3 text-right mt-10">
+            <a routerLink="/upload-video">
+                <button class="btn2">Upload video</button>
+            </a>
+        </div>
+    </div>
+    <!-- search -->
+    <div class="row">
+        <div class="col-md-8">
+            <form class="black-text">
+                <div class="Spacer-2"></div>
+                <div class="md-form form-lg mb-15">
+                    <input type="text" id="search" class="form-control form-control-lg" (keydown.enter)="onKeyEnter($event.target.value)" #search_term ngModel name="search_term">
+                    <label for="search" [ngClass]="{'active' : search_term}">search</label>
+                </div>
+            </form>
+        </div>
+        <!-- <div class="col-md-4 text-right">
+            <div class="Spacer-10"></div>
+            <a routerLink="/upload-video">
+                <button class="btn2">Upload video</button>
+            </a>
+        </div> -->
+    </div>
+    <!-- search -->
+    <div class="Spacer-10"></div>
+    <!-- vod list -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" *ngFor="let vod_video of vod_videos">
+            <div class="live-video-box">
+                <div class="public-img" [style.background-image] = "'url('+vod_video.image+')'">  
+                    <a routerLink="/vod-view" [queryParams]="{id : vod_video.unique_id}">
+                        <div class="playbtn1">
+                            <div class="white-btn-play1"><img src="../../../assets/img/play-btn.png"></div>
+                            <div class="pink-btn-play1"><img src="../../../assets/img/play-btn-pink.png"></div>
+                        </div>
+                    </a>
+                    <div class="col-xs-3 p-10">
+                        <img src="../../../assets/img/check.png" class="video-status" *ngIf="vod_video.status">
+                        <!-- decline img -->
+                        <img src="../../../assets/img/cancel.png" class="video-status" *ngIf="!vod_video.status">
+                    </div>
+                    <div class="p-10 text-right">
+                        <span class="label label-success" *ngIf="vod_video.publish_status">published</span>
+                        <span class="label label-danger" *ngIf="!vod_video.publish_status">not Yet published</span>
+                    </div>
+                    <div class="video-amount" *ngIf="vod_video.amount > 0">
+                        <h5 class="no-margin">{{vod_video.currency}}{{vod_video.amount}}</h5>
+                    </div>
+                    <!--<div class="watch-count">
+                        <h5 class="h5-s user-name m-0"><i class="fa fa-eye icon"></i>2542</h5>
+                    </div> -->
+                </div>
+                <div class="user-profile spacing">
+                    <div class="display-inline">
+                        <div class="vod-left">
+                            <h4 class="h4-s user-name text-bold overflow">{{vod_video.title}}</h4>
+                        </div>
+                        <div class="vod-right dropdown">
+                            <span class="dropdown-toggle menu-icon" type="button" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></span>
+                            <ul class="dropdown-menu vod-listdropdown">
+                                <li><a routerLink="/edit-video" [queryParams]="{video_id : vod_video.unique_id}">Edit video</a></li>
+                                <li><a (click)="deleteVODvideo($event,vod_video.vod_id)" style="cursor: pointer;">delete video</a></li>
+                                <li class="divider"></li>
+                                <li><a (click)="changeVODstatus($event, vod_video.vod_id)" style="cursor: pointer;">{{vod_video.status ? 'Decline' : 'Approve'}} video</a></li>
+                                <li *ngIf="vod_video.publish_status == 0"><a (click)="publishVODvideo($event,vod_video.vod_id)" style="cursor: pointer;">Publish video</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h5 class="h5-s user-name overflow text-grey-clr"><i class="fa fa-clock-o icon"></i>{{vod_video.created_at}}</h5> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- vod list -->
+    <div class="loader" *ngIf="showLoader">
+        <div class="spin"></div>
+        <div class="bounce"></div>
+    </div>
+
+    <div class="text-center" *ngIf="skipCount > 0 && datasAvailable > 0">
+        <button class="show-more-btn" (click)="showMore()">show more</button>
+    </div>
+
+    <div class="no_result_class text-center" *ngIf="skipCount <= 0">
+        <div>
+            <h3 class="tab-head text-center">No Videos found</h3>
+            <img class="noresult-img" src="../../../assets/img/no-result.gif">
+        </div>
+    </div>
+</div>

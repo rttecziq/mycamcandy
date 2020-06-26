@@ -1,0 +1,48 @@
+<div class="sec-padding left-spacing1">
+    <h3 class="heading-element">search result of "{{term}}"</h3>
+    <div class="Spacer-10"></div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" *ngFor="let live_tv_video of live_tv_videos">
+            <div class="live-video-box">
+                <div class="public-img" [style.background-image]="'url('+live_tv_video.image+')'">
+                    <a routerLink="/vod-view">
+                        <div class="playbtn1">
+                            <div class="white-btn-play1"><img src="../../../assets/img/play-btn.png"></div>
+                            <div class="pink-btn-play1"><img src="../../../assets/img/play-btn-pink.png"></div>
+                        </div>
+                    </a>
+                    <div class="p-10 text-right">
+                        <span class="label label-success">Live</span>
+                    </div>
+                    <!--<div class="video-amount">
+                        <h5 class="no-margin">$10.00</h5>
+                    </div>
+                    <div class="watch-count">
+                        <h5 class="h5-s user-name m-0"><i class="fa fa-eye icon"></i>25</h5>
+                    </div>-->
+                </div>
+                <div class="user-profile spacing">
+                    <h4 class="h4-s user-name text-bold overflow">{{live_tv_video.title}}</h4>
+                    <a href=""><h5 class="h5-s user-name overflow text-grey-clr">{{live_tv_video.user_name}} </h5></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="Spacer-10"></div>
+    <div class="loader" *ngIf="showLoader">
+        <div class="spin"></div>
+        <div class="bounce"></div>
+    </div>
+
+    <div class="text-center" *ngIf="skipCount > 0">
+        <button class="show-more-btn" (click)="showMore()">show more</button>
+    </div>
+
+    <div class="no_result_class text-center" *ngIf="skipCount <= 0">
+        <div>
+            <h3 class="tab-head text-center">No live t                                                                              v videos found</h3>
+            <img class="noresult-img" src="../../../assets/img/no-result.gif">
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,195 @@
+<div class="left-spacing1">
+    <div class="row m-0">
+        <div [ngClass]="{'col-sm-7 col-md-8 col-lg-8 p-0' : group_view.is_owner, 'col-sm-12 col-md-12 col-lg-12 p-0':!group_view.is_owner}">
+            <div [style.background-image]="'url('+group_view.live_group_picture+')'" class="group-bg-img relative">
+                <div class="view-group-bg-img-overlay">
+                    <div>
+                        <h3 class="view-group-head">{{group_view.live_group_name}} <span class="label label-success small" *ngIf="group_view.is_owner">admin</span></h3>
+                        <p class="view-group-text">created at {{group_view.date}}</p>
+                    </div>
+                </div>
+                <div class="group-edit" *ngIf="group_view.is_owner">
+                    <h4>
+                        <a routerLink="/edit-group" [queryParams]="{id : group_view.live_group_id}"><i class="fa fa-pencil"></i></a>
+                    </h4>
+                </div>
+            </div>
+            <div class="sec-padding">
+                <h4 class="view-group-subhead">description</h4>
+                <p class="view-group-desc">{{group_view.live_group_description ? group_view.live_group_description : 'No description found' }}</p>
+                
+                <h4 class="view-group-subhead">{{group_view.total_members}} Partipants</h4>
+                <div class="display-inline group-sec p-0"  *ngIf="group_view.is_owner">
+                    <a style="cursor:pointer" data-toggle="modal" data-target="#add-participant" (click)="clearParticipent()">
+                        <div class="group-left">
+                            <img src="../../../../../assets/img/app-participents.png" class="add-participant-img">
+                        </div>
+                        <div class="group-right">
+                            <h4 class="mt-15">Add Participants</h4>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="display-inline group-sec"  id="member_{{member.member_id}}" *ngFor="let member of group_members">
+                    <div>
+                        <div class="group-par-left">
+                            <img src="{{member.member_picture}}" onError="this.src='../../../../../assets/img/pro-bg.jpg'" class="add-participant-img">
+                        </div>
+                        <div class="group-par-middle">
+                            <h4 class="mt-4 mb-4 black-txt ">{{member.member_name}}</h4>
+                            <p class="m-0">{{member.member_description}}</p>
+                        </div>
+                        <div class="group-par-right" *ngIf="group_view.is_owner">
+                            <div><a style="cursor:pointer" data-toggle="modal" [attr.data-target]="'#remove_member_' + member.member_id"><i class="fa fa-close"></i></a></div>
+                        </div>
+
+                        <div class="modal fade" id="remove_member_{{member.member_id}}" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body" style="padding: 15px !important;">
+                                            <button type="button" class="close" data-dismiss="modal" id="close_member_{{member.member_id}}">&times;</button>
+                                            <h4 class="m-0">Remove <span class="captalize">{{member.member_name}}</span> from <span class="captalize">{{group_view.live_group_name}} group</span>?</h4>
+                                            <div class="text-right">
+                                                <div class="text-right mt-30">
+                                                    <button class="btn1 mr-10" data-dismiss="modal">Cancel</button>
+                                                    <button class="btn2" (click)="deleteRemoveMember(member.member_id, group_view.live_group_id)">Remove</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-right mt-20" *ngIf="group_view.is_owner">
+                    <button class="btn" (click)="deleteGroup(group_view.live_group_id)">delete group</button>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-sm-5 col-md-4 col-lg-4 p-0 relative" *ngIf="group_view.is_owner"> 
+            <group-sidebar></group-sidebar>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="add-participant" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="black-text">
+                <div class="modal-body relative">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="m-0">Add Participants</h4>
+                    <div class="md-form form-lg" style="position:relative">
+
+                        <input type="text" id="group_search_results" class="form-control form-control-lg" (input)="onKeyEnterParticipant($event.target.value, 0)" #searchParticipant ngModel name="searchParticipant" (keydown.esc)="onKeyEscSearch($event)" placeholder="Search Users..." autocomplete="off">
+                        <!--<label for="search">search</label>-->
+
+                        <div class="search_menu"  *ngIf="search_users.length > 0" style="max-height : 450px">
+                            <ul class="search-live-video">
+                                <li *ngFor="let search_user of search_users;let idx = index;">
+                                    <div class="search-left">
+                                        <img src="{{search_user.picture}}" class="img-circle" alt="User Image">
+                                    </div>
+                                    <div class="search-right">
+                                        <h4 style="margin-bottom: 3px">
+                                            {{search_user.name}}
+                                            <!--<small><i class="fa fa-clock-o"></i> 5 mins</small>-->
+                                        </h4>
+                                        <!-- <p style="font-size: 11px">{{search_user.no_of_followers ? search_user.no_of_followers : 0}} Followers</p> -->
+                                        <p *ngIf="!search_user.is_member" (click)="addMemberDetails(search_user.follower_id, idx)" style="font-size: 11px;cursor: pointer" class="label small label-success">Add Member</p>
+
+                                        <p *ngIf="search_user.is_member" (click)="removeMemberDetails(search_user.follower_id, idx)" style="font-size: 11px;cursor: pointer" class="label small label-warning">Remove Member</p>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <br>
+
+                            <div class=" text-center"><button class="btn btn-md" style="padding : 0px 9px;" (click)="showMoreMembers()" >view more</button></div>
+                        </div>
+                    </div>
+                    <!--<div class="">
+                        <ul class="selected-member">
+                            <li class="selected-member-list">  
+                                <img src="../../../../../assets/img/bg-2.jpg">
+                                <span class="captalize">fannie</span>
+                                <i class="fa fa-close remove-selected"></i>
+                            </li>
+                            <li class="selected-member-list">  
+                                <img src="../../../../../assets/img/bg-2.jpg">
+                                <span class="captalize">fannie</span>
+                                <i class="fa fa-close remove-selected"></i>
+                            </li>
+                            <li class="selected-member-list">  
+                                <img src="../../../../../assets/img/bg-2.jpg">
+                                <span class="captalize">fannie</span>
+                                <i class="fa fa-close remove-selected"></i>
+                            </li>
+                            <li class="selected-member-list">  
+                                <img src="../../../../../assets/img/bg-2.jpg">
+                                <span class="captalize">fannie</span>
+                                <i class="fa fa-close remove-selected"></i>
+                            </li>
+                            <li class="selected-member-list">  
+                                <img src="../../../../../assets/img/bg-2.jpg">
+                                <span class="captalize">fannie</span>
+                                <i class="fa fa-close remove-selected"></i>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="mt-20 mb-20">Contacts</h4>
+                        <div>
+                            <input class="inp-cbx" id="cbx" type="checkbox" style="display: none;"/>
+                            <label class="cbx" for="cbx">
+                                <div class="cbx-first">
+                                    <svg width="12px" height="10px" viewbox="0 0 12 10">
+                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="cbx-second">
+                                    <h4 class="mt-4 mb-4 black-txt">fannie</h4>
+                                    <p class="m-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</p>
+                                </div>
+                            </label>
+                        </div>
+                            <div>
+                            <input class="inp-cbx" id="cbx2" type="checkbox" style="display: none;"/>
+                            <label class="cbx" for="cbx2">
+                                <div class="cbx-first">
+                                    <svg width="12px" height="10px" viewbox="0 0 12 10">
+                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="cbx-second">
+                                    <h4 class="mt-4 mb-4 black-txt">fannie</h4>
+                                    <p class="m-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</p>
+                                </div>
+                            </label>
+                        </div>
+                            <div>
+                            <input class="inp-cbx" id="cbx3" type="checkbox" style="display: none;"/>
+                            <label class="cbx" for="cbx3">
+                                <div class="cbx-first">
+                                    <svg width="12px" height="10px" viewbox="0 0 12 10">
+                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="cbx-second">
+                                    <h4 class="mt-4 mb-4 black-txt">fannie</h4>
+                                    <p class="m-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>-->
+                </div>
+                <div class="fixed-submit-btn">
+                    <button><i class="fa fa-check"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

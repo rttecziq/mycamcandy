@@ -1,0 +1,47 @@
+<!-- MAIN SECTION STARTS -->
+<div class="sec-padding left-spacing1">
+    <div class="row">
+        <!-- BRAODCAST IMAGE SECTION STARTS -->
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-8 top-margin">
+            <!--<video id="example1" class="video-js vjs-default-skin vjs-big-play-centered" style="width:100%;height:350px;"
+                controls width="700" height="350"
+                poster="http://placeimg.com/640/264/any"
+                data-setup='{"controls":true}'>
+                <source  src="../../../assets/video/video.mp4" type='video/mp4' />
+            </video> -->
+            <div id="videos-container" width="700" height="350">
+                
+            </div>
+            <div class="white-bg spacing1 shadow" style="margin-top:-5px;">
+                <!--<h4 class="captalize">Uploaded by  <a routerLink="/view-profile"><span class="theme-clr"> Streamer demo </span></a></h4>-->
+                <h3 class="captalize">{{live_tv_obj.title}}</h3>
+                <p class="m-0 text-grey-clr">{{live_tv_obj.description}}</p>
+            </div>
+        </div>
+    </div>
+    <h4 class="captalize mb-30 mt-30">recently uploaded</h4>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" *ngFor="let tv_video of tv_videos">
+            <div class="live-video-box">
+                <div class="public-img" [style.background-image] = "'url('+tv_video.image+')'">
+                    <a routerLink="/live-tv/view" [queryParams]="{id : tv_video.custom_live_video_id}">
+                        <div class="playbtn1">
+                            <div class="white-btn-play1"><img src="../../../assets/img/play-btn.png"></div>
+                            <div class="pink-btn-play1"><img src="../../../assets/img/play-btn-pink.png"></div>
+                        </div>
+                    </a>
+                    <!--<div class="video-amount">
+                        <h5 class="no-margin">$10.00</h5>
+                    </div>-->
+                </div>
+                <div class="user-profile spacing">
+                    <h4 class="h4-s user-name text-bold overflow">{{tv_video.title}}</h4>
+                    <h5 class="h5-s user-name overflow text-grey-clr"><i class="fa fa-clock-o icon"></i>{{tv_video.created_date}} </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="text-center">
+        <button class="show-more-btn">show more</button>
+    </div>-->
+</div>

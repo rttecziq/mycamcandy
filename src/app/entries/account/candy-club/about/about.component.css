@@ -1,0 +1,149 @@
+/********************User end About Start**********************/
+
+.profile-background .container{
+  background: #fff;
+  padding:0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.user-profile-list{
+  margin:0px;
+}
+.list-group-item:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+.list-group-item:first-child {
+  border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+.user-profile-list a{
+  color:#484747!important;
+}
+
+.float-left{
+  float: left;
+}
+.float-right{
+  float: right;
+}
+.profile-primary-div ul li{background: #ffbf0047;border-color: #ffc107;}
+.user-profile-list a:hover li{
+  background-color: #ffc107;
+    border-color: #ffc107;
+    color: #fff;
+}
+.user-profile-list li{text-align: center;}
+.user-profile-list li i.fa{font-size:22px;}
+.user-profile-list a:hover li.active{
+  background-color: #ffc107;
+    border-color: #ffc107;
+    color: #fff;
+}
+.user-profile-list li.active{
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+/***Sidebar menu End**/
+
+.mt-3{margin-top: 2rem;}
+.mt-5{margin-top: 3rem;}
+.mb-5{margin-bottom: 3rem;}
+.p-2{padding: .5rem;}
+.p-5{padding: 3rem;}
+.bg-light{background: #f7f7f7;}
+
+.user-row{background: #efefef;margin-top: 10px;}
+.user-pic img{
+  padding:10px;
+  position: absolute;
+  top:-100px;
+}
+.actions{
+  margin-right: 10px;
+    margin-top: -37px;
+}
+.user-activity{
+    height: 500px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.post-footer-option .list-unstyled {
+    display: inline-flex;
+}
+.clear{
+  width: 100%;
+  height: 1px;
+  background: silver;
+  clear: both;
+}
+.mb-3{margin-bottom: 2rem;}
+.post-footer-option .list-unstyled li a{padding: 10px}
+.about-ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.post-body img{width: 150px;}
+.about-ul li{
+  border-bottom: 2px solid #e0e0e0;
+    padding: 10px;
+}
+.actions .dropdown-menu{left: -110px}
+#post-on-wall{
+  padding:3rem;
+}
+.p-image{
+  position: absolute;
+  left: 49%;
+  margin-top: -7%;
+  font-size: 22px;
+}
+.profile-pic-upload{
+  height: 24px;
+  width: 24px;
+  position: absolute;
+    top: 5%;
+    opacity: 0;
+    cursor: pointer;
+}
+.fa-camera.upload-button-profile-pic {
+    color: #f7f7f7;
+}
+.img-container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.user-cover .fa-camera{font-size: 22px;color: #f7f7f7;}
+.cover-pic-upload{display: none!important;}
+@media screen and (max-width: 767px){
+  .user-pic img {
+    position: relative;
+    top: unset;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+.desc, .username{text-align: center;}
+.p-image {
+    position: absolute;
+    left: 48%;
+    margin-top: -118px;
+    font-size: 22px;
+}
+}
+@media screen and (max-width: 991px) and (min-width: 768px){
+  .user-pic img {
+    top: -65px;
+}
+}
+/********************User end About End**********************/

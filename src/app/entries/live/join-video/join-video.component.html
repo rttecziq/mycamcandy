@@ -1,0 +1,193 @@
+<!--MAIN SECTION STARTS-->
+<div class="">
+    <div class="row m-0">
+        <!-- BRAODCAST IMAGE SECTION STARTS -->
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 p-0">
+            <div class="left-spacing1 sec-padding">
+                <!--<video id="example1" class="video-js vjs-default-skin vjs-big-play-centered" style="width:100%;height:350px;"
+                    controls width="700" height="350"
+                    poster="http://placeimg.com/640/264/any"
+                    data-setup='{"controls":true}'>
+                    <source  src="../../../assets/video/video.mp4" type='video/mp4' />
+                </video> -->
+
+                <!-- live video -->
+                <div id="videos-container" class="web">
+                    <div id="defaultImage">
+                        <img src="{{video_details.snapshot}}" style="width: 100%;height: 350px;">
+                    </div>
+                </div>
+
+                <div class="main_video_error web" id="main_video_setup_error" style="display: none;">
+                    <img src="../../../assets/img/error.jpg" class="error-image" alt="Error" style="width: 100%;height: 250px;">
+
+                    <div class="flash_display" id="flash_error_display" style="display: none;">
+                        <div class="flash_error_div">
+                            <div class="flash_error">Flash is missing. Download it from <a target="_blank" href="http://get.adobe.com/flashplayer/" class="underline"> Adobe</a>.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="web-rtc" style="display: none;" (click)="webrtc()" type="button">webrtc</button>
+
+                <button id="join-room" style="display: none;" (click)="joinRoom()" type="button">Join Room</button>
+                
+                <div class="white-bg spacing1 shadow" style="margin-top:-5px;">
+                    <div>
+                        <a hre="#"><button class="btn btn-default btn-block btn-br size-14 mr-5">{{video_details.type}}</button></a>
+                        <a hre="#"><button class="btn btn-default btn-block btn-br size-14 mr-5"><i class="fa fa-eye"></i> &nbsp; {{viewer_cnt}}</button></a>
+                        <a hre="#"><button class="btn btn-default btn-block btn-br size-14 mr-5 width-35"><i class="fa fa-facebook"></i></button></a>
+                        <a hre="#"><button class="btn btn-default btn-block btn-br size-14 mr-5 "><i class="fa fa-twitter"></i></button></a>
+                        <a hre="#"><button class="btn btn-default btn-block btn-br size-14 pull-right" *ngIf="video_details.amount > 0">{{video_details.currency}}{{video_details.amount}}</button></a>
+                    </div>
+                    <h4 class="captalize">Streaming by <span class="theme-clr">{{video_details.name}} </span> </h4>
+
+                    <h4 class="captalize" *ngIf="video_details.live_group_id > 0">Group Name - <a routerLink="/view-group" [queryParams]="{id : video_details.live_group_id}"><span class="theme-clr">{{video_details.live_group_name}} </span> </a></h4>
+                    <h3 class="captalize mt-15">{{video_details.title}}</h3>
+                    <p class="m-0 text-grey-clr">{{video_details.description}}</p>
+                </div>
+                <!-- live video -->
+
+                <!-- public videos -->
+                <!-- <div class="public-video-header top-margin">
+                    PUBLIC VIDEOS
+                </div> -->
+                <div class="hidden-xs hidden-sm" *ngIf="public_videos.length">
+                    <h3 class="heading-element top-margin">public videos</h3>
+                    <div class="row">
+                        <!-- PUBLIC VIDEOS LIST STARTS -->
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="row">
+                                <div class="Spacer-10"></div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" *ngFor="let public_video of public_videos">
+                                    <div class="live-video-box">
+                                        <div class="public-img" [style.background-image]="'url(' + public_video.snapshot + ')'">
+                                            <a routerLink="/join-video" [queryParams]="{video_id : public_video.video_id}">
+                                                <div class="playbtn1">
+                                                    <div class="white-btn-play1"><img src="../../../assets/img/play-btn.png"></div>
+                                                    <div class="pink-btn-play1"><img src="../../../assets/img/play-btn-pink.png"></div>
+                                                </div>
+                                            </a>
+                                            <div class="video-amount" *ngIf="public_video.amount > 0">
+                                                <h5 class="no-margin">{{public_video.currency}}{{public_video.amount}}</h5>
+                                            </div>
+                                            <div class="watch-count">
+                                                <h5 class="h5-s user-name m-0"><i class="fa fa-eye icon"></i>{{public_video.viewers}}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="user-profile spacing">
+                                            <h4 class="h4-s user-name text-bold overflow">{{public_video.title}}</h4>
+                                            <a href=""><h5 class="h5-s user-name overflow text-grey-clr">{{public_video.name}}</h5></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- PUBLIC VIDEOS LIST ENDS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- BROADCAST IMAGE SECTION ENDS -->
+
+        <!-- CHAT SECTION STARTS -->
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 p-0 fixed-chat">
+            <div class="panel panel-default">
+                <div class="panel-heading white-text"><i class="fa fa-commenting icon"></i>Chat</div>
+                <div class="panel-body chat-container" id="chat-box" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+
+                    <span *ngFor="let chat_message of chat_messages">
+                        <!-- LEFT ALIGNED MEDIA OBJECT-->
+                        <div class="media">
+                            <div class="media-left">
+                                    <img src="{{chat_message.userpicture}}" class="media-object media1" >
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{chat_message.username}}</h4>
+                                <p>{{chat_message.message}}</p>
+                            </div>
+                        </div>
+                        <hr>
+
+                    </span>
+                    
+                </div>
+                <div class="panel-footer">
+                    <form>
+                        <div class="input-group">
+                            <input  type="text" class="form-control broad-form" placeholder="Type your message here..." id="chat-input" name="message" [(ngModel)]="messageContent" 
+                            (keyup.enter)="sendMessage(messageContent)" maxlength="128" >
+                            <span class="input-group-addon broad-icon" id="chat-send" (click)="sendMessage(messageContent)"><i class="fa fa-paper-plane"></i></span>   
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- CHAT SECTION ENDS -->
+    </div>
+</div>
+<!--MAIN SECTION ENDS-->
+    
+    
+    <!-- PUBLIC VIDEO SECTION STARTS-->
+    <!-- <div class="sec-padding left-spacing1" *ngIf="public_videos.length > 0">
+        <div class="public-video-header">
+            PUBLIC VIDEOS
+        </div>
+        <div class="row"> -->
+            <!-- PUBLIC VIDEOS LIST STARTS -->
+            <!-- <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                <div class="row">
+                    <div class="Spacer-10"></div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" *ngFor="let public_video of public_videos">
+                        <div class="live-video-box">
+                            <div class="public-img" [style.background-image]="'url(' + public_video.snapshot + ')'">
+                                <a routerLink="/join-video" [queryParams]="{video_id : public_video.video_id}">
+                                    <div class="playbtn1">
+                                        <div class="white-btn-play1"><img src="../../../assets/img/play-btn.png"></div>
+                                        <div class="pink-btn-play1"><img src="../../../assets/img/play-btn-pink.png"></div>
+                                    </div>
+                                </a>
+                                <div class="video-amount">
+                                    <h5 class="no-margin">$100.00</h5>
+                                </div>
+                                <div class="watch-count">
+                                    <h5 class="h5-s user-name m-0"><i class="fa fa-eye icon"></i>{{public_video.viewers}}</h5>
+                                </div>
+                            </div>
+                            <div class="user-profile spacing">
+                                <h4 class="h4-s user-name text-bold overflow">{{public_video.title}}</h4>
+                                <a href=""><h5 class="h5-s user-name overflow text-grey-clr">{{public_video.name}}</h5></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- PUBLIC VIDEOS LIST ENDS -->
+    
+            <!-- SUGGESTION LIST STARTS -->
+            <!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="suggestion-list">
+                    <div class="media" *ngFor="let suggestion of suggestions;let i = index;">
+                        <button type="button" class="close close1" data-dismiss="modal">&times;</button>
+                            <div class="media-left">
+                                <a routerLink="/view-profile" [queryParams]="{peer_id : suggestion.follower_id}"><img src="{{suggestion.picture}}" class="media-object img-thumbnail width-70"></a>
+                            </div>
+                        <div class="media-body">
+                            <a routerLink="/view-profile"><h4 class="media-heading">{{suggestion.name}}</h4></a>
+                            <p>{{suggestion.no_of_followers}} Followers</p>
+                            <button class="btn2 btn-padding" type="button" (click)="followUser(suggestion.follower_id)"><i class="fa fa-thumbs-up icon" ></i>Follow</button>
+                        </div>
+                        <hr>	
+                    </div>
+                    <div class="pull-right">
+                        <a href="" class="text-grey-clr">View more <i class="fa fa-angle-right ml-5"></i></a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div> -->
+            <!-- SUGGESTION LIST ENDS -->
+        <!-- </div>
+    </div> -->
+    <!--PUBLIC VIDEO SECTION ENDS-->
+    

@@ -1,0 +1,45 @@
+<!-- MAIN SECTION STARTS -->
+<div class="sec-padding left-spacing1">
+    <div class="public-video-header top-margin">FOLLOWERS</div>
+    <!-- FOLLOERS LIST STARTS -->
+    <div class="row">
+        <div class="Spacer-10"></div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" *ngFor="let follower_detail of follower_details;let i = index">
+            <div class="live-video-box">
+                <a routerLink="/view-profile" [queryParams]="{peer_id : follower_detail.follower_id}"><div class="followers-img" [style.background-image] = "'url('+follower_detail.picture+')'"></div></a>
+                <div class="user-profile spacing">
+                    <a routerLink="/view-profile" [queryParams]="{peer_id : follower_detail.follower_id}"><h4 class="h4-s user-name text-bold overflow">{{follower_detail.name}}</h4></a> 
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
+                            <h4 class="h4-s user-name blue-clr mt-5 mb-15 overflow">{{follower_detail.no_of_followers}} Followers</h4>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7" *ngIf="!follower_detail.is_block">
+                            <button class=" btn-default btn-follow right-align left follow-btn" type="button" *ngIf="!follower_detail.status" (click)="followUser(follower_detail.follower_id, i)"><i class="fa fa-user-plus icon"></i> Follow</button>
+                            <button class=" btn-default btn-follow right-align left follow-btn" type="button" *ngIf="follower_detail.status" (click)="unFollowUser(follower_detail.follower_id, i)"><i class="fa fa-user-times icon"></i> Unfollow</button>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7" *ngIf="follower_detail.is_block">
+                            <button class=" btn-default btn-follow right-align left follow-btn" type="button" (click)="unBlockUser(follower_detail.follower_id, i)"><i class="fa fa-ban icon"></i> Unblock</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- FOLLOWERS LIST ENDS -->
+    <!-- section loader -->
+    <div class="loader" *ngIf="showFollowersLoader">
+        <div class="spin"></div>
+        <div class="bounce"></div>
+    </div>
+    <div class="text-center" *ngIf="followersSkipCount > 0 && datasAvailable > 0">
+        <button class="show-more-btn" (click)="showMoreFollowers()">Show more</button>
+    </div>
+    <div class="no_result_class text-center" *ngIf="followersSkipCount <= 0">
+        <div>
+            <h3 class="tab-head text-center">No Followers history found</h3>
+            <img class="noresult-img" src="../../../assets/img/no-result.gif">
+        </div>
+    </div>
+</div>
+<!-- MAIN SECTION ENDS -->
