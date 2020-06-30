@@ -10,7 +10,7 @@ declare var $: any
 @Component({
     selector: 'common-header',
     templateUrl: 'header.component.html',
-    styleUrls:['../../../../assets/css/header/header.css'],
+    styleUrls:['./header.component.css'],
     host: {
         '(document:click)': 'onClick($event)',
     },
@@ -88,11 +88,11 @@ export class HeaderComponent implements AfterViewInit, OnDestroy{
     }
 
     ngAfterViewInit() {
-        this.toggleMenu();
-        this.menuHeight();
-        this.liActive();
-        this.headerDropdown();
-        this.searchbox();
+        // this.toggleMenu();
+        // this.menuHeight();
+        // this.liActive();
+        // this.headerDropdown();
+        // this.searchbox();
         this.site_settings = JSON.parse(localStorage.getItem('site_settings'));
 
         let site_logo = (this.site_settings).filter(obj => {

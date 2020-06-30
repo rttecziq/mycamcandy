@@ -51,7 +51,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // sample controller
 import { ErrorComponent } from './common/error/error.component';
-import { FooterContentComponent } from './common/common-layout/footer/footer-content.component';
 import { UserSignupComponent } from './common/auth/register/user-signup.component';
 import { QuickSignupComponent } from './common/home/quick-signup/quick-signup.component';
 export function HttpLoaderFactory(http: HttpClient) {
@@ -76,7 +75,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     SocialLoginComponent,
     NotificationComponent,
     HeaderLoginComponent,
-    FooterContentComponent,
     UserSignupComponent,
     QuickSignupComponent
   ],

@@ -1,159 +1,27 @@
-
-    <nav class="navbar navbar-inverse" id="custom_header_mcc">
-      <div class="container-fluid">
-        <div class="navbar-header">
-
-
-          <div class="toggle-wrap">
-            <span class="toggle-bar"></span>
-          </div>
-          <aside>
-            <div class="header-side-menu" id="header-side-menu">
-              <ul class="nav navbar-nav" style="visibility: visible;margin:0">
-                <li><button class="btn btn-sm btn-signup" *ngIf="!this.userId">Signup</button></li>
-                <li class="active"><a href="javascript:void(0);"><i class="fa fa-circle" style="color: #03b503;"></i>&nbsp;Streaming Now</a></li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" aria-expanded="false">Categories <span class="caret"></span></a>
-                  <ul class="dropdown-menu" style="padding:0">
-                    <li class="dropdown-submenu">
-                      <a class="test" tabindex="-1" href="#">New dropdown <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
-                        <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
-                      </ul>
-                    </li>
-                    <li><a tabindex="-1" href="javascript:void(0);">Hair</a></li>
-                    <li><a tabindex="-1" href="javascript:void(0);">Gender</a></li>
-                  </ul>
-                </li>
-                
-                <li id="search-menu"><a href="javascript:void(0);"><i class="fa fa-search"></i>&nbsp; Search</a></li>
-                <div id="searchbox" class="search-hide">
-                  <form method="POST" class="form-inline" id="form-search">
-                    
-                      <input type="search" name="search" id="search" class="form-control" placeholder="Search...">
-                    
-                      <button class="btn" name="search_submit" id="search_submit"><i class="fa fa-search"></i></button>
-                    
-                  </form>
-                </div>
-                <li><a href="javascript:void(0);"><i class="fa fa-question-circle"></i>&nbsp; Help</a></li>
-              </ul>
-              <div class="mob-footer">
-                 <ul>
-                   <li><a href="#">Help/Contact</a></li>
-                   <li><a href="#">Privacy</a></li>
-                   <li><a href="#">Cookie</a></li>
-                   <li><a href="#">DMCA</a></li>
-                 </ul>
-                 <p>All models appearing on this website are 18 years of age or older.<br>
-                  Join now to play with MyCamCandy Models today at MyCamCandy.com</p>
-                  <ul>
-                   <li><a href="#">Privacy</a></li>
-                   <li><a href="#">Cookie</a></li>
-                   <li><a href="#">DMCA</a></li>
-                   <li><a href="#">18 U.S.C. 2257 Record Keeping Requirements Compliance Statement</a></li>
-                 </ul>
-                 <p class="text-center">Copyright © 2020. All Rights Reserved.</p>
-              </div>
-            </div>
-          </aside>
-
-
-          <button type="button" class="navbar-toggle login-toggle" id="login-or-menu" data-toggle="collapse" data-target="#myNavbar">
-            <span *ngIf="!this.userId">Login</span> <span *ngIf="userId">Menu</span>                       
-          </button>
-          <div class="logos">
-          <a class="navbar-brand" routerLink="/" id="header_logo_mcc">My Cam Candy
-            <p class="worldwide">World-Wide Cam Community</p></a>
-            <a routerLink="/"><img src="{{site_logo}}" id="header_logo_img_mcc"></a>
-          </div>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav navbar-center">
-              <li class="nav-item">  
-                <app-header-login></app-header-login>   
-              </li>
+<div class="header">
+  <div class="container-fluid">
+     <nav class="navbar navbar-inverse">
+       <div class="container-fluid">
+         <div class="navbar-header">
+           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>                        
+           </button>
+           <a class="navbar-brand" href="javascript:void(0)"><img src="/assets/img/model/logo.png" height="71" width="186"></a>
+         </div>
+         <div class="collapse navbar-collapse" id="myNavbar">
+           <ul class="navbar-nav navbar-right" *ngIf="userId">
+                <li><a routerLink="/modeldashboard"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                <li><a routerLink="/"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
+                <li routerLink="/candy-club/" class="active"><a href="">Dashboard</a></li>
+           </ul>
+           <ul class="navbar-nav navbar-right" *ngIf="!userId">
+              <li><a routerLink="/register">Signup</a></li>
+              <li><a routerLink="/login">Login</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right" id="ul-right">
-              <li class="nav-item">
-                <a class="nav-link signup" title="Sign up" routerLink="/signup" *ngIf="!this.userId">SIGN UP</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" title="Home" href="javascript:void(0)" *ngIf="userId"><i class="fa fa-home" style="font-size: 19px;"></i></a>
-              </li>
-              <li class="nav-item"><a title="My Models" class="nav-link" href="javascript:void(0)" *ngIf="userId">MY MODELS</a>
-                <ul>
-                  <li class="">
-                    <a class="nav-link" href="javascript:void(0)">FAN CLUB MODELS</a>
-                  </li>
-                  <li class="">
-                    <a class="nav-link" href="javascript:void(0)">MY FAVORITES</a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" title="All Models" href="javascript:void(0)" *ngIf="this.userId">ALL MODELS</a>
-              </li>
-              <li class="nav-item"><a title="Videos" class="nav-link" href="javascript:void(0)" *ngIf="userId">VIDEOS</a>
-                  <ul>
-                    <li class="">
-                      <a class="nav-link" href="javascript:void(0)">My PREMIUM VIDEOS</a>
-                    </li>
-                    <li class="">
-                      <a class="nav-link" href="javascript:void(0)">MY FAN CLUB MODEL VIDEOS</a>
-                    </li>
-                  </ul>
-              </li>
-              <li class="nav-item"><a title="Photos" class="nav-link" href="javascript:void(0)" *ngIf="userId">PHOTOS</a>
-                <ul>
-                  <li class="">
-                    <a class="nav-link" href="javascript:void(0)">MY FAN CLUB MODELS PHOTOS</a>
-                  </li>
-                  <li class="">
-                    <a class="nav-link" href="javascript:void(0)">My PREMIUM PHOTOS</a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item"><a title="Buy Candy" class="nav-link" href="javascript:void(0)" *ngIf="userId">BUY CANDY</a>
-                <ul>
-                  <li class="">
-                    <a class="nav-link" href="javascript:void(0)">BUY CANDY</a>
-                  </li>
-                  <li class="">
-                    <a class="nav-link" href="javascript:void(0)">MEMBER PURCHASE HISTORY</a>
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item" *ngIf="userId">
-                <a class="nav-link" title="Logout" role="button" (click)="logout()">LOGOUT</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" title="Candy Shop" href="javascript:void(0)">CANDY SHOP</a>
-              </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="header-gap"></div>
-<!-- Forgot POPUP -->
-<div class="modal fade" id="forgot-popup" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body" style="text-align:center;">
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4>Forgot Your Password?</h4>
-        <form method="POST" action="" id="forget-pass">
-          <p>Enter your username below to reset new password.</p>
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Username" name="username" id="username">
-          </div>
-          <div class="form-group">
-            <input type="submit" name="submit" id="submit" value="SUBMIT" class="btn">
-          </div>
-        </form>
-      </div>
-    </div>  
+         </div>
+       </div>
+     </nav>
   </div>
 </div>
-<!-- Forgot POPUP End -->
-<!--HAEDER ENDS-->

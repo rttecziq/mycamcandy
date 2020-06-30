@@ -1,0 +1,22 @@
+.footer {
+  background: #FFFFFF url(/assets/img/model/footer-bg.png) scroll;
+  border-top: 2px solid #FFFFFF;
+  margin: 20px auto 0;
+  position: relative;
+  font-size: 16px;
+  text-align: center;
+  background-position: 279px center;
+}
+.footer ul.list-unstyled li a {
+  color: #0b0a0a;
+  line-height: 1.8;
+}
+a{text-decoration: none!important;}
+.footer .list-unstyled {
+  margin-bottom: 25px;
+  margin-top: 35px;
+}
+.footer .footer-logo img{
+margin-left: auto;
+margin-right: auto;
+}
