@@ -1,20 +1,27 @@
-<footer>
-	<ul>
-		<li class="" *ngFor="let top_link of top_links">
-			<a [routerLink]="['/page']" [queryParams]="{page_id:top_link.id}">{{top_link.heading}}</a>
-		</li>
-		
-	</ul>
-	<hr>
-	
-	<div class="footer-content">
-		<p [innerHTML]="mid_content"></p>
-	</div>
-
-	<ul>
-		<li class="" *ngFor="let bottom_link of bottom_links">
-			<a [routerLink]="['/page']" [queryParams]="{page_id:bottom_link.id}">{{bottom_link.heading}}</a>
-		</li>		
-	</ul>
-	<p class="text-center">Copyright © 2020. All Rights Reserved.</p>	
+<footer class="footer">
+	<div class="container-fluid">
+		<div class="row">
+		   <div class="col-md-3 col-sm-4 col-xs-12 footer-logo hidden-xs">
+			  <a [routerLink]="['/']"><img src="/assets/img/model/logo.png" alt="" class="img-responsive"></a>
+		   </div>
+		   <div class="col-md-6 col-sm-5 col-xs-12">
+			  <ul class="list-unstyled">
+                <li class="" *ngFor="let bottom_link of bottom_links">
+                    <a [routerLink]="['/page']" [queryParams]="{page_id:bottom_link.id}">{{bottom_link.heading}}</a>
+			  </ul>
+		   </div>
+		   <div class="col-md-3 col-sm-3 col-xs-12">
+			  <ul class="list-unstyled">
+				 <li><a href="https://mycamcandy.com" target="_blank">MyCamCandy</a></li>
+				 <li><a href="https://models.streamvertigo.com" target="_blank">Stream Vertigo - Models</a></li>
+				 <li><a href="https://studios.streamvertigo.com" target="_blank">Stream Vertigo -Studios</a></li>
+			  </ul>
+		   </div>
+		</div>
+		<div class="row">
+		   <div class="col-md-12 col-sm-12 col-xs-12 copyright-text">
+			  <p>Copyright © 2020. All Rights Reserved.</p>
+		   </div>
+		</div>
+	 </div>	
 </footer>

@@ -1,23 +1,20 @@
 <footer class="footer">
 	<div class="container-fluid">
 		<div class="row">
-		   <div class="col-md-3 col-sm-4 col-xs-12 footer-logo">
-			  <a href="#"><img src="/assets/img/model/logo.png" alt="" class="img-responsive"></a>
+		   <div class="col-md-3 col-sm-4 col-xs-12 footer-logo hidden-xs">
+			  <a [routerLink]="['/']"><img src="/assets/img/model/logo.png" alt="" class="img-responsive"></a>
 		   </div>
 		   <div class="col-md-6 col-sm-5 col-xs-12">
 			  <ul class="list-unstyled">
-				 <li><a href="">Privacy Policy</a></li>
-				 <li><a href="">COOKIE POLICY</a></li>
-				 <li><a href="">DCMA COMPLAINT</a></li>
-				 <li><a href="">NOTICE ABOUT INDIVIDUALS PERFORMING ON STREAMVERTIGO</a></li>
-				 <li><a href="">18 U.S.C. 2257 Record Keeping Requirements Compliance Statement</a></li>
+                <li class="" *ngFor="let bottom_link of bottom_links">
+                    <a [routerLink]="['/page']" [queryParams]="{page_id:bottom_link.id}">{{bottom_link.heading}}</a>
 			  </ul>
 		   </div>
 		   <div class="col-md-3 col-sm-3 col-xs-12">
 			  <ul class="list-unstyled">
-				 <li><a href="">MyCamCandy</a></li>
-				 <li><a href="">Stream Vertigo - Models</a></li>
-				 <li><a href="">Stream Vertigo -Studios</a></li>
+				 <li><a href="https://mycamcandy.com" target="_blank">MyCamCandy</a></li>
+				 <li><a href="https://models.streamvertigo.com" target="_blank">Stream Vertigo - Models</a></li>
+				 <li><a href="https://studios.streamvertigo.com" target="_blank">Stream Vertigo -Studios</a></li>
 			  </ul>
 		   </div>
 		</div>
