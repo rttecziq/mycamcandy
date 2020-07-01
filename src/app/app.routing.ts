@@ -45,17 +45,14 @@ const appRoutes:Routes = [
         ]
     },
 
+    {path :'login', component:LoginComponent,canActivate: [AuthGuard],data : {title : "Login", expectedRole: 'onlyGuest'} },
+
     { path: '', component:MainLayoutComponent,
         canActivate: [AuthGuard],
         data: { 
           expectedRole: 'onlyGuest'
         },
         children:[
-            { 
-                path: 'login', 
-                component:LoginComponent,
-                data : {title : "Login"}
-            },
             { 
                 path: 'signup', 
                 component:UserSignupComponent,

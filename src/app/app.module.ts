@@ -17,7 +17,6 @@ import { SidebarComponent } from './common/common-layout/sidebar/sidebar.compone
 
 import { ForgotPasswordComponent } from './common/auth/forgot-password/forgot-password.component';
 import { LoginComponent } from './common/auth/login/login.component';
-import { HeaderLoginComponent } from './common/auth/login/header-login.component';
 import { SocialLoginComponent } from './common/auth/social-login/login.component';
 import { RegisterComponent } from './common/auth/register/register.component';
 import { ChooseComponent } from './common/auth/choose/choose.component';
@@ -74,7 +73,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ErrorComponent,
     SocialLoginComponent,
     NotificationComponent,
-    HeaderLoginComponent,
     UserSignupComponent,
     QuickSignupComponent
   ],
