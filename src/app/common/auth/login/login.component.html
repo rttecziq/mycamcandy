@@ -1,60 +1,28 @@
-<!--BODY STARTS-->
-<div class="main body-img" style="background-image: url(../../../assets/img/bg-video-default.jpg);">
-    <div class="overlay section-spacing pt-120">
-        <div class="signup-form ">
-            <div class="right-align">
-                <a routerLink="/register" [queryParams]="{uType : uType}" class="forgot">{{'sign_up' | translate}}<i class="fa fa-chevron-right signin-arrow"></i></a>
-            </div>
-            <div class="clear-both"></div>
-            <!--h2 class="signup-head center-align top">StreamNow</h2> -->
-            <div class="Spacer-8 top"></div>
-            <!-- SOCIAL LOGIN SECTION STARTS -->
-            <div class="row" *ngIf="google_status || fb_status">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 google" *ngIf="google_status">
-                    <button class="google-signin" type="button" (click)="socialLogin('google')"><i class="fa fa-google icon"></i>{{'signin_with_google' | translate}}</button>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 facebook" *ngIf="fb_status">
-                     <button class="facebook-signin" type="button" (click)="socialLogin('facebook')"><i class="fa fa-facebook icon"></i>{{'signin_with_facebook' | translate}}</button>
-                </div>
-            </div>
-            <span *ngIf="google_status || fb_status">
-                  <!-- SOCIAL LOGIN SECTION ENDS -->
-                  <div class="Spacer-8"></div>
-                  <h3 class="signup-line center-align">{{'or' | translate}}</h3>
-            </span>
-            <!-- FORM ENDS -->
-            <form class="auth-form" (ngSubmit)="userAuthentication(userName.value, Password.value)" #loginForm="ngForm">
-                
+<div class="login-body">
+<div class="container-fluid">
+    <div class="login-form">
+            <form class="login_form" (ngSubmit)="userAuthentication(userName.value, Password.value)" #loginForm="ngForm">
                 <div class="md-form form-lg">
-                    <input type="email" id="email" class="form-control form-control-lg" name="email" #userName ngModel autocomplete="off">
-                    <label for="email">{{'email' | translate}}</label>
+                    <label>Username</label>
+                    <input class="form-control" type="text" name="user" placeholder="Username" #userName ngModel autocomplete="off">
                 </div>
-                <div class="md-form form-lg">
-                    <input type="password" id="password" class="form-control form-control-lg" name="Password" #Password ngModel autocomplete="off">
-                    <label for="password">{{'password' | translate}}</label>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" class="form-control" name="Password" #Password ngModel autocomplete="off">
                 </div>
-                <div class="center-align">
-                    <button class="btn width-200" type="submit" [disabled]="!loginForm.valid">{{'login' | translate}}</button>
+                <div class="form-group">
+                    <div class="checkbox">
+                      <label><input type="checkbox" name="remember" value="">Remember Me</label>
+                    </div>
+                  </div>
+                <div class="form-group">
+                    <button class="btn btn-info w-100" type="submit" [disabled]="!loginForm.valid">{{'Log In' | translate}}</button>
                 </div>
             </form>
-            <div class="Spacer-5"></div>
-            <div class="center-align">
-                <a routerLink="/forgot-password" [queryParams]="{uType : uType}" class="forgot">{{'forgot_password' | translate}}?</a>
-            </div>
 
-            <br>
-
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <a class="btn width-200" routerLink="/login" [queryParams]="{uType : 'viewer'}">{{'viewer_login' | translate}}</a>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <a class="btn width-200" routerLink="/register" [queryParams]="{uType : 'viewer'}">{{'viewer_registration' | translate}}</a>
-                </div>
-            </div>
-        </div>
-        <div class="Spacer-10"></div>
-
+            <p id="nav">
+                <a routerLink="/register">Register</a> | <a routerLink="/forgot-password">Forgot Your Password?</a>
+              </p>
     </div>
 </div>
-<!--BODY ENDS-->
+</div>

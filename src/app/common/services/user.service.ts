@@ -16,37 +16,18 @@ export class UserService {
 	readonly adminUrl = environment.adminUrl;
 
 	// Define common variables
-
 	login_by : string;
-
 	device_type : string;
-
 	device_token : string;
-
 	login_type : string; // User logged in as streamer /viewer
-
 	userId : string;
 
 	constructor(private http: HttpClient,  private route : ActivatedRoute) { 
 
 		this.login_by = "manual";
-
 		this.device_type = "web";
-
 		this.device_token = "123456";
-
-		this.route.queryParams.subscribe(params => {
-
-            this.login_type = params['uType'];
-
-        });
-
-        if (this.login_type == '' || this.login_type == null || this.login_type == undefined) {
-
-            this.login_type = 'viewer';
-
-		}
-		
+        this.login_type = 'creator';		
 		this.userId = (localStorage.getItem('userId') != '' && localStorage.getItem('userId') != null && localStorage.getItem('userId') != undefined) ? localStorage.getItem('userId') : '';
 
 	}
@@ -62,7 +43,7 @@ export class UserService {
 		formData.append('login_by', this.login_by);
 		formData.append('device_type', this.device_type);
 		formData.append('device_token', this.device_token);
-		// formData.append('login_type', this.login_type);
+		formData.append('login_type', this.login_type);
 
 		return this.http.post(this.apiUrl+'login', formData);
 
