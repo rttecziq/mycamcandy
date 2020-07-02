@@ -5,8 +5,8 @@
         <div class="text-center">
           <img [src]="user_profile_picture" class="img-fluid img-circle mx-auto" style="width:150px;">
        </div>
-          <h5 class="text-center"><a href="#" class="text-danger">{{ user_details.name }}</a></h5>
-          <p class="text-center"><a href="#">View Profile</a></p>
+          <h5 class="text-center"><a routerLink="/candy-club/{{username}}" class="text-danger">{{ user_details.name }}</a></h5>
+          <p class="text-center"><a routerLink="/candy-club/{{username}}">View Profile</a></p>
           <ul class="nav nav-tabs" id="myTab" role="tablist" style="width:100%">
             <li class="nav-item">
                <a class="nav-link active" data-toggle="tab" href="#account" role="tab" aria-controls="account">
@@ -19,13 +19,6 @@
                <a class="nav-link" data-toggle="tab" href="#change" role="tab" aria-controls="change">
                <i class="fa fa-cog" aria-hidden="true" style="font-size: 24px"></i>&nbsp;&nbsp;
                <span class="ml-3">Change Password</span> 
-               <i class="fa fa-angle-right float-right" aria-hidden="true" style="font-size: 24px"></i>&nbsp;&nbsp;
-               </a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link" data-toggle="tab" href="#privacy" role="tab" aria-controls="privacy">
-               <i class="fa fa-lock" aria-hidden="true" style="font-size: 24px"></i>&nbsp;&nbsp;
-               <span class="ml-3">Privacy</span> 
                <i class="fa fa-angle-right float-right" aria-hidden="true" style="font-size: 24px"></i>&nbsp;&nbsp;
                </a>
             </li>
@@ -95,68 +88,6 @@
                 </div>
                 <div class="form-group">
                    <input type="submit" class="btn btn-lg btn-warning" value="Update Password">
-                </div>
-             </form>
-          </div>
-          <div class="tab-pane" id="privacy" role="tabpanel">
-             <i class="fa fa-lock text-secondary" style="font-size: 23px"></i>&nbsp;&nbsp; <span class="bold text-secondary">Privacy</span>
-             <form method="POST" class="mt-3">
-                <div class="form-group">
-                   <label class="bold">Profile Privacy <i class="fa fa-question-circle-o text-secondary" data-toggle="tooltip" data-placement="top" title="Who can see your public profile?" aria-hidden="true"></i>&nbsp;&nbsp;</label>
-                   <select class="form-control" name="profile_privacy" id="profile_privacy">
-                      <option value="Everyone">Everyone</option>
-                      <option value="Only me">Only me</option>
-                      <option value="Only people I follow can view my profile">Only people I follow can view my profile</option>
-                      <option value="Followers">Followers</option>
-                   </select>
-                </div>
-                <div class="form-group">
-                   <label class="bold">Hide my profile from directory <i class="fa fa-question-circle-o text-secondary" data-toggle="tooltip" data-placement="top" title="Here you can hide yourself from appearing in public directory" aria-hidden="true"></i>&nbsp;&nbsp;</label>
-                   <div class="form-check">
-                    <label class="form-check-label">
-                      <input type="radio" class="form-check-input" id="hide_profile" name="hide_profile" value="Yes">Yes
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input type="radio" class="form-check-input" id="hide_profile" name="hide_profile" value="No">No
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group">
-                   <label class="bold">Who can see your activity wall?</label>
-                   <select class="form-control" name="activity_wall" id="activity_wall">
-                      <option value="Public">Public</option>
-                      <option value="Only me">Only me</option>
-                      <option value="Members">Members</option>
-                      <option value="Followers">Followers</option>
-                      <option value="People I follow">People I follow</option>
-                   </select>
-                </div>
-                <div class="form-group">
-                   <label class="bold">Hide my online status? <i class="fa fa-question-circle-o text-secondary" data-toggle="tooltip" data-placement="top" title="Do you want other people to see that you are online?" aria-hidden="true"></i>&nbsp;&nbsp;</label>
-                   <div class="form-check">
-                    <label class="form-check-label">
-                      <input type="radio" class="form-check-input" id="online_status" name="online_status" value="Yes">Yes
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input type="radio" class="form-check-input" id="online_status" name="online_status" value="No">No
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group">
-                   <label class="bold">Who can send me private messages?</label>
-                   <select class="form-control" name="private_messages" id="private_messages">
-                      <option value="Everyone">Everyone</option>
-                      <option value="Nobody">Nobody</option>
-                      <option value="Only people I follow">Only people I follow</option>
-                      <option value="Followers">Followers</option>
-                   </select>
-                </div>
-                <div class="form-group">
-                   <input type="button" class="btn btn-lg btn-warning" name="update_privacy" id="update_privacy" value="Update Privacy">
                 </div>
              </form>
           </div>
