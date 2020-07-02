@@ -151,6 +151,12 @@ const entryRoutes: Routes = [
                 data: {title : "My Profile", expectedRole: 'onlyUser'},
             },
             {
+                path: "candy-club/:username",
+                component: AboutComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Profile", expectedRole: 'onlyUser'},
+            },
+            {
                 path: "candy-club/about",
                 component: AboutComponent,
                 canActivate: [AuthGuard],

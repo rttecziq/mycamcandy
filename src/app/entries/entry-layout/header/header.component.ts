@@ -21,6 +21,8 @@ export class EntryHeaderComponent implements AfterViewInit,OnDestroy{
     errorMessages : string;
     userId : any;
     isUserExists : string;
+    username : string;
+
     key_term :string;
     notifications_types : any;
 
@@ -30,6 +32,7 @@ export class EntryHeaderComponent implements AfterViewInit,OnDestroy{
         this.errorMessages = "";
         this.site_settings = this.appService.appDetails();
         this.userId = (localStorage.getItem('userId') != '' && localStorage.getItem('userId') != null && localStorage.getItem('userId') != undefined) ? localStorage.getItem('userId') : '';
+        this.username = (localStorage.getItem('username') != '' && localStorage.getItem('username') != null && localStorage.getItem('username') != undefined) ? localStorage.getItem('username') : '';
         this.isUserExists = this.userService.userId;
     }
 
