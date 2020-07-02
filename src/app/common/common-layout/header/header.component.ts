@@ -27,6 +27,8 @@ export class HeaderComponent implements AfterViewInit, OnDestroy{
 
     userId : any;
 
+    username : string;
+
     key_term : any;
 
     // notifications_types : any;
@@ -40,6 +42,7 @@ export class HeaderComponent implements AfterViewInit, OnDestroy{
         this.errorMessages = '';
 
         this.userId = (localStorage.getItem('userId') != '' && localStorage.getItem('userId') != null && localStorage.getItem('userId') != undefined) ? localStorage.getItem('userId') : '';
+        this.username = (localStorage.getItem('username') != '' && localStorage.getItem('username') != null && localStorage.getItem('username') != undefined) ? localStorage.getItem('username') : '';
 
     }
 

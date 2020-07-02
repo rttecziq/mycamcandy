@@ -14,7 +14,7 @@
            <ul class="navbar-nav navbar-right" *ngIf="userId">
                 <li><a routerLink="/modeldashboard"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                 <li><a routerLink="/"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
-                <li routerLink="/candy-club/" class="active"><a href="">Dashboard</a></li>
+                <li routerLink="/candy-club/{{username}}" class="active"><a href="">Dashboard</a></li>
            </ul>
            <ul class="navbar-nav navbar-right" *ngIf="!userId">
               <li><a routerLink="/register">Signup</a></li>
