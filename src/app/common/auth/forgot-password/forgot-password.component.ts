@@ -9,8 +9,6 @@ declare var $: any ;
 @Component({
     templateUrl: 'forgot-password.component.html',
     styleUrls:[
-        '../../../../assets/css/bootstrap/css/bootstrap.min.css',
-        '../../../../assets/css/font-awesome/css/font-awesome.min.css',
         '../../../../assets/css/responsive.css',
         './forgot-password.component.css'
     ]
@@ -18,30 +16,23 @@ declare var $: any ;
 
 export class ForgotPasswordComponent{
     ngOnInit(){
-        var height = window.innerHeight;
-        var content_height = height - 70;
-        $('.body-img').height(content_height);
-        $('.overlay').height(content_height);
+
     }
+
+    uType : string; //The user is streamer / viewer
     errorMessages : string;
 
     constructor(private route:ActivatedRoute, private userService : UserService, private router : Router, public translate : TranslateService) {
-
         this.errorMessages = "";
-
-
+        this.uType = "creator";
     }
     
 
     sendResetPassword(email) {
-
         this.userService.forgotPassword(email)
             .subscribe(
-
                 (data : any) => {
-
                     if (data.success == true) {
-
                         $.toast({
                             heading: 'Success',
                             text: this.translate.instant('forgot_password_success'),
@@ -52,13 +43,10 @@ export class ForgotPasswordComponent{
                             loader : false,
                             showHideTransition: 'slide'
                         });
-
-                        this.router.navigate(['/']);
+                        this.router.navigate(['/login']);
 
                     } else {
-
                         this.errorMessages = data.error_messages;
-
                         $.toast({
                             heading: 'Error',
                             text: this.errorMessages,
@@ -75,9 +63,7 @@ export class ForgotPasswordComponent{
                 },
 
                 (err : HttpErrorResponse) => {
-
                     this.errorMessages = this.translate.instant('something_went_wrong');
-
                     $.toast({
                         heading: 'Error',
                         text: this.errorMessages,
@@ -91,6 +77,5 @@ export class ForgotPasswordComponent{
 
                 }
             );
-
     }
 }
