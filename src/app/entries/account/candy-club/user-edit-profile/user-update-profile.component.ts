@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { RequestService } from '../../../../common/services/request.service';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
-import { UserPreferences } from '../../../../models/user-preferences';
+import { ModelPreferences } from '../../../../models/model-preferences';
 import { Preference } from '../../../../models/preference';
 import { CheckStreamerService } from '../../../../common/services/check-streamer.service';
 
@@ -28,7 +28,7 @@ export class UserUpdateProfileComponent implements AfterViewInit {
   }
 
 errorMessages : string;
-user_details : UserPreferences;
+model_details : ModelPreferences;
 profile_picture : File;
 cover_picture : File;
 user_profile_picture : string;
@@ -36,43 +36,89 @@ user_cover_picture : string;
 is_content_creator : boolean;
 fileInputs : FileList;
 userId : string;
+username : string;
 preferences : Preference;
 constructor(private requestService : RequestService, private router : Router, private location : Location, private checkStreamerService :CheckStreamerService) {
 
     this.profile_picture = null;
     this.cover_picture = null;
-    this.user_details = {
+    this.model_details = {
         name : "",
-        gender: "",
         cover : "",
         picture : "",
-        orientation : "",
         description : "",
-        body_type : "",
-        ethnicity : "",
-        age : "",
-        hair_color : "",
-        breast : "",
+
+        //about
+        personality_description : "",
+        chatroom_show_description : "",
+        turn_on_description : "",
+        bad_mood_description : "",
+        dream_customer_description : "",
+
+        //general
+        zodiac_sign : "",
+        height : "",
+        birth_date : "",
+        weight : "",
+        public_age : "",
+        breast_size_number : 0,
+        public_country : "",
+        breast_size_letter : "",
+        language_spoken : "",
+        breast_type : "",
+        gender : "",
         hair_length : "",
-        breast_size : "",
-        body_hair : ""
+        hair_color : "",
+        shoe_size : "",
+        public_hair : "",
+
+        // sexual preferences
+        orientation : "",
+
+        // characteristics
+        ethnicity : "", 
+        eyes : "",
+
+        //Fetishes & specialities
+        fetishes : [],
+        wishlist : "",
+
+        // color scheme
+        text_color : "",
+        background_color : "",
+
+        // category
+        category : [],
+
+        // social media
+        twitter : "",
+        instagram : "" 
+        
     }
+
+
     this.preferences = {
+        zodiac_sign : [],
+        height : [],
+        birth_date : [],
+        weight : [],
+        public_age : [],
+        breast_size_number : [],
+        public_country : [],
+        breast_size_letter : [],
+        language_spoken : [],
+        breast_type : [],
         gender : [],
-        orientation: [],
-        body_type : [],
-        ethnicity : [],
-        age : [],
-        hair_color : [],
-        breast : [],
         hair_length : [],
-        breast_size : [],
-        body_hair : []
+        hair_color : [],
+        shoe_size : [],
+        public_hair : [],
+        body_type : []
     }
 
     this.user_profile_picture = "../../../../assets/img/default-profile.jpg";
     this.user_cover_picture = "../../../../assets/img/cover.jpg";
-    this.is_content_creator = false;
+    this.is_content_creator = true;
 }
 
   ngAfterViewInit(){
@@ -88,12 +134,13 @@ constructor(private requestService : RequestService, private router : Router, pr
      }); */
 
      // Load Logged In User Profile
-
      setTimeout(()=>{
-        this.user_model_Preference_fn("userModelPreferences", "");
+     //   this.user_model_Preference_fn("userModelPreferences", "");
         let user_id = (localStorage.getItem('userId') != '' && localStorage.getItem('userId') != null && localStorage.getItem('userId') != undefined) ? localStorage.getItem('userId') : '';
+        let username = (localStorage.getItem('username') != '' && localStorage.getItem('username') != null && localStorage.getItem('username') != undefined) ? localStorage.getItem('username') : '';
         this.userId = user_id;
-        this.model_physic_data_fn("modelPhysicData","");
+        this.username = username;
+      // this.model_physic_data_fn("modelPhysicData","");
      }, 1000);
 
  }
@@ -118,11 +165,8 @@ removeCoverPicture() {
 
 // To save the temporary file object into this variable with preview image
 handleProfilePicture(files: FileList) {
-
   this.profile_picture = files.item(0);
-
   if(!files.item(0).type.match('image')) {
-
       $.toast({
           heading: 'Warning',
           text: "Please choose image with extensions .png, .jpg, .jpeg",
@@ -133,13 +177,10 @@ handleProfilePicture(files: FileList) {
           loader : false,
           showHideTransition: 'slide'
       });
-
       return false;
-
   }
 
-  var reader = new FileReader();
-  
+  var reader = new FileReader();  
   reader.onload = (event: any) => {    
     this.user_profile_picture = event.target.result;
   }
@@ -150,19 +191,16 @@ handleProfilePicture(files: FileList) {
         image: files.item(0),
         type: PROFILE_PICTURE
     }
-
     this.updateImagesFn(formData);
 }
 
 // To save the cover picture in temp object with preview image
 handleCoverPicture(files : FileList) {
   this.cover_picture = files.item(0);
-
   if(!files.item(0).type.match('image')) {
       $.toast({
           heading: 'Warning',
           text: "Please choose image with extensions .png, .jpg, .jpeg",
-      // icon: 'error',
           position: 'top-right',
           stack: false,
           textAlign: 'left',
@@ -174,19 +212,16 @@ handleCoverPicture(files : FileList) {
 
   }
 
-  var reader = new FileReader();
-  
+  var reader = new FileReader();  
   reader.onload = (event: any) => {    
     this.user_cover_picture = event.target.result;    
   }
-  reader.readAsDataURL(files.item(0));
-  
+  reader.readAsDataURL(files.item(0));  
   // upload picture
   const formData = {
       image: files.item(0),
       type: COVER_PICTURE
   }
-
   this.updateImagesFn(formData);
 }
 
@@ -243,7 +278,6 @@ updateDescriptionFn(form : NgForm) {
                     $.toast({
                         heading: 'Success',
                         text: "Description has been updated successfully",
-                    // icon: 'error',
                         position: 'top-right',
                         stack: false,
                         textAlign: 'left',
@@ -255,7 +289,6 @@ updateDescriptionFn(form : NgForm) {
                     $.toast({
                         heading: 'Error',
                         text: this.errorMessages,
-                    // icon: 'error',
                         position: 'top-right',
                         stack: false,
                         textAlign: 'left',
@@ -270,7 +303,6 @@ updateDescriptionFn(form : NgForm) {
                 $.toast({
                     heading: 'Error',
                     text: this.errorMessages,
-                // icon: 'error',
                     position: 'top-right',
                     stack: false,
                     textAlign: 'left',
@@ -292,7 +324,6 @@ model_physic_data_fn(url, object) {
               $.toast({
                   heading: 'Error',
                   text: this.errorMessages,
-              // icon: 'error',
                   position: 'top-right',
                   stack: false,
                   textAlign: 'left',
@@ -323,7 +354,7 @@ user_model_Preference_fn(url, object) {
       .subscribe(
           (data : any ) => {
               if (data.success == true) {
-                  this.user_details = data;
+                  this.model_details = data;
                   this.user_cover_picture = data.cover;
                   this.user_profile_picture = data.picture;
               } else {
@@ -331,7 +362,6 @@ user_model_Preference_fn(url, object) {
                   $.toast({
                       heading: 'Error',
                       text: this.errorMessages,
-                  // icon: 'error',
                       position: 'top-right',
                       stack: false,
                       textAlign: 'left',
@@ -346,7 +376,6 @@ user_model_Preference_fn(url, object) {
               $.toast({
                   heading: 'Error',
                   text: this.errorMessages,
-              // icon: 'error',
                   position: 'top-right',
                   stack: false,
                   textAlign: 'left',
@@ -359,15 +388,15 @@ user_model_Preference_fn(url, object) {
 }
 
    // To update the profile page of logged in user
-   updateUserModelPreferenceFn(form : NgForm) {    
-    this.requestService.postMethod('updateUserModelPreference', form.value)
+   updateModelProfileFn(form : NgForm) {    
+       //console.log(form.value); return;
+    this.requestService.postMethod('ENTER_HERE', form.value)
         .subscribe(
             (data : any ) => {
                 if (data.success == true) {
                     $.toast({
                         heading: 'Success',
-                        text: "Model preferences has been updated successfully",
-                    // icon: 'error',
+                        text: "Model profile has been updated successfully",
                         position: 'top-right',
                         stack: false,
                         textAlign: 'left',
@@ -379,7 +408,6 @@ user_model_Preference_fn(url, object) {
                     $.toast({
                         heading: 'Error',
                         text: this.errorMessages,
-                    // icon: 'error',
                         position: 'top-right',
                         stack: false,
                         textAlign: 'left',
@@ -394,7 +422,6 @@ user_model_Preference_fn(url, object) {
                 $.toast({
                     heading: 'Error',
                     text: this.errorMessages,
-                // icon: 'error',
                     position: 'top-right',
                     stack: false,
                     textAlign: 'left',

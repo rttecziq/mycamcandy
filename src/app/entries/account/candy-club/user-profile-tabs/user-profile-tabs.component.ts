@@ -29,6 +29,7 @@ export class UserProfileTabsComponent implements AfterViewInit {
   
   isUserExists : string;
   userId : string;
+  username : string;
   
   constructor(private userService : UserService, private requestService : RequestService, private router : Router) {
   
@@ -53,8 +54,8 @@ export class UserProfileTabsComponent implements AfterViewInit {
   
       this.user_cover_picture = "../../../../assets/img/bg-image.jpg";
   
-      this.is_content_creator = false;
-
+      this.is_content_creator = true;
+      this.username = (localStorage.getItem('username') != '' && localStorage.getItem('username') != null && localStorage.getItem('username') != undefined) ? localStorage.getItem('username') : '';
       this.isUserExists = (localStorage.getItem('userId') != '' && localStorage.getItem('userId') != null && localStorage.getItem('userId') != undefined) ? localStorage.getItem('userId') : '';
   }
   
