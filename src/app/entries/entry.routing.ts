@@ -66,6 +66,10 @@ import { CandiesInvoiceComponent } from './candy-packages/invoice/candies-invoic
 import { CandiesPaymentSuccessComponent } from './candy-packages/payment-success/candies-payment-success.component';
 import { CandiesPaymentFailureComponent } from './candy-packages/payment-failure/candies-payment-failure.component';
 import { VipMembershipComponent } from './account/candy-club/vip-membership/vip-membership.component';
+import { MyFanClubComponent } from './account/candy-club/my-fan-club/my-fan-club.component';
+import { MessageComponent } from './account/candy-club/message/message.component';
+import { EarningHistoryComponent } from './account/candy-club/earning-history/earning-history.component';
+import { MyGiftComponent } from './account/candy-club/my-gift/my-gift.component';
 
 const entryRoutes: Routes = [
     { path: 'viewer-video', 
@@ -173,6 +177,30 @@ const entryRoutes: Routes = [
                 component: UserUpdateProfileComponent,
                 canActivate: [AuthGuard],
                 data: {title : "Edit Profile", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/:username/my-fan-club",
+                component: MyFanClubComponent,
+                canActivate: [AuthGuard],
+                data: {title : "My Fan Club", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/:username/messages",
+                component: MessageComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Messages", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/:username/earning-history",
+                component: EarningHistoryComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Earning History", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/:username/my-gifts",
+                component: MyGiftComponent,
+                canActivate: [AuthGuard],
+                data: {title : "My Gifts", expectedRole: 'onlyUser'},
             },
             {
                 path: "candy-club/vip-membership",

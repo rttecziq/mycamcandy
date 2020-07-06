@@ -1,0 +1,49 @@
+/************MY GIFTS Start****************/
+.row-pad{
+    padding-right: 15px;
+    padding-left: 8px;
+}
+.gif_heading{
+    background: #ff8787;
+    color: #fff;
+    padding: 10px
+  }
+  .mprofileGiftlisr {
+      background-image: url(../../../../../assets/img/model/heart-img.png);
+      border: 1px solid;
+      height: 400px;
+      width: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background-attachment: fixed;
+      padding-top: 2vh;
+  }
+  .mprofileGiftlisr .img-container{position: relative;}
+  .mprofileGiftlisr .bottom-left {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 50%;
+    padding: 10px;
+    background: #13121269;
+  }
+  .mprofileGiftlisr .bottom-right {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 50%;
+    padding: 10px;
+    text-align: right;
+    background: #13121269;;
+  }
+  .mprofileGiftlisr img{width: 100%}
+  .mprofileGiftlisr .grid{
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+  .mt-2{margin-top: 10px;}
+  .mprofileGiftlisr .row{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  /************MY GIFTS end****************/

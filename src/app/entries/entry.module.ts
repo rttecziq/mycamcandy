@@ -104,7 +104,11 @@ import { CandiesInvoiceComponent } from './candy-packages/invoice/candies-invoic
 import { CandiesPaymentSuccessComponent } from './candy-packages/payment-success/candies-payment-success.component';
 import { CandiesPaymentFailureComponent } from './candy-packages/payment-failure/candies-payment-failure.component';
 import { VipMembershipComponent } from './account/candy-club/vip-membership/vip-membership.component';
-
+import { MyFanClubComponent } from './account/candy-club/my-fan-club/my-fan-club.component';
+import { MessageComponent } from './account/candy-club/message/message.component';
+import { EarningHistoryComponent } from './account/candy-club/earning-history/earning-history.component';
+import { MyGiftComponent } from './account/candy-club/my-gift/my-gift.component';
+import  {  NgxEmojiPickerModule  }  from  'ngx-emoji-picker';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
@@ -171,7 +175,11 @@ export function HttpLoaderFactory(http: HttpClient) {
         UserProfileTabsComponent,
         UserUpdateProfileComponent,
         MyAccountComponent,
-        VipMembershipComponent
+        VipMembershipComponent,
+        MyFanClubComponent,
+        MessageComponent,
+        EarningHistoryComponent,
+        MyGiftComponent
     ],
     imports: [
         CommonModule,
@@ -185,6 +193,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatInputModule,
         MatRippleModule,
         MatNativeDateModule,
+        NgxEmojiPickerModule,
         TranslateModule.forRoot({
             loader: {
               provide: TranslateLoader,

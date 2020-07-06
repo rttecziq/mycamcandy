@@ -1,0 +1,77 @@
+<div class="container profile-background">
+  
+  <!--Common user's profile tab -->
+  <user-profile-tabs></user-profile-tabs>
+
+  <div class="row mt-5 mb-5">
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
+    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+      <div class="msg mt-5 mb-5">
+        <div class="row">
+          <div class="col-lg-3 col-md-4 col-sm-5 mt-3">
+           <ul class="active_msg">
+             <li class="active">
+           <div class="border p-1 mt-1">
+              <a href="#"><img src="http://mycamcandy-server.local/images/default-profile.jpg" id="model-profile-pic" class="img-circle" height="50" width="50">
+               <span class="">Username <i class="fa fa-circle"></i></span> 
+              </a>
+           </div>
+         </li>
+           <li>
+           <div class="border p-1 mt-1">
+              <a href="#"><img src="http://mycamcandy-server.local/images/default-profile.jpg" id="model-profile-pic" class="img-circle" height="50" width="50">
+               <span class="">Username <i class="fa fa-circle"></i></span> 
+              </a>
+           </div>
+         </li>
+         <li>
+           <div class="border p-1 mt-1">
+              <a href="#"><img src="http://mycamcandy-server.local/images/default-profile.jpg" id="model-profile-pic" class="img-circle" height="50" width="50">
+               <span class="">Username <i class="fa fa-circle"></i></span> 
+              </a>
+           </div>
+         </li>
+         </ul>
+          </div>
+          <div class="col-lg-9 col-md-8 col-sm-7 border mt-3">
+            <div class="row mt-4">
+              <div class="col-lg-12 col-md-12">
+                 <div class="float-left">
+                    <a href="#"><img src="http://mycamcandy-server.local/images/default-profile.jpg" id="model-profile-pic" class="img-circle" height="50" width="50">
+                    <span class="">Username</span> 
+                    </a>
+                 </div>
+                 <div class="float-right mt-3">
+                    <a href="#"><i class="fa fa-ban text-danger" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;
+                    <a href="#"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a>
+                 </div>
+              </div>
+            </div>
+             <hr>
+            <div class="chat-box mt-4">
+              <p class="p-2 bg-receive">hi, how are you?</p>
+              <p class="p-2 bg-sent">hi, i am fine...<a href="#"><i class="fa fa-trash text-danger float-right"></i></a></p>
+              <p class="p-2 bg-sent">hello<a href="#"><i class="fa fa-trash text-danger float-right"></i></a></p>
+              <p class="p-2 bg-receive">hi</p>
+              <p class="p-2 bg-sent">hiaaaaaaaaa aaaaaaa aaaaaaaaaaaa aaaaaa aaaaa aaaaaaaaaaaaaaa
+               aaaaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaa aaaaaaaaaaa aaaaaaaaaaaaaaaaaaaa
+               aaaaaaaaaaaaaa aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaa aaaaaaaaa
+               aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaa aaaaaaaaaa aaaaaaaaaaaa
+               aaaaa aaaaaa aaaaaaa<a href="#"><i class="fa fa-trash text-danger float-right"></i></a></p>
+              <p class="p-2 bg-receive">hi</p>
+            </div>
+            <form method="POST">
+             <div class="form-group">
+               <textarea class="form-control chat-message" placeholder="Type a message" [(ngModel)]="chat.message" name="message" id="sent_msg"></textarea>
+               <i class="smilies" (click)="toggled = !toggled" [(emojiPickerIf)]="toggled" [emojiPickerDirection]="'bottom'" (emojiPickerSelect)="handleSelection($event)">😄</i>
+             </div>
+               <button type="button" name="submit" id="submit" class="mb-3 float-right btn btn-sm btn-primary"><i class="fa fa-envelope p-2" aria-hidden="true" style="font-size: 20px"></i></button>
+            </form>
+            
+          </div>
+        </div>
+   </div>
+    </div>
+  </div>
+
+</div>

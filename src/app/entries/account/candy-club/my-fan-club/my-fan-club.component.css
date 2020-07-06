@@ -1,0 +1,59 @@
+
+/********fan_club Start*******/
+
+.subs-table{
+    height: 400px;
+    overflow-y: auto;
+  }
+  .p-3 {
+      padding: 1rem!important;
+  }
+  .mb-5 {
+      margin-bottom: 3rem;
+  }
+  .mt-5 {
+      margin-top: 3rem;
+  }
+  .mt-4 {
+      margin-top: 1.5rem!important;
+  }
+  .btn-grid {
+      padding: 3rem!important;
+  }
+  .bold{font-weight: 600;}
+  .btn-custom {
+      color: #fff;
+      background-color: #55acee;
+      border-color: #55acee;
+      font-weight: 600;
+      border-radius: 0;
+      padding: 12px 12px;
+      width:100%;
+      line-height: 2.428571;
+  }
+  .btn-custom:hover {
+      color: #fff;
+      background-color: #b5def9;
+      border-color: #b5def9;
+      border-radius: 10px;
+  }
+  .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+      border: 1px solid #b1def9;
+  }
+  .table-bordered {
+      border: 1px solid #b1def9;
+  }
+  @media screen and (max-width: 767px){
+  .table-bordered {
+      border: 1px solid #b1def9!important;
+  }
+  .table-responsive{
+    border:0px solid;
+  }
+  .btn-grid {
+      padding: 3rem!important;
+      padding-top: 1rem!important;
+      padding-bottom: 1rem!important;
+  }
+  }
+  /********fan_club end*******/

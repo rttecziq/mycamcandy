@@ -52,6 +52,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ErrorComponent } from './common/error/error.component';
 import { UserSignupComponent } from './common/auth/register/user-signup.component';
 import { QuickSignupComponent } from './common/home/quick-signup/quick-signup.component';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
