@@ -2,11 +2,23 @@
   <div class="container mb-3">    
      <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 mt-3">
         <div class="profile-primary-div">
+            <div class="row">
+               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                  <a href="#/followers">
+                  <button class="btn-followers">Followers<br>1</button>
+                  </a>
+               </div>
+               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                  <a href="#/followings">
+                  <button class="btn-following">Following<br>1</button>
+                  </a>
+               </div>
+            </div>
            <ul class="list-group user-profile-list">
-              <a routerLink="/candy-club/about">
+              <a routerLink="/candy-club/{{username}}/about">
                  <li class="list-group-item active"><i class="fa fa-user float-left" aria-hidden="true"></i> <span class="link">About</span></li>
               </a>
-              <a routerLink="/candy-club/activity">
+              <a routerLink="/candy-club/{{username}}/activity">
                  <li class="list-group-item"><i class=" fa fa-pencil-square-o float-left" aria-hidden="true"></i>  <span class="link">Activity</span></li>
               </a>
               <a href="#">
@@ -21,9 +33,6 @@
               <a href="#">
                  <li class="list-group-item"><i class="fa fa-file-video-o float-left" aria-hidden="true"></i>  <span class="link">My Fan Club Videos</span></li>
               </a>
-              <a routerLink="/candy-club/vip-membership">
-               <li class="list-group-item"><i class="fa fa-flower-o float-left" aria-hidden="true"></i>  <span class="link">Buy Vip Membership</span></li>
-              </a>
            </ul>
         </div>
      </div> 
@@ -31,6 +40,31 @@
         <div class="img-container user-cover">
            <div *ngIf="user_cover_picture">
               <img [src]="user_cover_picture" class="img-responsive user-cover-photo">
+              <div class="top-left cover-menu">
+               <ul>
+                   <li><a href="#">31 <br> Candy Albums</a></li>
+                   <li><a href="#">6 <br> Candy Collections</a></li>
+                   <li><a href="#">13 <br> Sweet Treats</a></li>
+                   <li class="float-right text-center" style="display: inline-block;">
+                     <button class="btn btn-sm btn-info">
+                       <img src="/assets/img/model/iconfinder_179_Upload_183298.png" height="25" width="25">
+                     </button><br>
+                     <div class="text-light">Upload Albums</div>
+                   </li>
+                   <li class="float-right text-center" style="display: inline-block;">
+                     <button class="btn btn-sm btn-info">
+                       <img src="/assets/img/model/iconfinder_add-item_57905.png" height="25" width="25">
+                     </button><br>
+                     <div class="text-light">Add Collections</div>
+                   </li> 
+                <li class="float-right text-center" style="display: inline-block;">
+                 <button class="btn btn-sm btn-info">
+                   <img src="/assets/img/model/Gift_Box-36-128.png" height="25" width="25">
+                 </button><br>
+                 <div class="text-light">Add Sweet Treats</div>
+               </li>
+               </ul>
+             </div>
               <div class="centered">
 
                 <div class="dropdown">
@@ -73,8 +107,8 @@
             <form id="form4" #updateDescriptionForm="ngForm" (ngSubmit)="updateDescriptionFn(updateDescriptionForm)">
               <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                  <div class="username">
-                    <a href="">
-                       <h3>{{ user_details.name }}  <i class="fa fa-circle" style="font-size: 16px;color: #0bb30b;"></i></h3>
+                     <a routerLink="/candy-club/{{username}}">
+                       <h3>{{ model_details.name }}  <i class="fa fa-circle" style="font-size: 16px;color: #0bb30b;"></i></h3>
                     </a>
                  </div>
                  <div class="actions float-right">
@@ -82,119 +116,1006 @@
                  <!-- <i class="fa fa-check text-info" aria-hidden="true" style="font-size:28px"></i> -->
                  </div>
                  <div class="form-group">
-                    <textarea class="form-control" placeholder="Description" [(ngModel)]="user_details.description" name="description"></textarea>
+                    <textarea class="form-control" placeholder="Description" [(ngModel)]="model_details.description" name="description"></textarea>
                  </div>
               </div>
             </form>
            </div>
         </div>
-        <form class="black-text" id="form3" #updateProfileForm="ngForm" (ngSubmit)="updateUserModelPreferenceFn(updateProfileForm)">
-        <div class="row mt-5 mb-5">
-           <div class="col-lg-6 col-md-6 col-sm-6 mt-4">
-               <div class="form-group">
-                  <label class="bold">Gender</label>
-                  <select class="selectpicker form-control" name="gender" [(ngModel)]="user_details.gender">
-                     <option value="">Nothing selected</option>
-                     <option *ngFor="let gender of preferences.gender" [value]="gender">{{gender}}</option>
-                  </select>
+        <form class="black-text user-row" id="form3" #updateProfileForm="ngForm" (ngSubmit)="updateModelProfileFn(updateProfileForm)">
+               
+         <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-5 follower">
+                  <h5 class="h5-toggle mt-3" data-toggle="collapse" data-target="#demo">About You</h5>
+                    <div id="demo" class="collapse mt-3">
+                      <div class="form-group">
+                        <label class="bold">How would you describe your personality?</label>
+                        <!-- <textarea class="form-control" rows="8" [(ngModel)]="model_details.personality_description" name="personality_description"></textarea> -->
+                        <ckeditor
+                           [(ngModel)]="model_details.personality_description"
+                           name="personality_description"
+                           [config]="config"
+                           [readonly]="false">
+                        </ckeditor>
+                     </div>
+                      <div class="form-group">
+                        <label class="bold">What kind of show do you like putting on in your chat room?</label>
+                        <!-- <textarea class="form-control" rows="8" [(ngModel)]="model_details.chatroom_show_description" name="chatroom_show_description"></textarea> -->
+                        <ckeditor
+                           [(ngModel)]="model_details.chatroom_show_description"
+                           name="chatroom_show_description"
+                           [config]="config"
+                           [readonly]="false">
+                        </ckeditor>
+                      </div>
+                      <div class="form-group">
+                        <label class="bold">What turns you on and get you going?</label>
+                        <!-- <textarea class="form-control" rows="8" [(ngModel)]="model_details.turn_on_description" name="turn_on_description"></textarea> -->
+                        <ckeditor
+                           [(ngModel)]="model_details.turn_on_description"
+                           name="turn_on_description"
+                           [config]="config"
+                           [readonly]="false">
+                        </ckeditor>
+                     </div>
+                      <div class="form-group">
+                        <label class="bold">What annoys you and puts you in a bad mood?</label>
+                        <!-- <textarea class="form-control" rows="8" [(ngModel)]="model_details.bad_mood_description" name="bad_mood_description"></textarea> -->
+                        <ckeditor
+                           [(ngModel)]="model_details.bad_mood_description"
+                           name="bad_mood_description"
+                           [config]="config"
+                           [readonly]="false">
+                        </ckeditor>
+                     </div>
+                      <div class="form-group">
+                        <label class="bold">Who is your dream customer?</label>
+                        <!-- <textarea class="form-control" rows="8" [(ngModel)]="model_details.dream_customer_description" name="dream_customer_description"></textarea> -->
+                        <ckeditor
+                           [(ngModel)]="model_details.dream_customer_description"
+                           name="dream_customer_description"
+                           [config]="config"
+                           [readonly]="false">
+                        </ckeditor>
+                     </div>
+                    </div>
+                    <h5 class="h5-toggle mt-3" data-toggle="collapse" data-target="#demo1">Schedule</h5>
+                    <div id="demo1" class="border-bottom mt-3 collapse">
+                       <a href="#">Add to schedule</a>
+                    </div>
+                    <h5 class="h5-toggle mt-3" data-toggle="collapse" data-target="#demo2">General</h5>
+                    <div id="demo2" class="mt-3 collapse">
+                       <div class="row">
+                          <div class="col-lg-6 col-md-6 mt-2">
+                             <div class="form-group">
+                              <label class="bold">Zodiac Signs</label>
+                                <select class="selectpicker form-control" data-live-search="true" [(ngModel)]="model_details.zodiac_sign" name="zodiac_sign" id="zodiac_sign">
+                                    <option value="">Nothing selected</option>
+                                    <option value="Aquarius">Aquarius</option>
+                                    <option value="Pisces">Pisces</option>
+                                    <option value="Aries">Aries</option>
+                                    <option value="Taurus">Taurus</option>
+                                    <option value="Gemini">Gemini</option>
+                                    <option value="Cancer">Cancer</option>
+                                    <option value="leo">leo</option>
+                                    <option value="Virgo">Virgo</option>
+                                    <option value="libra">libra</option>
+                                    <option value="Scorpio">Scorpio</option>
+                                    <option value="Sagittarius">Sagittarius</option>
+                                    <option value="Capricorn">Capricorn</option>
+                                 </select>
+                             </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 mt-2">
+                             <div class="form-group">
+                              <label class="bold">Height</label>
+                                <select class="selectpicker form-control" data-live-search="true"  [(ngModel)]="model_details.height" name="height" id="height">
+                                    <option value="">Nothing selected</option>
+                                    <option value="4 ft 4 in/132-133 cm">4 ft 4 in/132-133 cm</option>
+                                    <option value="4 ft 4 in/132-133 cm">4 ft 4 in/132-133 cm</option>
+                                    <option value="4 ft 5 in/134-135 cm">4 ft 5 in/134-135 cm</option>
+                                    <option value="4 ft 6 in/136-138 cm">4 ft 6 in/136-138 cm</option>
+                                    <option value="4 ft 7 in/139-141 cm">4 ft 7 in/139-141 cm</option>
+                                    <option value="4 ft 8 in/142-143 cm">4 ft 8 in/142-143 cm</option>
+                                    <option value="4 ft 9 in/144-146 cm">4 ft 9 in/144-146 cm</option>
+                                    <option value="4 ft 10 in/147-149 cm">4 ft 10 in/147-149 cm</option>
+                                    <option value="4 ft 11 in/150-152 cm">4 ft 11 in/150-152 cm</option>
+                                    <option value="5 ft 0 in/152-154 cm">5 ft 0 in/152-154 cm</option>
+                                    <option value="5 ft 1 in/155-157 cm">5 ft 1 in/155-157 cm</option>
+                                    <option value="5 ft 2 in/158-159 cm">5 ft 2 in/158-159 cm</option>
+                                    <option value="5 ft 3 in/160-162 cm">5 ft 3 in/160-162 cm</option>
+                                    <option value="5 ft 4 in/163-164 cm">5 ft 4 in/163-164 cm</option>
+                                    <option value="5 ft 5 in/165-167 cm">5 ft 5 in/165-167 cm</option>
+                                    <option value="5 ft 6 in/168-169 cm">5 ft 6 in/168-169 cm</option>
+                                    <option value="5 ft 7 in/170-172 cm">5 ft 7 in/170-172 cm</option>
+                                    <option value="5 ft 8 in/173-174 cm">5 ft 8 in/173-174 cm</option>
+                                    <option value="5 ft 9 in/175-177 cm">5 ft 9 in/175-177 cm</option>
+                                    <option value="5 ft 10 in/177-179 cm">5 ft 10 in/177-179 cm</option>
+                                    <option value="5 ft 11 in/180-182 cm">5 ft 11 in/180-182 cm</option>
+                                    <option value="6 ft 0 in/182-184 cm">6 ft 0 in/182-184 cm</option>
+                                    <option value="6 ft 1 in/185-187 cm">6 ft 1 in/185-187 cm</option>
+                                    <option value="6 ft 2 in/187-199 cm">6 ft 2 in/187-199 cm</option>
+                                    <option value="6 ft 3 in/190-192 cm">6 ft 3 in/190-192 cm</option>
+                                    <option value="6 ft 4 in/193-194 cm">6 ft 4 in/193-194 cm</option>
+                                    <option value="6 ft 5 in/195-197 cm">6 ft 5 in/195-197 cm</option>
+                                    <option value="6 ft 6 in/198-199 cm">6 ft 6 in/198-199 cm</option>
+                                    <option value="6 ft 7 in/200-202 cm">6 ft 7 in/200-202 cm</option>
+                                    <option value="6 ft 8 in/203-205 cm">6 ft 8 in/203-205 cm</option>
+                                    <option value="6 ft 9 in/206-207 cm">6 ft 9 in/206-207 cm</option>
+                                    <option value="6 ft 10 in/208-209 cm">6 ft 10 in/208-209 cm</option>
+                                    <option value="6 ft 11 in/210-212 cm">6 ft 11 in/210-212 cm</option>
+                                    <option value="7 ft 0 in/213-214 cm">7 ft 0 in/213-214 cm</option>
+                                 </select>
+                             </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 mt-2">
+                             <div class="form-group">
+                              <label class="bold"><i class="fa fa-calendar"></i> Birth Date</label>
+                                <input type="date" class="form-control" [(ngModel)]="model_details.birth_date" name="birth_date">
+                             </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 mt-2">
+                             <div class="form-group">
+                              <label class="bold">Weight</label>
+                                <select class="selectpicker form-control" data-live-search="true" [(ngModel)]="model_details.weight" name="weight" id="weight">
+                                    <option value="">Nothing selected</option>
+                                    <option value="85 lbs/38kg">85 lbs/38kg</option>
+                                    <option value="90 lbs/40kg">90 lbs/40kg</option>
+                                    <option value="95 lbs/43kg">95 lbs/43kg</option>
+                                    <option value="100 lbs/45kg">100 lbs/45kg</option>
+                                    <option value="105 lbs/47kg">105 lbs/47kg</option>
+                                    <option value="110 lbs/49kg">110 lbs/49kg</option>
+                                    <option value="115 lbs/52kg">115 lbs/52kg</option>
+                                    <option value="120 lbs/54kg">120 lbs/54kg</option>
+                                    <option value="125 lbs/56kg">125 lbs/56kg</option>
+                                    <option value="130 lbs/59kg">130 lbs/59kg</option>
+                                    <option value="135 lbs/61kg">135 lbs/61kg</option>
+                                    <option value="140 lbs/63kg">140 lbs/63kg</option>
+                                    <option value="145 lbs/65kg">145 lbs/65kg</option>
+                                    <option value="150 lbs/68kg">150 lbs/68kg</option>
+                                    <option value="155 lbs/70kg">155 lbs/70kg</option>
+                                    <option value="160 lbs/72kg">160 lbs/72kg</option>
+                                    <option value="165 lbs/75kg">165 lbs/75kg</option>
+                                    <option value="170 lbs/77kg">170 lbs/77kg</option>
+                                    <option value="175 lbs/79kg">175 lbs/79kg</option>
+                                    <option value="180 lbs/81kg">180 lbs/81kg</option>
+                                    <option value="185 lbs/83kg">185 lbs/83kg</option>
+                                    <option value="190 lbs/86kg">190 lbs/86kg</option>
+                                    <option value="195 lbs/88kg">195 lbs/88kg</option>
+                                    <option value="200 lbs/90kg">200 lbs/90kg</option>
+                                    <option value="205 lbs/92kg">205 lbs/92kg</option>
+                                    <option value="210 lbs/95kg">210 lbs/95kg</option>
+                                    <option value="215 lbs/97kg">215 lbs/97kg</option>
+                                    <option value="220 lbs/99kg">220 lbs/99kg</option>
+                                    <option value="225 lbs/102kg">225 lbs/102kg</option>
+                                 </select>
+                             </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 mt-2">
+                             <div class="form-group">
+                              <label class="bold">Public Age</label>
+                                <select class="selectpicker form-control" data-live-search="true" [(ngModel)]="model_details.public_age" name="public_age" id="public_age">
+                                    <option value="">Nothing selected</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
+                                    <option value="29">29</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                    <option value="45">45</option>
+                                    <option value="46">46</option>
+                                    <option value="47">47</option>
+                                    <option value="48">48</option>
+                                    <option value="49">49</option>
+                                    <option value="50">50</option>
+                                    <option value="51">51</option>
+                                    <option value="52">52</option>
+                                    <option value="53">53</option>
+                                    <option value="54">54</option>
+                                    <option value="55">55</option>
+                                    <option value="56">56</option>
+                                    <option value="57">57</option>
+                                    <option value="58">58</option>
+                                    <option value="59">59</option>
+                                    <option value="60">60</option>
+                                    <option value="61">61</option>
+                                    <option value="62">62</option>
+                                    <option value="63">63</option>
+                                    <option value="64">64</option>
+                                    <option value="65">65</option>
+                                    <option value="66">66</option>
+                                    <option value="67">67</option>
+                                    <option value="68">68</option>
+                                    <option value="69">69</option>
+                                    <option value="70">70</option>
+                                 </select>
+                             </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 mt-2">
+                             <div class="form-group">
+                              <label class="bold">Breast Size (Number)</label>
+                                <select class="selectpicker form-control" data-live-search="true" [(ngModel)]="model_details.breast_size_number" name="breast_size_number" id="breast_size_number">
+                                    <option value="">Nothing selected</option>
+                                    <option value="30">30</option>
+                                    <option value="31">31</option>
+                                    <option value="32">32</option>
+                                    <option value="33">33</option>
+                                    <option value="34">34</option>
+                                    <option value="35">35</option>
+                                    <option value="36">36</option>
+                                    <option value="37">37</option>
+                                    <option value="38">38</option>
+                                    <option value="39">39</option>
+                                    <option value="40">40</option>
+                                    <option value="41">41</option>
+                                    <option value="42">42</option>
+                                    <option value="43">43</option>
+                                    <option value="44">44</option>
+                                 </select>
+                             </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 mt-2">
+                             <div class="form-group">
+                              <label class="bold">Public Country</label>
+                                <select class="selectpicker form-control" data-live-search="true" [(ngModel)]="model_details.public_country" name="public_country" id="public_country">
+                                     <option value="">Nothing selected</option><option value="Afghanistan">Afghanistan</option>
+                                     <option value="Albania">Albania</option>
+                                     <option value="Algeria">Algeria</option>
+                                     <option value="American Samoa">American Samoa</option>
+                                     <option value="Andorra">Andorra</option>
+                                     <option value="Angola">Angola</option>
+                                     <option value="Anguilla">Anguilla</option>
+                                     <option value="Antartica">Antarctica</option>
+                                     <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                                     <option value="Argentina">Argentina</option>
+                                     <option value="Armenia">Armenia</option>
+                                     <option value="Aruba">Aruba</option>
+                                     <option value="Australia">Australia</option>
+                                     <option value="Austria">Austria</option>
+                                     <option value="Azerbaijan">Azerbaijan</option>
+                                     <option value="Bahamas">Bahamas</option>
+                                     <option value="Bahrain">Bahrain</option>
+                                     <option value="Bangladesh">Bangladesh</option>
+                                     <option value="Barbados">Barbados</option>
+                                     <option value="Belarus">Belarus</option>
+                                     <option value="Belgium">Belgium</option>
+                                     <option value="Belize">Belize</option>
+                                     <option value="Benin">Benin</option>
+                                     <option value="Bermuda">Bermuda</option>
+                                     <option value="Bhutan">Bhutan</option>
+                                     <option value="Bolivia">Bolivia</option>
+                                     <option value="Bosnia and Herzegowina">Bosnia and Herzegowina</option>
+                                     <option value="Botswana">Botswana</option>
+                                     <option value="Bouvet Island">Bouvet Island</option>
+                                     <option value="Brazil">Brazil</option>
+                                     <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                                     <option value="Brunei Darussalam">Brunei Darussalam</option>
+                                     <option value="Bulgaria">Bulgaria</option>
+                                     <option value="Burkina Faso">Burkina Faso</option>
+                                     <option value="Burundi">Burundi</option>
+                                     <option value="Cambodia">Cambodia</option>
+                                     <option value="Cameroon">Cameroon</option>
+                                     <option value="Canada">Canada</option>
+                                     <option value="Cape Verde">Cape Verde</option>
+                                     <option value="Cayman Islands">Cayman Islands</option>
+                                     <option value="Central African Republic">Central African Republic</option>
+                                     <option value="Chad">Chad</option>
+                                     <option value="Chile">Chile</option>
+                                     <option value="China">China</option>
+                                     <option value="Christmas Island">Christmas Island</option>
+                                     <option value="Cocos Islands">Cocos (Keeling) Islands</option>
+                                     <option value="Colombia">Colombia</option>
+                                     <option value="Comoros">Comoros</option>
+                                     <option value="Congo">Congo</option>
+                                     <option value="Congo">Congo, the Democratic Republic of the</option>
+                                     <option value="Cook Islands">Cook Islands</option>
+                                     <option value="Costa Rica">Costa Rica</option>
+                                     <option value="Cota D'Ivoire">Cote d'Ivoire</option>
+                                     <option value="Croatia">Croatia (Hrvatska)</option>
+                                     <option value="Cuba">Cuba</option>
+                                     <option value="Cyprus">Cyprus</option>
+                                     <option value="Czech Republic">Czech Republic</option>
+                                     <option value="Denmark">Denmark</option>
+                                     <option value="Djibouti">Djibouti</option>
+                                     <option value="Dominica">Dominica</option>
+                                     <option value="Dominican Republic">Dominican Republic</option>
+                                     <option value="East Timor">East Timor</option>
+                                     <option value="Ecuador">Ecuador</option>
+                                     <option value="Egypt">Egypt</option>
+                                     <option value="El Salvador">El Salvador</option>
+                                     <option value="Equatorial Guinea">Equatorial Guinea</option>
+                                     <option value="Eritrea">Eritrea</option>
+                                     <option value="Estonia">Estonia</option>
+                                     <option value="Ethiopia">Ethiopia</option>
+                                     <option value="Falkland Islands">Falkland Islands (Malvinas)</option>
+                                     <option value="Faroe Islands">Faroe Islands</option>
+                                     <option value="Fiji">Fiji</option>
+                                     <option value="Finland">Finland</option>
+                                     <option value="France">France</option>
+                                     <option value="France Metropolitan">France, Metropolitan</option>
+                                     <option value="French Guiana">French Guiana</option>
+                                     <option value="French Polynesia">French Polynesia</option>
+                                     <option value="French Southern Territories">French Southern Territories</option>
+                                     <option value="Gabon">Gabon</option>
+                                     <option value="Gambia">Gambia</option>
+                                     <option value="Georgia">Georgia</option>
+                                     <option value="Germany">Germany</option>
+                                     <option value="Ghana">Ghana</option>
+                                     <option value="Gibraltar">Gibraltar</option>
+                                     <option value="Greece">Greece</option>
+                                     <option value="Greenland">Greenland</option>
+                                     <option value="Grenada">Grenada</option>
+                                     <option value="Guadeloupe">Guadeloupe</option>
+                                     <option value="Guam">Guam</option>
+                                     <option value="Guatemala">Guatemala</option>
+                                     <option value="Guinea">Guinea</option>
+                                     <option value="Guinea-Bissau">Guinea-Bissau</option>
+                                     <option value="Guyana">Guyana</option>
+                                     <option value="Haiti">Haiti</option>
+                                     <option value="Heard and McDonald Islands">Heard and Mc Donald Islands</option>
+                                     <option value="Holy See">Holy See (Vatican City State)</option>
+                                     <option value="Honduras">Honduras</option>
+                                     <option value="Hong Kong">Hong Kong</option>
+                                     <option value="Hungary">Hungary</option>
+                                     <option value="Iceland">Iceland</option>
+                                     <option value="India">India</option>
+                                     <option value="Indonesia">Indonesia</option>
+                                     <option value="Iran">Iran (Islamic Republic of)</option>
+                                     <option value="Iraq">Iraq</option>
+                                     <option value="Ireland">Ireland</option>
+                                     <option value="Israel">Israel</option>
+                                     <option value="Italy">Italy</option>
+                                     <option value="Jamaica">Jamaica</option>
+                                     <option value="Japan">Japan</option>
+                                     <option value="Jordan">Jordan</option>
+                                     <option value="Kazakhstan">Kazakhstan</option>
+                                     <option value="Kenya">Kenya</option>
+                                     <option value="Kiribati">Kiribati</option>
+                                     <option value="Democratic People's Republic of Korea">Korea, Democratic People's Republic of</option>
+                                     <option value="Korea">Korea, Republic of</option>
+                                     <option value="Kuwait">Kuwait</option>
+                                     <option value="Kyrgyzstan">Kyrgyzstan</option>
+                                     <option value="Lao">Lao People's Democratic Republic</option>
+                                     <option value="Latvia">Latvia</option>
+                                     <option value="Lebanon">Lebanon</option>
+                                     <option value="Lesotho">Lesotho</option>
+                                     <option value="Liberia">Liberia</option>
+                                     <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
+                                     <option value="Liechtenstein">Liechtenstein</option>
+                                     <option value="Lithuania">Lithuania</option>
+                                     <option value="Luxembourg">Luxembourg</option>
+                                     <option value="Macau">Macau</option>
+                                     <option value="Macedonia">Macedonia, The Former Yugoslav Republic of</option>
+                                     <option value="Madagascar">Madagascar</option>
+                                     <option value="Malawi">Malawi</option>
+                                     <option value="Malaysia">Malaysia</option>
+                                     <option value="Maldives">Maldives</option>
+                                     <option value="Mali">Mali</option>
+                                     <option value="Malta">Malta</option>
+                                     <option value="Marshall Islands">Marshall Islands</option>
+                                     <option value="Martinique">Martinique</option>
+                                     <option value="Mauritania">Mauritania</option>
+                                     <option value="Mauritius">Mauritius</option>
+                                     <option value="Mayotte">Mayotte</option>
+                                     <option value="Mexico">Mexico</option>
+                                     <option value="Micronesia">Micronesia, Federated States of</option>
+                                     <option value="Moldova">Moldova, Republic of</option>
+                                     <option value="Monaco">Monaco</option>
+                                     <option value="Mongolia">Mongolia</option>
+                                     <option value="Montserrat">Montserrat</option>
+                                     <option value="Morocco">Morocco</option>
+                                     <option value="Mozambique">Mozambique</option>
+                                     <option value="Myanmar">Myanmar</option>
+                                     <option value="Namibia">Namibia</option>
+                                     <option value="Nauru">Nauru</option>
+                                     <option value="Nepal">Nepal</option>
+                                     <option value="Netherlands">Netherlands</option>
+                                     <option value="Netherlands Antilles">Netherlands Antilles</option>
+                                     <option value="New Caledonia">New Caledonia</option>
+                                     <option value="New Zealand">New Zealand</option>
+                                     <option value="Nicaragua">Nicaragua</option>
+                                     <option value="Niger">Niger</option>
+                                     <option value="Nigeria">Nigeria</option>
+                                     <option value="Niue">Niue</option>
+                                     <option value="Norfolk Island">Norfolk Island</option>
+                                     <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                                     <option value="Norway">Norway</option>
+                                     <option value="Oman">Oman</option>
+                                     <option value="Pakistan">Pakistan</option>
+                                     <option value="Palau">Palau</option>
+                                     <option value="Panama">Panama</option>
+                                     <option value="Papua New Guinea">Papua New Guinea</option>
+                                     <option value="Paraguay">Paraguay</option>
+                                     <option value="Peru">Peru</option>
+                                     <option value="Philippines">Philippines</option>
+                                     <option value="Pitcairn">Pitcairn</option>
+                                     <option value="Poland">Poland</option>
+                                     <option value="Portugal">Portugal</option>
+                                     <option value="Puerto Rico">Puerto Rico</option>
+                                     <option value="Qatar">Qatar</option>
+                                     <option value="Reunion">Reunion</option>
+                                     <option value="Romania">Romania</option>
+                                     <option value="Russia">Russian Federation</option>
+                                     <option value="Rwanda">Rwanda</option>
+                                     <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option> 
+                                     <option value="Saint LUCIA">Saint LUCIA</option>
+                                     <option value="Saint Vincent">Saint Vincent and the Grenadines</option>
+                                     <option value="Samoa">Samoa</option>
+                                     <option value="San Marino">San Marino</option>
+                                     <option value="Sao Tome and Principe">Sao Tome and Principe</option> 
+                                     <option value="Saudi Arabia">Saudi Arabia</option>
+                                     <option value="Senegal">Senegal</option>
+                                     <option value="Seychelles">Seychelles</option>
+                                     <option value="Sierra">Sierra Leone</option>
+                                     <option value="Singapore">Singapore</option>
+                                     <option value="Slovakia">Slovakia (Slovak Republic)</option>
+                                     <option value="Slovenia">Slovenia</option>
+                                     <option value="Solomon Islands">Solomon Islands</option>
+                                     <option value="Somalia">Somalia</option>
+                                     <option value="South Africa">South Africa</option>
+                                     <option value="South Georgia">South Georgia and the South Sandwich Islands</option>
+                                     <option value="Span">Spain</option>
+                                     <option value="SriLanka">Sri Lanka</option>
+                                     <option value="St. Helena">St. Helena</option>
+                                     <option value="St. Pierre and Miguelon">St. Pierre and Miquelon</option>
+                                     <option value="Sudan">Sudan</option>
+                                     <option value="Suriname">Suriname</option>
+                                     <option value="Svalbard">Svalbard and Jan Mayen Islands</option>
+                                     <option value="Swaziland">Swaziland</option>
+                                     <option value="Sweden">Sweden</option>
+                                     <option value="Switzerland">Switzerland</option>
+                                     <option value="Syria">Syrian Arab Republic</option>
+                                     <option value="Taiwan">Taiwan, Province of China</option>
+                                     <option value="Tajikistan">Tajikistan</option>
+                                     <option value="Tanzania">Tanzania, United Republic of</option>
+                                     <option value="Thailand">Thailand</option>
+                                     <option value="Togo">Togo</option>
+                                     <option value="Tokelau">Tokelau</option>
+                                     <option value="Tonga">Tonga</option>
+                                     <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                                     <option value="Tunisia">Tunisia</option>
+                                     <option value="Turkey">Turkey</option>
+                                     <option value="Turkmenistan">Turkmenistan</option>
+                                     <option value="Turks and Caicos">Turks and Caicos Islands</option>
+                                     <option value="Tuvalu">Tuvalu</option>
+                                     <option value="Uganda">Uganda</option>
+                                     <option value="Ukraine">Ukraine</option>
+                                     <option value="United Arab Emirates">United Arab Emirates</option>
+                                     <option value="United Kingdom">United Kingdom</option>
+                                     <option value="United States">United States</option>
+                                     <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                                     <option value="Uruguay">Uruguay</option>
+                                     <option value="Uzbekistan">Uzbekistan</option>
+                                     <option value="Vanuatu">Vanuatu</option>
+                                     <option value="Venezuela">Venezuela</option>
+                                     <option value="Vietnam">Viet Nam</option>
+                                     <option value="Virgin Islands (British)">Virgin Islands (British)</option>
+                                     <option value="Virgin Islands (U.S)">Virgin Islands (U.S.)</option>
+                                     <option value="Wallis and Futana Islands">Wallis and Futuna Islands</option>
+                                     <option value="Western Sahara">Western Sahara</option>
+                                     <option value="Yemen">Yemen</option>
+                                     <option value="Yugoslavia">Yugoslavia</option>
+                                     <option value="Zambia">Zambia</option>
+                                     <option value="Zimbabwe">Zimbabwe</option>
+                                 </select>
+                             </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 mt-2">
+                             <div class="form-group">
+                              <label class="bold">Breast Size (Letter)</label>
+                                <select class="selectpicker form-control" data-live-search="true" [(ngModel)]="model_details.breast_size_letter" name="breast_size_letter">
+                                    <option value="">Nothing selected</option>
+                                    <option value="AA">AA</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="DD">DD</option>
+                                    <option value="DDD/E">DDD/E</option>
+                                    <option value="F">F</option>
+                                    <option value="G">G</option>
+                                    <option value="H">H</option>
+                                 </select>
+                             </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 mt-2">
+                             <div class="form-group">
+                              <label class="bold">Languages Spoken</label>
+                                <select class="selectpicker form-control" multiple data-live-search="true" [(ngModel)]="model_details.language_spoken" name="language_spoken">
+                                      <option value="AF">Afrikanns</option>
+                                      <option value="SQ">Albanian</option>
+                                      <option value="AR">Arabic</option>
+                                      <option value="HY">Armenian</option>
+                                      <option value="EU">Basque</option>
+                                      <option value="BN">Bengali</option>
+                                      <option value="BG">Bulgarian</option>
+                                      <option value="CA">Catalan</option>
+                                      <option value="KM">Cambodian</option>
+                                      <option value="ZH">Chinese (Mandarin)</option>
+                                      <option value="HR">Croation</option>
+                                      <option value="CS">Czech</option>
+                                      <option value="DA">Danish</option>
+                                      <option value="NL">Dutch</option>
+                                      <option value="EN">English</option>
+                                      <option value="ET">Estonian</option>
+                                      <option value="FJ">Fiji</option>
+                                      <option value="FI">Finnish</option>
+                                      <option value="FR">French</option>
+                                      <option value="KA">Georgian</option>
+                                      <option value="DE">German</option>
+                                      <option value="EL">Greek</option>
+                                      <option value="GU">Gujarati</option>
+                                      <option value="HE">Hebrew</option>
+                                      <option value="HI">Hindi</option>
+                                      <option value="HU">Hungarian</option>
+                                      <option value="IS">Icelandic</option>
+                                      <option value="ID">Indonesian</option>
+                                      <option value="GA">Irish</option>
+                                      <option value="IT">Italian</option>
+                                      <option value="JA">Japanese</option>
+                                      <option value="JW">Javanese</option>
+                                      <option value="KO">Korean</option>
+                                      <option value="LA">Latin</option>
+                                      <option value="LV">Latvian</option>
+                                      <option value="LT">Lithuanian</option>
+                                      <option value="MK">Macedonian</option>
+                                      <option value="MS">Malay</option>
+                                      <option value="ML">Malayalam</option>
+                                      <option value="MT">Maltese</option>
+                                      <option value="MI">Maori</option>
+                                      <option value="MR">Marathi</option>
+                                      <option value="MN">Mongolian</option>
+                                      <option value="NE">Nepali</option>
+                                      <option value="NO">Norwegian</option>
+                                      <option value="FA">Persian</option>
+                                      <option value="PL">Polish</option>
+                                      <option value="PT">Portuguese</option>
+                                      <option value="PA">Punjabi</option>
+                                      <option value="QU">Quechua</option>
+                                      <option value="RO">Romanian</option>
+                                      <option value="RU">Russian</option>
+                                      <option value="SM">Samoan</option>
+                                      <option value="SR">Serbian</option>
+                                      <option value="SK">Slovak</option>
+                                      <option value="SL">Slovenian</option>
+                                      <option value="ES">Spanish</option>
+                                      <option value="SW">Swahili</option>
+                                      <option value="SV">Swedish </option>
+                                      <option value="TA">Tamil</option>
+                                      <option value="TT">Tatar</option>
+                                      <option value="TE">Telugu</option>
+                                      <option value="TH">Thai</option>
+                                      <option value="BO">Tibetan</option>
+                                      <option value="TO">Tonga</option>
+                                      <option value="TR">Turkish</option>
+                                      <option value="UK">Ukranian</option>
+                                      <option value="UR">Urdu</option>
+                                      <option value="UZ">Uzbek</option>
+                                      <option value="VI">Vietnamese</option>
+                                      <option value="CY">Welsh</option>
+                                      <option value="XH">Xhosa</option>
+                                 </select>
+                             </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 mt-2">
+                             <div class="form-group">
+                              <label class="bold">Breast Type</label>
+                                <select class="selectpicker form-control" data-live-search="true" [(ngModel)]="model_details.breast_type" name="breast_type">
+                                    <option value="">Nothing selected</option>
+                                    <option value="Natural">Natural</option>
+                                    <option value="Enhanced">Enhanced</option>
+                                 </select>
+                             </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 mt-2">
+                             <div class="form-group">
+                              <label class="bold">Gender</label>
+                                <select class="selectpicker form-control" data-live-search="true" [(ngModel)]="model_details.gender" name="gender">
+                                    <option value="">Nothing selected</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Transgender-M2F">Transgender-M2F</option>
+                                    <option value="Transgender-F2M">Transgender-F2M</option>
+                                 </select>
+                             </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 mt-2">
+                             <div class="form-group">
+                              <label class="bold">Hair length</label>
+                                <select class="selectpicker form-control" data-live-search="true" [(ngModel)]="model_details.hair_length" name="hair_length">
+                                    <option value="">Nothing selected</option>
+                                    <option value="Extremely long">Extremely long</option>
+                                    <option value="Long">Long</option>
+                                    <option value="Medium length">Medium length</option>
+                                    <option value="Short">Short</option>
+                                    <option value="Very short">Very short</option>
+                                    <option value="Bald">Bald</option>
+                                 </select>
+                             </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 mt-2">
+                             <div class="form-group">
+                              <label class="bold">Shoe size</label>
+                                <select class="selectpicker form-control" data-live-search="true" [(ngModel)]="model_details.shoe_size" name="shoe_size">
+                                    <option value="">Nothing selected</option>
+                                    <option value="4">4</option>
+                                    <option value="4.5">4.5</option>
+                                    <option value="5">5</option>
+                                    <option value="5.5">5.5</option>
+                                    <option value="6">6</option>
+                                    <option value="6.5">6.5</option>
+                                    <option value="7">7</option>
+                                    <option value="7.5">7.5</option>
+                                    <option value="8">8</option>
+                                    <option value="8.5">8.5</option>
+                                    <option value="9">9</option>
+                                    <option value="9.5">9.5</option>
+                                    <option value="10">10</option>
+                                    <option value="10.5">10.5</option>
+                                    <option value="11">11</option>
+                                    <option value="11.5">11.5</option>
+                                    <option value="12">12</option>
+                                 </select>
+                             </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 mt-2">
+                             <div class="form-group">
+                              <label class="bold">Hair color</label>
+                                <select class="selectpicker form-control" data-live-search="true" [(ngModel)]="model_details.hair_color" name="hair_color">
+                                    <option value="">Nothing selected</option>
+                                    <option value="Platinum">Platinum</option>
+                                    <option value="Blonde">Blonde</option>
+                                    <option value="Honey">Honey</option>
+                                    <option value="Brown">Brown</option>
+                                    <option value="Auburn">Auburnt</option>
+                                    <option value="Red">Red</option>
+                                    <option value="Black">Black</option>
+                                    <option value="Alternative">Alternative</option>
+                                 </select>
+                             </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 mt-2">
+                             <div class="form-group">
+                              <label class="bold">Public Hair</label>
+                                <select class="selectpicker form-control" data-live-search="true" [(ngModel)]="model_details.public_hair" name="public_hair">
+                                    <option value="">Nothing selected</option>
+                                    <option value="Natural">Natural</option>
+                                    <option value="Trimmed">Trimmed</option>
+                                    <option value="Hardly any">Hardly any</option>
+                                    <option value="No hair">No hair</option>
+                                 </select>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <h5 class="h5-toggle mt-3" data-toggle="collapse" data-target="#demo3">Sexual Preference</h5>
+                    <div id="demo3" class="border-bottom mt-3 collapse">
+                       <div class="row">
+                          <div class="col-lg-12 col-md-12 mt-2">
+                             <label class="bold">Orientation</label>
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt-2">
+                             <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.orientation" name="orientation" value="Straight">Straight
+                                 </label>
+                               </div>
+                               <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.orientation" name="orientation" value="Lesbian">Lesbian
+                                 </label>
+                               </div>
+                               <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.orientation" name="orientation" value="Fluid">Fluid
+                                 </label>
+                              </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt-2">
+                             <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.orientation" name="orientation" value="Bisexual">Bisexual
+                                 </label>
+                               </div>
+                               <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.orientation" name="orientation" value="Gay">Gay
+                                 </label>
+                               </div>
+                          </div>
+                       </div>
+                    </div>
+                    <h5 class="h5-toggle mt-3" data-toggle="collapse" data-target="#demo4">Characteristics</h5>
+                    <div id="demo4" class="mt-3 collapse">
+                       <div class="row">
+                          
+                          <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
+                           <div class="row">
+                              <div class="col-lg-12 col-md-12 mt-2">
+                             <label class="bold">Ethnicity</label>
+                             </div>
+                             <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
+                             <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.ethnicity" name="ethnicity" value="Asian">Asian
+                                 </label>
+                               </div>
+                               <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.ethnicity" name="ethnicity" value="Caucasian">Caucasian
+                                 </label>
+                               </div>
+                               <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.ethnicity" name="ethnicity" value="Latin">Latin
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.ethnicity" name="ethnicity" value="Native American">Native American
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
+                             <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.ethnicity" name="ethnicity" value="Black">Black
+                                 </label>
+                               </div>
+                               <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.ethnicity" name="ethnicity" value="Indian">Indian
+                                 </label>
+                               </div>
+                               <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.ethnicity" name="ethnicity" value="Middle Eastern">Middle Eastern
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.ethnicity" name="ethnicity" value="Exotic">Exotic
+                                 </label>
+                              </div>
+                           </div>
+                           </div>
+                          </div>
+                          <!--<div class="col-lg-6 col-md-6 col-sm-6 mt-2">
+                           <div class="row">
+                               <div class="col-lg-12 col-md-12 mt-2">
+                             <label class="bold">Hair</label>
+                             </div>
+                             <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
+                             <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" id="char_hair" name="char_hair" value="Platinum">Platinum
+                                 </label>
+                               </div>
+                               <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" id="char_hair" name="char_hair" value="Honey">Honey
+                                 </label>
+                               </div>
+                               <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" id="char_hair" name="char_hair" value="Auburn">Auburn
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" id="char_hair" name="char_hair" value="Black">Black
+                                 </label>
+                              </div>
+                           </div> 
+                           <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
+                             <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" id="char_hair" name="char_hair" value="Blonde">Blonde
+                                 </label>
+                               </div>
+                               <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" id="char_hair" name="char_hair" value="Brown">Brown
+                                 </label>
+                               </div>
+                               <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" id="char_hair" name="char_hair" value="Red">Red
+                                 </label>
+                              </div>
+                              <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" id="char_hair" name="char_hair" value="Alternative">Alternative
+                                 </label>
+                              </div>
+                           </div>
+                           </div>
+                          </div>-->
+                          <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
+                           <div class="row">
+                              <div class="col-lg-12 col-md-12 mt-2">
+                             <label class="bold">Eyes</label>
+                             </div>
+                             <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
+                             <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.eyes" name="eyes" value="Brown Eyes">Brown Eyes
+                                 </label>
+                               </div>
+                               <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.eyes" name="eyes" value="Blue Eyes">Blue Eyes
+                                 </label>
+                               </div>
+                               <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.eyes" name="eyes" value="Gray Eyes">Gray Eyes
+                                 </label>
+                              </div>
+                           </div>
+                           <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
+                             <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.eyes" name="eyes" value="Hazel Eyes">Hazel Eyes
+                                 </label>
+                               </div>
+                               <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.eyes" name="eyes" value="Green Eyes">Green Eyes
+                                 </label>
+                               </div>
+                               <div class="form-check">
+                                 <label class="form-check-label">
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.eyes" name="eyes" value="Amber Eyes">Amber Eyes
+                                 </label>
+                              </div>
+                           </div>
+                           </div>
+                          </div>
+                       </div>
+                    </div>
+                    <h5 class="h5-toggle mt-3" data-toggle="collapse" data-target="#demo5">Fetishes & Specialties</h5>
+                    <div id="demo5" class=" mt-3 collapse">
+                       <div class="row">
+                          <div class="col-lg-12 col-md-12">
+                             <div class="form-group">
+                              <label class="bold">Fetishes</label>
+                                <select class="selectpicker form-control" multiple data-live-search="true" [(ngModel)]="model_details.fetishes" name="fetishes" id="fetishes">
+                                    <option value="">Nothing selected</option>
+                                    <option value="High heels">High heels</option>
+                                    <option value="Hair Pulling">Hair Pulling</option>
+                                    <option value="Feet">Feet</option>
+                                    <option value="Domination">Domination</option>
+                                    <option value="Bondage">Bondage</option>
+                                    <option value="Dildos">Dildos</option>
+                                    <option value="Anal Sex">Anal Sex</option>
+                                    <option value="Leather">Leather</option>
+                                    <option value="Latex">Latex</option>
+                                    <option value="Lace">Lace</option>
+                                    <option value="Roleplay">Roleplay</option>
+                                    <option value="Toys">Toys</option>
+                                    <option value="Vibrators">Vibrators</option>
+                                    <option value="Costumes">Costumes</option>
+                                    <option value="Underwear">Underwear</option>
+                                    <option value="Submission">Submission</option>
+                                    <option value="Ass Play">Ass Play</option>
+                                    <option value="Double Penetration">Double Penetration</option>
+                                    <option value="Squirting">Squirting</option>
+                                    <option value="CEI">CEI</option>
+                                    <option value="Humiliation">Humiliation</option>
+                                 </select>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <h5 class="h5-toggle mt-3" data-toggle="collapse" data-target="#demo6">Wish List</h5>
+                    <div id="demo6" class=" mt-3 collapse">
+                       <div class="row">
+                          <div class="col-lg-12 col-md-12">
+                             <div class="form-group">
+                              <label class="bold">Wish List</label>
+                                <textarea class="form-control" rows="8" [(ngModel)]="model_details.wishlist" name="wishlist"></textarea>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <h5 class="h5-toggle mt-3" data-toggle="collapse" data-target="#demo7">Color Scheme</h5>
+                    <div id="demo7" class=" mt-3 collapse">
+                       <div class="row">
+                          <div class="col-lg-6 col-md-6">
+                             <div class="form-group">
+                              <input type="color" class="form-control" name="" id="">
+                              <label class="bold">Choose your profile text color</label>
+                                <input type="text" class="form-control" [(ngModel)]="model_details.text_color" name="text_color">
+                             </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6">
+                             <div class="form-group">
+                              <input type="color" class="form-control" name="" id="">
+                              <label class="bold">Choose your profile background color</label>
+                                <input type="text" class="form-control" [(ngModel)]="model_details.background_color" name="background_color">
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <h5 class="h5-toggle mt-3" data-toggle="collapse" data-target="#demo8">Category</h5>
+                    <div id="demo8" class=" mt-3 collapse">
+                       <div class="row">
+                          <div class="col-lg-12 col-md-12">
+                             <div class="form-group">
+                              <label class="bold">Category</label>
+                                <select class="selectpicker form-control" multiple data-live-search="true" [(ngModel)]="model_details.category" name="category">
+                                    <option value="">Nothing selected</option>
+                                    <option value="Celebrity">Celebrity</option>
+                                    <option value="Hot Flirt">Hot Flirt</option>
+                                    <option value="Transgirl">Transgirl</option>
+                                    <option value="Amateur">Amateur</option>
+                                    <option value="Lesbian">Lesbian</option>
+                                    <option value="Couple">Couple</option>
+                                    <option value="Newbie">Newbie</option>
+                                    <option value="Mature">Mature</option>
+                                    <option value="Fetish">Fetish</option>
+                                    <option value="Girl">Girl</option>
+                                 </select>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <h5 class="h5-toggle mt-3" data-toggle="collapse" data-target="#demo9">Social Media</h5>
+                    <div id="demo9" class=" mt-3 collapse">
+                       <div class="row">
+                          <!-- <div class="col-lg-4 col-md-4">
+                             <div class="form-group">
+                              <label class="bold"><i class="fa fa-facebook"></i> Facebook</label>
+                                <input type="url" class="form-control" name="fb" id="fb">
+                             </div>
+                          </div> -->
+                          <div class="col-lg-6 col-md-6">
+                             <div class="form-group">
+                              <label class="bold"><i class="fa fa-twitter"></i> Twitter</label>
+                                <input type="url" class="form-control" [(ngModel)]="model_details.twitter" name="twitter">
+                             </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6">
+                             <div class="form-group">
+                              <label class="bold"><i class="fa fa-instagram"></i> Instagram</label>
+                                <input type="url" class="form-control"  [(ngModel)]="model_details.instagram" name="instagram">
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="row">
+                       <div class="col-lg-6 col-md-6 mt-3">
+                          <input type="submit" class="btn btn-info btn-block" id="update_profile" value="Update Profile">
+                       </div>
+                       <div class="col-lg-6 col-md-6 mt-3">
+                          <button class="btn btn-default btn-block">Cancel</button>
+                       </div>
+                    </div>
                </div>
-           </div>
-           <div class="col-lg-6 col-md-6 col-sm-6 mt-4">
-              <div class="form-group">
-                 <label class="bold">Orientation</label>
-                 <select class="selectpicker form-control" name="orientation" [(ngModel)]="user_details.orientation">
-                    <option value="">Nothing selected</option>
-                    <option *ngFor="let orientation of preferences.orientation" [value]="orientation">{{orientation}}</option>
-                 </select>
-              </div>
-           </div>
-        </div>
-        <div class="mt-3">
-           <h1 class="text-center text-info">MY MODEL PREFERENCES</h1>
-           <div class="clear"></div>
-              <div class="row mt-5">
-                 <div class="col-lg-4 col-md-6">
-                    <div class="form-group">
-                       <label class="bold">Body type </label>
-                       <select class="selectpicker form-control" name="body_type" [(ngModel)]="user_details.body_type">
-                           <option value="">Nothing selected</option>
-                           <option *ngFor="let body_type of preferences.body_type" [value]="body_type">{{body_type}}</option>
-                       </select>
-                    </div>
-                 </div>
-                 <div class="col-lg-4 col-md-6">
-                    <div class="form-group">
-                       <label class="bold">Ethnicity</label>
-                       <select class="selectpicker form-control" name="ethnicity" [(ngModel)]="user_details.ethnicity">
-                          <option value="">Nothing selected</option>
-                          <option *ngFor="let ethnicity of preferences.ethnicity" [value]="ethnicity">{{ethnicity}}</option>
-                       </select>
-                    </div>
-                 </div>
-                 <div class="col-lg-4 col-md-6">
-                    <div class="form-group">
-                       <label class="bold">Age</label>
-                       <select class="selectpicker form-control" name="age"  [(ngModel)]="user_details.age">
-                          <option value="">Nothing selected</option>
-                          <option *ngFor="let age of preferences.age" [value]="age">{{age}}</option> 
-                       </select>
-                    </div>
-                 </div>
-                 <div class="col-lg-4 col-md-6">
-                    <div class="form-group">
-                       <label class="bold">Hair Color</label>
-                       <select class="selectpicker form-control" name="hair_color" [(ngModel)]="user_details.hair_color">
-                          <option value="">Nothing selected</option>
-                          <option *ngFor="let hair_color of preferences.hair_color" [value]="hair_color">{{hair_color}}</option>
-                       </select>
-                    </div>
-                 </div>
-                 <div class="col-lg-4 col-md-6">
-                    <div class="form-group">
-                       <label class="bold">Breasts</label>
-                       <select class="selectpicker form-control" name="breast" [(ngModel)]="user_details.breast">
-                          <option value="">Nothing selected</option>
-                          <option *ngFor="let breast of preferences.breast" [value]="breast">{{breast}}</option>
-                       </select>
-                    </div>
-                 </div>
-                 <div class="col-lg-4 col-md-6">
-                    <div class="form-group">
-                       <label class="bold">Hair length</label>
-                       <select class="selectpicker form-control" name="hair_length" [(ngModel)]="user_details.hair_length">
-                          <option value="">Nothing selected</option>
-                          <option *ngFor="let hair_length of preferences.hair_length" [value]="hair_length">{{hair_length}}</option>
-                       </select>
-                    </div>
-                 </div>
-                 <div class="col-lg-4 col-md-6">
-                    <div class="form-group">
-                       <label class="bold">Breast size</label>
-                       <select class="selectpicker form-control" name="breast_size" [(ngModel)]="user_details.breast_size">
-                          <option value="">Nothing selected</option>
-                          <option *ngFor="let breast_size of preferences.breast_size" [value]="breast_size">{{breast_size}}</option>
-                       </select>
-                    </div>
-                 </div>
-                 <div class="col-lg-4 col-md-6">
-                    <div class="form-group">
-                       <label class="bold">Body hair</label>
-                       <select class="selectpicker form-control" name="body_hair" [(ngModel)]="user_details.body_hair">
-                          <option value="">Nothing selected</option>
-                          <option *ngFor="let body_hair of preferences.body_hair" [value]="body_hair">{{body_hair}}</option>
-                       </select>
-                    </div>
-                 </div>
-              </div>
-              <div class="row">
-                 <div class="col-lg-6 col-md-6 mt-3">
-                    <input type="submit" class="btn btn-info" value="Update Profile" style="width:100%">
-                 </div>
-                 <div class="col-lg-6 col-md-6 mt-3">
-                    <input type="button" class="btn" value="Cancel" (click)="resetForm()" style="width:100%;background: #ccc">
-                 </div>
-              </div>
-        </div>
+         </div>
+
       </form>
      </div>     
   </div>

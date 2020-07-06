@@ -80,6 +80,9 @@ import { AuthGuard } from '../common/auth/auth.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
+// ckeditor modules for model profile edit
+import { CKEditorModule } from 'ng2-ckeditor';
+
 import { TitleService } from '../common/services/title.service';
 
 import {CheckStreamerService} from '../common/services/check-streamer.service';
@@ -186,6 +189,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         EntryRoutingModule,
         HttpClientModule,
         FormsModule,
+        CKEditorModule,
         // NoopAnimationsModule,
         MatDatepickerModule,
         MatButtonModule,
