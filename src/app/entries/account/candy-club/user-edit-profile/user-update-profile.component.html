@@ -122,7 +122,7 @@
             </form>
            </div>
         </div>
-        <form class="black-text" id="form3" #updateProfileForm="ngForm" (ngSubmit)="updateModelProfileFn(updateProfileForm)">
+        <form class="black-text user-row" id="form3" #updateProfileForm="ngForm" (ngSubmit)="updateModelProfileFn(updateProfileForm)">
                
          <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-5 follower">
@@ -130,24 +130,54 @@
                     <div id="demo" class="collapse mt-3">
                       <div class="form-group">
                         <label class="bold">How would you describe your personality?</label>
-                        <textarea class="form-control" rows="8" [(ngModel)]="model_details.personality_description" name="personality_description"></textarea>
-                      </div>
+                        <!-- <textarea class="form-control" rows="8" [(ngModel)]="model_details.personality_description" name="personality_description"></textarea> -->
+                        <ckeditor
+                           [(ngModel)]="model_details.personality_description"
+                           name="personality_description"
+                           [config]="config"
+                           [readonly]="false">
+                        </ckeditor>
+                     </div>
                       <div class="form-group">
                         <label class="bold">What kind of show do you like putting on in your chat room?</label>
-                        <textarea class="form-control" rows="8" [(ngModel)]="model_details.chatroom_show_description" name="chatroom_show_description"></textarea>
+                        <!-- <textarea class="form-control" rows="8" [(ngModel)]="model_details.chatroom_show_description" name="chatroom_show_description"></textarea> -->
+                        <ckeditor
+                           [(ngModel)]="model_details.chatroom_show_description"
+                           name="chatroom_show_description"
+                           [config]="config"
+                           [readonly]="false">
+                        </ckeditor>
                       </div>
                       <div class="form-group">
                         <label class="bold">What turns you on and get you going?</label>
-                        <textarea class="form-control" rows="8" [(ngModel)]="model_details.turn_on_description" name="turn_on_description"></textarea>
-                      </div>
+                        <!-- <textarea class="form-control" rows="8" [(ngModel)]="model_details.turn_on_description" name="turn_on_description"></textarea> -->
+                        <ckeditor
+                           [(ngModel)]="model_details.turn_on_description"
+                           name="turn_on_description"
+                           [config]="config"
+                           [readonly]="false">
+                        </ckeditor>
+                     </div>
                       <div class="form-group">
                         <label class="bold">What annoys you and puts you in a bad mood?</label>
-                        <textarea class="form-control" rows="8" [(ngModel)]="model_details.bad_mood_description" name="bad_mood_description"></textarea>
-                      </div>
+                        <!-- <textarea class="form-control" rows="8" [(ngModel)]="model_details.bad_mood_description" name="bad_mood_description"></textarea> -->
+                        <ckeditor
+                           [(ngModel)]="model_details.bad_mood_description"
+                           name="bad_mood_description"
+                           [config]="config"
+                           [readonly]="false">
+                        </ckeditor>
+                     </div>
                       <div class="form-group">
                         <label class="bold">Who is your dream customer?</label>
-                        <textarea class="form-control" rows="8" [(ngModel)]="model_details.dream_customer_description" name="dream_customer_description"></textarea>
-                      </div>
+                        <!-- <textarea class="form-control" rows="8" [(ngModel)]="model_details.dream_customer_description" name="dream_customer_description"></textarea> -->
+                        <ckeditor
+                           [(ngModel)]="model_details.dream_customer_description"
+                           name="dream_customer_description"
+                           [config]="config"
+                           [readonly]="false">
+                        </ckeditor>
+                     </div>
                     </div>
                     <h5 class="h5-toggle mt-3" data-toggle="collapse" data-target="#demo1">Schedule</h5>
                     <div id="demo1" class="border-bottom mt-3 collapse">
@@ -181,7 +211,7 @@
                               <label class="bold">Height</label>
                                 <select class="selectpicker form-control" data-live-search="true"  [(ngModel)]="model_details.height" name="height" id="height">
                                     <option value="">Nothing selected</option>
-                                    <option value="<4 ft 4 in/132-133 cm">4 ft 4 in/132-133 cm</option>
+                                    <option value="4 ft 4 in/132-133 cm">4 ft 4 in/132-133 cm</option>
                                     <option value="4 ft 4 in/132-133 cm">4 ft 4 in/132-133 cm</option>
                                     <option value="4 ft 5 in/134-135 cm">4 ft 5 in/134-135 cm</option>
                                     <option value="4 ft 6 in/136-138 cm">4 ft 6 in/136-138 cm</option>
@@ -788,29 +818,29 @@
                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt-2">
                              <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="orientation" name="orientation" value="Straight">Straight
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.orientation" name="orientation" value="Straight">Straight
                                  </label>
                                </div>
                                <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="orientation" name="orientation" value="Lesbian">Lesbian
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.orientation" name="orientation" value="Lesbian">Lesbian
                                  </label>
                                </div>
                                <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="orientation" name="orientation" value="Fluid">Fluid
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.orientation" name="orientation" value="Fluid">Fluid
                                  </label>
                               </div>
                           </div>
                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt-2">
                              <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="orientation" name="orientation" value="Bisexual">Bisexual
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.orientation" name="orientation" value="Bisexual">Bisexual
                                  </label>
                                </div>
                                <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="orientation" name="orientation" value="Gay">Gay
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.orientation" name="orientation" value="Gay">Gay
                                  </label>
                                </div>
                           </div>
@@ -828,44 +858,44 @@
                              <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
                              <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="ethnicity" name="ethnicity" value="Asian">Asian
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.ethnicity" name="ethnicity" value="Asian">Asian
                                  </label>
                                </div>
                                <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="ethnicity" name="ethnicity" value="Caucasian">Caucasian
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.ethnicity" name="ethnicity" value="Caucasian">Caucasian
                                  </label>
                                </div>
                                <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="ethnicity" name="ethnicity" value="Latin">Latin
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.ethnicity" name="ethnicity" value="Latin">Latin
                                  </label>
                               </div>
                               <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="ethnicity" name="ethnicity" value="Native American">Native American
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.ethnicity" name="ethnicity" value="Native American">Native American
                                  </label>
                               </div>
                            </div>
                            <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
                              <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="ethnicity" name="ethnicity" value="Black">Black
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.ethnicity" name="ethnicity" value="Black">Black
                                  </label>
                                </div>
                                <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="ethnicity" name="ethnicity" value="Indian">Indian
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.ethnicity" name="ethnicity" value="Indian">Indian
                                  </label>
                                </div>
                                <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="ethnicity" name="ethnicity" value="Middle Eastern">Middle Eastern
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.ethnicity" name="ethnicity" value="Middle Eastern">Middle Eastern
                                  </label>
                               </div>
                               <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="ethnicity" name="ethnicity" value="Exotic">Exotic
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.ethnicity" name="ethnicity" value="Exotic">Exotic
                                  </label>
                               </div>
                            </div>
@@ -930,34 +960,34 @@
                              <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
                              <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="eyes" name="eyes" value="Brown Eyes">Brown Eyes
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.eyes" name="eyes" value="Brown Eyes">Brown Eyes
                                  </label>
                                </div>
                                <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="eyes" name="eyes" value="Blue Eyes">Blue Eyes
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.eyes" name="eyes" value="Blue Eyes">Blue Eyes
                                  </label>
                                </div>
                                <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="eyes" name="eyes" value="Gray Eyes">Gray Eyes
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.eyes" name="eyes" value="Gray Eyes">Gray Eyes
                                  </label>
                               </div>
                            </div>
                            <div class="col-lg-6 col-md-6 col-sm-6 mt-2">
                              <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="eyes" name="eyes" value="Hazel Eyes">Hazel Eyes
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.eyes" name="eyes" value="Hazel Eyes">Hazel Eyes
                                  </label>
                                </div>
                                <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="eyes" name="eyes" value="Green Eyes">Green Eyes
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.eyes" name="eyes" value="Green Eyes">Green Eyes
                                  </label>
                                </div>
                                <div class="form-check">
                                  <label class="form-check-label">
-                                   <input type="radio" class="form-check-input" id="eyes" name="eyes" value="Amber Eyes">Amber Eyes
+                                   <input type="radio" class="form-check-input" [(ngModel)]="model_details.eyes" name="eyes" value="Amber Eyes">Amber Eyes
                                  </label>
                               </div>
                            </div>

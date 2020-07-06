@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { RequestService } from '../../../../common/services/request.service';
@@ -19,25 +19,28 @@ const PROFILE_PICTURE = "PROFILE_PICTURE";
 })
 export class UserUpdateProfileComponent implements AfterViewInit {
 
-  resetForm() {
-    $("#form3")[0].reset();
-  }
+    config: any = {
+        allowedContent: true,
+        toolbar: [['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', 'Link', '-', 'blockQuote']],
+        removePlugins: 'elementspath',
+        resize_enabled: false,
+        extraPlugins: 'font,divarea,placeholder',
+        contentsCss: ["body {font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;}"],
+        autoParagraph: false,
+        enterMode: 2
+    };
 
-  updateProfileReset() { 
-
-  }
-
-errorMessages : string;
-model_details : ModelPreferences;
-profile_picture : File;
-cover_picture : File;
-user_profile_picture : string;
-user_cover_picture : string;
-is_content_creator : boolean;
-fileInputs : FileList;
-userId : string;
-username : string;
-preferences : Preference;
+    errorMessages : string;
+    model_details : ModelPreferences;
+    profile_picture : File;
+    cover_picture : File;
+    user_profile_picture : string;
+    user_cover_picture : string;
+    is_content_creator : boolean;
+    fileInputs : FileList;
+    userId : string;
+    username : string;
+    preferences : Preference;
 constructor(private requestService : RequestService, private router : Router, private location : Location, private checkStreamerService :CheckStreamerService) {
 
     this.profile_picture = null;
@@ -49,7 +52,7 @@ constructor(private requestService : RequestService, private router : Router, pr
         description : "",
 
         //about
-        personality_description : "",
+        personality_description : '',
         chatroom_show_description : "",
         turn_on_description : "",
         bad_mood_description : "",
@@ -92,10 +95,8 @@ constructor(private requestService : RequestService, private router : Router, pr
 
         // social media
         twitter : "",
-        instagram : "" 
-        
+        instagram : ""        
     }
-
 
     this.preferences = {
         zodiac_sign : [],
@@ -142,6 +143,7 @@ constructor(private requestService : RequestService, private router : Router, pr
         this.username = username;
       // this.model_physic_data_fn("modelPhysicData","");
      }, 1000);
+
 
  }
 
@@ -389,7 +391,7 @@ user_model_Preference_fn(url, object) {
 
    // To update the profile page of logged in user
    updateModelProfileFn(form : NgForm) {    
-       //console.log(form.value); return;
+       console.log(form.value); return;
     this.requestService.postMethod('ENTER_HERE', form.value)
         .subscribe(
             (data : any ) => {
