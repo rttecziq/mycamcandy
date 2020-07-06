@@ -10,21 +10,28 @@
 .float-left{float: left;}
 .float-right{float: right;}
 .bold{font-weight: 600;}
+.heading {
+    background: #ff8787;
+    color: #fff;
+    padding: 10px;
+}
 .nav-tabs .nav-link {
     border: 1px solid transparent;
     border-top-left-radius: .25rem;
     border-top-right-radius: .25rem;
-    background: #ccc;
+    background: #eee;
 }
 .nav-tabs .nav-link {
     display: block;
     padding: .5rem 1rem;
 }
+.nav-tabs .nav-item.active .nav-link{font-weight: 600;}
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
     border-color: #e9ecef #e9ecef #dee2e6;
+    background: #ddd;
 }
 .nav-tabs .nav-item{width: 100%;}
-a:hover {color:#ffc107!important;}
+/* a:hover {color:#ffc107!important;} */
 a {color: #070707!important;}
 .btn-warning {background-color:#ffc107!important;border-color: #ffc107!important;}
 #account-row{margin-bottom: 3rem;}
