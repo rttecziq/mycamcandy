@@ -71,6 +71,12 @@ hr{border-top: 1px solid #d4d1d1;}
     border-radius: 4px;
     overflow: hidden;
 }
+.chat-message{padding-right: 30px;}
+.smilies{
+    position: absolute;
+    right: 29px;
+    bottom: 12%;
+}
 .chat-box .bg-sent .fa-trash{display: none;}
 .chat-box .bg-sent:hover .fa.fa-trash.text-danger.float-right {
     display: block!important;
@@ -79,6 +85,11 @@ hr{border-top: 1px solid #d4d1d1;}
   .msg {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+}
+.smilies{
+    position: absolute;
+    right: 29px;
+    bottom: 7%;
 }
 }
 /*************Message End****************/

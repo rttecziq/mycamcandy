@@ -52,7 +52,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ErrorComponent } from './common/error/error.component';
 import { UserSignupComponent } from './common/auth/register/user-signup.component';
 import { QuickSignupComponent } from './common/home/quick-signup/quick-signup.component';
-import  {  NgxEmojiPickerModule  }  from  'ngx-emoji-picker';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
@@ -89,8 +89,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    }),
-    NgxEmojiPickerModule.forRoot()
+    })
   ],
   providers: [AppService, UserService, RequestService, AuthGuard, TitleService, CheckStreamerService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

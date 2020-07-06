@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Chat } from '../../../../models/chat';
 import { hasLifecycleHook } from '@angular/compiler/src/lifecycle_reflector';
 declare var $: any ;
 @Component({
@@ -7,10 +9,18 @@ declare var $: any ;
   styleUrls: ['./message.component.css']
 })
 export class MessageComponent implements OnInit {
-  toggled: boolean = false;
-  message: string = '';
+  toggled: boolean;
+  message: string;
+  chat : Chat;
+
+  constructor() { 
+    this.chat = {
+      message : ''
+    }
   
-  constructor() { }
+
+    this.toggled = false;
+  }
 
   msgActive() {
     $('.active_msg').on('click', 'li', function() {
@@ -19,7 +29,10 @@ export class MessageComponent implements OnInit {
     });
   }
  
-  
+  handleSelection(event) {
+    this.chat.message += event.char;
+  }
+
   ngOnInit() {
     
     this.msgActive();

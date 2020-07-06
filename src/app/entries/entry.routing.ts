@@ -161,19 +161,19 @@ const entryRoutes: Routes = [
                 data: {title : "Profile", expectedRole: 'onlyUser'},
             },
             {
-                path: "candy-club/:username/about",
+                path: "candy-club/about",
                 component: AboutComponent,
                 canActivate: [AuthGuard],
                 data: {title : "About", expectedRole: 'onlyUser'},
             },
             {
-                path: "candy-club/:username/activity",
+                path: "candy-club/activity",
                 component: ActivityComponent,
                 canActivate: [AuthGuard],
                 data: {title : "My Activity", expectedRole: 'onlyUser'},
             },
             {
-                path: "candy-club/:username/edit-profile",
+                path: "candy-club/edit-profile",
                 component: UserUpdateProfileComponent,
                 canActivate: [AuthGuard],
                 data: {title : "Edit Profile", expectedRole: 'onlyUser'},
