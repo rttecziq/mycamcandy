@@ -391,7 +391,7 @@ user_model_Preference_fn(url, object) {
 
    // To update the profile page of logged in user
    updateModelProfileFn(form : NgForm) {    
-       console.log(form.value); return;
+
     this.requestService.postMethod('ENTER_HERE', form.value)
         .subscribe(
             (data : any ) => {
