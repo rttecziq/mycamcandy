@@ -62,8 +62,7 @@
             </div>
             <form method="POST">
              <div class="form-group">
-               <textarea class="form-control chat-message" placeholder="Type a message" [(ngModel)]="chat.message" name="message" id="sent_msg"></textarea>
-               <i class="smilies" (click)="toggled = !toggled" [(emojiPickerIf)]="toggled" [emojiPickerDirection]="'bottom'" (emojiPickerSelect)="handleSelection($event)">😄</i>
+               <textarea class="form-control chat-message" placeholder="Type a message" name="message" id="sent_msg"></textarea>
              </div>
                <button type="button" name="submit" id="submit" class="mb-3 float-right btn btn-sm btn-primary"><i class="fa fa-envelope p-2" aria-hidden="true" style="font-size: 20px"></i></button>
             </form>
