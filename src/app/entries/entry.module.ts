@@ -111,7 +111,7 @@ import { MyFanClubComponent } from './account/candy-club/my-fan-club/my-fan-club
 import { MessageComponent } from './account/candy-club/message/message.component';
 import { EarningHistoryComponent } from './account/candy-club/earning-history/earning-history.component';
 import { MyGiftComponent } from './account/candy-club/my-gift/my-gift.component';
-import  {  NgxEmojiPickerModule  }  from  'ngx-emoji-picker';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
@@ -197,7 +197,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatInputModule,
         MatRippleModule,
         MatNativeDateModule,
-        NgxEmojiPickerModule,
         TranslateModule.forRoot({
             loader: {
               provide: TranslateLoader,
