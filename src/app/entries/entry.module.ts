@@ -111,6 +111,17 @@ import { MyFanClubComponent } from './account/candy-club/my-fan-club/my-fan-club
 import { MessageComponent } from './account/candy-club/message/message.component';
 import { EarningHistoryComponent } from './account/candy-club/earning-history/earning-history.component';
 import { MyGiftComponent } from './account/candy-club/my-gift/my-gift.component';
+import { FreeShowPhotoComponent } from './account/candy-club/free-show-photo/free-show-photo.component';
+import { NudeShowPhotoComponent } from './account/candy-club/nude-show-photo/nude-show-photo.component';
+import { TopModelComponent } from './account/candy-club/top-model/top-model.component';
+import { RecordedVideoComponent } from './account/candy-club/recorded-video/recorded-video.component';
+import { AlbumComponent } from './account/candy-club/album/album.component';
+import { CollectionComponent } from './account/candy-club/collection/collection.component';
+import { SweetTreatComponent } from './account/candy-club/sweet-treat/sweet-treat.component';
+import { ModelNewsComponent } from './account/candy-club/model-news/model-news.component';
+import { ModelScheduleComponent } from './account/candy-club/model-schedule/model-schedule.component';
+import { UploadPhotoComponent } from './account/candy-club/upload-photo/upload-photo.component';
+import { UploadVideosComponent } from './account/candy-club/upload-videos/upload-videos.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -182,7 +193,18 @@ export function HttpLoaderFactory(http: HttpClient) {
         MyFanClubComponent,
         MessageComponent,
         EarningHistoryComponent,
-        MyGiftComponent
+        MyGiftComponent,
+        FreeShowPhotoComponent,
+        NudeShowPhotoComponent,
+        TopModelComponent,
+        RecordedVideoComponent,
+        AlbumComponent,
+        CollectionComponent,
+        SweetTreatComponent,
+        ModelNewsComponent,
+        ModelScheduleComponent,
+        UploadPhotoComponent,
+        UploadVideosComponent
     ],
     imports: [
         CommonModule,
