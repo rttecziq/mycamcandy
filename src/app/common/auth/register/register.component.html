@@ -1,51 +1,524 @@
-<div class="main body-img" style="background-image: url(../../../assets/img/bg-video-default.jpg);">
-    <div class="overlay section-spacing pt-120">
-        <div class="signup-form">
-            <div class="right-align">
-                <a routerLink="/login" [queryParams]="{uType : uType}" class="forgot">{{'sign_in' | translate}}<i class="fa fa-chevron-right signin-arrow"></i></a>
-            </div>
-            <div class="clear-both"></div>
-            <!--<h2 class="signup-head center-align top">StreamNow</h2> -->
-            <div class="Spacer-8 top"></div>
-            <!-- SOCIAL LOGIN SECTION STARTS -->
-            <div class="row" *ngIf="google_status || fb_status">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 google" *ngIf="google_status">
-                    <button class="google-signin" type="button" (click)="socialLogin('google')"><i class="fa fa-google icon"></i>{{'signin_with_google' | translate}}</button>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 facebook" *ngIf="fb_status">
-                     <button class="facebook-signin" type="button" (click)="socialLogin('facebook')"><i class="fa fa-facebook icon"></i>{{'signin_with_facebook' | translate}}</button>
-                </div>
-            </div>
-            <span *ngIf="google_status || fb_status">
-                <!-- SOCIAL LOGIN SECTION ENDS -->
-                <div class="Spacer-8"></div>
-                <h3 class="signup-line center-align">{{'or' | translate}}</h3>
-            </span>
-            <!-- FORM STARTS -->
 
-            <form class="" #userRegistrationForm="ngForm" (ngSubmit)="userRegistration(userRegistrationForm)">
-                <div class="md-form form-lg">
-                    <input type="text" id="username" class="form-control form-control-lg" [(ngModel)]="user.name" required name="name" minlength="2" maxlength="128" autocomplete="off">
-                    <label for="username">{{'name' | translate}}</label>
-                </div>
-                <div class="md-form form-lg">
-                    <input type="email" id="email" class="form-control form-control-lg" [(ngModel)]="user.email" name="email" required autocomplete="off">
-                    <label for="email">email</label>
-                </div>
-                <div class="md-form form-lg">
-                    <input type="password" id="password" class="form-control form-control-lg" [(ngModel)]="user.password" name="password" required minlength="6" title="Enter Minimum 6 character" autocomplete="off">
-                    <label for="password">password</label>
-                </div>
-                <div class="md-form form-lg">
-                    <input type="password" id="confirm_password" class="form-control form-control-lg" [(ngModel)]="user.password_confirmation" name="password_confirmation" required minlength="6" title="Enter Minimum 6 character" autocomplete="off">
-                    <label for="confirm_password">{{'confirm_password' | translate}}</label>
-                </div>
-                
-                <div class="center-align">
-                    <button class="btn width-200" type="submit" [disabled]="!userRegistrationForm.valid">SignUp</button>
-                </div>
-            </form>
-            <!-- FORM ENDS -->
-        </div>
-    </div>
+<div class="container-fluid signup">
+	<div class="row">
+		<div class="col-lg-5 col-md-5 col-sm-5 signup-fa">
+			<h2>Make money with most innovative webcam community</h2>
+			<p><i class="fa fa-money"></i>&nbsp; Get the best tools and support to maximize your earnings. Earn money even when you’re not online, through your Fan Club and referrals.</p>
+			<p><i class="fa fa-users"></i>&nbsp; Use your social mojo to make loyal fans and followers. We’re more than a webcam powerhouse, we are an interactive, fun community!</p>
+			<p><i class="fa fa-trophy"></i>&nbsp; We respect and celebrate your excellence! Top talent and hard work mean higher payouts, bonuses and rewards.</p>
+		</div>
+		<div class="col-lg-7 col-md-7 col-sm-7">
+			
+                <form id="msform" #modelRegistrationForm="ngForm" (ngSubmit)="modelRegistration(modelRegistrationForm)">
+                           <!-- progressbar -->
+                            <ul id="progressbar">
+                                <li class="active" id="account"></li>
+                                <li id="personal"></li>
+                                <li id="payment"></li>
+                                <li id="cust"></li>
+                            </ul> <!-- fieldsets -->
+                            
+                            <fieldset>
+                                <div class="form-card">
+                                 <h4 class="fs-title">Become a performer</h4>
+                                 <h5 class="fs-title">Join our webcam family</h5>
+                                 <div class="form-group">
+                                 <input type="text" name="name" [(ngModel)]="model.name" (change)="checkModelExist($event.target.value)" id="username" pattern="[a-z0-9]*" minlength="4" placeholder="User name" required> 
+                                 <p class="small">Choose a catchy name to stand out from the crowd! Usernames must be at least 4 characters long - no spaces. This name will show as your User Name in various places on the website.</p>
+                                 <p [innerHTML]="user_availability"></p>
+                              </div>
+                                 <div class="form-group">
+                                 <input type="text" name="modelname" [(ngModel)]="model.modelname" id="modelname" placeholder="Model name" required> 
+                                 </div>
+                                 <div class="form-group">
+                                 	<label>DOB:</label>
+                                 <input type="Date" name="dob" [(ngModel)]="model.dob" id="dob" required> 
+                                 </div>
+                                 <div class="row">
+                                 	<div class="col-lg-6 col-md-6 col-sm-6">
+		                                 <div class="form-group">
+		                                 <input type="email" name="email" [(ngModel)]="model.email" placeholder="Enter email" required> 
+		                                 </div>
+                             		</div>
+		                            <div class="col-lg-6 col-md-6 col-sm-6">
+		                                 <div class="form-group">
+		                                 <input type="email" name="email_confirmation" [(ngModel)]="model.email_confirmation" id="confirm_mail" placeholder="Confirm email" required> 
+		                                 </div>
+		                            </div>
+                             	 </div>
+                             	 <div class="row">
+                                 	<div class="col-lg-6 col-md-6 col-sm-6">
+		                                 <div class="form-group">
+		                                 <input type="password" name="password" [(ngModel)]="model.password" placeholder="Enter password" required> 
+		                                 </div>
+                             		</div>
+		                            <div class="col-lg-6 col-md-6 col-sm-6">
+		                                 <div class="form-group">
+		                                 <input type="password" name="password_confirmation" [(ngModel)]="model.password_confirmation" placeholder="Confirm password" required>
+		                                 </div>
+		                            </div>
+                             	 </div>
+                                 <div class="form-group">
+                                    <label>Gender:</label><br>
+                                    <div class="form-check-inline">
+                                      <label class="form-check-label">
+                                      <input type="radio" class="form-check-input" [(ngModel)]="model.gender" name="gender" value="Female" checked style="width:auto" required>Female
+                                    </label>
+                                  </div>
+                                  <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                      <input type="radio" class="form-check-input" [(ngModel)]="model.gender" name="gender" value="Male" style="width:auto" required>Male
+                                    </label>
+                                  </div>
+                                  <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                      <input type="radio" class="form-check-input" [(ngModel)]="model.gender" name="gender" value="transgender-M2F" style="width:auto" required>Transgender-M2F
+                                    </label>
+                                  </div>
+                                  <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                      <input type="radio" class="form-check-input" [(ngModel)]="model.gender" name="gender" value="transgender-F2M" style="width:auto" required>Transgender-F2M
+                                    </label>
+                                  </div>
+                                 </div>
+                                </div> <input type="button" name="next" id="1" class="next action-button" value="Next Step" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                	<div class="row">
+                                 	<div class="col-lg-6 col-md-6 col-sm-6">
+		                                 <div class="form-group">
+		                                 <input type="text" name="first_name" [(ngModel)]="model.first_name" id="fname" placeholder="Legal first name" required> 
+		                                 </div>
+                             		</div>
+		                            <div class="col-lg-6 col-md-6 col-sm-6">
+		                                 <div class="form-group">
+		                                 <input type="text" name="last_name" [(ngModel)]="model.last_name" id="lname" placeholder="Legal last name" required> 
+		                                 </div>
+		                            </div>
+                             	 </div>
+                                 <div class="form-group">
+                                    <input type="text" name="othername" [(ngModel)]="model.othername" placeholder="Other names" required> 
+                                    <span class="small">List all your names, aliases, maiden name, nicknames, and any other professional names. If no other name exists, please enter "none"</span>
+                                 </div>
+                                 <div class="form-group">
+                                    <select class="list-dt form-control" name="official_document" [(ngModel)]="model.official_document" id="form_dropdown" required>
+                                       <option value="">Select type of official document you are uploading</option>
+                                       <option value="Driver's license">Driver's license</option>
+                                       <option value="State ID">State ID</option>
+                                       <option value="US Passport">US Passport</option>
+                                       <option value="Residency card (Green Card)">Residency card (Green Card)</option>
+                                       <option value="US Visa">US Visa</option>
+                                       <option value="US Military card (front and back)">US Military card (front and back)</option>
+                                    </select>
+                                    <p class="small">Submit a copy of your current government issued photo identification document, such as passport or US Drivers' license ("Photo ID", "ID"). Make sure all parts of your ID - your photo, legal name, date of birth and all the numbers on your ID are clearly readable.</p>
+                                 </div>
+                                </div> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                 <input type="button" name="next" id="2" class="next action-button" value="Next Step" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <div [style.background-image]="id_proof_image ? 'url(' + id_proof_image + ')' : null" class="user-profile1"></div>
+                                    <div class="form-group">
+                                       <label>ID Upload:</label>
+                                       <input type="file" id="file-1" name="id_proof" class="inputfile inputfile-2 none" accept="image/png,image/jpeg" (change)="handleIdProof($event.target.files)" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <div [style.background-image]="holding_id_proof_image ? 'url(' + holding_id_proof_image + ')' : null" class="user-profile1"></div>
+                                       <label>Upload photo of yourself holding the ID:</label>
+                                       <input type="file" id="file-2" name="holding_id_proof" class="inputfile inputfile-2 none" accept="image/png,image/jpeg" (change)="handleHoldingIdProof($event.target.files)" required>
+                                    </div>
+                                </div> <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
+                                <input type="button" name="next" id="3" class="next action-button" value="Next Step" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <div class="form-group">
+                                       <label>Payout method:</label>
+                                       <select class="list-dt form-control" name="payment_method" [(ngModel)]="model.payment_method" id="payment_method" required>
+                                          <option value="">Choose payout method</option>
+                                          <option value="Payoneer">Payoneer</option>
+                                          <option value="Paxum">Paxum</option>
+                                          <option value="Check by mail">Check by mail</option>
+                                          <option value="Direct bank deposit">Direct bank deposit</option>
+                                       </select>
+                                    </div>
+                                    <div class="payoneer-paxum">
+                                       <label>Payoneer or Paxum email:</label>
+                                       <div class="form-group">
+                                       <input type="email" name="payoneer_email" [(ngModel)]="model.payoneer_email" id="payoneer_enter_mail" placeholder="Enter email" required> 
+                                       </div>
+                                       <div class="form-group">
+                                       <input type="email" name="payoneer_email_confirmation" [(ngModel)]="model.payoneer_email_confirmation" id="payoneer_confirmation" placeholder="Confirm email" required> 
+                                       </div>
+                                    </div>
+                                    <div class="check-by-mail">
+                                       <div class="form-group">
+                                       <textarea name="check_by_mail_address" [(ngModel)]="model.check_by_mail_address" id="check_by_mail_address" placeholder="Address..." required></textarea> 
+                                       </div>
+                                       <div class="form-group">
+                                       <input type="text" name="check_by_mail_city" [(ngModel)]="model.check_by_mail_city" id="check_by_mail_city" placeholder="City" required> 
+                                       </div>
+                                       <div class="form-group">
+                                       <input type="text" name="check_by_mail_state" [(ngModel)]="model.check_by_mail_state" id="check_by_mail_state" placeholder="State/Province" required> 
+                                       </div>
+                                       <div class="form-group">
+                                       <input type="text" name="check_by_mail_zip" [(ngModel)]="model.check_by_mail_zip" id="check_by_mail_zip" placeholder="Zip/Postal" required> 
+                                       </div>
+                                       <div class="form-group">
+                                          <label>Country:</label>
+                                          <select class="list-dt form-control" name="check_by_mail_country" [(ngModel)]="model.check_by_mail_country" id="check_by_mail_country" required>
+                                             <option value="">Choose Country</option>
+                                             <option value="Afghanistan">Afghanistan</option>
+                                              <option value="Albania">Albania</option>
+                                              <option value="Algeria">Algeria</option>
+                                              <option value="American Samoa">American Samoa</option>
+                                              <option value="Andorra">Andorra</option>
+                                              <option value="Angola">Angola</option>
+                                              <option value="Anguilla">Anguilla</option>
+                                              <option value="Antartica">Antarctica</option>
+                                              <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                                              <option value="Argentina">Argentina</option>
+                                              <option value="Armenia">Armenia</option>
+                                              <option value="Aruba">Aruba</option>
+                                              <option value="Australia">Australia</option>
+                                              <option value="Austria">Austria</option>
+                                              <option value="Azerbaijan">Azerbaijan</option>
+                                              <option value="Bahamas">Bahamas</option>
+                                              <option value="Bahrain">Bahrain</option>
+                                              <option value="Bangladesh">Bangladesh</option>
+                                              <option value="Barbados">Barbados</option>
+                                              <option value="Belarus">Belarus</option>
+                                              <option value="Belgium">Belgium</option>
+                                              <option value="Belize">Belize</option>
+                                              <option value="Benin">Benin</option>
+                                              <option value="Bermuda">Bermuda</option>
+                                              <option value="Bhutan">Bhutan</option>
+                                              <option value="Bolivia">Bolivia</option>
+                                              <option value="Bosnia and Herzegowina">Bosnia and Herzegowina</option>
+                                              <option value="Botswana">Botswana</option>
+                                              <option value="Bouvet Island">Bouvet Island</option>
+                                              <option value="Brazil">Brazil</option>
+                                              <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                                              <option value="Brunei Darussalam">Brunei Darussalam</option>
+                                              <option value="Bulgaria">Bulgaria</option>
+                                              <option value="Burkina Faso">Burkina Faso</option>
+                                              <option value="Burundi">Burundi</option>
+                                              <option value="Cambodia">Cambodia</option>
+                                              <option value="Cameroon">Cameroon</option>
+                                              <option value="Canada">Canada</option>
+                                              <option value="Cape Verde">Cape Verde</option>
+                                              <option value="Cayman Islands">Cayman Islands</option>
+                                              <option value="Central African Republic">Central African Republic</option>
+                                              <option value="Chad">Chad</option>
+                                              <option value="Chile">Chile</option>
+                                              <option value="China">China</option>
+                                              <option value="Christmas Island">Christmas Island</option>
+                                              <option value="Cocos Islands">Cocos (Keeling) Islands</option>
+                                              <option value="Colombia">Colombia</option>
+                                              <option value="Comoros">Comoros</option>
+                                              <option value="Congo">Congo</option>
+                                              <option value="Congo">Congo, the Democratic Republic of the</option>
+                                              <option value="Cook Islands">Cook Islands</option>
+                                              <option value="Costa Rica">Costa Rica</option>
+                                              <option value="Cota D'Ivoire">Cote d'Ivoire</option>
+                                              <option value="Croatia">Croatia (Hrvatska)</option>
+                                              <option value="Cuba">Cuba</option>
+                                              <option value="Cyprus">Cyprus</option>
+                                              <option value="Czech Republic">Czech Republic</option>
+                                              <option value="Denmark">Denmark</option>
+                                              <option value="Djibouti">Djibouti</option>
+                                              <option value="Dominica">Dominica</option>
+                                              <option value="Dominican Republic">Dominican Republic</option>
+                                              <option value="East Timor">East Timor</option>
+                                              <option value="Ecuador">Ecuador</option>
+                                              <option value="Egypt">Egypt</option>
+                                              <option value="El Salvador">El Salvador</option>
+                                              <option value="Equatorial Guinea">Equatorial Guinea</option>
+                                              <option value="Eritrea">Eritrea</option>
+                                              <option value="Estonia">Estonia</option>
+                                              <option value="Ethiopia">Ethiopia</option>
+                                              <option value="Falkland Islands">Falkland Islands (Malvinas)</option>
+                                              <option value="Faroe Islands">Faroe Islands</option>
+                                              <option value="Fiji">Fiji</option>
+                                              <option value="Finland">Finland</option>
+                                              <option value="France">France</option>
+                                              <option value="France Metropolitan">France, Metropolitan</option>
+                                              <option value="French Guiana">French Guiana</option>
+                                              <option value="French Polynesia">French Polynesia</option>
+                                              <option value="French Southern Territories">French Southern Territories</option>
+                                              <option value="Gabon">Gabon</option>
+                                              <option value="Gambia">Gambia</option>
+                                              <option value="Georgia">Georgia</option>
+                                              <option value="Germany">Germany</option>
+                                              <option value="Ghana">Ghana</option>
+                                              <option value="Gibraltar">Gibraltar</option>
+                                              <option value="Greece">Greece</option>
+                                              <option value="Greenland">Greenland</option>
+                                              <option value="Grenada">Grenada</option>
+                                              <option value="Guadeloupe">Guadeloupe</option>
+                                              <option value="Guam">Guam</option>
+                                              <option value="Guatemala">Guatemala</option>
+                                              <option value="Guinea">Guinea</option>
+                                              <option value="Guinea-Bissau">Guinea-Bissau</option>
+                                              <option value="Guyana">Guyana</option>
+                                              <option value="Haiti">Haiti</option>
+                                              <option value="Heard and McDonald Islands">Heard and Mc Donald Islands</option>
+                                              <option value="Holy See">Holy See (Vatican City State)</option>
+                                              <option value="Honduras">Honduras</option>
+                                              <option value="Hong Kong">Hong Kong</option>
+                                              <option value="Hungary">Hungary</option>
+                                              <option value="Iceland">Iceland</option>
+                                              <option value="India">India</option>
+                                              <option value="Indonesia">Indonesia</option>
+                                              <option value="Iran">Iran (Islamic Republic of)</option>
+                                              <option value="Iraq">Iraq</option>
+                                              <option value="Ireland">Ireland</option>
+                                              <option value="Israel">Israel</option>
+                                              <option value="Italy">Italy</option>
+                                              <option value="Jamaica">Jamaica</option>
+                                              <option value="Japan">Japan</option>
+                                              <option value="Jordan">Jordan</option>
+                                              <option value="Kazakhstan">Kazakhstan</option>
+                                              <option value="Kenya">Kenya</option>
+                                              <option value="Kiribati">Kiribati</option>
+                                              <option value="Democratic People's Republic of Korea">Korea, Democratic People's Republic of</option>
+                                              <option value="Korea">Korea, Republic of</option>
+                                              <option value="Kuwait">Kuwait</option>
+                                              <option value="Kyrgyzstan">Kyrgyzstan</option>
+                                              <option value="Lao">Lao People's Democratic Republic</option>
+                                              <option value="Latvia">Latvia</option>
+                                              <option value="Lebanon">Lebanon</option>
+                                              <option value="Lesotho">Lesotho</option>
+                                              <option value="Liberia">Liberia</option>
+                                              <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
+                                              <option value="Liechtenstein">Liechtenstein</option>
+                                              <option value="Lithuania">Lithuania</option>
+                                              <option value="Luxembourg">Luxembourg</option>
+                                              <option value="Macau">Macau</option>
+                                              <option value="Macedonia">Macedonia, The Former Yugoslav Republic of</option>
+                                              <option value="Madagascar">Madagascar</option>
+                                              <option value="Malawi">Malawi</option>
+                                              <option value="Malaysia">Malaysia</option>
+                                              <option value="Maldives">Maldives</option>
+                                              <option value="Mali">Mali</option>
+                                              <option value="Malta">Malta</option>
+                                              <option value="Marshall Islands">Marshall Islands</option>
+                                              <option value="Martinique">Martinique</option>
+                                              <option value="Mauritania">Mauritania</option>
+                                              <option value="Mauritius">Mauritius</option>
+                                              <option value="Mayotte">Mayotte</option>
+                                              <option value="Mexico">Mexico</option>
+                                              <option value="Micronesia">Micronesia, Federated States of</option>
+                                              <option value="Moldova">Moldova, Republic of</option>
+                                              <option value="Monaco">Monaco</option>
+                                              <option value="Mongolia">Mongolia</option>
+                                              <option value="Montserrat">Montserrat</option>
+                                              <option value="Morocco">Morocco</option>
+                                              <option value="Mozambique">Mozambique</option>
+                                              <option value="Myanmar">Myanmar</option>
+                                              <option value="Namibia">Namibia</option>
+                                              <option value="Nauru">Nauru</option>
+                                              <option value="Nepal">Nepal</option>
+                                              <option value="Netherlands">Netherlands</option>
+                                              <option value="Netherlands Antilles">Netherlands Antilles</option>
+                                              <option value="New Caledonia">New Caledonia</option>
+                                              <option value="New Zealand">New Zealand</option>
+                                              <option value="Nicaragua">Nicaragua</option>
+                                              <option value="Niger">Niger</option>
+                                              <option value="Nigeria">Nigeria</option>
+                                              <option value="Niue">Niue</option>
+                                              <option value="Norfolk Island">Norfolk Island</option>
+                                              <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                                              <option value="Norway">Norway</option>
+                                              <option value="Oman">Oman</option>
+                                              <option value="Pakistan">Pakistan</option>
+                                              <option value="Palau">Palau</option>
+                                              <option value="Panama">Panama</option>
+                                              <option value="Papua New Guinea">Papua New Guinea</option>
+                                              <option value="Paraguay">Paraguay</option>
+                                              <option value="Peru">Peru</option>
+                                              <option value="Philippines">Philippines</option>
+                                              <option value="Pitcairn">Pitcairn</option>
+                                              <option value="Poland">Poland</option>
+                                              <option value="Portugal">Portugal</option>
+                                              <option value="Puerto Rico">Puerto Rico</option>
+                                              <option value="Qatar">Qatar</option>
+                                              <option value="Reunion">Reunion</option>
+                                              <option value="Romania">Romania</option>
+                                              <option value="Russia">Russian Federation</option>
+                                              <option value="Rwanda">Rwanda</option>
+                                              <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option> 
+                                              <option value="Saint LUCIA">Saint LUCIA</option>
+                                              <option value="Saint Vincent">Saint Vincent and the Grenadines</option>
+                                              <option value="Samoa">Samoa</option>
+                                              <option value="San Marino">San Marino</option>
+                                              <option value="Sao Tome and Principe">Sao Tome and Principe</option> 
+                                              <option value="Saudi Arabia">Saudi Arabia</option>
+                                              <option value="Senegal">Senegal</option>
+                                              <option value="Seychelles">Seychelles</option>
+                                              <option value="Sierra">Sierra Leone</option>
+                                              <option value="Singapore">Singapore</option>
+                                              <option value="Slovakia">Slovakia (Slovak Republic)</option>
+                                              <option value="Slovenia">Slovenia</option>
+                                              <option value="Solomon Islands">Solomon Islands</option>
+                                              <option value="Somalia">Somalia</option>
+                                              <option value="South Africa">South Africa</option>
+                                              <option value="South Georgia">South Georgia and the South Sandwich Islands</option>
+                                              <option value="Span">Spain</option>
+                                              <option value="SriLanka">Sri Lanka</option>
+                                              <option value="St. Helena">St. Helena</option>
+                                              <option value="St. Pierre and Miguelon">St. Pierre and Miquelon</option>
+                                              <option value="Sudan">Sudan</option>
+                                              <option value="Suriname">Suriname</option>
+                                              <option value="Svalbard">Svalbard and Jan Mayen Islands</option>
+                                              <option value="Swaziland">Swaziland</option>
+                                              <option value="Sweden">Sweden</option>
+                                              <option value="Switzerland">Switzerland</option>
+                                              <option value="Syria">Syrian Arab Republic</option>
+                                              <option value="Taiwan">Taiwan, Province of China</option>
+                                              <option value="Tajikistan">Tajikistan</option>
+                                              <option value="Tanzania">Tanzania, United Republic of</option>
+                                              <option value="Thailand">Thailand</option>
+                                              <option value="Togo">Togo</option>
+                                              <option value="Tokelau">Tokelau</option>
+                                              <option value="Tonga">Tonga</option>
+                                              <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                                              <option value="Tunisia">Tunisia</option>
+                                              <option value="Turkey">Turkey</option>
+                                              <option value="Turkmenistan">Turkmenistan</option>
+                                              <option value="Turks and Caicos">Turks and Caicos Islands</option>
+                                              <option value="Tuvalu">Tuvalu</option>
+                                              <option value="Uganda">Uganda</option>
+                                              <option value="Ukraine">Ukraine</option>
+                                              <option value="United Arab Emirates">United Arab Emirates</option>
+                                              <option value="United Kingdom">United Kingdom</option>
+                                              <option value="United States">United States</option>
+                                              <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                                              <option value="Uruguay">Uruguay</option>
+                                              <option value="Uzbekistan">Uzbekistan</option>
+                                              <option value="Vanuatu">Vanuatu</option>
+                                              <option value="Venezuela">Venezuela</option>
+                                              <option value="Vietnam">Viet Nam</option>
+                                              <option value="Virgin Islands (British)">Virgin Islands (British)</option>
+                                              <option value="Virgin Islands (U.S)">Virgin Islands (U.S.)</option>
+                                              <option value="Wallis and Futana Islands">Wallis and Futuna Islands</option>
+                                              <option value="Western Sahara">Western Sahara</option>
+                                              <option value="Yemen">Yemen</option>
+                                              <option value="Yugoslavia">Yugoslavia</option>
+                                              <option value="Zambia">Zambia</option>
+                                              <option value="Zimbabwe">Zimbabwe</option>
+                                          </select>
+                                       </div>
+                                    </div>
+                                    <div class="direct-bank-deposit">
+                                       <div class="form-group">
+                                          <h3 class="fs-title">ACH direct deposit</h3>
+                                          <input type="text" name="bank_name"  [(ngModel)]="model.bank_name" id="bank_name" placeholder="Bank name" required>
+                                       </div>
+                                       <div class="form-group">
+                                          <input type="text" name="routing_number"  [(ngModel)]="model.routing_number" id="routing_number" placeholder="Routing number" required>
+                                       </div>
+                                       <div class="form-group">
+                                          <input type="text" name="account_number"  [(ngModel)]="model.account_number" id="account_number" placeholder="Account number" required>
+                                       </div>
+                                    </div>
+                                    <div class="form-group">
+                                       <input type="text" name="tax_id" [(ngModel)]="model.tax_id" placeholder="Business tax ID or Social Security number" required>
+                                    </div>
+                                    <div class="form-group">
+                                    	<div class="terms_div">
+                                    		<div class="termcondition">
+                                             <h4 align="center">Stream Vertigo Model/Studio Agreement</h4>
+                                             <p>Please carefully review this Model/Studio Agreement as this electronic document is a legally binding and enforceable contract and agreement between You (referred to herein as "Model/ Studio " or "you") and Stream Vertigo Inc. (also referred to herein as “StreamVertigo”). By providing your electronic signature below you are agreeing to be bound by and acknowledge your complete acceptance of all the Terms and conditions of this Agreement.</p>
+                                             <p class="tctitle">1.	No Prostitution or Sex Trafficking</p>
+                                             <p class="tcindent">a.	StreamVertigo strictly forbids You from using Our service or any of our websites in ANY WAY whatsoever to engage in, promote, assist, or facilitate any act of prostitution, sex trafficking of minors, or sex trafficking by force, deception, or coercion.</p>
+                                             <p class="tctitle">2.	Web Interface</p>
+                                             <p class="tcindent">a.	Subject to the terms and conditions of this agreement, StreamVertigo agrees to provide Model/ Studio access to and use of a trademarked web interface to be utilized on the StreamVertigo computer systems (“systems”). Model/Studio understand and agrees this web interface is and will remain the exclusive property of StreamVertigo Inc. And that under no circumstances will the Model/ Studio share, duplicate, or back engineer the StreamVertigo web interface in any way, shape, system or procedure.</p>
+                                             <p class="tctitle">3.	Payments</p>
+                                             <p class="tcindent">a.	StreamVertigo usually remits Model/Studio Payments twice a month: once on the 16th the month (for the first two weeks) and once on the 1st of the month (for the last two weeks of the previous month). StreamVertigo is not responsible for any delays in payments for up to 60 days as well as any case of a delay due to factors not connected to the Company. StreamVertigo offers various forms of payment including direct deposit or by check.</p>
+                                             <p class="tcindent">b.	Checks: Checks will be sent by regular mail (available to US residents only). You must provide a valid name and current address (City, Country, Zip code) and not a P.O. Box address. Your minimum check must be at least $100.</p>
+                                             <p class="tcindent">c.	Please note that StreamVertigo’s policy is that StreamVertigo is not held responsible for theft or loss of checks sent out to Models/ Studios. In no way shall StreamVertigo be responsible for replacement of the check or payment of the funds by an alternative method. Nonetheless, if you have not received your check for at least 30 days and it has not been cashed, StreamVertigo is willing to stop the check and reissue the payment via the Model’s/ Studio’s preferred method, with a cancellation fee of $25.</p>
+                                             <p class="tcindent">d.	Model’s/ Studio’s Service Payments are inclusive to any subsidiary taxes chargeable in accordance with applicable law. This includes service, goods, and value added taxes.</p>
+                                             <p class="tctitle">4.	Your Own Separate Business</p>
+                                             <p class="tcindent">a.	At all times while using the StreamVertigo web interface, You shall have your own business license, pay your own taxes, and take all other necessary and required actions to operate as your own separate and distinct business. Model/ Studio represents and warrants that Model/ Studio is responsible for obtaining all registrations, certification, and licenses to meet all requirements related to Model’s/ Studio’s payment of taxes under the related laws of any country, state, or local government. In addition, Model/ Studio is responsible for sustaining appropriate workers compensation coverage or insurance for you and any of your employees.</p>
+                                             <p class="tcindent">b.	In no way shall a Model/ Studio be considered or treated as an employee of StreamVertigo for any reason. Nothing in this Agreement shall intend to be viewed as or interpreted by the parties as the establishment of an employee and employer relationship, principal and studio, partners, or as any other business associations, other than as parties to this Agreement. We will not pay or make any payments on behalf of or for the benefit of the Model/ Studio including but not limited to: Social Security, Medicare, FICA, VAT taxes, federal taxes, country taxes, state taxes, local taxes, workers compensation, unemployment premiums or insurance. Model/ Studio shall have no claim against StreamVertigo for any wages, vacation pay, sick leave, Social Security, workers compensation, unemployment benefits, or any other benefits of any kind. Additionally, Model/ Studio will not be eligible for any retirement benefits, 401(k) benefits, profit sharing benefits, bonuses, or any other types of benefits to be paid or owed by StreamVertigo.</p>
+                                             <p class="tctitle">5.	No Right to Control</p>
+                                             <p class="tcindent">a.	Model/ Studio agrees to the term and conditions stated herein for the use of the web interface, Model/ Studio is free to exercise the Model’s/ Studio’s own judgment and decisions when using the StreamVertigo web interface or alternate web interfaces the Model/ Studio may use to generate income.  The parties agree StreamVertigo does not have any control over or the right to control the means in which a Model/ Studio exercises their use the StreamVertigo web interface as well as the manners or details the Model/ Studio may use when giving performance on other web interfaces.</p>
+                                             <p class="tctitle">6.	Age Verification</p>
+                                             <p class="tcindent">a.	Model/ Studio represent and warrants that Model/ Studio is of “Legal Age,” meaning at least 18 years old and the age of majority and legal consent in the region in which you live and that any government issued identification documents (“I.D.”) provided to StreamVertigo.com and its affiliates is valid and accurately reflects and represent that the Model/Studio is of “Legal Age.”</p>
+                                             <p class="tctitle">7.	Term</p>
+                                             <p class="tcindent">a.	This Agreement shall inaugurate once Model’s/ Studio’s proper submission of this signed electronic document and all required information and documentation and StreamVertigo’s review and approval of Model/ Studio have been submitted and verified. This Agreement shall remain valid until terminated by one the parties. The Model/ Studio will have the right to terminate this Agreement so long as a written notice is provided to StreamVertigo. StreamVertigo may terminate this Agreement and may remove a Model’s/ Studio’s account at its complete discretion for any reason whatsoever, including but not limited to: Model’s/ Studio’s infringement with any terms or conditions of this Agreement, our Terms of Use, or Privacy Policy; Model/ Studio account is suspected of fraud; Model/ Studio engages in theft, breach of non-disclosure, or any other act of negligence.</p>
+                                             <p class="tctitle">8.	No Publicity of Other Sites</p>
+                                             <p class="tcindent">a.	Publicity of any non- StreamVertigo related website associated with StreamVertigo Models/ Studios and affiliate site members is prohibited. This includes but is not limited to by chat, by email, or any other related factor. Violation of this condition will result in termination of this Agreement and permanent termination of your account. Furthermore, StreamVertigo reserves the right to withhold payments to you upon infringement of the terms contained herein this Agreement.</p>
+                                             <p class="tctitle">9.	Non-Disclosure</p>
+                                             <p class="tcindent">a.	All information and content provided through the Services, including but not limited to, the text, data, software, manuscripts, graphics, photographs, sounds, videos, interactive features, blogs, posts, feedback, messages, and other materials (collectively, “Content”) and trademarks, service marks, and logos contained therein are owned by Us or licensed to us is subject to copyright and other intellectual property rights under United States and foreign laws. All content is provided exclusively for Model/ Studio information and personal, non-commercial use. Model/ Studio shall agree to not engage in the use of copying, editing, publishing, transmitting, or uploading this content in any way. In addition, Model/ Studio also agree to not to interfere with any security related features of the Services, Content, or features that confine the use of or copying of any Content. Any content provided by Model/Studio is hereby licensed by Model/ Studio to the Company, and you shall have no claims, demands or suits in this respect.</p>
+                                             <p class="tctitle">10.	Indemnification</p>
+                                             <p class="tcindent">a.	Model/ Studio shall insure and hold the Company, managers, owners, shareholders, directors, employees, related companies and other representatives harmless from any damage, liability, claim, demand, or expense. This includes but is not limited to, judicious attorney fees, made by any third-party by reason of or arising from: Model/ Studio use of and access to the Services or use of Model/ Studio account by any other person; Model/ Studio violation of any term of these Terms and Conditions; Model/ Studio  violation of any third-party right including any copyright, trademark, patent, other intellectual property rights, privacy rights, or any other right; Any action by a Model/ Studio which is deemed careless or wrongful.</p>
+                                             <p class="tctitle">1.	Limitation of Liability</p>
+                                             <p class="tcindent">a.	YOU, MODEL/ STUDIO, AGREE YOUR USE OF OUR SERVICES SHALL BE AT YOUR SOLE RISK. THE SERVICES ARE PROVIDED ON AN “AS-IS” AND “AS AVAILABLE” BASIS, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED TO THE ABSOLUTE POSSIBLE PERMITTED BY LAW. STREAMVERTIGO AND OUR EMPLOYEES, AFFILIATES, RELATED COMPANIES AND OTHER REPRESENTATIVES, RELINQUISH ANY AND ALL WARRANTIES, INCLUDING, BUT NOT LIMITED TO: IMPLIED WARRANTIES OF MERCHANTABILITY, TITLE, FITNESS FOR A PARTICULAR PURPOSE, SECURITY, ACCURACY, RELAIBILITY, COMPLETENESS, USEFULNESS, OR NON-INFRINGEMENT OR INTELLECTUAL PROPERTY, AND OTHERS. ADDITIONALLY, STREAMVERTIGO WILL IN NO WAY BE LIABLE TO MODEL/ STUDIO FOR ANY LOST PROFITS, LOSS OF BUSINESS, LOSS OF USE, OR ANY OTHER CONSEQUENTIAL, SPECIAL, PUNITIVE AND SIMILAR DAMAGES ARISING OUT OF OR RELATED TO THIS AGREEMENT</p>
+                                             <p class="tcindent">IN NO EVENT WILL STREAMVERTIGO OR AFFILIATES, SUPPLIERS, OR THE COMPANY’S AFFILIATES /SUPPLIERS’, DIRECTORS, EMPLOYEES, SHAREHOLDERS, REPRESENTATIVES, LICENSORS, OR SUCCESSORS, BE LIABLE TO A MODEL/ STUDIO FOR ANY INDIRECT, CONSEQUENTIAL, INCIDENTAL, SPECIAL, PUNITIVE, EXEMPLARY DAMAGES WHATSOEVER WHETHER BASED ON WARRANTY, CONTRACT, TORT, OR ANY OTHER LEGAL THEORY AND WHETHER OR NOT STREAMVERTIGO IS ADVISED OF THE POSSIBILITY OF SUCH INDEMNITIES OR SUCH INDEMNITIES ARE FORESEEABLE.</p>
+                                             <p class="tcindent">MODEL/ STUDIO AND STREAMVERTIGO AGREE THAT ANY REASON OF ACTION ARISING OUT OF OR RELATED TO THE SERVICE IN ANY WAY MUST BE COMMENCED WITHIN ONE (1) YEAR AFTER THE CAUSE OF ACTION ARISES. OTHERWISE, SUCH CAUSE OF ACTION IS PERMANENTLY LOCKED. BOTH PARTIES EXPRESSLY AGREE TO WAIVE THEIR RIGHTS TO ANY LONGER STATUTE OF LIMITATIONS.</p>
+                                             <p class="tctitle">11.	Changes to terms and conditions of this Agreement</p>
+                                             <p class="tcindent">a.	THESE TERMS MAY BE ALTERED OR AMENDED AT THE SOLE DISCRETION OF STREAMVERTIGO WITH OR WITHOUT NOTICE, AT ANY TIME. In addition, StreamVertigo reserve the right to cease providing all or any portion of the Services at and time with or without notice. Model/ Studio will be notified of any revisions or amendments to this agreement via email, writing, or posting on this website and give you the opportunity to accept the changes.</p>
+                                             <p class="tctitle">12.	Waiver</p>
+                                             <p class="tcindent">a.	Failure to agree to any part of these Terms shall not institute a waiver of any Term hereof. No waiver of a breach of any agreement to these terms shall constitute a waiver of any prior, coexisting or subsequent breach of the same or any other agreement hereof. Unless granted in writing by an authorized representative or director of StreamVertigo, shall no Model/ Studio be entitled to waive any term of this Agreement.</p>
+                                             <p class="tctitle">13.	Severability</p>
+                                             <p class="tcindent">a.	If any provision or part of this Agreement shall be deemed unenforceable or invalid, shall be ineffective to the extent of such prohibition or unenforceability, keeping in mind the intents and purposes of this Agreement. Each other term and provision of this agreement shall remain valid and be binding upon the parties, to the fullest extent permitted by law.</p>
+                                             <p class="tctitle">14.	Headings and Counterparts</p>
+                                             <p class="tcindent">a.	The headings used herein are for convenience only and shall not be deemed to define, limit, or interpret the contents of any terms of this Agreement. Whether distributed via email, fax, or written, each copy of this Agreement will be deemed as an original and constitute as one of the same.</p>
+                                             <p class="tctitle">15.	Informed consent</p>
+                                             <p class="tcindent">a.	Model/Studio agrees and acknowledges that Model/Studio has read, understands, and agrees to the terms and conditions of this Agreement, and that Model/Studio has had an opportunity to consult with legal counsel or advisors necessary in connection with this Agreement. Based on this, Model/Studio willingly enters into this Agreement, without any improper incentive, knowing that this Agreement is binding upon Model’s/Studio’s proper submission of this signed Agreement and all required information, documentation, and StreamVertigo’s review and approval of Model’s/Studio’s application, without any counter-signature by StreamVertigo of this or Agreement.</p>
+                                             <p class="tctitle">Signature</p>
+                                             <p>By clicking “accept” below, you are acknowledging that you have read and agree to all terms and conditions of this Agreement.</p>
+                                             <p>Updated: March 17, 2019</p>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="form-group">
+                                          <label>Agreement:</label>
+                                          <div class="checkbox">
+                                       <label><input type="checkbox" [(ngModel)]="model.agree_signup" name="agree_signup" required> I agree to these conditions and wish to continue</label>
+                                 </div>
+                                       </div>
+                                       <div class="form-group">
+                                          <div class="terms_div">
+                                             <div class="membertandc">
+                                             <p class="mtctoptitle">PERFORMER CODE OF CONDUCT</p>
+                                             <p class="mtcpara">The following regulations are in place to secure the authenticity and value of our site and its performers. Abuse of any of these rules can result in suspension or immediate termination of your account with Streamvertigo.</p>
+                                             <p class="mtctitle">1.	LIVE STREAM CODE OF CONDUCT</p>
+                                             <p class="mtcindentleft">»  Performer agrees that they will abide by all laws and regulations during use of StreamVeritgo’s Services. Performer shall not suggest or portray any actions involving sex with any person under the age of 18 years of age at any time. Performer also agrees not to engage in or portray any representation of rape, incest, bestiality, fisting, necrophilia, urination, or defecation. Animals, children, or any persons not registered under your account should not appear on camera at any time.</p>
+                                             <p class="mtctitle">2. BELOW THE WAIST NUDITY IS PROHIBITED</p>
+                                             <p class="mtcindentleft">»  In order to prevent a minor’s exposure to adult material we demand that there be no below the waist nudity in free chat. Being topless is acceptable but full nudity is only allowed in age verified areas such as “Private” or also referred to as “Paid Chat.” If a performer is found displaying full nudity in free chat, their account will result in a temporary suspension on the first offense and termination thereafter.</p>
+                                             <p class="mtctitle">3. ONLY REGISTERED AND APPROVED PERFORMERS CAN PERFORM ON THEIR ACCOUNT</p>
+                                             <p class="mtcindentleft">»  You agree that you are the induvial registered to the account and displayed in the profile. Accounts may NOT be shared or borrowed. Any accounts found hosting any person other than the performer registered to the site will be terminated immediately and funds will be withheld.</p>
+                                             <p class="mtctitle">4. ALL DOCUMENTS MUST BE SUBMITTED FOR ALL PERFORMERS</p>
+                                             <p class="mtcindentleft">»  By broadcasting you are verifying that you are 18 years of age or older and have completed submitting all requested documentation from site in order to use services on the site. Only persons who have submitted all documentation and have been approved through the site to perform may use services provided. Accounts with uncomplete proper documentation will be removed.</p>
+                                             <p class="mtctitle">5. HARASSMENT</p>
+                                             <p class="mtcindentleft">»  StreamVertigo will not tolerate member to model or model to model harassment. If you are found to be disturbing, misleading and/or insulting other models, your account many be suspended or terminated. We trust all models will behave in a mature matter and maintain peace with all other performers.</p>
+                                             <p class="mtctitle">6. FRAUDULENT ACTIVITY</p>
+                                             <p class="mtcindentleft">»  Fraudulent activity by models or members will not be taken lightly. Any accounts suspected of fraudulent activity will be terminated and funds will be withheld. Fraudulent activity is characterized by any complaints, continuous chargebacks, or any activity that is deemed wrongful by the StreamVertigo team.</p>
+                                             <p class="mtctitle">7. INACTIVE ACCOUNTS</p>
+                                             <p class="mtcindentleft">»  Accounts no longer in use must be removed. Any inactive accounts will be archived after a certain period of time and will not be recoverable. You should note that StreamVirtigo reserves the right to terminate any account at any time for any reason, this includes performance level and/or quality.</p>
+                                             <p class="mtctitle">8. OFF-SITE PROMOTION</p>
+                                             <p class="mtcindentleft">»  Any promotion of other sites by chat, word of mouth, text, or any other matter in not allowed. If found promoting other sites directly to Streamvertigo and its affiliated site members, your account will be terminated. This includes personal websites.</p>
+                                             <p class="mtctitle">9. DO NOT RELEASE PERSONAL INFORMATION</p>
+                                             <p class="mtcindentleft">»  For your own safety do not release any personal information to any Members or Guests of the site. Personal information includes exchange of emails, addresses, online chat IDs and personal social media sites such as Facebook, Twitter, Instagram, ect. Accounts soliciting escort or prostitution services will be reported and terminated.</p>
+                                             <p class="mtctitle">STREAM VIRTIGO RESERVES THE RIGHT TO ADD OR AMEND ANY OF THE RULES AND REGULATIONS AS DEEMED NECESSARY.</p>
+                                             <p class="mtctitleright">Last Updated: March 16, 2019</p>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="form-group">
+                                          <label>Performer code of Conduct:</label>
+                                          <div class="checkbox">
+                                       <label><input type="checkbox" [(ngModel)]="model.performer_signup" name="performer_signup" required> Check here to indicate that you have read and agree to the Performer Code of Conduct.</label>
+                                 </div>
+                                       </div>
+                                    </div> <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> 
+                                    <input type="submit" id="form_submit" class="action-button" value="Submit" />
+                                 </fieldset>
+               </form>
+		</div>
+	</div>
 </div>

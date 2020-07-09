@@ -13,8 +13,6 @@ import { HomeComponent } from './common/home/home.component';
 import { NotificationComponent } from './common/notifications/notification.component';
 
 import { ErrorComponent } from './common/error/error.component';
-
-import { UserSignupComponent } from './common/auth/register/user-signup.component';
 // To check Login user or not
 import { AuthGuard } from './common/auth/auth.guard';
 
@@ -53,11 +51,6 @@ const appRoutes:Routes = [
           expectedRole: 'onlyGuest'
         },
         children:[
-            { 
-                path: 'signup', 
-                component:UserSignupComponent,
-                data : {title : "Signup"}
-            },
             { 
                 path: 'register', 
                 component:RegisterComponent,

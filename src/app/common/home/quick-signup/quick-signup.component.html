@@ -1,9 +1,0 @@
-<div class="banner-text">
-    <form class="form-inline justify-content-center" #userRegistrationForm="ngForm" (ngSubmit)="userRegistration(userRegistrationForm)">
-        <input type="text" class="form-control ml-1 mr-1" id="user_join"  [(ngModel)]="user.name" required name="name" minlength="2" maxlength="50" autocomplete="off" placeholder="Username">
-        <input type="password" class="form-control ml-1 mr-1" id="password_join" [(ngModel)]="user.password" name="password" required autocomplete="off" placeholder="Password">
-        <input type="email" class="form-control ml-1 mr-1"  [(ngModel)]="user.email" name="email" required autocomplete="off" placeholder="Email">
-        <input type="submit" class="btn btn-primary ml-1 mr-1" name="login_join" id="login_join" value="Join for Free" style="background: #ffc107;">
-    </form>
-    <p class="mt-2 text-light pl-5 pr-5" style="font-size: 14px">By registering on mycamcandy, I certify i am at least 18 years old and have read and agree to its <a href="#">Terms of Use</a> and  <a href="#">Privacy Policy</a>, and consent to the use of  <a href="#">Cookies</a>.</p>
-</div>

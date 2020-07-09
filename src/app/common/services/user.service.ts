@@ -51,10 +51,9 @@ export class UserService {
 
 	// To login using authenticated details
 
-	userRegistration(userModel) {
+	modelRegistration(userModel) {
 
 		let formData = new FormData();
-
 		// append your data
 		for ( var key in userModel ) {
 		    formData.append(key, userModel[key]);
@@ -65,7 +64,7 @@ export class UserService {
 		formData.append('device_token', this.device_token);
 		formData.append('login_type', this.login_type);
 
-		return this.http.post(this.apiUrl+'register', formData);
+		return this.http.post(this.apiUrl+'model_register', formData);
 
 	}
 
@@ -95,6 +94,13 @@ export class UserService {
 		
 
 		return this.http.post(this.apiUrl+'forgotpassword', formData);
+	}
+
+	checkModelExist(name) {
+		let formData = new FormData();
+		formData.append('name', name);
+		
+		return this.http.post(this.apiUrl+'check_model_exist', formData);
 	}
 
 	// Check social login details
