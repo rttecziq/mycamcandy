@@ -70,6 +70,17 @@ import { MyFanClubComponent } from './account/candy-club/my-fan-club/my-fan-club
 import { MessageComponent } from './account/candy-club/message/message.component';
 import { EarningHistoryComponent } from './account/candy-club/earning-history/earning-history.component';
 import { MyGiftComponent } from './account/candy-club/my-gift/my-gift.component';
+import { AlbumComponent } from './account/candy-club/album/album.component';
+import { CollectionComponent } from './account/candy-club/collection/collection.component';
+import { FreeShowPhotoComponent } from './account/candy-club/free-show-photo/free-show-photo.component';
+import { NudeShowPhotoComponent } from './account/candy-club/nude-show-photo/nude-show-photo.component';
+import { ModelNewsComponent } from './account/candy-club/model-news/model-news.component';
+import { ModelScheduleComponent } from './account/candy-club/model-schedule/model-schedule.component';
+import { RecordedVideoComponent } from './account/candy-club/recorded-video/recorded-video.component';
+import { SweetTreatComponent } from './account/candy-club/sweet-treat/sweet-treat.component';
+import { TopModelComponent } from './account/candy-club/top-model/top-model.component';
+import { UploadPhotoComponent } from './account/candy-club/upload-photo/upload-photo.component';
+import { UploadVideosComponent } from './account/candy-club/upload-videos/upload-videos.component';
 
 const entryRoutes: Routes = [
     { path: 'viewer-video', 
@@ -201,6 +212,72 @@ const entryRoutes: Routes = [
                 component: MyGiftComponent,
                 canActivate: [AuthGuard],
                 data: {title : "My Gifts", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/:username/album",
+                component: AlbumComponent,
+                canActivate: [AuthGuard],
+                data: {title : "My Album", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/:username/collection",
+                component: CollectionComponent,
+                canActivate: [AuthGuard],
+                data: {title : "My Collections", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/:username/free-show-photo",
+                component: FreeShowPhotoComponent,
+                canActivate: [AuthGuard],
+                data: {title : "My Free Show Photo", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/:username/nude-show-photo",
+                component: NudeShowPhotoComponent,
+                canActivate: [AuthGuard],
+                data: {title : "My Nude Show Photo", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/:username/model-news",
+                component: ModelNewsComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Model News", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/:username/model-schedule",
+                component: ModelScheduleComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Model Schedule", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/:username/recorded-video",
+                component: RecordedVideoComponent,
+                canActivate: [AuthGuard],
+                data: {title : "My Recorded Video", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/:username/sweet-treat",
+                component: SweetTreatComponent,
+                canActivate: [AuthGuard],
+                data: {title : "My Sweet Treat", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/:username/top-model",
+                component: TopModelComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Top Model", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/:username/upload-photo",
+                component: UploadPhotoComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Upload Photo", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/:username/upload-video",
+                component: UploadVideosComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Upload Videos", expectedRole: 'onlyUser'},
             },
             {
                 path: "candy-club/vip-membership",

@@ -1,0 +1,66 @@
+/*********Album Start**********/
+.bold{font-weight: bold}
+.mt-5{margin-top: 3rem;}
+.p-3{padding: 2rem;}
+.mb-5{margin-bottom: 3rem;}
+.mt-3{margin-top: 2.5rem;}
+.mb-3{margin-bottom: 2.5rem;}
+.text-center{text-align: center;}
+.model-album{padding-left: 20px;padding-right: 20px;}
+.model-album .heading {
+  padding: 0px 0px 15px 15px;
+    margin-bottom: 0;
+}
+.text-shadow{
+  text-shadow: 0 0 5px #000, 0 0 3px rgba(0,0,0,0.6);
+  line-height: 12px;
+}
+.model-album .img-container{
+  position: relative;
+  text-align: center;
+  color: #fff;
+}
+.model-album .bottom-left {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 5px;
+    width: 50%;
+}
+
+.model-album .top-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px;
+    width: 50%;
+}
+
+.model-album .top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    width: 50%;
+}
+
+.model-album .bottom-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 5px;
+    width: 50%;
+}
+
+.model-album .centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 5px;
+  width: 100%;
+  background: #00000057;
+}
+.model-album .img-container img{width: 100%}
+.model-album .img-container .fa{font-size: 19px}
+/*********Album End**********/
