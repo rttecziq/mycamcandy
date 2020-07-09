@@ -1,0 +1,78 @@
+/*********************Signup Start*************************/
+
+.signup {
+    padding-left: 8%;
+    padding-right: 8%;
+    background: #e6ebed;
+}
+.user-profile1 {
+    width: 200px;
+    height: 200px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #fff;
+  }
+.font-weight-bold {
+    font-weight: bold;
+}
+.mt-2{margin-top: .5rem}
+.signup-fa .fa{font-size: 3em;}
+.signup-fa .fa-money{color: #adcd95;}
+.signup-fa .fa-users{color: #acd0e5;}
+.signup-fa .fa-trophy{color: #edb98b;}
+.signup-fa p {
+    margin: 0 0 30px;
+    font-size: 16px;
+    line-height: 25px;
+    word-spacing: 2px;
+}
+.terms_div {
+    height: 120px;
+    overflow-y: scroll;
+    background: #f1f1f1;
+}
+.termcondition{
+	color: #666666;
+	padding: 10px;
+}
+.center{text-align: center;}
+.tctitle {
+    font-size: 17px;
+    font-weight: 600;
+}
+.tcindent {
+    padding-left: 2%;
+}
+.membertandc {
+    padding: 10px;
+    text-align: justify;
+    color: #666666;
+}
+.mtctoptitle {
+    text-align: center;
+    font-weight: 600;
+}
+.mtcpara {
+    padding-left: 20px;
+}
+.mtctitle {
+    padding-left: 20px;
+}
+.mtctitleright {
+    float: right;
+}
+#msform {text-align: center;position: relative;margin-top: 20px}#msform fieldset .form-card {border: 0 none;border-radius: 0px;padding: 20px 40px 30px 40px;box-sizing: border-box;width: 100%;margin: 0;position: relative}#msform fieldset {border: 0;border-radius: 0.5rem;box-sizing: border-box;width: 100%;margin: 0;padding-bottom: 20px;position: relative}#msform fieldset:not(:first-of-type) {display: none}#msform fieldset .form-card {text-align: left;color: #9E9E9E}#msform input, #msform textarea {padding:4px;width: 100%;}#msform input:focus, #msform textarea:focus {outline-width: 0}#msform .action-button {width: auto;background: #84d19c;font-weight: bold;color: white;border: 0 none;border-radius: 5px;cursor: pointer;padding: 7px 15px;}#msform .action-button:hover,#msform .action-button:focus {box-shadow: 0 0 0 2px white, 0 0 0 3px #84d19c}#msform .action-button-previous {width: auto;background: #fff;font-weight: bold;color: #616161;border: 0 none;border-radius: 5px;cursor: pointer;padding: 7px 15px;margin: 10px 5px}#msform .action-button-previous:hover, #msform .action-button-previous:focus {box-shadow: 0 0 0 2px white, 0 0 0 3px #616161}select.list-dt {border: none;outline: 0;border-bottom: 1px solid #ccc;padding: 2px 5px 3px 5px;margin: 2px}select.list-dt:focus {border-bottom: 2px solid skyblue}.card {z-index: 0;border: none;border-radius: 0.5rem;position: relative}.fs-title {font-size: 25px;color: #2C3E50;margin-bottom: 10px;text-align: left}#progressbar {margin-bottom: 30px;overflow: hidden;color: lightgrey;padding-left: 0;}#progressbar .active {color: #000000}#progressbar li {list-style-type: none;font-size: 12px;width: 25%;float: left;position: relative}#progressbar #account:before {content: "1"}#progressbar #personal:before {content: "2"}#progressbar #payment:before {content: "3"}#progressbar #cust:before {content: "4"}#progressbar #confirm:before {content: "5"}#progressbar li:before {width: 50px;height: 50px;line-height: 45px;display: block;font-size: 18px;color: #ffffff;background: lightgray;border-radius: 50%;margin: 0 auto 10px auto;padding: 2px}#progressbar li:after {content: '';width: 100%;height: 2px;background: lightgray;position: absolute;left: 0;top: 25px;z-index: -1}#progressbar li.active:before, #progressbar li.active:after {background: skyblue}.radio-group {position: relative;margin-bottom: 25px}.radio {display: inline-block;width: 204;height: 104;border-radius: 0;background: lightblue;box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);box-sizing: border-box;cursor: pointer;margin: 8px 2px}.radio:hover {box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3)}.radio.selected {box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1)}.fit-image {width: 100%;object-fit: cover}#msform label{font-weight: 600;color: #464646}.form-check-inline {display: -ms-inline-flexbox;display: inline-flex;-ms-flex-align: center;align-items: center;padding-left: 0;margin-right: .75rem;}#msform .form-check-label{font-weight: normal!important;}#msform input[type=checkbox]{width: auto!important;}
+@media screen and (max-width: 767px){
+	#msform fieldset .form-card{
+		padding: 0!important;
+		margin:0!important;
+	}
+	.signup {
+    	padding-left: 15px!important;
+    	padding-right: 15px!important;
+}
+}
+  input.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
