@@ -2,95 +2,118 @@
   
   <!--Common user's profile tab -->
   <user-profile-tabs></user-profile-tabs>
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 mt-3 mb-3"></div>
+    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 mt-3 mb-3">
+      <div class="user-row">
+      <ul class="model_about">
+        <li><strong>Zodiac Signs</strong>&nbsp;&nbsp;
+          <span *ngFor="let zodiac_signs of general.zodiac_signs.profile_categories_views">
+            <span *ngIf="model_details.zodiac_signs == zodiac_signs.id">{{zodiac_signs.name}}</span>
+          </span>
+        </li>
+        <li><strong><i class="fa fa-calendar">&nbsp;&nbsp;</i>Birth Date</strong>&nbsp;&nbsp;<span *ngIf="model_details.dob != 0">{{ model_details.dob }}</span></li>
 
-  <div class="row mt-5 mb-5">
-    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
-      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-        <div class="row mt-5">
-        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-          <div class="user-activity">
-              <div class="panel panel-default mt-2">
-                <div class="panel-body p-2">
-                    <section class="post-heading">
-                      <div class="row">
-                          <div class="col-md-12 col-sm-12  col-xs-12">
-                            <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                  <img class="media-object photo-profile" [src]="user_profile_picture" width="40" height="40" alt="...">
-                                  </a>
-                                </div>
-                                <div class="media-body">                                  
-                                      <h5 class="media-heading" style="margin-bottom: 0;">&nbsp;&nbsp;<a href="#" class="anchor-username">Model</a></h5>
-                                  <a href="#" class="anchor-time">&nbsp;&nbsp;September 27 at 10:25am</a>
-                                </div>
-                            </div>
-                          </div>
-                      </div>
-                    </section>
-                    <section class="post-body mt-3">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras 
-                          turpis sem, dictum id bibendum eget, malesuada ut massa. Ut scel
-                          erisque nulla sed luctus dapibus. Nulla sit amet mi vitae purus sol
-                          licitudin venenatis. Praesent et sem urna. Integer vitae lectus nis
-                          l. Fusce sapien ante, tristique efficitur lorem et, laoreet ornare lib
-                          ero. Nam fringilla leo orci. Vivamus semper quam nunc, sed ornare magna dignissim sed. Etiam interdum justo quis risus
-                          efficitur dictum. Nunc ut pulvinar quam. N
-                          unc mollis, est a dapibus dignissim, eros elit tempor diam, eu tempus quam felis eu velit.
-                      </p>
-                    </section>
-                    <section class="post-body mt-3">
-                      <img [src]="user_profile_picture" class="img-responsive">
-                    </section>
-                    <section class="post-body mt-3">
-                      <!-- Videos section-->
-                    </section>
-                    <section class="post-footer">
-                      <hr>
-                      <div class="post-footer-option">
-                          <ul class="list-unstyled">
-                            <li><a href="#"><i class="fa fa-thumbs-up"></i> Like</a></li>
-                            <!--<li><a href="#"><i class="fa fa-thumbs-down"></i> Unlike</a></li>-->
-                            <li><a href="#"><i class="fa fa-comment ml-5"></i> Comment</a></li>
-                          </ul>
-                      </div>
-                      <div class="post-footer-comment-wrapper">
-                          <div class="comment-form">
-                          </div>
-                          <div class="comment">
-                            <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                  <img class="media-object photo-profile mt-2" [src]="user_profile_picture" width="40" height="40" alt="...">
-                                  </a>
-                                </div>
-                                &nbsp;&nbsp;
-                                <div class="media-body">
-                                      <form method="POST">
-                                        <textarea class="form-control" placeholder="Write a comment..." name="comment" id="comment"></textarea>
-                                      </form>
-                                </div>
-                            </div>
-                          </div>
-                      </div>
-                    </section>
-                </div>
-              </div>
-            </div>
-        </div>  
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-          <ul class="about-ul">
-            <li><strong>Gender </strong> <span *ngIf="user_details.gender"> {{ user_details.gender }}</span></li>
-            <li><strong>Orientation </strong> <span>Straight</span></li>
-          </ul>
-        </div>
-        </div>
+        <li><strong>Public Age</strong>&nbsp;&nbsp;
+          <span *ngFor="let public_age of general.public_age.profile_categories_views">
+            <span *ngIf="model_details.public_age == public_age.id">{{public_age.name}}</span>
+          </span>
+        </li>
+        <li><strong>Public Country</strong>&nbsp;&nbsp;
+          <span *ngFor="let public_country of general.public_country.profile_categories_views">
+            <span *ngIf="model_details.public_country == public_country.id">{{public_country.name}}</span>
+          </span>
+        </li>
+        <li><strong>Languages Spoken</strong>&nbsp;&nbsp;
+          <span *ngFor="let language_spoken of general.language_spoken.profile_categories_views">
+            <span *ngIf="model_details.language_spoken == language_spoken.id">{{language_spoken.name}}</span>
+          </span>
+        </li>
+        <li><strong>Gender</strong>&nbsp;&nbsp;
+          <span *ngFor="let gender of general.gender.profile_categories_views">
+            <span *ngIf="model_details.gender == gender.id">{{gender.name}}</span>
+          </span>
+        </li>
+        <li><strong>Shoe Size</strong>&nbsp;&nbsp;
+          <span *ngFor="let shoe_size of general.shoe_size.profile_categories_views">
+            <span *ngIf="model_details.shoe_size == shoe_size.id">{{shoe_size.name}}</span>
+          </span>
+        </li>
+        <li><strong>Body Type</strong>&nbsp;&nbsp;
+          <span *ngFor="let body_type of general.body_type.profile_categories_views">
+            <span *ngIf="model_details.body_type == body_type.id">{{body_type.name}}</span>
+          </span>
+        </li>
+        <li><strong>Ethinicity</strong>&nbsp;&nbsp;
+          <span *ngFor="let ethnicity of general.ethnicity.profile_categories_views">
+            <span *ngIf="model_details.ethnicity == ethnicity.id">{{ethnicity.name}}</span>
+          </span>
+        </li>
+        <li><strong>Height</strong>&nbsp;&nbsp;
+          <span *ngFor="let height of general.height.profile_categories_views">
+            <span *ngIf="model_details.height == height.id">{{height.name}}</span>
+          </span>
+        </li>
+        <li><strong>Weight</strong>&nbsp;&nbsp;
+          <span *ngFor="let weight of general.weight.profile_categories_views">
+            <span *ngIf="model_details.weight == weight.id">{{weight.name}}</span>
+          </span>
+        </li>
+        <li><strong>Weight</strong>&nbsp;&nbsp;
+          <span *ngFor="let breast_size_number of general.breast_size_number.profile_categories_views">
+            <span *ngIf="model_details.breast_size_number == breast_size_number.id">{{breast_size_number.name}}</span>
+          </span>
+        </li>
+        <li><strong>Breast Size (Letter)</strong>&nbsp;&nbsp;
+          <span *ngFor="let breast_size_letter of general.breast_size_letter.profile_categories_views">
+            <span *ngIf="model_details.breast_size_letter == breast_size_letter.id">{{breast_size_letter.name}}</span>
+          </span>
+        </li>
+        <li><strong>Breast Type</strong>&nbsp;&nbsp;
+          <span *ngFor="let breast_type of general.breast_type.profile_categories_views">
+            <span *ngIf="model_details.breast_type == breast_type.id">{{breast_type.name}}</span>
+          </span>
+        </li>
+        <li><strong>Hair Length</strong>&nbsp;&nbsp;
+          <span *ngFor="let hair_length of general.hair_length.profile_categories_views">
+            <span *ngIf="model_details.hair_length == hair_length.id">{{hair_length.name}}</span>
+          </span>
+        </li>
+        <li><strong>Hair Color</strong>&nbsp;&nbsp;
+          <span *ngFor="let hair_color of general.hair_color.profile_categories_views">
+            <span *ngIf="model_details.hair_color == hair_color.id">{{hair_color.name}}</span>
+          </span>
+        </li>
+        <li><strong>Public Hair</strong>&nbsp;&nbsp;
+          <span *ngFor="let public_hair of general.public_hair.profile_categories_views">
+            <span *ngIf="model_details.public_hair == public_hair.id">{{public_hair.name}}</span>
+          </span>
+        </li>
+        <li><strong>Eye</strong>&nbsp;&nbsp;
+          <span *ngFor="let eyes of general.eyes.profile_categories_views">
+            <span *ngIf="model_details.eyes == eyes.id">{{eyes.name}}</span>
+          </span>
+        </li>
+      </ul>
+      <ul class="model_about_2">
+        <li><strong>Orientation</strong>&nbsp;&nbsp;
+          <span *ngFor="let orientation of general.orientation.profile_categories_views">
+            <span *ngIf="model_details.orientation == orientation.id">{{orientation.name}}</span>
+          </span>
+        </li>
+        <li><strong><a href="#">Add to schedule</a></strong></li>
+        <li><strong>How would you describe your personality?</strong><br>          
+            <span *ngIf="model_details.describe_your_personality" [innerHtml]="model_details.describe_your_personality"></span>
+        </li>
+        <li><strong>fetishes</strong>&nbsp;&nbsp;<span *ngIf="model_details.fetishes">
+          <span *ngFor="let fetishes of general.fetishes.profile_categories_views">
+            <span *ngIf="model_details.fetishes == fetishes.id">{{fetishes.name}}</span>
+          </span>
+        </span></li>
+        <li><strong>Wish List</strong>&nbsp;&nbsp;<span *ngIf="model_details.wish_list" [innerHtml] ="model_details.wish_list"></span></li>
+        <!-- <li><strong>Category</strong>&nbsp;&nbsp;Celebrity, Hot Flirt, Transgirl, Amateur, Lesbian, Couple</li> -->
+      </ul>
+      </div>
     </div>
   </div>
-
-
-    <div class="mt-3 mb-3">
-      <h1 class="text-center text-info">MY MODEL PREFERENCES</h1>
-      <div class="clear"></div>
-    </div>
 </div>

@@ -47,6 +47,7 @@ export class RequestService {
 
 		// By Default added device type and login type in future use
 		formData.append('id', this.userId);
+		formData.append('model_id', this.userId);
 		formData.append('token', this.accessToken);
 
 		// append your data
@@ -80,6 +81,7 @@ export class RequestService {
 		this.accessToken = (localStorage.getItem('accessToken') != '' && localStorage.getItem('accessToken') != null && localStorage.getItem('accessToken') != undefined) ? localStorage.getItem('accessToken') : '';1
 
 		let params = {'id' : this.userId,
+						'model_id' : this.userId,
 						'token' : this.accessToken,
 						'login_by': this.login_by,
 						'device_type': this.device_type};

@@ -2,7 +2,10 @@ import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RequestService } from '../../../../common/services/request.service';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
-import { User } from '../../../../models/user';
+import { ModelProfile } from '../../../../models/model-profile';
+import { Preference } from '../../../../models/preference';
+import { DatePipe } from  '@angular/common';
+
 declare var $: any ;
 
 @Component({
@@ -14,46 +17,87 @@ export class AboutComponent implements AfterViewInit {
 
  
     errorMessages : string;
-
-    user_details : User;
-    
-    profile_picture : File;
-    
-    cover_picture : File;
-    
-    user_profile_picture : string;
-    
-    user_cover_picture : string;
-    
-    is_content_creator : boolean;
-    
-    
+    is_content_creator : boolean;   
     userId : string;
+    model_details : ModelProfile;
+    general : Preference;
+    datePipe : DatePipe;
     
-    constructor(private requestService : RequestService, private router : Router) {
+    constructor(private requestService : RequestService, private router : Router) {    
+        
+        this.model_details = {
+        
+            //about
+            describe_your_personality : "",
+            what_kind_chat_room : "",
+            turns_on_you_going : "",
+            what_annoys_bed_room : "",
+            who_dream_customer : "",
     
-        this.profile_picture = null;
+            //general
+            zodiac_signs : "",
+            height : "",
+            dob : 0,
+            weight : "",
+            public_age : "",
+            breast_size_number : "",
+            public_country : "",
+            breast_size_letter : "",
+            language_spoken : "",
+            breast_type : "",
+            gender : "",
+            hair_length : "",
+            hair_color : "",
+            shoe_size : "",
+            public_hair : "",
     
-        this.cover_picture = null;
-        this.user_details = {
+            // sexual preferences
+            orientation : "",
     
-            name : "",
-            email : "",
-            cover : "",
-            picture : "",
-            no_of_followers : "",
-            no_of_followings : "",
-            total_user_amount : "",
-            description : "",
-            login_by : "",
-            gallery_description : ""
+            // characteristics
+            ethnicity : "", 
+            eyes : "",
+    
+            //Fetishes & specialities
+            fetishes : [],
+            wish_list : "",
+    
+            // color scheme
+            profile_text_color : "#000",
+            profile_bg_color : "#fff",
+    
+            // category
+            //category : [],
+    
+            // social media
+            twitter : "",
+            instagram : "",
+            body_type : ""      
         }
     
-        this.user_profile_picture = "../../../../assets/img/pro-img.jpg";
-    
-        this.user_cover_picture = "../../../../assets/img/bg-image.jpg";
-    
-        this.is_content_creator = false;
+        this.general = {
+            zodiac_signs : [],
+            height : [],
+            birth_date : [],
+            weight : [],
+            public_age : [],
+            breast_size_number : [],
+            public_country : [],
+            breast_size_letter : [],
+            language_spoken : [],
+            breast_type : [],
+            gender : [],
+            hair_length : [],
+            hair_color : [],
+            shoe_size : [],
+            public_hair : [],
+            body_type : [],
+            orientation : [],
+            ethnicity : [],
+            eyes : [],
+            fetishes : []
+        }
+        this.is_content_creator = true;
     }
     
     ngAfterViewInit(){
@@ -68,66 +112,68 @@ export class AboutComponent implements AfterViewInit {
         $.getScript('../../../../assets/js/lightbox.min.js',function(){
         }); */
     
-        // Load Logged In User Profile
+        // Load Logged In Model Profile details
     
-        setTimeout(()=>{
-    
-            this.user_profile_fn("userDetails", "");
-    
+        setTimeout(()=>{    
+            this.model_profile_data_fn("model_profiles","");    
         }, 1000);
     
     }
-    
-    user_profile_fn(url, object) {
-    
-        this.requestService.getMethod(url, object)
-            .subscribe(
-                (data : any ) => {
-    
-                    if (data.success == true) {
-                        this.user_details = data;
-                        this.user_cover_picture = data.cover;
-                        this.user_profile_picture = data.picture;
-                        this.is_content_creator = data.is_content_creator;
-                    } else {
-    
-                        this.errorMessages = data.error_messages;
-    
-                        $.toast({
-                            heading: 'Error',
-                            text: this.errorMessages,
-                        // icon: 'error',
-                            position: 'top-right',
-                            stack: false,
-                            textAlign: 'left',
-                            loader : false,
-                            showHideTransition: 'slide'
-                        });
-                        
-                    }
-    
-                },
-    
-                (err : HttpErrorResponse) => {
-    
-                    this.errorMessages = 'Oops! Something Went Wrong';
-    
-                    $.toast({
-                        heading: 'Error',
-                        text: this.errorMessages,
-                    // icon: 'error',
-                        position: 'top-right',
-                        stack: false,
-                        textAlign: 'left',
-                        loader : false,
-                        showHideTransition: 'slide'
-                    });
-    
-                }
-    
-            );
-    
+
+    toast_message(heading, message) {
+        $.toast({
+            heading: heading,
+            text: message,
+            position: 'top-right',
+            stack: false,
+            textAlign: 'left',
+            loader : false,
+            showHideTransition: 'slide'
+        });
     }
+
+    model_profile_data_fn(url, object) {    
+        this.requestService.getMethod(url, object)
+        .subscribe(
+            (data : any ) => {
+                if (data.success == true) {                 
+                    this.general.zodiac_signs        = data.data[1];
+                    this.general.height              = data.data[0];
+                    this.general.weight              = data.data[3];
+                    this.general.public_age          = data.data[4];
+                    this.general.breast_size_number  = data.data[5];
+                    this.general.public_country      = data.data[6];
+                    this.general.breast_size_letter  = data.data[7];
+                    this.general.language_spoken     = data.data[8];
+                    this.general.breast_type         = data.data[9];
+                    this.general.hair_length         = data.data[11];
+                    this.general.shoe_size           = data.data[12];
+                    this.general.hair_color          = data.data[13];
+                    this.general.public_hair         = data.data[15];
+                    this.general.body_type           = data.data[14];
+                    this.general.gender              = data.data[10];
+        
+                    this.general.orientation         = data.data[16];
+                    this.general.ethnicity           = data.data[17];
+                    this.general.eyes                = data.data[18];
+                    this.general.fetishes            = data.data[19];
+                    
+                    if(data.model_details !== undefined && data.model_details !== null && data.model_details !== "") {
+                        this.model_details = data.model_details;
+                       // this.model_details.dob =  new Date().getFullYear() - this.datePipe.transform(this.model_details.dob, "yyyy");
+                    }
+                } else {
+                    this.errorMessages = data.error_messages;
+                    this.toast_message("Error", this.errorMessages);             
+                }
+            },
+      
+            (err : HttpErrorResponse) => {
+                this.errorMessages = 'Oops! Something Went Wrong';
+                this.toast_message("Error", this.errorMessages);
+            }
+        );
+      }
   
 
 }

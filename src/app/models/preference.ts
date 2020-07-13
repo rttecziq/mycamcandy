@@ -1,5 +1,5 @@
 export interface Preference {
-    zodiac_sign :  Array<string>,
+    zodiac_signs :  Array<string>,
     height : Array<string>,
     birth_date : Array<string>,
     weight : Array<string>,
@@ -14,5 +14,10 @@ export interface Preference {
     hair_color : Array<string>,
     shoe_size : Array<string>,
     public_hair : Array<string>,
-    body_type : Array<string>
+    ethnicity : Array<string>,
+    body_type : Array<string>,
+    orientation : Array<string>,
+    eyes : Array<string>,
+    fetishes : Array<string>    
+
 }
