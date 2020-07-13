@@ -1,25 +1,20 @@
-export interface ModelPreferences {
-    name : string,
-    cover : string,
-    picture : string,
-    description : string,
-
+export interface ModelProfile {
     // about 
-    personality_description : string,
-    chatroom_show_description : string,
-    turn_on_description : string,
-    bad_mood_description : string,
-    dream_customer_description : string,
+    describe_your_personality : string,
+    what_kind_chat_room : string,
+    turns_on_you_going : string,
+    what_annoys_bed_room : string,
+    who_dream_customer : string,
 
     // schedule (pending)
 
     // General
-    zodiac_sign : string,
+    zodiac_signs : string,
     height : string,
-    birth_date : string,
+    dob : number,
     weight : string,
     public_age : string,
-    breast_size_number : number,
+    breast_size_number : string,
     public_country : string,
     breast_size_letter : string,
     language_spoken : string,
@@ -29,6 +24,7 @@ export interface ModelPreferences {
     hair_color : string,
     shoe_size : string,
     public_hair : string,
+    body_type : string,
 
     //  sexual preference
     orientation : string,
@@ -39,14 +35,14 @@ export interface ModelPreferences {
 
     //Fetishes & specialities
     fetishes : Array<string>,
-    wishlist : string,
+    wish_list : string,
 
     // color scheme
-    text_color : string,
-    background_color : string,
+    profile_text_color : string,
+    profile_bg_color : string,
 
     // category
-    category : Array<string>,
+    //category : Array<string>,
 
     // social media
     twitter : string,

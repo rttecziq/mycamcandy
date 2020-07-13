@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { RequestService } from '../../../../common/services/request.service';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
-import { ModelPreferences } from '../../../../models/model-preferences';
+import { ModelProfile } from '../../../../models/model-profile';
 import { Preference } from '../../../../models/preference';
 import { CheckStreamerService } from '../../../../common/services/check-streamer.service';
 
@@ -15,7 +15,9 @@ const PROFILE_PICTURE = "PROFILE_PICTURE";
 @Component({
   selector: 'app-user-update-profile',
   templateUrl: './user-update-profile.component.html',
-  styleUrls: ['./user-update-profile.component.css']
+  styleUrls: [/*'../../../../../assets/css/select2.min.css', */
+                './user-update-profile.component.css'
+            ]
 })
 export class UserUpdateProfileComponent implements AfterViewInit {
 
@@ -31,40 +33,47 @@ export class UserUpdateProfileComponent implements AfterViewInit {
     };
 
     errorMessages : string;
-    model_details : ModelPreferences;
+    model_details : ModelProfile;
     profile_picture : File;
     cover_picture : File;
     user_profile_picture : string;
     user_cover_picture : string;
+    no_of_followers : number;
+    no_of_followings : number;
+    description : string;
     is_content_creator : boolean;
     fileInputs : FileList;
     userId : string;
     username : string;
-    preferences : Preference;
+    general : Preference;
+
+    resetForm() {
+        $("#form3")[0].reset();
+    }
+
 constructor(private requestService : RequestService, private router : Router, private location : Location, private checkStreamerService :CheckStreamerService) {
 
+    this.no_of_followers = 0;
+    this.no_of_followings = 0;
     this.profile_picture = null;
     this.cover_picture = null;
+    this.description = "";
     this.model_details = {
-        name : "",
-        cover : "",
-        picture : "",
-        description : "",
-
+        
         //about
-        personality_description : '',
-        chatroom_show_description : "",
-        turn_on_description : "",
-        bad_mood_description : "",
-        dream_customer_description : "",
+        describe_your_personality : "",
+        what_kind_chat_room : "",
+        turns_on_you_going : "",
+        what_annoys_bed_room : "",
+        who_dream_customer : "",
 
         //general
-        zodiac_sign : "",
+        zodiac_signs : "",
         height : "",
-        birth_date : "",
+        dob : 0,
         weight : "",
         public_age : "",
-        breast_size_number : 0,
+        breast_size_number : "",
         public_country : "",
         breast_size_letter : "",
         language_spoken : "",
@@ -84,22 +93,23 @@ constructor(private requestService : RequestService, private router : Router, pr
 
         //Fetishes & specialities
         fetishes : [],
-        wishlist : "",
+        wish_list : "",
 
         // color scheme
-        text_color : "",
-        background_color : "",
+        profile_text_color : "#000",
+        profile_bg_color : "#fff",
 
         // category
-        category : [],
+        //category : [],
 
         // social media
         twitter : "",
-        instagram : ""        
+        instagram : "",
+        body_type : ""      
     }
 
-    this.preferences = {
-        zodiac_sign : [],
+    this.general = {
+        zodiac_signs : [],
         height : [],
         birth_date : [],
         weight : [],
@@ -114,7 +124,11 @@ constructor(private requestService : RequestService, private router : Router, pr
         hair_color : [],
         shoe_size : [],
         public_hair : [],
-        body_type : []
+        body_type : [],
+        orientation : [],
+        ethnicity : [],
+        eyes : [],
+        fetishes : []
     }
 
     this.user_profile_picture = "../../../../assets/img/default-profile.jpg";
@@ -133,15 +147,16 @@ constructor(private requestService : RequestService, private router : Router, pr
      });
      $.getScript('../../../../assets/js/lightbox.min.js',function(){
      }); */
-
+    $('select').select2();
+    
      // Load Logged In User Profile
      setTimeout(()=>{
-     //   this.user_model_Preference_fn("userModelPreferences", "");
+        this.user_profile_fn("userDetails", "");
         let user_id = (localStorage.getItem('userId') != '' && localStorage.getItem('userId') != null && localStorage.getItem('userId') != undefined) ? localStorage.getItem('userId') : '';
         let username = (localStorage.getItem('username') != '' && localStorage.getItem('username') != null && localStorage.getItem('username') != undefined) ? localStorage.getItem('username') : '';
         this.userId = user_id;
         this.username = username;
-      // this.model_physic_data_fn("modelPhysicData","");
+       this.generalAccordionData_fn("model_profiles","");
      }, 1000);
 
 
@@ -272,164 +287,126 @@ updateImagesFn(formData) {
         );
 }
 
+toast_message(heading, message) {
+    $.toast({
+        heading: heading,
+        text: message,
+        position: 'top-right',
+        stack: false,
+        textAlign: 'left',
+        loader : false,
+        showHideTransition: 'slide'
+    });
+}
+
 updateDescriptionFn(form : NgForm) {
     this.requestService.postMethod('updateUserDescription', form.value)
         .subscribe(
             (data : any ) => {
-                if (data.success == true) {
-                    $.toast({
-                        heading: 'Success',
-                        text: "Description has been updated successfully",
-                        position: 'top-right',
-                        stack: false,
-                        textAlign: 'left',
-                        loader : false,
-                        showHideTransition: 'slide'
-                    });
+                if (data.success == true) {                   
+                    this.toast_message("Success", "Description has been updated successfully");
                 } else {
                     this.errorMessages = data.error_messages;
-                    $.toast({
-                        heading: 'Error',
-                        text: this.errorMessages,
-                        position: 'top-right',
-                        stack: false,
-                        textAlign: 'left',
-                        loader : false,
-                        showHideTransition: 'slide'
-                    });                    
+                    this.toast_message("Error", this.errorMessages);                 
                 }
             },
 
             (err : HttpErrorResponse) => {
                 this.errorMessages = 'Oops! Something Went Wrong';
-                $.toast({
-                    heading: 'Error',
-                    text: this.errorMessages,
-                    position: 'top-right',
-                    stack: false,
-                    textAlign: 'left',
-                    loader : false,
-                    showHideTransition: 'slide'
-                });
+                this.toast_message("Error", this.errorMessages);
             }
         );
 }
 
-model_physic_data_fn(url, object) {    
+setBackgroundColor(bgcolor) { this.model_details.profile_bg_color = bgcolor; }
+setTextColor(textColor) { this.model_details.profile_text_color = textColor; }
+
+generalAccordionData_fn(url, object) {    
   this.requestService.getMethod(url, object)
   .subscribe(
       (data : any ) => {
           if (data.success == true) {
-             this.preferences = data;
+           //  this.general = data;
+            this.general.zodiac_signs        = data.data[1];
+            this.general.height              = data.data[0];
+            this.general.weight              = data.data[3];
+            this.general.public_age          = data.data[4];
+            this.general.breast_size_number  = data.data[5];
+            this.general.public_country      = data.data[6];
+            this.general.breast_size_letter  = data.data[7];
+            this.general.language_spoken     = data.data[8];
+            this.general.breast_type         = data.data[9];
+            this.general.hair_length         = data.data[11];
+            this.general.shoe_size           = data.data[12];
+            this.general.hair_color          = data.data[13];
+            this.general.public_hair         = data.data[15];
+            this.general.body_type           = data.data[14];
+            this.general.gender              = data.data[10];
+
+            this.general.orientation         = data.data[16];
+            this.general.ethnicity           = data.data[17];
+            this.general.eyes                = data.data[18];
+            this.general.fetishes            = data.data[19];
+            
+            if(data.model_details !== undefined && data.model_details !== null && data.model_details !== "") {
+                this.model_details = data.model_details;
+            }
+
           } else {
               this.errorMessages = data.error_messages;
-              $.toast({
-                  heading: 'Error',
-                  text: this.errorMessages,
-                  position: 'top-right',
-                  stack: false,
-                  textAlign: 'left',
-                  loader : false,
-                  showHideTransition: 'slide'
-              });              
+              this.toast_message("Error", this.errorMessages);             
           }
       },
 
       (err : HttpErrorResponse) => {
           this.errorMessages = 'Oops! Something Went Wrong';
-          $.toast({
-              heading: 'Error',
-              text: this.errorMessages,
-          // icon: 'error',
-              position: 'top-right',
-              stack: false,
-              textAlign: 'left',
-              loader : false,
-              showHideTransition: 'slide'
-          });
+          this.toast_message("Error", this.errorMessages);
       }
   );
 }
 
-user_model_Preference_fn(url, object) {
+user_profile_fn(url, object) {
   this.requestService.getMethod(url, object)
       .subscribe(
           (data : any ) => {
               if (data.success == true) {
-                  this.model_details = data;
+                  this.description = data.description;
                   this.user_cover_picture = data.cover;
                   this.user_profile_picture = data.picture;
+                  this.no_of_followings = data.no_of_followings;
+                  this.no_of_followers  = data.no_of_followers;
               } else {
                   this.errorMessages = data.error_messages;
-                  $.toast({
-                      heading: 'Error',
-                      text: this.errorMessages,
-                      position: 'top-right',
-                      stack: false,
-                      textAlign: 'left',
-                      loader : false,
-                      showHideTransition: 'slide'
-                  });                  
+                  this.toast_message("Error", this.errorMessages);
               }
           },
 
           (err : HttpErrorResponse) => {
               this.errorMessages = 'Oops! Something Went Wrong';
-              $.toast({
-                  heading: 'Error',
-                  text: this.errorMessages,
-                  position: 'top-right',
-                  stack: false,
-                  textAlign: 'left',
-                  loader : false,
-                  showHideTransition: 'slide'
-              });
+              this.toast_message("Error", this.errorMessages);
           }
       );
 
 }
 
    // To update the profile page of logged in user
-   updateModelProfileFn(form : NgForm) {    
+   updateModelProfileFn(form : NgForm) {
+       console.log(form.value);
 
-    this.requestService.postMethod('ENTER_HERE', form.value)
+    this.requestService.postMethod('updateModelProfile', form.value)
         .subscribe(
             (data : any ) => {
                 if (data.success == true) {
-                    $.toast({
-                        heading: 'Success',
-                        text: "Model profile has been updated successfully",
-                        position: 'top-right',
-                        stack: false,
-                        textAlign: 'left',
-                        loader : false,
-                        showHideTransition: 'slide'
-                    });
+                    this.toast_message("Success", "Model profile has been updated successfully");
                 } else {
                     this.errorMessages = data.error_messages;
-                    $.toast({
-                        heading: 'Error',
-                        text: this.errorMessages,
-                        position: 'top-right',
-                        stack: false,
-                        textAlign: 'left',
-                        loader : false,
-                        showHideTransition: 'slide'
-                    });                    
+                    this.toast_message("Error", this.errorMessages);                    
                 }
             },
 
             (err : HttpErrorResponse) => {
                 this.errorMessages = 'Oops! Something Went Wrong';
-                $.toast({
-                    heading: 'Error',
-                    text: this.errorMessages,
-                    position: 'top-right',
-                    stack: false,
-                    textAlign: 'left',
-                    loader : false,
-                    showHideTransition: 'slide'
-                });
+                this.toast_message("Error", this.errorMessages);
             }
         );
 }
