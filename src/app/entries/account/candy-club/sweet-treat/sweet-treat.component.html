@@ -1,4 +1,4 @@
-<div class="container profile-background">
+<div class="container-fluid profile-background">
   
   <!--Common user's profile tab -->
   <user-profile-tabs></user-profile-tabs>
@@ -9,114 +9,26 @@
       <div class="row mt-5">
         <div class="model-album">
           <h3 class="heading">My Sweet Treat</h3>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
+
+            <div *ngIf="sweet_treats">
+              <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3" *ngFor="let sweet_treat of sweet_treats">
+                
+                  <div class="img-container">
+                    <a routerLink="/candy-club/{{username}}/sweet-treat/{{sweet_treat.id}}">
+                      <img [src]="sweet_treat.featured_image" class="img-responsive">
+                    </a>
+                    <a routerLink="/candy-club/{{username}}/sweet-treat/{{sweet_treat.id}}">
+                      <div class="bottom-left text-shadow text-white">{{sweet_treat.title}}</div>
+                    </a>
+                    <!-- <div class="top-left"><i class="fa fa-play-circle"></i></div> -->
+                    <div class="top-right" *ngIf="sweet_treat.listing == 1"><i class="fa fa-ban" (click)="unlist_sweet_treat(sweet_treat.id)" title="unlist me"></i></div>
+                    <!-- <div class="bottom-right">Bottom Right</div> -->
+                    <a routerLink="/candy-club/{{username}}/sweet-treat/{{sweet_treat.id}}"><div class="centered bold text-white">{{sweet_treat.candies}} Candies</div></a>
+                  </div>
+                
               </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
+            </div>
+
         </div>
       </div>
     </div>

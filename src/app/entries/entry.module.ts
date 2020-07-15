@@ -122,6 +122,7 @@ import { ModelNewsComponent } from './account/candy-club/model-news/model-news.c
 import { ModelScheduleComponent } from './account/candy-club/model-schedule/model-schedule.component';
 import { UploadPhotoComponent } from './account/candy-club/upload-photo/upload-photo.component';
 import { UploadVideosComponent } from './account/candy-club/upload-videos/upload-videos.component';
+import { SweetTreatDetailsComponent } from './account/candy-club/sweet-treat/sweet-treat-details/sweet-treat-details.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -204,7 +205,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         ModelNewsComponent,
         ModelScheduleComponent,
         UploadPhotoComponent,
-        UploadVideosComponent
+        UploadVideosComponent,
+        SweetTreatDetailsComponent
     ],
     imports: [
         CommonModule,

@@ -16,7 +16,32 @@
   <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 mt-3">
     <div class="img-container user-cover">
       <div *ngIf="user_cover_picture">
-        <img [src]="user_cover_picture" class="img-responsive user-cover-photo">
+        <img [src]="user_cover_picture" class="img-responsive user-cover-photo w-100">
+        <div class="top-left cover-menu">
+          <ul>
+              <li><a href="#">31 <br> Candy Albums</a></li>
+              <li><a href="#">6 <br> Candy Collections</a></li>
+              <li><a routerLink="/candy-club/{{username}}/sweet-treat">13 <br> Sweet Treats</a></li>
+              <li class="float-right text-center" style="display: inline-block;">
+                <button class="btn btn-sm btn-info">
+                  <img src="/assets/img/model/iconfinder_179_Upload_183298.png" height="25" width="25">
+                </button><br>
+                <div class="text-light">Upload Albums</div>
+              </li>
+              <li class="float-right text-center" style="display: inline-block;">
+                <button class="btn btn-sm btn-info">
+                  <img src="/assets/img/model/iconfinder_add-item_57905.png" height="25" width="25">
+                </button><br>
+                <div class="text-light">Add Collections</div>
+              </li> 
+           <li class="float-right text-center" style="display: inline-block;">
+            <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#sweet_treat_model" class="pointer">
+              <img src="/assets/img/model/Gift_Box-36-128.png" height="25" width="25">
+            </button><br>
+            <div class="text-light">Add Sweet Treats</div>
+          </li>
+          </ul>
+        </div>
       </div>
     <!-- <div class="centered">
       <i class="fa fa-camera upload-button-cover-pic"></i>
@@ -60,3 +85,59 @@
   
     </div>
   </div>
+
+  <!-- sweet treate model-->
+<div class="modal fade" id="sweet_treat_model" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" id="sweet_treat_model_close">&times;</button>
+          <h4 class="mt-0">Sweet Treat</h4>
+          
+          <form id="form5" #sweetTreatForm="ngForm" (ngSubmit)="sweetTreatFormFn(sweetTreatForm)"><hr>
+           <div class="form-group mt-2">
+              <label> Title </label>
+              <input type="text" name="title" class="form-control" [(ngModel)]="sweet_treat.title" required/>
+
+              <div class="row mt-2">
+                 <div class="col-md-4 mt-2">
+                    <label>Candies</label>
+                    <input type="number" name="candies" placeholder="9999" class="form-control" [(ngModel)]="sweet_treat.candies" required/>
+                 </div>
+                 <div class="col-md-4"></div>
+                 <div class="col-md-4 mt-2 text-right">
+                    <label>
+                    <input type="checkbox" name="listing" [(ngModel)]="sweet_treat.listing"/>
+                     Unlisted </label>
+                 </div>
+              </div>
+
+              <div class="row mt-2">
+                 <div class="col-md-6 mt-2">
+                    <label>Featured Image</label>
+                    <div [style.background-image]="sweet_treat_featured_image ? 'url(' + sweet_treat_featured_image + ')' : null" class="user-profile1 thumbnail"></div>
+                    <input type="file" name="featured_image" class="form-control" accept="image/png,image/jpeg" (change)="handleSweetTreat($event.target.files)" required/>
+                 </div>
+                 <div class="col-md-6 mt-2">
+                    <label>Description</label>
+                    <textarea name="description" class="form-control" [(ngModel)]="sweet_treat.description"></textarea>
+                 </div>
+              </div>
+
+              <div class="form-group mt-2">
+                 <label>+ add a secret note to reveal after purchase</label>
+                 <input type="text" name="secret_note" class="form-control" [(ngModel)]="sweet_treat.secret_note"/>
+              </div>
+              <div class="form-row text-center mt-2 mb-2">
+                 <button type="submit" class="btn btn-primary">Add Sweet Treat</button>
+              </div>
+
+           </div>
+       </form>
+
+      </div>
+    </div>
+
+  </div>
+</div>
