@@ -78,6 +78,7 @@ import { ModelNewsComponent } from './account/candy-club/model-news/model-news.c
 import { ModelScheduleComponent } from './account/candy-club/model-schedule/model-schedule.component';
 import { RecordedVideoComponent } from './account/candy-club/recorded-video/recorded-video.component';
 import { SweetTreatComponent } from './account/candy-club/sweet-treat/sweet-treat.component';
+import { SweetTreatDetailsComponent } from './account/candy-club/sweet-treat/sweet-treat-details/sweet-treat-details.component';
 import { TopModelComponent } from './account/candy-club/top-model/top-model.component';
 import { UploadPhotoComponent } from './account/candy-club/upload-photo/upload-photo.component';
 import { UploadVideosComponent } from './account/candy-club/upload-videos/upload-videos.component';
@@ -260,6 +261,12 @@ const entryRoutes: Routes = [
                 component: SweetTreatComponent,
                 canActivate: [AuthGuard],
                 data: {title : "My Sweet Treat", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/:username/sweet-treat/:id",
+                component: SweetTreatDetailsComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Sweet Treat Details", expectedRole: 'onlyUser'},
             },
             {
                 path: "candy-club/:username/top-model",

@@ -3,8 +3,12 @@
   background: #FFFFFF url(/assets/img/model/footer-bg.png) scroll;
     background-position: 279px center;
 }
+.mt-2 {margin-top:1em;}
 .ml-1{margin-left: 1rem;}
 .mr-1{margin-right: 1rem;}
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
 .profile-background .container{
   /*background: #fff;*/
   padding:0;
@@ -14,6 +18,14 @@
 .user-profile-list{
   margin:0px;
   background: #fff;
+}
+.user-profile1 {
+  width: 100px;
+  height: 100px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #fff;
 }
 a{
     text-decoration: none!important;

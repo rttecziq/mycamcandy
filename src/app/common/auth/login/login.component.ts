@@ -58,6 +58,9 @@ export class LoginComponent implements AfterViewInit{
 
                     localStorage.setItem('accessToken', data.token);
                     localStorage.setItem('username', data.name);
+                    localStorage.setItem('profile_picture', data.picture);
+                    localStorage.setItem('chat_picture', data.chat_picture);
+                    localStorage.setItem('cover_picture', data.cover);
                     localStorage.setItem('userId', data.id);
                     
                     $.toast({

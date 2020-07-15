@@ -6,6 +6,7 @@ import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { ModelProfile } from '../../../../models/model-profile';
 import { Preference } from '../../../../models/preference';
+import { sweetTreat } from '../../../../models/sweet-treat';
 import { CheckStreamerService } from '../../../../common/services/check-streamer.service';
 
 declare var $: any ;
@@ -38,6 +39,8 @@ export class UserUpdateProfileComponent implements AfterViewInit {
     cover_picture : File;
     user_profile_picture : string;
     user_cover_picture : string;
+    sweet_treat_image : File;
+    sweet_treat_featured_image : string;
     no_of_followers : number;
     no_of_followings : number;
     description : string;
@@ -46,6 +49,7 @@ export class UserUpdateProfileComponent implements AfterViewInit {
     userId : string;
     username : string;
     general : Preference;
+    sweet_treat : sweetTreat;
 
     resetForm() {
         $("#form3")[0].reset();
@@ -57,7 +61,18 @@ constructor(private requestService : RequestService, private router : Router, pr
     this.no_of_followings = 0;
     this.profile_picture = null;
     this.cover_picture = null;
+    this.sweet_treat_image = null;
     this.description = "";
+
+    this.sweet_treat = {
+        title : "",
+        candies : 0,
+        listing : false,
+        description : "",
+        featured_image : "",
+        secret_note : ""
+    }
+
     this.model_details = {
         
         //about
@@ -133,6 +148,7 @@ constructor(private requestService : RequestService, private router : Router, pr
 
     this.user_profile_picture = "../../../../assets/img/default-profile.jpg";
     this.user_cover_picture = "../../../../assets/img/cover.jpg";
+    this.sweet_treat_featured_image = "../../../../assets/img/default-profile.jpg";
     this.is_content_creator = true;
 }
 
@@ -242,6 +258,21 @@ handleCoverPicture(files : FileList) {
   this.updateImagesFn(formData);
 }
 
+// Sweet treat featured image
+handleSweetTreat(files : FileList) {
+    this.sweet_treat_image = files.item(0);
+    if(!files.item(0).type.match('image')) {
+        this.toast_message("Warning", "Please choose image with extensions .png, .jpg, .jpeg");  
+        return false;
+    }
+  
+    var reader = new FileReader();  
+    reader.onload = (event: any) => {    
+      this.sweet_treat_featured_image = event.target.result;    
+    }
+    reader.readAsDataURL(files.item(0));
+}
+
 updateImagesFn(formData) {
     this.requestService.postMethod('updateUserProfileImages', formData)
         .subscribe(
@@ -318,6 +349,49 @@ updateDescriptionFn(form : NgForm) {
         );
 }
 
+sweetTreatFormFn(form : NgForm) {
+    
+    if (form.value['title'] == undefined || form.value['title'] == '' || form.value['title'] == null) {
+        this.toast_message("Error", "Enter Sweet treat title");
+        return false;
+    }
+
+    if (form.value['candies'] == undefined || form.value['candies'] == '' || form.value['candies'] == null) {
+        this.toast_message("Error", "Candies field is missing");
+        return false;
+    }
+
+    if (this.sweet_treat_image !== undefined && this.sweet_treat_image !== null) {            
+        form.value['featured_image'] = this.sweet_treat_image;
+    } else {
+        this.toast_message("Error", "Add Sweet treat featured image");
+        return false;
+    }
+    if (form.value['listing'] === true) {
+        form.value['listing'] = 0;
+    } else {
+        form.value['listing'] = 1;
+    }
+
+    this.requestService.postMethod('sweetTreat', form.value)
+        .subscribe(
+            (data : any ) => {
+                if (data.success == true) {
+                    this.toast_message("Success", "Sweet Treat added successfully");
+                    $('#sweet_treat_model_close').click();
+                } else {
+                    this.errorMessages = data.error_messages;
+                    this.toast_message("Error", this.errorMessages);                    
+                }
+            },
+
+            (err : HttpErrorResponse) => {
+                this.errorMessages = 'Oops! Something Went Wrong';
+                this.toast_message("Error", this.errorMessages);
+            }
+        );
+}
+
 setBackgroundColor(bgcolor) { this.model_details.profile_bg_color = bgcolor; }
 setTextColor(textColor) { this.model_details.profile_text_color = textColor; }
 
@@ -369,16 +443,16 @@ user_profile_fn(url, object) {
   this.requestService.getMethod(url, object)
       .subscribe(
           (data : any ) => {
-              if (data.success == true) {
-                  this.description = data.description;
-                  this.user_cover_picture = data.cover;
-                  this.user_profile_picture = data.picture;
-                  this.no_of_followings = data.no_of_followings;
-                  this.no_of_followers  = data.no_of_followers;
-              } else {
-                  this.errorMessages = data.error_messages;
-                  this.toast_message("Error", this.errorMessages);
-              }
+                if (data.success == true) {
+                    this.description = data.description;
+                    this.user_cover_picture = data.cover;
+                    this.user_profile_picture = data.picture;
+                    this.no_of_followings = data.no_of_followings;
+                    this.no_of_followers  = data.no_of_followers;
+                } else {
+                    this.errorMessages = data.error_messages;
+                    this.toast_message("Error", this.errorMessages);
+                }
           },
 
           (err : HttpErrorResponse) => {
@@ -391,8 +465,6 @@ user_profile_fn(url, object) {
 
    // To update the profile page of logged in user
    updateModelProfileFn(form : NgForm) {
-       console.log(form.value);
-
     this.requestService.postMethod('updateModelProfile', form.value)
         .subscribe(
             (data : any ) => {

@@ -9,6 +9,9 @@
 .user-profile-list{
   margin:0px;
 }
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
 .list-group-item:last-child {
     margin-bottom: 0;
     border-bottom-right-radius: 0px;
@@ -113,8 +116,16 @@ a {text-decoration: none!important;}
 }
 .img-container {
   position: relative;
-  text-align: center;
   color: white;
+}
+.mt-2 {margin-top:1em;}
+.user-profile1 {
+  width: 100px;
+  height: 100px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #fff;
 }
 .centered {
   position: absolute;
@@ -145,4 +156,31 @@ a {text-decoration: none!important;}
     top: -65px;
 }
 }
-/********************User end About End**********************/
+
+.top-left {
+  position: absolute;
+  top: 0px;
+  /*left: 16px;*/
+  width: 100%;
+  background: #00000057;
+}
+.text-center{
+  text-align:center;
+}
+
+.cover-menu ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  width: 100%;
+}
+.cover-menu ul li a{
+  color: #fff;
+}
+.cover-menu li {
+    list-style: none;
+    display: inline-flex;
+    padding: 5px 5px;
+    text-align: center;
+}

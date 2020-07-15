@@ -1,0 +1,59 @@
+<div class="container profile-background">
+  
+  <!--Common user's profile tab -->
+  <user-profile-tabs></user-profile-tabs>
+
+<div class="row mt-5" *ngIf="content == 1">
+  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
+  <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+
+  <nav class="sweet-treat-detail">
+      <ol class="ol">
+            <li class="pr-2">
+               <a routerLink="/candy-club/{{username}}">
+                  <img [src]="chat_picture ? chat_picture : ''" class="img-circle" height="50" width="50">
+               </a>
+            </li> 
+            <li class="pl-1 pt-3">
+               <a routerLink="/candy-club/{{username}}" class="text-capitalize"> {{username}} </a> 
+               <i class="fa fa-angle-right"></i>
+            </li> 
+            <li class="pl-1 text-light pt-3">Items 
+               <i class="fa fa-angle-right"></i>
+            </li> 
+            <li class="pl-1 text-light pt-3"><span>{{title}}</span></li>
+      </ol>
+  </nav>
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-3">
+    <img [src]="featured_image" class="w-100">
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-3">
+    <div class="card">
+        <div class="card-header">
+          <i class="fa fa-gift text-dark" style="color: rgb(0, 0, 0);"></i> Instant Access
+        </div>
+        <div class="card-body">
+          <div class="btn btn-success w-100">{{candies}} Candies!</div>                           
+        </div>
+    </div>
+    <div class="description mt-3 bg-white p-2">
+      <p>{{description}}</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+    <div *ngIf="content == 0">
+      <div class="row mt-5">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
+           <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+              <div class="alert alert-danger text-center">
+                No sweet treat found
+              </div>
+          </div>
+      </div>
+    </div>
+
+</div>

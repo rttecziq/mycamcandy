@@ -34,7 +34,6 @@ export class RegisterComponent implements AfterViewInit{
         this.id_proof_image = "../../../../assets/img/pro-img.jpg";
         this.holding_id_proof_image = "../../../../assets/img/pro-img.jpg";
         this.user_availability = "";
-        
 
         this.model = {
             name: "",

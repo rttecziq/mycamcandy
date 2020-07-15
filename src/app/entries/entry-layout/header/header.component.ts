@@ -81,8 +81,12 @@ export class EntryHeaderComponent implements AfterViewInit,OnDestroy{
 				if (data.success == true) {
 
                     // Remove all the items which is stored in localstorage
-                    localStorage.removeItem('accessToken');
+                    localStorage.removeItem('accessToken');                    
                     localStorage.removeItem('userId');
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('profile_picture');
+                    localStorage.removeItem('chat_picture');
+                    localStorage.removeItem('cover_picture');
 					//localStorage.clear();
 					$.toast({
 						heading: 'Success',
