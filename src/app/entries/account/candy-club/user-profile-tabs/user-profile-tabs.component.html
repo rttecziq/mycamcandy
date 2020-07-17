@@ -20,7 +20,7 @@
         <div class="top-left cover-menu">
           <ul>
               <li><a href="#">31 <br> Candy Albums</a></li>
-              <li><a href="#">6 <br> Candy Collections</a></li>
+              <li><a routerLink="/candy-club/{{username}}/collection">6 <br> Candy Collections</a></li>
               <li><a routerLink="/candy-club/{{username}}/sweet-treat">13 <br> Sweet Treats</a></li>
               <li class="float-right text-center" style="display: inline-block;">
                 <button class="btn btn-sm btn-info">
@@ -29,7 +29,7 @@
                 <div class="text-light">Upload Albums</div>
               </li>
               <li class="float-right text-center" style="display: inline-block;">
-                <button class="btn btn-sm btn-info">
+                <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#collection_model" class="pointer" >
                   <img src="/assets/img/model/iconfinder_add-item_57905.png" height="25" width="25">
                 </button><br>
                 <div class="text-light">Add Collections</div>
@@ -86,7 +86,7 @@
     </div>
   </div>
 
-  <!-- sweet treate model-->
+<!-- sweet treate model-->
 <div class="modal fade" id="sweet_treat_model" role="dialog">
   <div class="modal-dialog">
 
@@ -135,6 +135,40 @@
 
            </div>
        </form>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+ <!-- Collection model-->
+ <div class="modal fade" id="collection_model" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" id="collection_model_close">&times;</button>
+          <h4 class="mt-0">Collection</h4>
+          
+          <form id="form6" #collectionForm="ngForm" (ngSubmit)="collectionFormFn(collectionForm)"><hr>
+            <div class="form-group mt-2">
+                <label> Collection <span class="text-danger bold">*</span> </label>
+                <input type="text" name="collection_title" class="form-control" [(ngModel)]="model_collection.collection_title" required/>
+
+                <label class="mt-2"> Candies <span class="text-danger bold">*</span> </label>
+                <input type="number" name="collection_candies" class="form-control" [(ngModel)]="model_collection.collection_candies" required/>
+                
+                <label class="mt-2"> File Upload <span class="text-danger bold">*</span> </label>
+                <div [style.background-image]="collection_featured_image ? 'url(' + collection_featured_image + ')' : null" class="user-profile1 thumbnail"></div>
+                <input type="file" name="collection_featured_image" class="form-control" accept="image/png,image/jpeg" (change)="handleCollection($event.target.files)" required/>
+
+                <div class="form-row text-center mt-2 mb-2">
+                  <button type="submit" class="btn btn-primary">Add Collection</button>
+                </div>
+            </div>
+          </form>
 
       </div>
     </div>

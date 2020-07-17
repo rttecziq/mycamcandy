@@ -5,11 +5,20 @@
 .mb-5{margin-bottom: 3rem;}
 .mt-3{margin-top: 2.5rem;}
 .mb-3{margin-bottom: 2.5rem;}
+.ml-1 {margin-left:1rem;}
 .text-center{text-align: center;}
 .model-album{padding-left: 20px;padding-right: 20px;}
 .model-album .heading {
   padding: 0px 0px 15px 15px;
     margin-bottom: 0;
+}
+.user-profile1 {
+  width: 100px;
+  height: 100px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #fff;
 }
 .text-white{color:#fff;}
 .text-shadow{

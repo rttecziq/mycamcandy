@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, CollectionChangeRecord } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../../../../common/services/user.service';
@@ -6,6 +6,8 @@ import { RequestService } from '../../../../common/services/request.service';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { User } from '../../../../models/user';
 import { sweetTreat } from '../../../../models/sweet-treat';
+import { collection } from '../../../../models/collection';
+
 declare var $: any ;
 
 @Component({
@@ -23,20 +25,23 @@ export class UserProfileTabsComponent implements AfterViewInit {
   user_cover_picture : string;
   sweet_treat_image : File;
   sweet_treat_featured_image : string;
+  collection_image : File;
+  collection_featured_image : string;
   is_content_creator : boolean;  
   isUserExists : string;
   userId : string;
   username : string;
   sweet_treat : sweetTreat;
+  model_collection : collection;
   
   constructor(private userService : UserService, private requestService : RequestService, private router : Router) {
   
-      this.profile_picture = null;
-  
+      this.profile_picture = null;  
       this.cover_picture = null;
       this.sweet_treat_image = null;
-      this.user_details = {
-  
+      this.collection_image = null;
+
+      this.user_details = {  
           name : "",
           email : "",
           cover : "",
@@ -49,7 +54,7 @@ export class UserProfileTabsComponent implements AfterViewInit {
           gallery_description : ""
       }
 
-      this.sweet_treat = {
+    this.sweet_treat = {
         title : "",
         candies : 0,
         listing : false,
@@ -57,10 +62,17 @@ export class UserProfileTabsComponent implements AfterViewInit {
         featured_image : "",
         secret_note : ""
     }
+
+    this.model_collection = {
+        collection_title : "",
+        collection_candies : 0,
+        collection_featured_image : "",
+    }
   
       this.user_profile_picture = "../../../../assets/img/pro-img.jpg";  
       this.user_cover_picture = "../../../../assets/img/bg-image.jpg";
       this.sweet_treat_featured_image = "../../../../assets/img/default-profile.jpg";
+      this.collection_featured_image = "../../../../assets/img/default-profile.jpg";
   
       this.is_content_creator = true;
       this.username = (localStorage.getItem('username') != '' && localStorage.getItem('username') != null && localStorage.getItem('username') != undefined) ? localStorage.getItem('username') : '';
@@ -140,7 +152,7 @@ export class UserProfileTabsComponent implements AfterViewInit {
   
   }
 
-  handleSweetTreat(files : FileList) {
+handleSweetTreat(files : FileList) {
     this.sweet_treat_image = files.item(0);
     if(!files.item(0).type.match('image')) {
         this.toast_message("Warning", "Please choose image with extensions .png, .jpg, .jpeg");  
@@ -150,6 +162,20 @@ export class UserProfileTabsComponent implements AfterViewInit {
     var reader = new FileReader();  
     reader.onload = (event: any) => {    
       this.sweet_treat_featured_image = event.target.result;    
+    }
+    reader.readAsDataURL(files.item(0));
+}
+
+handleCollection(files : FileList) {
+    this.collection_image = files.item(0);
+    if(!files.item(0).type.match('image')) {
+        this.toast_message("Warning", "Please choose image with extensions .png, .jpg, .jpeg");  
+        return false;
+    }
+  
+    var reader = new FileReader();  
+    reader.onload = (event: any) => {    
+      this.collection_featured_image = event.target.result;    
     }
     reader.readAsDataURL(files.item(0));
 }
@@ -196,6 +222,45 @@ export class UserProfileTabsComponent implements AfterViewInit {
                     this.toast_message("Success", "Sweet Treat added successfully");
                     $('#sweet_treat_model_close').click();
                     location.reload();
+                } else {
+                    this.errorMessages = data.error_messages;
+                    this.toast_message("Error", this.errorMessages);                    
+                }
+            },
+
+            (err : HttpErrorResponse) => {
+                this.errorMessages = 'Oops! Something Went Wrong';
+                this.toast_message("Error", this.errorMessages);
+            }
+        );
+}
+
+collectionFormFn(form : NgForm) {
+    
+    if (form.value['collection_title'] == undefined || form.value['collection_title'] == '' || form.value['collection_title'] == null) {
+        this.toast_message("Error", "Enter collection title");
+        return false;
+    }
+
+    if (form.value['collection_candies'] == undefined || form.value['collection_candies'] == '' || form.value['collection_candies'] == null) {
+        this.toast_message("Error", "Collection candies is missing");
+        return false;
+    }
+
+    if (this.collection_image !== undefined && this.collection_image !== null) {            
+        form.value['collection_featured_image'] = this.collection_image;
+    } else {
+        this.toast_message("Error", "Add collection featured image");
+        return false;
+    }
+        
+    this.requestService.postMethod('addCollection', form.value)
+        .subscribe(
+            (data : any ) => {
+                if (data.success == true) {
+                    this.toast_message("Success", "Collection added successfully");
+                    $('#collection_model_close').click();
+                    this.router.navigate(['/candy-club/'+this.username+'/collection']);
                 } else {
                     this.errorMessages = data.error_messages;
                     this.toast_message("Error", this.errorMessages);                    
