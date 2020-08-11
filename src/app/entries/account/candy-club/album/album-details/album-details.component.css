@@ -1,0 +1,19 @@
+.ml-2 {
+    margin-left:1em;
+}
+.user-profile1 {
+    width: 100px;
+    height: 100px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #fff;
+  }
+
+  .model-album .top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    width: 50%;
+}

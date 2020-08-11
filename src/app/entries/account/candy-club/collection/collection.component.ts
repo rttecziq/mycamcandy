@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { RequestService } from '../../../../common/services/request.service';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
-import { collection } from '../../../../models/collection';
+import { Collection } from '../../../../models/collection';
 
 declare var $: any ;
 
@@ -17,7 +17,7 @@ export class CollectionComponent implements AfterViewInit {
   errorMessages : string;
   collections : any;
   username : string;
-  model_collection : collection;
+  model_collection : Collection;
   showModal: boolean;
   collection_image : File;
   collection_featured_image : string;

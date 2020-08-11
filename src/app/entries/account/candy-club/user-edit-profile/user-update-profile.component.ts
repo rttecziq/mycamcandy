@@ -7,8 +7,9 @@ import { Location } from '@angular/common';
 import { ModelProfile } from '../../../../models/model-profile';
 import { Preference } from '../../../../models/preference';
 import { sweetTreat } from '../../../../models/sweet-treat';
-import { collection } from '../../../../models/collection';
+import { Collection } from '../../../../models/collection';
 import { CheckStreamerService } from '../../../../common/services/check-streamer.service';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 declare var $: any ;
 const COVER_PICTURE = "COVER_PICTURE";
@@ -17,11 +18,41 @@ const PROFILE_PICTURE = "PROFILE_PICTURE";
 @Component({
   selector: 'app-user-update-profile',
   templateUrl: './user-update-profile.component.html',
-  styleUrls: [/*'../../../../../assets/css/select2.min.css', */
-                './user-update-profile.component.css'
-            ]
+  styleUrls: ['./user-update-profile.component.css']
 })
 export class UserUpdateProfileComponent implements AfterViewInit {
+
+    fetishes = [];
+    selectedItems = [];
+    dropdownSettings:IDropdownSettings;
+    ngOnInit() {
+      this.fetishes = [
+        { item_id: 1, item_text: 'High Heels' },
+        { item_id: 2, item_text: 'Hair Pulling' },
+        { item_id: 3, item_text: 'Pune' },
+        { item_id: 4, item_text: 'Navsari' }
+      ];
+      console.log(this.fetishes);
+      this.selectedItems = [
+        { item_id: 3, item_text: 'Pune' },
+        { item_id: 4, item_text: 'Navsari' }
+      ];
+      this.dropdownSettings = {
+        singleSelection: false,
+        idField: 'id',
+        textField: 'name',
+        selectAllText: 'Select All',
+        unSelectAllText: 'UnSelect All',
+        itemsShowLimit: 3,
+        allowSearchFilter: true
+      };
+    }
+    // onItemSelect(item: any) {
+    //   console.log(item);
+    // }
+    // onSelectAll(items: any) {
+    //   console.log(items);
+    // }
 
     config: any = {
         allowedContent: true,
@@ -53,7 +84,7 @@ export class UserUpdateProfileComponent implements AfterViewInit {
     username : string;
     general : Preference;
     sweet_treat : sweetTreat;
-    model_collection : collection;
+    model_collection : Collection;
 
     resetForm() {
         $("#form3")[0].reset();
@@ -175,7 +206,7 @@ constructor(private requestService : RequestService, private router : Router, pr
      });
      $.getScript('../../../../assets/js/lightbox.min.js',function(){
      }); */
-    $('select').select2();
+    
     
      // Load Logged In User Profile
      setTimeout(()=>{
@@ -491,7 +522,7 @@ generalAccordionData_fn(url, object) {
             if(data.model_details !== undefined && data.model_details !== null && data.model_details !== "") {
                 this.model_details = data.model_details;
             }
-
+            console.log(this.general.fetishes);
           } else {
               this.errorMessages = data.error_messages;
               this.toast_message("Error", this.errorMessages);             
@@ -531,6 +562,7 @@ user_profile_fn(url, object) {
 
    // To update the profile page of logged in user
    updateModelProfileFn(form : NgForm) {
+       console.log(form.value);
     this.requestService.postMethod('updateModelProfile', form.value)
         .subscribe(
             (data : any ) => {

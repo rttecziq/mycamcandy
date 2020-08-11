@@ -267,7 +267,7 @@
                           <div class="col-lg-6 col-md-6 mt-2" *ngIf="general.language_spoken.profile_categories_views && general.language_spoken.profile_categories_views.length > 0">
                              <div class="form-group">
                               <label class="bold">{{general.language_spoken.name}}</label>
-                                <select class="form-control" multiple  [(ngModel)]="model_details.language_spoken" name="language_spoken">
+                                <select class="form-control"  [(ngModel)]="model_details.language_spoken" name="language_spoken">
                                  <option value="">Nothing selected</option>
                                  <option *ngFor="let language_spoken of general.language_spoken.profile_categories_views" [selected]="model_details.language_spoken == language_spoken.id" [value]="language_spoken.id">
                                     {{language_spoken.name}}
@@ -471,12 +471,20 @@
                           <div class="col-lg-12 col-md-12">
                              <div class="form-group">
                               <label class="bold">{{general.fetishes.name}}</label>
-                                <select class="form-control" multiple  [(ngModel)]="model_details.fetishes" name="fetishes" id="fetishes">
+                                <!-- <select class="form-control" multiple  [(ngModel)]="model_details.fetishes" name="fetishes" id="fetishes">
                                     <option value="">Nothing selected</option>
                                     <option *ngFor="let fetishes of general.fetishes.profile_categories_views" [selected]="model_details.fetishes == fetishes.id" [value]="fetishes.id">
                                        {{fetishes.name}}
                                      </option>
-                                 </select>
+                                 </select> -->
+                                 <ng-multiselect-dropdown
+                                 [placeholder]="'Nothing Selected'"
+                                 [data]="general.fetishes.profile_categories_views"
+                                 [(ngModel)]="selectedItems"
+                                 [settings]="dropdownSettings"
+                                 name="fetishes"
+                                 >
+                                 </ng-multiselect-dropdown>
                              </div>
                           </div>
                        </div>
