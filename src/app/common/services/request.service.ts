@@ -72,6 +72,12 @@ export class RequestService {
 
 	}
 
+	uploadAlbum(url, formData) {
+
+		return this.http.post(this.apiUrl+url, formData);
+
+	}
+
 	// GetMethod for only to load details from API
 
 	getMethod(url, object) {

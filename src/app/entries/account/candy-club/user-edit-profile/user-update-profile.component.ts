@@ -7,7 +7,9 @@ import { Location } from '@angular/common';
 import { ModelProfile } from '../../../../models/model-profile';
 import { Preference } from '../../../../models/preference';
 import { sweetTreat } from '../../../../models/sweet-treat';
+import { Collection } from '../../../../models/collection';
 import { CheckStreamerService } from '../../../../common/services/check-streamer.service';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 declare var $: any ;
 const COVER_PICTURE = "COVER_PICTURE";
@@ -16,11 +18,41 @@ const PROFILE_PICTURE = "PROFILE_PICTURE";
 @Component({
   selector: 'app-user-update-profile',
   templateUrl: './user-update-profile.component.html',
-  styleUrls: [/*'../../../../../assets/css/select2.min.css', */
-                './user-update-profile.component.css'
-            ]
+  styleUrls: ['./user-update-profile.component.css']
 })
 export class UserUpdateProfileComponent implements AfterViewInit {
+
+    fetishes = [];
+    selectedItems = [];
+    dropdownSettings:IDropdownSettings;
+    ngOnInit() {
+      this.fetishes = [
+        { item_id: 1, item_text: 'High Heels' },
+        { item_id: 2, item_text: 'Hair Pulling' },
+        { item_id: 3, item_text: 'Pune' },
+        { item_id: 4, item_text: 'Navsari' }
+      ];
+      console.log(this.fetishes);
+      this.selectedItems = [
+        { item_id: 3, item_text: 'Pune' },
+        { item_id: 4, item_text: 'Navsari' }
+      ];
+      this.dropdownSettings = {
+        singleSelection: false,
+        idField: 'id',
+        textField: 'name',
+        selectAllText: 'Select All',
+        unSelectAllText: 'UnSelect All',
+        itemsShowLimit: 3,
+        allowSearchFilter: true
+      };
+    }
+    // onItemSelect(item: any) {
+    //   console.log(item);
+    // }
+    // onSelectAll(items: any) {
+    //   console.log(items);
+    // }
 
     config: any = {
         allowedContent: true,
@@ -40,7 +72,9 @@ export class UserUpdateProfileComponent implements AfterViewInit {
     user_profile_picture : string;
     user_cover_picture : string;
     sweet_treat_image : File;
-    sweet_treat_featured_image : string;
+    sweet_treat_featured_image : string;    
+    collection_image : File;
+    collection_featured_image : string;
     no_of_followers : number;
     no_of_followings : number;
     description : string;
@@ -50,6 +84,7 @@ export class UserUpdateProfileComponent implements AfterViewInit {
     username : string;
     general : Preference;
     sweet_treat : sweetTreat;
+    model_collection : Collection;
 
     resetForm() {
         $("#form3")[0].reset();
@@ -62,6 +97,7 @@ constructor(private requestService : RequestService, private router : Router, pr
     this.profile_picture = null;
     this.cover_picture = null;
     this.sweet_treat_image = null;
+    this.collection_image = null;
     this.description = "";
 
     this.sweet_treat = {
@@ -71,6 +107,12 @@ constructor(private requestService : RequestService, private router : Router, pr
         description : "",
         featured_image : "",
         secret_note : ""
+    }
+
+    this.model_collection = {
+        collection_title : "",
+        collection_candies : 0,
+        collection_featured_image : "",
     }
 
     this.model_details = {
@@ -149,6 +191,7 @@ constructor(private requestService : RequestService, private router : Router, pr
     this.user_profile_picture = "../../../../assets/img/default-profile.jpg";
     this.user_cover_picture = "../../../../assets/img/cover.jpg";
     this.sweet_treat_featured_image = "../../../../assets/img/default-profile.jpg";
+    this.collection_featured_image = "../../../../assets/img/default-profile.jpg";
     this.is_content_creator = true;
 }
 
@@ -163,7 +206,7 @@ constructor(private requestService : RequestService, private router : Router, pr
      });
      $.getScript('../../../../assets/js/lightbox.min.js',function(){
      }); */
-    $('select').select2();
+    
     
      // Load Logged In User Profile
      setTimeout(()=>{
@@ -269,6 +312,20 @@ handleSweetTreat(files : FileList) {
     var reader = new FileReader();  
     reader.onload = (event: any) => {    
       this.sweet_treat_featured_image = event.target.result;    
+    }
+    reader.readAsDataURL(files.item(0));
+}
+
+handleCollection(files : FileList) {
+    this.collection_image = files.item(0);
+    if(!files.item(0).type.match('image')) {
+        this.toast_message("Warning", "Please choose image with extensions .png, .jpg, .jpeg");  
+        return false;
+    }
+  
+    var reader = new FileReader();  
+    reader.onload = (event: any) => {    
+      this.collection_featured_image = event.target.result;    
     }
     reader.readAsDataURL(files.item(0));
 }
@@ -392,6 +449,46 @@ sweetTreatFormFn(form : NgForm) {
         );
 }
 
+collectionFormFn(form : NgForm) {
+    
+    if (form.value['collection_title'] == undefined || form.value['collection_title'] == '' || form.value['collection_title'] == null) {
+        this.toast_message("Error", "Enter collection title");
+        return false;
+    }
+
+    if (form.value['collection_candies'] == undefined || form.value['collection_candies'] == '' || form.value['collection_candies'] == null) {
+        this.toast_message("Error", "Collection candies is missing");
+        return false;
+    }
+
+    if (this.collection_image !== undefined && this.collection_image !== null) {            
+        form.value['collection_featured_image'] = this.collection_image;
+    } else {
+        this.toast_message("Error", "Add collection featured image");
+        return false;
+    }
+        
+    this.requestService.postMethod('addCollection', form.value)
+        .subscribe(
+            (data : any ) => {
+                if (data.success == true) {
+                    this.toast_message("Success", "Collection added successfully");
+                    $('#collection_model_close').click();
+                    this.router.navigate(['/candy-club/'+this.username+'/collection']);
+                } else {
+                    this.errorMessages = data.error_messages;
+                    this.toast_message("Error", this.errorMessages);                    
+                }
+            },
+
+            (err : HttpErrorResponse) => {
+                this.errorMessages = 'Oops! Something Went Wrong';
+                this.toast_message("Error", this.errorMessages);
+            }
+        );
+}
+
+
 setBackgroundColor(bgcolor) { this.model_details.profile_bg_color = bgcolor; }
 setTextColor(textColor) { this.model_details.profile_text_color = textColor; }
 
@@ -425,7 +522,7 @@ generalAccordionData_fn(url, object) {
             if(data.model_details !== undefined && data.model_details !== null && data.model_details !== "") {
                 this.model_details = data.model_details;
             }
-
+            console.log(this.general.fetishes);
           } else {
               this.errorMessages = data.error_messages;
               this.toast_message("Error", this.errorMessages);             
@@ -465,6 +562,7 @@ user_profile_fn(url, object) {
 
    // To update the profile page of logged in user
    updateModelProfileFn(form : NgForm) {
+       console.log(form.value);
     this.requestService.postMethod('updateModelProfile', form.value)
         .subscribe(
             (data : any ) => {

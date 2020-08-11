@@ -19,23 +19,23 @@
         <img [src]="user_cover_picture" class="img-responsive user-cover-photo w-100">
         <div class="top-left cover-menu">
           <ul>
-              <li><a href="#">31 <br> Candy Albums</a></li>
-              <li><a href="#">6 <br> Candy Collections</a></li>
+              <li><a routerLink="/candy-club/{{username}}/album">31 <br> Candy Albums</a></li>
+              <li><a routerLink="/candy-club/{{username}}/collection">6 <br> Candy Collections</a></li>
               <li><a routerLink="/candy-club/{{username}}/sweet-treat">13 <br> Sweet Treats</a></li>
               <li class="float-right text-center" style="display: inline-block;">
-                <button class="btn btn-sm btn-info">
+                <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#uploadAlbum">
                   <img src="/assets/img/model/iconfinder_179_Upload_183298.png" height="25" width="25">
                 </button><br>
                 <div class="text-light">Upload Albums</div>
               </li>
               <li class="float-right text-center" style="display: inline-block;">
-                <button class="btn btn-sm btn-info">
+                <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#collection_model">
                   <img src="/assets/img/model/iconfinder_add-item_57905.png" height="25" width="25">
                 </button><br>
                 <div class="text-light">Add Collections</div>
               </li> 
            <li class="float-right text-center" style="display: inline-block;">
-            <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#sweet_treat_model" class="pointer">
+            <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#sweet_treat_model">
               <img src="/assets/img/model/Gift_Box-36-128.png" height="25" width="25">
             </button><br>
             <div class="text-light">Add Sweet Treats</div>
@@ -86,7 +86,7 @@
     </div>
   </div>
 
-  <!-- sweet treate model-->
+<!-- sweet treate model-->
 <div class="modal fade" id="sweet_treat_model" role="dialog">
   <div class="modal-dialog">
 
@@ -136,6 +136,111 @@
            </div>
        </form>
 
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+ <!-- Collection model-->
+ <div class="modal fade" id="collection_model" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" id="collection_model_close">&times;</button>
+          <h4 class="mt-0">Collection</h4>
+          
+          <form id="form6" #collectionForm="ngForm" (ngSubmit)="collectionFormFn(collectionForm)"><hr>
+            <div class="form-group mt-2">
+                <label> Collection <span class="text-danger bold">*</span> </label>
+                <input type="text" name="collection_title" class="form-control" [(ngModel)]="model_collection.collection_title" required/>
+
+                <label class="mt-2"> Candies <span class="text-danger bold">*</span> </label>
+                <input type="number" name="collection_candies" class="form-control" [(ngModel)]="model_collection.collection_candies" required/>
+                
+                <label class="mt-2"> File Upload <span class="text-danger bold">*</span> </label>
+                <div [style.background-image]="collection_featured_image ? 'url(' + collection_featured_image + ')' : null" class="user-profile1 thumbnail"></div>
+                <input type="file" name="collection_featured_image" class="form-control" accept="image/png,image/jpeg" (change)="handleCollection($event.target.files)" required/>
+
+                <div class="form-row text-center mt-2 mb-2">
+                  <button type="submit" class="btn btn-primary">Add Collection</button>
+                </div>
+            </div>
+          </form>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Album upload -->
+<div id="uploadAlbum" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form method="POST"enctype="multipart/form-data" #albumUploadForm="ngForm" (ngSubmit)="albumUploadFormFn(albumUploadForm)">
+          <div class="form-group">
+            <label>Album Title <span class="text-danger">*</span></label>
+            <input type="text" name="title" [(ngModel)]="albums.title" class="form-control" required/>
+          </div>
+          <div class="form-group">
+            <label>Tags</label>
+            <select class="form-control" name="tags" multiple [(ngModel)]="albums.tags">
+              <option  value="Ass">Ass</option>
+              <option value="Femdom">Femdom</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Collections</label>
+            <select class="form-control" name="collection" [(ngModel)]="albums.collection">
+              <option value="">Nothing selected</option>
+              <option *ngFor="let collection of collection_list" [value]="collection.id" [selected]="albums.collection == collection.id">{{collection.collection_title}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Albums Category <span class="text-danger">*</span></label><br>
+            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="password_check" (change)="togglePassword($event)" name="password_check" class="check_password"><i class="fa fa-lock"></i> Password</label>
+            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="candies_check" (change)="toggleCandies($event)" name="candies_check" class="check_candies"><i class="fa fa-gift"></i> Candies</label>
+            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="albums.listing" name="listing"><i class="fa fa-eye-slash"></i> Unlisted</label>
+            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="albums.vip" name="vip"><i class="fa fa-cube"></i> VIPS</label>
+            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="albums.featured" name="featured"><i class="fa fa-star"></i> Featured</label>
+          </div>
+          <div class="form-group password-div" *ngIf="password_check">
+            <label>Password <span class="text-danger">*</span></label>
+            <input type="password" [(ngModel)]="albums.password" name="password"  class="form-control">
+          </div>
+          <div class="form-group candies-div" *ngIf="candies_check">
+            <label>Candies <span class="text-danger">*</span></label>
+            <input type="number" [(ngModel)]="albums.candies" name="candies" class="form-control">
+          </div>
+          <div class="form-group">
+            <i *ngFor='let album_videos_url of album_videos_urls' height="75" width="75" class="fa fa-3x fa-video-camera" style="color:red;"></i>
+            <label>Video Upload</label>
+            <input type="file" name="video[]" [(ngModel)]="albums.video" (change)="handleAlbumVideo($event)"  multiple class="form-control" accept="video/mp4,video/mkv,video/flv">          
+          </div>
+          <div class="form-group">
+            <label>Album Cover Image</label>
+            <div [style.background-image]="album_cover_image ? 'url(' + album_cover_image + ')' : null" [class]="album_cover_image ? 'user-profile1' : ''"></div>
+              <input type="file" name="album_cover_image" [(ngModel)]="albums.album_cover_image" (change)="handleAlbumCover($event.target.files)" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Photos</label>
+            <i *ngFor='let album_photos_url of album_photos_urls' height="75" width="75" class="fa fa-3x fa-video-camera" style="color:red;"></i>
+            <div class="image-upload-wrap">
+              <input class="file-upload-input form-control" name="photo[]" (change)="handleAlbumPhoto($event)"  [(ngModel)]="albums.photo" type='file' accept="image/png,image/jpeg,image/heic" multiple />
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="submit" name="submit_album" class="btn btn-info btn-sm" value="Upload Album"> 
+          </div>
+        </form>
       </div>
     </div>
 

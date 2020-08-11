@@ -71,6 +71,7 @@ import { MessageComponent } from './account/candy-club/message/message.component
 import { EarningHistoryComponent } from './account/candy-club/earning-history/earning-history.component';
 import { MyGiftComponent } from './account/candy-club/my-gift/my-gift.component';
 import { AlbumComponent } from './account/candy-club/album/album.component';
+import { AlbumDetailsComponent } from './account/candy-club/album/album-details/album-details.component';
 import { CollectionComponent } from './account/candy-club/collection/collection.component';
 import { FreeShowPhotoComponent } from './account/candy-club/free-show-photo/free-show-photo.component';
 import { NudeShowPhotoComponent } from './account/candy-club/nude-show-photo/nude-show-photo.component';
@@ -219,6 +220,12 @@ const entryRoutes: Routes = [
                 component: AlbumComponent,
                 canActivate: [AuthGuard],
                 data: {title : "My Album", expectedRole: 'onlyUser'},
+            },
+            { 
+                path: "candy-club/:username/album/:id",
+                component: AlbumDetailsComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Album Details", expectedRole: 'onlyUser'},
             },
             {
                 path: "candy-club/:username/collection",

@@ -9,114 +9,24 @@
       <div class="row mt-5">
         <div class="model-album">
           <h3 class="heading">My Candy Albums</h3>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
+                <div *ngIf="albums?.length > 0">
+                  <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3" *ngFor="let album of albums">
+                    <a routerLink="/candy-club/paul/album/{{album.id}}">
+                      <div class="img-container">
+                        <img [src]="album.album_cover_image" class="img-responsive">
+                        <div class="bottom-left text-shadow">{{ album.title }}</div>
+                        <div class="top-left"><i class="fa fa-play-circle"></i></div>
+                        <div class="top-right" *ngIf="album.password"><i class="fa fa-lock"></i></div>
+                        <!-- <div class="bottom-right">Bottom Right</div> -->
+                        <div class="centered bold">{{ album.candies }} Candies</div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+                <div *ngIf="albums?.length == 0">
+                    <p class="text-center alert alert-danger"> No album found </p>
+                </div>
         </div>
       </div>
     </div>

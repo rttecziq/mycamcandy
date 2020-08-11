@@ -9,117 +9,62 @@
       <div class="row mt-5">
         <div class="model-album">
           <h3 class="heading">My Candy Collections</h3>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
+
+              <div *ngIf="collections.length > 0">
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3" *ngFor="let collection of collections">                  
+                    <div class="img-container">
+                      <a routerLink="/candy-club/{{username}}/collection/{{collection.id}}">
+                        <img [src]="collection.collection_featured_image ? collection.collection_featured_image : ''" class="img-responsive">
+                      </a>
+                      <a routerLink="/candy-club/{{username}}/collection/{{collection.id}}">
+                        <div class="bottom-left text-shadow text-white">{{collection.collection_title}}</div>
+                      </a>
+                      <div class="top-left"><i class="fa fa-play-circle" id="xa"></i></div>
+                        <div class="top-right"><i class="fa fa-pencil" role="button"  (click)="show(collection.id, collection.collection_title, collection.collection_candies, collection.collection_featured_image)"></i></div>
+                      <!-- <div class="bottom-right">Bottom Right</div> (click)="editCollection(collection.id)"  data-toggle="modal" data-target="#collection_model"-->
+                      <a routerLink="/candy-club/{{username}}/collection/{{collection.id}}">
+                        <div class="centered bold text-white">{{collection.collection_candies}} Candies</div>
+                      </a>
+                    </div>                  
+                </div>
               </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
+
+              <div *ngIf="collections.length <= 0">
+                  <div class="alert alert-danger text-center"> No collection found</div>
               </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3">
-            <a href="#">
-              <div class="img-container">
-                <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                <div class="bottom-left text-shadow">Today Video</div>
-                <div class="top-left"><i class="fa fa-play-circle"></i></div>
-                <div class="top-right"><i class="fa fa-lock"></i></div>
-                <!-- <div class="bottom-right">Bottom Right</div> -->
-                <div class="centered bold">249 Candies</div>
-              </div>
-            </a>
-          </div>
+
         </div>
       </div>
     </div>
   </div>
 
+</div>
+
+<!--Collection edit -->
+<div class="modal" id="collection_model" role="dialog" [style.display]="showModal ? 'block' : 'none'" [style.opacity]="showModal ? '1' : '0'">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" id="collection_model_close" (click)="hide()">&times;</button>
+          <h4 class="mt-0">Collection</h4>          
+          <form id="form6" #collectionForm="ngForm" (ngSubmit)="collectionFormFn(collectionForm)"><hr>
+            <div class="form-group mt-2">
+                <label> Collection <span class="text-danger bold">*</span> </label>
+                <input type="text" name="collection_title" class="form-control" [(ngModel)]="model_collection.collection_title" required/>
+
+                <label class="mt-2"> Candies <span class="text-danger bold">*</span> </label>
+                <input type="number" name="collection_candies" class="form-control" [(ngModel)]="model_collection.collection_candies" required/>
+
+                <label class="mt-2"> File Upload <span class="text-danger bold">*</span> </label>
+                <div [style.background-image]="model_collection.collection_featured_image ? 'url(' + model_collection.collection_featured_image + ')' : null" class="user-profile1 thumbnail"></div>
+                <input type="file" name="collection_featured_image" class="form-control" accept="image/png,image/jpeg" (change)="handleCollection($event.target.files)" required/>
+
+                <div class="form-row text-center mt-2 mb-2">
+                  <button type="submit" class="btn btn-primary">Add Collection</button>
+                </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
 </div>

@@ -123,6 +123,8 @@ import { ModelScheduleComponent } from './account/candy-club/model-schedule/mode
 import { UploadPhotoComponent } from './account/candy-club/upload-photo/upload-photo.component';
 import { UploadVideosComponent } from './account/candy-club/upload-videos/upload-videos.component';
 import { SweetTreatDetailsComponent } from './account/candy-club/sweet-treat/sweet-treat-details/sweet-treat-details.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { AlbumDetailsComponent } from './account/candy-club/album/album-details/album-details.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -206,7 +208,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         ModelScheduleComponent,
         UploadPhotoComponent,
         UploadVideosComponent,
-        SweetTreatDetailsComponent
+        SweetTreatDetailsComponent,
+        AlbumDetailsComponent
     ],
     imports: [
         CommonModule,
@@ -221,6 +224,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatInputModule,
         MatRippleModule,
         MatNativeDateModule,
+        NgMultiSelectDropDownModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
               provide: TranslateLoader,
