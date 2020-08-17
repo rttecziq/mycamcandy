@@ -22,6 +22,7 @@ export class SweetTreatComponent implements AfterViewInit {
   sweet_treat_image : File;
   showModal: boolean;
   sweet_treat_featured_image : string;
+  is_edit_mode : boolean;
 
   constructor(private requestService : RequestService, private router : Router) {
     this.errorMessages ="";
@@ -85,9 +86,11 @@ export class SweetTreatComponent implements AfterViewInit {
     this.sweet_treat.secret_note = secret_note;
 
     this.showModal = true;
+    this.is_edit_mode = true;
   }
   hide() {
     this.showModal = false;
+    this.is_edit_mode = false;
   }
 
   sweetTreatFormFn(form : NgForm) {
@@ -106,20 +109,22 @@ export class SweetTreatComponent implements AfterViewInit {
     if (this.sweet_treat_image !== undefined && this.sweet_treat_image !== null) {            
         form.value['featured_image'] = this.sweet_treat_image;
     } else {
+      if(!this.is_edit_mode) {
         this.toast_message("Error", "Add Sweet treat featured image");
         return false;
+      }
     }
-    if (form.value['listing'] === true) {
-        form.value['listing'] = 0;
-    } else {
+    if (form.value['listing'] == true) {
         form.value['listing'] = 1;
+    } else {
+        form.value['listing'] = 0;
     }
 
     this.requestService.postMethod('sweetTreat', form.value)
         .subscribe(
             (data : any ) => {
                 if (data.success == true) {
-                    this.toast_message("Success", "Sweet Treat added successfully");
+                    this.toast_message("Success", this.is_edit_mode ? 'Sweet Treat updated successfully' : 'Sweet Treat added successfully');
                     $('#sweet_treat_model_close').click();
                     location.reload();
                 } else {

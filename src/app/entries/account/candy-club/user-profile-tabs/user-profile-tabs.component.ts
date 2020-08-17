@@ -37,6 +37,7 @@ export class UserProfileTabsComponent implements AfterViewInit {
   model_collection : Collection;
 
   collection_list : any;
+  sweet_shop_count : any;
   
   // album
   candies_check  = false;
@@ -60,6 +61,7 @@ export class UserProfileTabsComponent implements AfterViewInit {
       this.sweet_treat_image = null;
       this.collection_image = null;
       this.collection_list = [];
+      this.sweet_shop_count = [];
       this.album_cover = null;
       this.album_cover_image = "";
       this.album_video = null;
@@ -210,6 +212,8 @@ toggleCandies(e) { this.candies_check = e.target.checked; if(this.candies_check 
 
             if (data.success == true) {
                 this.collection_list = data.data;
+                this.sweet_shop_count = data.sweet_shop_count;
+                console.log(data);
             } else {
                 this.errorMessages = data.error_messages;
                 this.toast_message("Error", this.errorMessages);
@@ -446,6 +450,11 @@ albumUploadFormFn(form : NgForm) {
         form.value['password'] = "";
     }
 
+    if(this.album_photo == null && this.album_video == null) {
+        this.toast_message("Error", "Missing album image/video");
+        return false;
+    }
+
     form.value['listing']   = form.value['listing'] === true ? 1 : 0;
     form.value['vip']       = form.value['vip'] === true ? 1 : 0;
     form.value['featured']  = form.value['featured'] === true ? 1 : 0;
@@ -464,6 +473,7 @@ albumUploadFormFn(form : NgForm) {
     formData.append('listing', form.value['listing']);
     formData.append('vip', form.value['vip']);
     formData.append('featured', form.value['featured']);
+
 
     if(this.album_photo) {
 
@@ -497,18 +507,17 @@ albumUploadFormFn(form : NgForm) {
         .subscribe(
             (data : any ) => {
                 if (data.success === true) {
-                    console.log(data);
-                    if(data.data.length > 0) {
+                    // console.log(data);
+                    this.toast_message("Success", "Album added successfully");
+                    //if(data.data) {
                         // hide popup of album upload
                         // show popup heic conversion
-                        for (let i = 0; i < 1; i++) {
-                            this.heic_conversion(data.data[i]);
-                        }
-                    }
-                    this.toast_message("Success", "Album added successfully");
- 
+                        // for (let i = 0; i < 1; i++) {
+                        //     this.heic_conversion(data.data[i]);
+                        // }
+                    //}
                     $('#album_model_close').click();
-                   // this.router.navigate(['/candy-club/'+this.username+'/album']);
+                    this.router.navigate(['/candy-club/'+this.username+'/album']);
                 } else {
                     this.errorMessages = data.error_messages;
                     this.toast_message("Error", this.errorMessages);                    

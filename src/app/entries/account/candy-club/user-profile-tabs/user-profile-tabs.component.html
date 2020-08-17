@@ -19,9 +19,9 @@
         <img [src]="user_cover_picture" class="img-responsive user-cover-photo w-100">
         <div class="top-left cover-menu">
           <ul>
-              <li><a routerLink="/candy-club/{{username}}/album">31 <br> Candy Albums</a></li>
-              <li><a routerLink="/candy-club/{{username}}/collection">6 <br> Candy Collections</a></li>
-              <li><a routerLink="/candy-club/{{username}}/sweet-treat">13 <br> Sweet Treats</a></li>
+              <li><a routerLink="/candy-club/{{username}}/album">{{sweet_shop_count.album_count}} <br> Candy Albums</a></li>
+              <li><a routerLink="/candy-club/{{username}}/collection">{{sweet_shop_count.collection_count}} <br> Candy Collections</a></li>
+              <li><a routerLink="/candy-club/{{username}}/sweet-treat">{{sweet_shop_count.sweet_treat_count}} <br> Sweet Treats</a></li>
               <li class="float-right text-center" style="display: inline-block;">
                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#uploadAlbum">
                   <img src="/assets/img/model/iconfinder_179_Upload_183298.png" height="25" width="25">
@@ -221,7 +221,7 @@
             <input type="number" [(ngModel)]="albums.candies" name="candies" class="form-control">
           </div>
           <div class="form-group">
-            <i *ngFor='let album_videos_url of album_videos_urls' height="75" width="75" class="fa fa-3x fa-video-camera" style="color:red;"></i>
+            <!-- <i *ngFor='let album_videos_url of album_videos_urls' height="75" width="75" class="fa fa-3x fa-video-camera" style="color:red;"></i> -->
             <label>Video Upload</label>
             <input type="file" name="video[]" [(ngModel)]="albums.video" (change)="handleAlbumVideo($event)"  multiple class="form-control" accept="video/mp4,video/mkv,video/flv">          
           </div>
@@ -232,7 +232,7 @@
           </div>
           <div class="form-group">
             <label>Photos</label>
-            <i *ngFor='let album_photos_url of album_photos_urls' height="75" width="75" class="fa fa-3x fa-video-camera" style="color:red;"></i>
+            <!-- <i *ngFor='let album_photos_url of album_photos_urls' height="75" width="75" class="fa fa-3x fa-video-camera" style="color:red;"></i> -->
             <div class="image-upload-wrap">
               <input class="file-upload-input form-control" name="photo[]" (change)="handleAlbumPhoto($event)"  [(ngModel)]="albums.photo" type='file' accept="image/png,image/jpeg,image/heic" multiple />
             </div>

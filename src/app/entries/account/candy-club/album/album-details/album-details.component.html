@@ -8,13 +8,12 @@
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
       
       <div class="row mt-5">
-        <div class="model-album">
-          <div class="container">
-            <div class="col-lg-11"><h3 class="heading ml-2" *ngIf="albums?.length > 0">{{ albums.title }} 
-              <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#album_model"><i class="fa fa-pencil"></i> Edit</button>
-            </h3>
+        <div class="model-album" *ngIf="album_details?.length > 0">
+              <div class="container">
+                <div class="col-lg-11">
+                  <h3 class="heading ml-2">{{ albums.title }}<button class="btn btn-primary pull-right" data-toggle="modal" data-target="#album_model"><i class="fa fa-pencil"></i> Edit</button></h3>
+                </div>
               </div>
-          </div>
            
               <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3" *ngFor="let album of album_details">
                 <div *ngIf="album.type == 'IMAGE'">
@@ -42,18 +41,16 @@
                   </div>
                 </div>
               </div>
-
-        <div *ngIf="albums?.length == 0">
-          <p class="text-center alert alert-danger"> No album found </p>
         </div>
-
-      </div>
+        <div *ngIf="album_details?.length == 0">
+          <p class="text-center alert alert-danger"> No data found </p>
+        </div>
     </div>
   </div>
 </div>
 
   <!--Album edit -->
-<div class="modal fade" id="album_model"  role="dialog" *ngIf="albums?.length > 0">
+<div class="modal fade" id="album_model"  role="dialog" *ngIf="album_details?.length > 0">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -75,7 +72,7 @@
           <div class="form-group">
             <label>Collections</label>
             <select class="form-control" name="collection" [(ngModel)]="albums.collection">
-              <option value="">Nothing selected</option>
+              <option value="0" [selected]="albums.collection == '0'">Nothing selected</option>
               <option *ngFor="let collection of collection_list" [value]="collection.id" [selected]="albums.collection == collection.id">{{collection.collection_title}}</option>
             </select>
           </div>
