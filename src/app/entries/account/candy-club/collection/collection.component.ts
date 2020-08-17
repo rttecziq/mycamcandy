@@ -19,6 +19,7 @@ export class CollectionComponent implements AfterViewInit {
   username : string;
   model_collection : Collection;
   showModal: boolean;
+  is_edit_mode : boolean;
   collection_image : File;
   collection_featured_image : string;
   collection_id : number;
@@ -39,7 +40,6 @@ export class CollectionComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-
     setTimeout(()=>{
       this.list_collection_fn("listCollection", "");
     }, 1000);
@@ -83,9 +83,11 @@ show(id, collection_title,collection_candies,collection_featured_image) {
   this.model_collection.collection_candies = collection_candies;
   this.model_collection.collection_featured_image = collection_featured_image;
   this.showModal = true;
+  this.is_edit_mode = true;
 }
 hide() {
   this.showModal = false;
+  this.is_edit_mode = false;
 }
 
 
@@ -117,20 +119,26 @@ collectionFormFn(form : NgForm) {
       return false;
   }
 
-  if (this.collection_image !== undefined && this.collection_image !== null) {            
-      form.value['collection_featured_image'] = this.collection_image;
-  } else {
-      this.toast_message("Error", "Add collection featured image");
-      return false;
+  
+    if (this.collection_image !== undefined && this.collection_image !== null) {        
+        form.value['collection_featured_image'] = this.collection_image;
+    } else {
+      if(!this.is_edit_mode) {
+        this.toast_message("Error", "Add collection featured image");
+        return false;
+      }
   }
 //  addCollection api is used for edit also
   this.requestService.postMethod('addCollection', form.value)
       .subscribe(
           (data : any ) => {
               if (data.success == true) {
-                  this.toast_message("Success", "Collection added successfully");
-                  $('#collection_model_close').click();
-                  this.router.navigate(['/candy-club/'+this.username+'/collection']);
+                  this.toast_message("Success", this.is_edit_mode ? 'Collection updated successfully' : 'Collection added successfully');
+                    if(this.router.url.split("/").pop() == 'collection') {
+                      location.reload();
+                    } else {
+                      this.router.navigate(['/candy-club/'+this.username+'/collection']);
+                    }
               } else {
                   this.errorMessages = data.error_messages;
                   this.toast_message("Error", this.errorMessages);                    
@@ -143,31 +151,6 @@ collectionFormFn(form : NgForm) {
           }
       );
 }
-
-// editCollection(collection_id) {
-  
-//   const formData = {
-//     collection_id: collection_id
-//   }
-
-//   this.requestService.getMethod("", formData)
-//   .subscribe(
-//       (data : any ) => {
-//           if (data.success == true) {
-//               this.model_collection = data.data;
-//           } else {
-//               this.errorMessages = data.error_messages;
-//               this.toast_message("Error", this.errorMessages);
-//           }
-//       },
-
-//       (err : HttpErrorResponse) => {
-//           this.errorMessages = 'Oops! Something Went Wrong';
-//           this.toast_message("Error", this.errorMessages);
-//       }
-//   );
-// }
-
 
 
 }

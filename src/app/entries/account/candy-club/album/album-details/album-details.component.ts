@@ -266,9 +266,9 @@ albumUploadFormFn(form : NgForm) {
         form.value['password'] = "";
     }
 
-    form.value['listing']   = form.value['listing'] === true ? 1 : 0;
-    form.value['vip']       = form.value['vip'] === true ? 1 : 0;
-    form.value['featured']  = form.value['featured'] === true ? 1 : 0;
+    form.value['listing']   = form.value['listing'] == true ? 1 : 0;
+    form.value['vip']       = form.value['vip'] == true ? 1 : 0;
+    form.value['featured']  = form.value['featured'] == true ? 1 : 0;
 
     formData.append('id',  (localStorage.getItem('userId') != '' && localStorage.getItem('userId') != null && localStorage.getItem('userId') != undefined) ? localStorage.getItem('userId') : '');
     formData.append('model_id',  (localStorage.getItem('userId') != '' && localStorage.getItem('userId') != null && localStorage.getItem('userId') != undefined) ? localStorage.getItem('userId') : '');
@@ -323,7 +323,7 @@ albumUploadFormFn(form : NgForm) {
                     location.reload();
                 } else {
                     this.errorMessages = data.error_messages;
-                    this.toast_message("Error", this.errorMessages);                    
+                    this.toast_message("Error", this.errorMessages);
                 }
             },
 
