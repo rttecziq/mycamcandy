@@ -46,4 +46,4 @@ $(document).ready(function() {
 				classie.remove( ev.target.parentNode, 'input--filled' );
 			}
 	}
-})();
+});
