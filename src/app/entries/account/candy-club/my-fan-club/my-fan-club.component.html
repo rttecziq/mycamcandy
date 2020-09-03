@@ -34,38 +34,37 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Fan Club $5.99/month</td>
+                    <tr *ngFor="let subscribed_plan of subscribed_plans;let first = first;let i = index;">
+                      <td>{{subscribed_plan.title}} {{subscribed_plan.currency}}{{subscribed_plan.amount}}/month</td>
                       <td>active</td>
-                      <td>2019-12-16</td>
-                      <td>$8.05</td>
+                      <td>{{subscribed_plan.plan_created_at}}</td>
+                      <td>{{subscribed_plan.currency}}{{subscribed_plan.amount}}</td>
                       <td>1 / Until cancelled</td>
-                      <td>2DX802118X900400M</td>
-                      <td>username</td>
+                      <td>{{subscribed_plan.payment_id}}</td>
+                      <td>{{subscribed_plan.user_name | uppercase}}</td>
                     </tr>
-                    <tr>
-                      <td>Fan Club $5.99/month</td>
-                      <td>active</td>
-                      <td>2019-12-16</td>
-                      <td>$8.05</td>
-                      <td>1 / Until cancelled</td>
-                      <td>2DX802118X900400M</td>
-                      <td>username</td>
-                    </tr>
-                    <tr>
-                      <td>Fan Club $5.99/month</td>
-                      <td>active</td>
-                      <td>2019-12-16</td>
-                      <td>$8.05</td>
-                      <td>1 / Until cancelled</td>
-                      <td>2DX802118X900400M</td>
-                      <td>username</td>
-                    </tr>
+                    
                   </tbody>
                 </table>
+                <div class="Spacer-10"></div>
+                <div class="loader" *ngIf="showLoader">
+                    <div class="spin"></div>
+                    <div class="bounce"></div>
+                </div>
+                <div class="text-center" *ngIf="skipCount > 0 && datasAvailable > 0">
+                    <button class="show-more-btn" (click)="showMore()">show more</button>
+                </div>
               </div>
             </div>
-        </div>
+          </div>
+          <div class="Spacer-10"></div>
+
+          <div class="no_result_class text-center" *ngIf="skipCount <= 0">
+              <div>
+                  <h3 class="tab-head text-center">You aren't subscribed to any plans</h3>
+                  <img class="noresult-img" src="../../../assets/img/no-result.gif">
+              </div>
+          </div>
         </div>
       </div>
     </div>
