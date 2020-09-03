@@ -1,9 +1,11 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { RequestService } from '../../../../../common/services/request.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Album } from '../../../../../models/album';
+
+import { lightgallery } from 'lightgallery';
 
 declare var $:any;
 
@@ -86,6 +88,29 @@ export class AlbumDetailsComponent implements OnInit {
 
    });
   }
+  ngAfterViewInit(){ 
+    $(document).ready(function() {
+        var $commentBox = $('.s_sCommentBoxPanelLarge');
+        $commentBox.lightGallery({
+          appendSubHtmlTo: '.lg-item',
+          addClass: 'fb-comments',
+          mode: 'lg-fade',
+          download: false,
+          enableDrag: false,
+          actualSize: false,
+          autoplayControls: true,
+          enableSwipe: false
+        });
+        $commentBox.on('onAfterSlide.lg', function(event, prevIndex, index) {
+          var postid=$('#post_'+index).val();
+        //   $.post("", function(data){  
+           $('.lg-outer .lg-thumb-outer').width($(document).width()-420)
+           $('.lg-loaded .fb-comments').html('hkhk');
+        //   });
+        }); 
+    });
+    $.getScript('../../../../../assets/lightgallery/js/lightgallery-all.min.js');
+}
 
   togglePassword(e) { this.password_check = e.target.checked; }
   toggleCandies(e)  { this.candies_check = e.target.checked;  }

@@ -5,115 +5,139 @@
 
   <div class="row mt-5 mb-5">
     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
-    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
       
-      <div class="row mt-5">
-        <div class="model-album" *ngIf="album_details?.length > 0">
-              <div class="container">
-                <div class="col-lg-11">
-                  <h3 class="heading ml-2">{{ albums.title }}<button class="btn btn-primary pull-right" data-toggle="modal" data-target="#album_model"><i class="fa fa-pencil"></i> Edit</button></h3>
-                </div>
-              </div>
-           
-              <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3" *ngFor="let album of album_details">
-                <div *ngIf="album.type == 'IMAGE'">
-                      <div class="img-container" >
-                        <a class="example-image-link" href="{{album['photo']}}" data-lightbox="example-set" >
-                          <img class="example-image img-responsive" src="{{album['photo']}}" alt=""/>
-                        </a>
-
-                        <div class="top-right">
-                          <i class="fa fa-trash" role="button" (click)="deleteAlblumItem(album.item_id)"></i>
-                      </div>
+        <div class="row mt-5">
+          <div class="model-album" *ngIf="album_details?.length > 0">
+                <div class="container">
+                  <div class="col-lg-11">
+                    <h3 class="heading ml-2">{{ albums.title }}<button class="btn btn-primary pull-right" data-toggle="modal" data-target="#album_model"><i class="fa fa-pencil"></i> Edit</button></h3>
                   </div>
                 </div>
+            
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3" *ngFor="let album of album_details">
+                  <div *ngIf="album.type == 'IMAGE'">
+                        <div class="img-container" >
+                          <a class="example-image-link" href="{{album['photo']}}" data-lightbox="example-set" >
+                            <img class="example-image img-responsive" src="{{album['photo']}}" alt=""/>
+                          </a>
 
-                <div *ngIf="album.type == 'VIDEO'">
-                  <a class="example-image-link" href="{{album['video']}}" data-lightbox="example-set">
-                    <video class="gif-video" autoplay loop>     
-                      <source [src]="album['video']" type="video/webm">
-                      <source [src]="album['video']" type="video/mp4">
-                    </video>
+                          <div class="top-right">
+                            <i class="fa fa-trash" role="button" (click)="deleteAlblumItem(album.item_id)"></i>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div *ngIf="album.type == 'VIDEO'">
+                    <a class="example-image-link" href="{{album['video']}}" data-lightbox="example-set">
+                      <video class="gif-video" autoplay loop>     
+                        <source [src]="album['video']" type="video/webm">
+                        <source [src]="album['video']" type="video/mp4">
+                      </video>
+                    </a>
+
+                    <div class="top-right">
+                      <i class="fa fa-trash" role="button" (click)="deleteAlblumItem(album.item_id)"></i>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div *ngIf="album_details?.length == 0">
+            <p class="text-center alert alert-danger"> No data found </p>
+          </div>
+        </div>
+        <div class="demo-gallery">
+          <div class="list-unstyled row s_sCommentBoxPanelLarge">
+              <div class="col-xs-6 col-sm-4 col-md-3" data-responsive="img/1-375.jpg 375, img/1-480.jpg 480, img/1.jpg 800" data-src="assets/demo/img/1-1600.jpg" data-sub-html="&lt;div class=&quot;fb-comments s_comntPanlars_M&quot; data-width=&quot;400&quot; data-numposts=&quot;0&quot;&gt;&lt;/div&gt;">
+                  <a href="">
+                      <img class="img-responsive" src="assets/demo/img/thumb-1.jpg">
                   </a>
-
-                  <div class="top-right">
-                    <i class="fa fa-trash" role="button" (click)="deleteAlblumItem(album.item_id)"></i>
-                  </div>
-                </div>
               </div>
+              <div class="col-xs-6 col-sm-4 col-md-3" data-responsive="img/2-375.jpg 375, img/2-480.jpg 480, img/2.jpg 800" data-src="assets/demo/img/2-1600.jpg" data-sub-html="&lt;div class=&quot;fb-comments s_comntPanlars_M&quot; data-width=&quot;400&quot; data-numposts=&quot;0&quot;&gt;&lt;/div&gt;">
+                  <a href="">
+                      <img class="img-responsive" src="assets/demo/img/thumb-2.jpg">
+                  </a>
+              </div>
+              <div class="col-xs-6 col-sm-4 col-md-3" data-responsive="img/13-375.jpg 375, img/13-480.jpg 480, img/13.jpg 800" data-src="assets/demo/img/13-1600.jpg" data-sub-html="&lt;div class=&quot;fb-comments s_comntPanlars_M&quot; data-width=&quot;400&quot; data-numposts=&quot;0&quot;&gt;&lt;/div&gt;">
+                  <a href="">
+                      <img class="img-responsive" src="assets/demo/img/thumb-13.jpg">
+                  </a>
+              </div>
+              <div class="col-xs-6 col-sm-4 col-md-3" data-responsive="img/4-375.jpg 375, img/4-480.jpg 480, img/4.jpg 800" data-src="assets/demo/img/4-1600.jpg" data-sub-html="&lt;div class=&quot;fb-comments s_comntPanlars_M&quot; data-width=&quot;400&quot; data-numposts=&quot;0&quot;&gt;&lt;/div&gt;">
+                  <a href="">
+                      <img class="img-responsive" src="assets/demo/img/thumb-4.jpg">
+                  </a>
+              </div>
+          </div>
         </div>
-        <div *ngIf="album_details?.length == 0">
-          <p class="text-center alert alert-danger"> No data found </p>
-        </div>
+      </div>
     </div>
-  </div>
-</div>
 
   <!--Album edit -->
-<div class="modal fade" id="album_model"  role="dialog" *ngIf="album_details?.length > 0">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form method="POST" id="form8" #albumUploadForm="ngForm" (ngSubmit)="albumUploadFormFn(albumUploadForm)">
-          <div class="form-group">
-            <label>Album Title <span class="text-danger">*</span></label>
-            <input type="text" name="title" [(ngModel)]="albums.title" class="form-control" required/>
-          </div>
-          <div class="form-group">
-            <label>Tags</label>
-            <select class="form-control" name="tags" multiple [(ngModel)]="albums.tags">
-              <option  value="Ass">Ass</option>
-              <option value="Femdom">Femdom</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Collections</label>
-            <select class="form-control" name="collection" [(ngModel)]="albums.collection">
-              <option value="0" [selected]="albums.collection == '0'">Nothing selected</option>
-              <option *ngFor="let collection of collection_list" [value]="collection.id" [selected]="albums.collection == collection.id">{{collection.collection_title}}</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Albums Category <span class="text-danger">*</span></label><br>
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="password_check" (change)="togglePassword($event)" name="password_check" class="check_password"><i class="fa fa-lock"></i> Password</label>
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="candies_check" (change)="toggleCandies($event)" name="candies_check" class="check_candies"><i class="fa fa-gift"></i> Candies</label>
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="albums['listing']" name="listing"><i class="fa fa-eye-slash"></i> Unlisted</label>
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="albums['vip']" name="vip"><i class="fa fa-cube"></i> VIPS</label>
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="albums['featured']" name="featured"><i class="fa fa-star"></i> Featured</label>
-          </div>
-          <div class="form-group password-div" *ngIf="password_check">
-            <label>Password <span class="text-danger">*</span></label>
-            <input type="password" [(ngModel)]="albums.password" name="password"  class="form-control">
-          </div>
-          <div class="form-group candies-div" *ngIf="candies_check">
-            <label>Candies <span class="text-danger">*</span></label>
-            <input type="number" [(ngModel)]="albums.candies" name="candies" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Video Upload</label>
-            <input type="file" name="video" (change)="handleAlbumVideo($event)"  multiple class="form-control" accept="video/mp4,video/mkv,video/flv">
-          </div>
-          <div class="form-group">
-            <label>Album Cover Image</label>
-            <div [style.background-image]="albums.album_cover_image ? 'url(' + albums.album_cover_image + ')' : null" [class]="albums.album_cover_image ? 'user-profile1' : ''"></div>
-              <input type="file" name="album_cover_image" (change)="handleAlbumCover($event.target.files)" accept="image/png,image/jpeg,image/heic" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Photos</label>
-            <div class="image-upload-wrap">
-              <input class="file-upload-input form-control" name="photo" (change)="handleAlbumPhoto($event)" type='file' accept="image/png,image/jpeg,image/heic" multiple />
+  <div class="modal fade" id="album_model"  role="dialog" *ngIf="album_details?.length > 0">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" id="form8" #albumUploadForm="ngForm" (ngSubmit)="albumUploadFormFn(albumUploadForm)">
+            <div class="form-group">
+              <label>Album Title <span class="text-danger">*</span></label>
+              <input type="text" name="title" [(ngModel)]="albums.title" class="form-control" required/>
             </div>
-          </div>
-          <div class="form-group">
-            <input type="submit" name="submit_album" class="btn btn-info btn-sm" value="Update Album">
-          </div>
-        </form>
+            <div class="form-group">
+              <label>Tags</label>
+              <select class="form-control" name="tags" multiple [(ngModel)]="albums.tags">
+                <option  value="Ass">Ass</option>
+                <option value="Femdom">Femdom</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Collections</label>
+              <select class="form-control" name="collection" [(ngModel)]="albums.collection">
+                <option value="0" [selected]="albums.collection == '0'">Nothing selected</option>
+                <option *ngFor="let collection of collection_list" [value]="collection.id" [selected]="albums.collection == collection.id">{{collection.collection_title}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Albums Category <span class="text-danger">*</span></label><br>
+              <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="password_check" (change)="togglePassword($event)" name="password_check" class="check_password"><i class="fa fa-lock"></i> Password</label>
+              <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="candies_check" (change)="toggleCandies($event)" name="candies_check" class="check_candies"><i class="fa fa-gift"></i> Candies</label>
+              <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="albums['listing']" name="listing"><i class="fa fa-eye-slash"></i> Unlisted</label>
+              <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="albums['vip']" name="vip"><i class="fa fa-cube"></i> VIPS</label>
+              <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="albums['featured']" name="featured"><i class="fa fa-star"></i> Featured</label>
+            </div>
+            <div class="form-group password-div" *ngIf="password_check">
+              <label>Password <span class="text-danger">*</span></label>
+              <input type="password" [(ngModel)]="albums.password" name="password"  class="form-control">
+            </div>
+            <div class="form-group candies-div" *ngIf="candies_check">
+              <label>Candies <span class="text-danger">*</span></label>
+              <input type="number" [(ngModel)]="albums.candies" name="candies" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Video Upload</label>
+              <input type="file" name="video" (change)="handleAlbumVideo($event)"  multiple class="form-control" accept="video/mp4,video/mkv,video/flv">
+            </div>
+            <div class="form-group">
+              <label>Album Cover Image</label>
+              <div [style.background-image]="albums.album_cover_image ? 'url(' + albums.album_cover_image + ')' : null" [class]="albums.album_cover_image ? 'user-profile1' : ''"></div>
+                <input type="file" name="album_cover_image" (change)="handleAlbumCover($event.target.files)" accept="image/png,image/jpeg,image/heic" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Photos</label>
+              <div class="image-upload-wrap">
+                <input class="file-upload-input form-control" name="photo" (change)="handleAlbumPhoto($event)" type='file' accept="image/png,image/jpeg,image/heic" multiple />
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="submit" name="submit_album" class="btn btn-info btn-sm" value="Update Album">
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 </div>
