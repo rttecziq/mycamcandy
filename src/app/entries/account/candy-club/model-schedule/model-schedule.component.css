@@ -47,3 +47,16 @@ h1 {
     font-size: 80%;
     font-weight: 400;
 }
+.schedule-details{
+    height:30vh;
+    overflow-y: auto;
+}
+.mt-2{
+    margin-top: 1rem;
+}
+.bg-light{
+    background: #fff!important;
+}
+.p-0{
+    padding:0!important;
+}

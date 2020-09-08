@@ -22,9 +22,10 @@ export class AboutComponent implements AfterViewInit {
     model_details : ModelProfile;
     general : Preference;
     datePipe : DatePipe;
+    username:string;
     
     constructor(private requestService : RequestService, private router : Router) {    
-        
+        this.username = localStorage.getItem('username');        
         this.model_details = {
         
             //about
