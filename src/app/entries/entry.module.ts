@@ -125,6 +125,17 @@ import { UploadVideosComponent } from './account/candy-club/upload-videos/upload
 import { SweetTreatDetailsComponent } from './account/candy-club/sweet-treat/sweet-treat-details/sweet-treat-details.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AlbumDetailsComponent } from './account/candy-club/album/album-details/album-details.component';
+import { PrivacyPolicyComponent } from './account/candy-club/privacy-policy/privacy-policy.component';
+import { CookiePolicyComponent } from './account/candy-club/cookie-policy/cookie-policy.component';
+import { DcmaCompliantComponent } from './account/candy-club/dcma-compliant/dcma-compliant.component';
+import { NoticeAboutPerformerComponent } from './account/candy-club/notice-about-performer/notice-about-performer.component';
+import { ComplianceStatementComponent } from './account/candy-club/compliance-statement/compliance-statement.component';
+import { MakeMoreMoneyComponent } from './account/candy-club/make-more-money/make-more-money.component';
+import { WhySignupWithUsComponent } from './account/candy-club/why-signup-with-us/why-signup-with-us.component';
+import { PerformerDashboardComponent } from './account/candy-club/performer-dashboard/performer-dashboard.component';
+import { StartStreamingComponent } from './account/candy-club/start-streaming/start-streaming.component';
+import { UpdateAccountRecordComponent } from './account/candy-club/update-account-record/update-account-record.component';
+import { ModelDashboardComponent } from './account/candy-club/model-dashboard/model-dashboard.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -209,7 +220,18 @@ export function HttpLoaderFactory(http: HttpClient) {
         UploadPhotoComponent,
         UploadVideosComponent,
         SweetTreatDetailsComponent,
-        AlbumDetailsComponent
+        AlbumDetailsComponent,
+        PrivacyPolicyComponent,
+        CookiePolicyComponent,
+        DcmaCompliantComponent,
+        NoticeAboutPerformerComponent,
+        ComplianceStatementComponent,
+        MakeMoreMoneyComponent,
+        WhySignupWithUsComponent,
+        PerformerDashboardComponent,
+        StartStreamingComponent,
+        UpdateAccountRecordComponent,
+        ModelDashboardComponent
     ],
     imports: [
         CommonModule,

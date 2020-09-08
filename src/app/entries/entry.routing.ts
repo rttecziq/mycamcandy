@@ -83,6 +83,17 @@ import { SweetTreatDetailsComponent } from './account/candy-club/sweet-treat/swe
 import { TopModelComponent } from './account/candy-club/top-model/top-model.component';
 import { UploadPhotoComponent } from './account/candy-club/upload-photo/upload-photo.component';
 import { UploadVideosComponent } from './account/candy-club/upload-videos/upload-videos.component';
+import { MakeMoreMoneyComponent } from './account/candy-club/make-more-money/make-more-money.component';
+import { ComplianceStatementComponent } from './account/candy-club/compliance-statement/compliance-statement.component';
+import { CookiePolicyComponent } from './account/candy-club/cookie-policy/cookie-policy.component';
+import { DcmaCompliantComponent } from './account/candy-club/dcma-compliant/dcma-compliant.component';
+import { NoticeAboutPerformerComponent } from './account/candy-club/notice-about-performer/notice-about-performer.component';
+import { PrivacyPolicyComponent } from './account/candy-club/privacy-policy/privacy-policy.component';
+import { PerformerDashboardComponent } from './account/candy-club/performer-dashboard/performer-dashboard.component';
+import { StartStreamingComponent } from './account/candy-club/start-streaming/start-streaming.component';
+import { UpdateAccountRecordComponent } from './account/candy-club/update-account-record/update-account-record.component';
+import { WhySignupWithUsComponent } from './account/candy-club/why-signup-with-us/why-signup-with-us.component';
+import { ModelDashboardComponent } from './account/candy-club/model-dashboard/model-dashboard.component';
 
 const entryRoutes: Routes = [
     { path: 'viewer-video', 
@@ -166,6 +177,72 @@ const entryRoutes: Routes = [
                 component: ProfileComponent,
                 canActivate: [AuthGuard],
                 data: {title : "My Profile", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "compliance-statement",
+                component: ComplianceStatementComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Compliance Statement", expectedRole: 'guestUser'},
+            },
+            {
+                path: "privacy-policy",
+                component: PrivacyPolicyComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Privacy Policy", expectedRole: 'guestUser'},
+            },
+            {
+                path: "cookie-policy",
+                component: CookiePolicyComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Cookie Policy", expectedRole: 'guestUser'},
+            },
+            {
+                path: "dcma-compliant",
+                component: DcmaCompliantComponent,
+                canActivate: [AuthGuard],
+                data: {title : "DCMA Compliant", expectedRole: 'guestUser'},
+            },
+            {
+                path: "notice-about-individual-performer",
+                component: NoticeAboutPerformerComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Notice About Individual Performer", expectedRole: 'guestUser'},
+            },
+            {
+                path: "affiliate-area",
+                component: MakeMoreMoneyComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Affiliate Area", expectedRole: 'guestUser'},
+            },
+            {
+                path: "performer-dashboard",
+                component: PerformerDashboardComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Performer Dashboard", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "start-streaming",
+                component: StartStreamingComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Start Streaming", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "update-account-record",
+                component: UpdateAccountRecordComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Update Account Record", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "why-signup-with-us",
+                component: WhySignupWithUsComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Why Signup With Us", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "model-dashboard",
+                component: ModelDashboardComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Model Dashboard", expectedRole: 'guestUser'},
             },
             {
                 path: "candy-club/:username",

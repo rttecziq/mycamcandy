@@ -1,0 +1,172 @@
+.post-header{
+	color: #203864 !important;
+}
+.text-center{
+	text-align: center;
+}
+.text-secondary{
+	color: #999;
+}
+.bg-secondary{
+	background: #e8e8e8;
+}
+.mt-2{
+	margin-top: 1.5rem;
+}
+.mt-3{
+	margin-top: 2rem;
+}
+.p-2{
+	padding: .5rem;
+}
+.large{
+	font-size: 18px;
+}
+.w-auto{
+	width: auto!important;
+}
+.mr-2, .mx-2 {
+    margin-right: .5rem!important;
+}
+.mt-2, .my-2 {
+    margin-top: .5rem!important;
+}
+.mt-1{
+	margin-top: .1rem;
+}
+.input-container {
+    display: inline-flex;
+    margin-bottom: 5px;
+}
+.form-inline .form-control {
+    vertical-align: baseline;
+}
+.icon {
+    padding: 10px;
+    background: dodgerblue;
+    color: white;
+    min-width: 50px;
+    text-align: center;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+}
+.input-field {
+    padding: 7px;
+    outline: none;
+    border-bottom-left-radius: 0px!important;
+    border-top-left-radius: 0px!important;
+}
+.d-inline{
+	display: inline;
+}
+.bold{
+	font-weight: bold;
+}
+.table-responsive {
+    min-height: .01%;
+    overflow-x: auto;
+}
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+    border: 1px solid #b1def9;
+}
+.border-shadow {
+    position: relative;
+    background: #fff;
+    -webkit-box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    margin: 1rem 0;
+    padding: 1em 1em;
+    border-radius: .28571429rem;
+    border: 1px solid rgba(34,36,38,.15);
+}
+.border-shadow-2 {
+    position: relative;
+    background: #fff;
+    margin: 0;
+    padding: 1em 1em;
+    border-radius: .28571429rem;
+    border: 1px solid rgba(34,36,38,.15);
+}
+h5.ui-header {
+    padding: 35px 10px;
+    background: #a0c3db;
+    background-image: -webkit-linear-gradient(top, #a0c3db, #466284);
+    background-image: -moz-linear-gradient(top, #a0c3db, #466284);
+    background-image: -ms-linear-gradient(top, #a0c3db, #466284);
+    background-image: -o-linear-gradient(top, #a0c3db, #466284);
+    background-image: linear-gradient(to bottom, #a0c3db, #466284);
+}
+.btn-green{
+	background-color: #21ba45;
+    color: #fff;
+    padding: 10px 25px;
+}
+.btn-green:hover{
+	color: #000;
+}
+.btn-live{
+	position: relative;
+	font-size: 2rem;
+	font-weight: 600;
+}
+.btn-live .fa{
+	position: absolute;
+	font-size: 35px;
+	top:7px;
+}
+.w-100{
+	width: 100%;
+}
+.img-container{
+	position: relative;
+	color: #fff;
+}
+.bottom-left {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 50%;
+  text-align: left;
+  color: #fff;
+  padding: 5px;
+}
+.top-left {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 50%;
+  text-align: left;
+  color: #fff;
+  padding: 5px;
+}
+.top-right {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 50%;
+  text-align: right;
+  color: #fff;
+  padding: 5px;
+}
+.bottom-right {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 50%;
+  text-align: right;
+  color: #fff;
+  padding: 5px;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.plr-10px{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.grid{
+	padding: 3px;
+}

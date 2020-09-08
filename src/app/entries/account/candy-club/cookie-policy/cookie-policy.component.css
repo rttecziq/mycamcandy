@@ -1,0 +1,66 @@
+.page-bg {
+    /*background: #FFFFFF url(../images/footer-bg.png) scroll;*/
+    border-top: 2px solid #FFFFFF;
+    margin: 20px auto 0;
+    position: relative;
+    font-size: 16px;
+    background-position: 279px center;
+    background-color: #f084c8;
+}
+.post-contant {
+    background-color: #fff;
+    padding-left: 2%;
+    padding-right: 2%;
+    line-height: 25px;
+}
+.page-bg .main-heading {
+    background-color: #ff8787;
+}
+.text-center {
+    text-align: center!important;
+}
+.text-light {
+    color: #f8f9fa!important;
+}
+.pb-2, .py-2 {
+    padding-bottom: .5rem!important;
+}
+h1 {
+    font-size: 2.5rem;
+    color: #CF3046;
+}
+h4{
+    color: #f084c8;
+    font-size: 21px;
+}
+.bg-white{
+    background:#fff;
+}
+.mt-3{
+    margin-top: 1.5rem;
+}
+.p{
+    text-align: justify;
+    letter-spacing: .5px;
+    word-spacing: 3px;
+    margin-bottom: 18px;
+}
+ul{
+    list-style: none!important;
+}
+li{
+    margin-bottom: 18px;
+}
+.p-3 {
+    padding: 1rem!important;
+}
+.table-responsive {
+    min-height: .01%;
+    overflow-x: auto;
+}
+.table-bordered {
+    border: 1px solid #b1def9;
+}
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+    border: 1px solid #b1def9;
+}
