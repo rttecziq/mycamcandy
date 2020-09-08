@@ -101,7 +101,7 @@
             <span *ngIf="model_details.orientation == orientation.id">{{orientation.name}}</span>
           </span>
         </li>
-        <li><strong><a href="#">Add to schedule</a></strong></li>
+        <li><strong><a href="/#/candy-club/{{username}}/model-schedule">Add to schedule</a></strong></li>
         <li><strong>How would you describe your personality?</strong><br>          
             <span *ngIf="model_details.describe_your_personality" [innerHtml]="model_details.describe_your_personality"></span>
         </li>
