@@ -1,0 +1,711 @@
+<div class="container-fluid">
+  <h1 class="text-center post-header">Performer Dashboard</h1>
+  <div class="border-shadow">
+     This is the performer dashboard area. This HTML content section can be edited from plugin settings and can include announcements, instructions, links to help.
+  </div>
+  <div class="border-shadow">
+    <h5 class="ui-header">jensen (#887)</h5>
+    <span>Account Status: Verified</span>
+    <a href="#" class="btn btn-default">Update Account Records</a>
+    <div class="mt-2">
+      <p class="text-secondary">Your current balance: 18372.85</p>
+      <p class="text-secondary">MyCred: 18372.85</p>
+    </div>
+  </div>
+  <div class="border-shadow">
+    <h5 class="ui-header">Webcam Room: jensen</h5>
+    <a href="#" class="btn btn-green btn-live">Go Live &nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right"></i></a>
+
+    <form method="POST" class="mt-2">
+      <div class="form-group">
+        <select class="form-control w-auto d-inline" name="groupMode" id="groupMode">
+          <option value="">Free Chat</option>
+          <option value="">Group Show</option>
+          <option value="">Topless Show</option>
+          <option value="">Nude Show</option>
+        </select>
+        <span>Room Mode: Select group mode presets for your new session in this room, before going live.</span>
+        <div class="mt-2">
+          <p><strong>Group Show: </strong> Paid Mode: 20tkCandy/m</p>
+          <p><strong>Topless Show: </strong> Paid Mode: 20tkCandy/m</p>
+          <p><strong>Nude Show: </strong> Paid Mode: 20tkCandy/m</p>
+          <p>* This room is currently private, hidden from room list.</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <select class="form-control w-auto d-inline" name="roomInterface" id="roomInterface">
+          <option value="HTML5 - Recommended">HTML5 - RecommendedHTML5 - Recommended</option>
+          <option value="Flash">Flash</option>
+        </select>
+        <span>Room Interface: Select room interface before going live. Also applies to clients.</span>
+      </div>
+      <p class="mt-3">* HTML5 Videochat works in mobile and PC browsers, providing streaming with group chat, private 2 way video calls, tips, conferencing, collaboration, external broadcasts. Recommended.</p>
+      <p>* Flash PC interface is and older legacy app that supports presentation mode, streaming with group chat, 2 way videochat, tips. Mobile users will get the HTML5 Streaming interface, with extra latency, if transcoding is available. Does not support latest chat modes and options available in HTML5 app.</p>
+      <div class="labeled-button mt-2">
+        <button type="button" class="btn btn-default bold d-inline" data-toggle="collapse" data-target="#demo">CheckIn Options &nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-down"></i></button>
+        <span>Tag other performers present in session.</span>
+
+       <div id="demo" class="collapse border-shadow">
+         <h5 class="ui-header">Checkin Performers</h5>
+         <p>You can select partner performers or specify other performers that are present in session.</p>
+         <p>If paid group chat is enabled, earnings will be shared equally between checked in performers.</p>
+         <p>Checkin Performers</p>
+         <input type="text" name="username"id="username" class="form-control">
+         Comma separated list of performer usernames or emails.
+       </div>
+      </div>
+
+      <div class="mt-3">
+        <a href="#" class="btn btn-default bold d-inline">My Rooms &nbsp;&nbsp;&nbsp;<i class="fa fa-refresh"></i></a>
+        <span>Switch to different room / listing. Your account can setup and manage multiple room profiles.</span>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="text-center bg-secondary p-2">jensen</div>
+
+  <div class="mt-2 tab border-shadow">
+    <ul class="nav nav-tabs">
+       <li><a data-toggle="tab" href="#Call">Call</a></li>
+       <li><a data-toggle="tab" href="#Messages">Messages</a></li>
+       <li><a data-toggle="tab" href="#Setup">Setup</a></li>
+       <li><a data-toggle="tab" href="#Videos">Videos</a></li>
+       <li><a data-toggle="tab" href="#Teaser">Teaser</a></li>
+       <li><a data-toggle="tab" href="#Pictures">Pictures</a></li>
+       <li><a data-toggle="tab" href="#Bans">Bans</a></li>
+       <li><a data-toggle="tab" href="#MyCred">MyCred</a></li>
+       <li class="active"><a data-toggle="tab" href="#Overview">Overview</a></li>
+     </ul>
+
+     <div class="tab-content">
+       <div id="Call" class="tab-pane fade">
+         <div class="container-fluid">
+           <h5 class="ui-header large">Locked Private Calls</h5>
+           <div class="border-shadow">
+             <form method="POST">
+               <div class="form-group">
+                 <label>Client</label>
+                 <input type="text" name="user_email" id="user_email" class="form-control" placeholder="Username or Email">
+               </div>
+               <div class="form-group">
+                 <label>Call Mode</label>
+                 <select class="form-control" name="callMode" id="callMode">
+                   <option value="paid" selected="">Paid: Video 30tkCandy/m</option>
+                   <option value="paid-audio">Paid: Audio 20tkCandy/m</option>
+                   <option value="paid-text">Paid: Text 20tkCandy/m</option>
+                   <option value="free">Free: Video</option>
+                   <option value="free-audio">Free: Audio</option>
+                   <option value="free-text">Free: Text</option>
+                 </select>
+               </div>
+               <div class="form-group">
+                 <input type="submit" name="submit" id="submit" class="btn btn-default" value="Setup Call">
+               </div>
+               <div class="form-group">
+                 <p class="text-secondary">Setup locked private calls that can only be accessed by client using dedicated call link. Clients can access their persistent calls list in client dashboard.</p>
+               </div>
+             </form>
+           </div>
+
+           <div class="border-shadow">
+             <h5 class="ui-header large"><i class="fa fa-phone" style="font-size: 25px"></i> jensen #1 <i class="fa fa-user"></i>  paul</h5>
+             <p>https://mycamcandy.com/webcam/jensen/?call=1 <br>Closed</p>
+           </div>
+
+
+         </div>
+       </div>
+       <div id="Messages" class="tab-pane fade">
+         <div class="container-fluid">
+           <h5 class="ui-header large">Paid Questions and Messages</h5>
+           <div class="border-shadow">
+             No Messages
+           </div>
+         </div>
+       </div>
+       <div id="Setup" class="tab-pane fade">
+         <div class="container-fluid">
+           <h5 class="ui-header large">Webcam Profile Setup</h5>
+           <div class="table-responsive">
+             <form method="POST">
+               <table class="table table-bordered">
+                 <tbody>
+                   <tr>
+                     <td>Cost Per Minute</td>
+                     <td>
+                       <div class="form-group">
+                         <input type="text" name="costPerMinute" id="costPerMinute" class="form-control" value="30">
+                         <span>Cost per minute for private shows (set 0 to use default). Default: 20 Min: 20 Max: 100</span>
+                       </div>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>Cost Per Minute:<br> Audio Only</td>
+                     <td>
+                       <div class="form-group">
+                         <input type="text" name="costPerMinuteAudio" id="costPerMinuteAudio" class="form-control" value="20">
+                         <span>Default: 20 Min: 20 Max: 100</span>
+                       </div>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>Cost Per Minute:<br> Text Only</td>
+                     <td>
+                       <div class="form-group">
+                         <input type="text" name="costPerMinuteText" id="costPerMinuteText" class="form-control" value="20">
+                         <span>Default: 20 Min: 20 Max: 100</span>
+                       </div>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>Picture</td>
+                     <td>
+                       <div class="form-group">
+                         <input type="file" name="picture" id="picture" class="form-control" value="20">
+                         <span>Update room picture to use instead of live snapshot.</span>
+                       </div>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>Show</td>
+                     <td>
+                       <div class="form-group">
+                         <select name="showImage" id="showImage" class="form-control">
+                           <option value="picture" selected="">Picture</option>
+                           <option value="snapshot">Live Snapshot</option>
+                         </select>
+                         <p>Select image to show in webcam listings and HTML5 Videochat room.</p>
+                         <p>Snapshot Thumb: <a href="#">jensen.jpg</a> 3.29k</p>
+                       </div>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>Label</td>
+                     <td>
+                       <div class="form-group">
+                         <input type="text" name="label" id="label" class="form-control" value="">
+                         <span>Shows in room listings instead of name.</span>
+                       </div>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>Category</td>
+                     <td>
+                       <div class="form-group">
+                         <select name="category" id="category" class="form-control">
+                           <option value="Uncategorized">Uncategorized</option>
+                           <option value="Teen">Teen</option>
+                           <option value="Mature">Mature</option>
+                           <option value="Gender">Gender</option>
+                           <option value="Female" selected="selected">Female</option>
+                           <option value="Male">Male</option>
+                           <option value="Transgender">Transgender</option>
+                           <option value="Fetish">Fetish</option>
+                           <option value="Role play">Role play</option>
+                           <option value="Couples">Couples</option>
+                           <option value="Straight couples">Straight couples</option>
+                           <option value="Gay couples">Gay couples</option>
+                           <option value="Lesbian couples">Lesbian couples</option>
+                           <option value="My Free Show">My Free Show</option>
+                           <option value="My Nude Show Photos">My Nude Show Photos</option>
+                         </select>
+                         <p>Webcam category.</p>
+                       </div>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>Description</td>
+                     <td>
+                       <div class="form-group">
+                         <textarea class="form-control" name="desc" id="desc" rows="3"></textarea>
+                         <p>Room description: profile, schedule. Shows on room page and full row list layout.</p>
+                       </div>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>Brief</td>
+                     <td>
+                       <div class="form-group">
+                         <textarea class="form-control" name="brief" id="brief" rows="2"></textarea>
+                         <p>Room description: profile, schedule. Shows on room page and full row list layout.</p>
+                       </div>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>Private Videochat Mode</td>
+                     <td>
+                       <div class="form-group">
+                         <select name="private2way" id="private2way" class="form-control">
+                           <option value="">Default</option>
+                           <option value="1way">1 Way</option>
+                           <option value="2way" selected="">2 Way</option>
+                         </select>
+                         <p>Allow clients to start their cams for 2 way videochat.</p>
+                       </div>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>Ban Countries</td>
+                     <td>
+                       <div class="form-group">
+                         <textarea class="form-control" name="banCountries" id="banCountries" rows="2"></textarea>
+                         <p>You may want to ban your location for privacy reasons. Or countries and regions where your content is not legal or well received. List of locations (country, region, city or continent code, separated by comma) that can not access webcam room. (0)</p>
+                         <p>Detected IP: 47.8.228.149</p>
+                         <p>Detected Continent, Country, Region, City: , , ,</p>
+                         <p>ERROR: GeoIP extension is required on host for this functionality.</p>
+                       </div>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td>Tags</td>
+                     <td>
+                       <div class="form-group">
+                         <textarea class="form-control" name="tags" id="tags" rows="2"></textarea>
+                         <p>Tags separated by comma. Show in room listings.</p>
+                       </div>
+                     </td>
+                   </tr>
+                   <tr>
+                     <td></td>
+                     <td>
+                       <div class="form-group">
+                         <input type="submit" name="submit_form" id="submit_form" class="btn btn-primary" value="Setup">
+                       </div>
+                     </td>
+                   </tr>
+                 </tbody>
+               </table>
+             </form>
+           </div>
+         </div>
+       </div>
+       <div id="Videos" class="tab-pane fade">
+         <div class="container-fluid">
+           <div class="border-shadow">
+             <h5 class="ui-header large">Manage Videos</h5>
+             <p class="mt-2">Available jensen videos: 0 (0.00B)</p>
+             <a href="#" class="btn btn-lg btn-default">Import</a>
+             <a class="btn btn-lg btn-default" data-toggle="collapse" data-target="#uploadVideo">Upload</a>
+             <div id="uploadVideo" class="collapse border-shadow">
+               <h1 class="text-primary">Video Upload</h1>
+               <form method="POST">
+                 <div class="form-group">
+                   <label>Category</label>
+                         <select name="video_cat" id="video_cat" class="form-control">
+                           <option value="Uncategorized">Uncategorized</option>
+                           <option value="Teen">Teen</option>
+                           <option value="Mature">Mature</option>
+                           <option value="Gender">Gender</option>
+                           <option value="Female" selected="selected">Female</option>
+                           <option value="Male">Male</option>
+                           <option value="Transgender">Transgender</option>
+                           <option value="Fetish">Fetish</option>
+                           <option value="Role play">Role play</option>
+                           <option value="Couples">Couples</option>
+                           <option value="Straight couples">Straight couples</option>
+                           <option value="Gay couples">Gay couples</option>
+                           <option value="Lesbian couples">Lesbian couples</option>
+                           <option value="My Free Show">My Free Show</option>
+                           <option value="My Nude Show Photos">My Nude Show Photos</option>
+                         </select>
+                       </div>
+                 <div class="form-group">
+                   <label>Playlist</label>
+                   <input type="text" name="video_playlist" id="video_playlist" class="form-control" value="jensen" disabled>
+                 </div>
+                 <div class="form-group">
+                   <label>Tag(s)</label>
+                   <input type="text" name="video_tags" id="video_tags" class="form-control" placeholder="comma separated tags, for all videos that will be uploaded">
+                 </div>
+                 <div class="form-group">
+                   <label>Description</label>
+                   <textarea rows="2" name="video_description" id="video_description" class="form-control" placeholder="description, for all videos that will be uploaded"></textarea>
+                 </div>
+                 <div class="form-group">
+                   <label>Videos to Upload</label>
+                   <input type="file" name="video_upload" id="video_upload" class="form-control">
+                 </div>
+                 <div class="form-group">
+                   <input type="submit" name="video_upload_submit" id="video_upload_submit" class="btn btn-lg btn-default" value="Done Uploading Videos">
+                 </div>
+               </form>
+             </div>
+           </div>
+
+           <div class="border-shadow">
+             <h5 class="ui-header large">jensen - Videos</h5>
+
+             <form class="form-inline" method="POST">
+                <select class="form-control mr-2 mt-2" name="category" id="category">
+                   <option value="All" selected="selected">All</option>
+                   <option value="Uncategorized">Uncategorized</option>
+                   <option value="Teen">Teen</option>
+                   <option value="Female">Female</option>
+                   <option value="Fetish">Fetish</option>
+                 </select>
+                 <select class="form-control mr-2 mt-2" id="order_by" name="order_by">
+                   <option value="">Order By:</option>
+                   <option value="post_date" selected="">Video Date</option>
+                   <option value="video-views">Views</option>
+                   <option value="video-lastview">Watched Recently</option>
+                   <option value="rateStarReview_rating">Rating</option>
+                   <option value="rateStarReview_ratingNumber">Most Rated</option>
+                   <option value="rateStarReview_ratingPoints">Rate Popularity</option>
+                   <option value="rand">Random</option>
+                 </select>
+                <div class="input-container mr-2 mt-2">
+                   <i class="fa fa-tags icon"></i>
+                   <input class="input-field form-control" type="text" placeholder="Tags" name="tags" id="tags">
+                </div>
+                <div class="input-container mr-2 mt-2">
+                   <i class="fa fa-asterisk icon"></i>
+                   <input class="input-field form-control" type="text" placeholder="Name" name="name" id="name">
+                </div>
+                <button type="button" class="input-container btn-sm btn btn-primary mb-1 mt-1"><i class="fa fa-search" style="padding: 4.5px 20px;"></i></button>
+                <button type="button" class="input-container btn-sm btn btn-primary mb-1 mt-1"><i class="fa fa-refresh" style="padding: 4.5px 20px;"></i></button>
+             </form>
+               <div class="row mt-3 plr-10px">
+                 <div class="col-lg-3 col-md-4 col-sm-6 grid">
+                   <div class="img-container">
+                     <a href="#"><img src="../../../../../assets/img/model/thumb.jpg" class="img-responsive w-100"></a>
+                     <div class="top-left">jensen Free Chat jensen 9:58 6 Aug 2020</div>
+                     <div class="top-right">480p</div>
+                     <div class="bottom-left">00:00:57</div>
+                     <div class="bottom-right">9 views<br>21d 6h 6m ago</div>
+                   </div>
+                 </div>
+                 <div class="col-lg-3 col-md-4 col-sm-6 grid">
+                   <div class="img-container">
+                     <a href="#"><img src="../../../../../assets/img/model/thumb.jpg" class="img-responsive w-100"></a>
+                     <div class="top-left">jensen Free Chat jensen 9:58 6 Aug 2020</div>
+                     <div class="top-right">480p</div>
+                     <div class="bottom-left">00:00:57</div>
+                     <div class="bottom-right">9 views<br>21d 6h 6m ago</div>
+                   </div>
+                 </div>
+                 <div class="col-lg-3 col-md-4 col-sm-6 grid">
+                   <div class="img-container">
+                     <a href="#"><img src="../../../../../assets/img/model/thumb.jpg" class="img-responsive w-100"></a>
+                     <div class="top-left">jensen Free Chat jensen 9:58 6 Aug 2020</div>
+                     <div class="top-right">480p</div>
+                     <div class="bottom-left">00:00:57</div>
+                     <div class="bottom-right">9 views<br>21d 6h 6m ago</div>
+                   </div>
+                 </div>
+                 <div class="col-lg-3 col-md-4 col-sm-6 grid">
+                   <div class="img-container">
+                     <a href="#"><img src="../../../../../assets/img/model/thumb.jpg" class="img-responsive w-100"></a>
+                     <div class="top-left">jensen Free Chat jensen 9:58 6 Aug 2020</div>
+                     <div class="top-right">480p</div>
+                     <div class="bottom-left">00:00:57</div>
+                     <div class="bottom-right">9 views<br>21d 6h 6m ago</div>
+                   </div>
+                 </div>
+                 <div class="col-lg-3 col-md-4 col-sm-6 grid">
+                   <div class="img-container">
+                     <a href="#"><img src="../../../../../assets/img/model/thumb.jpg" class="img-responsive w-100"></a>
+                     <div class="top-left">jensen Free Chat jensen 9:58 6 Aug 2020</div>
+                     <div class="top-right">480p</div>
+                     <div class="bottom-left">00:00:57</div>
+                     <div class="bottom-right">9 views<br>21d 6h 6m ago</div>
+                   </div>
+                 </div>
+               </div>
+               <ul class="pagination mt-3">
+                 <li class="active"><a href="#">1</a></li>
+                 <li><a href="#">2</a></li>
+                 <li><a href="#">3</a></li>
+                 <li><a href="#">4</a></li>
+                 <li><a href="#">Next</a></li>
+               </ul>
+
+             </div>
+           </div>
+         </div>
+       <div id="Teaser" class="tab-pane fade">
+         <form method="POST" class="form-inline mt-3">
+           <div class="form-group">
+             <label>Select Video</label>
+             <select id="video_teaser" name="video_teaser" class="form-control">
+               <option value=""> - </option>
+               <option value="">2020 08 1820at2020 42 57</option>
+               <option value="">jensen Free Chat jensen 10:01 6 Aug 2020</option>
+               <option value="" selected="">jensen Free Chat jensen 9:58 6 Aug 2020</option>
+               <option value="">jensen Free Chat jensen 10:01 8 Jul 2020</option>
+               <option value="">jensen Free Chat jensen 10:00 8 Jul 2020</option>
+             </select>
+           </div>
+           <div class="form-group">
+             <input type="submit" name="select" id="select" class="btn btn-sm btn-default">
+           </div>
+         </form>
+         <p class="mt-2">No HTML5 format is currently available for this video! Conversion processing takes some time. If issue persists, contact site administrator.</p>
+         <p>Teaser video (featured video) plays shortly as preview in listings, in room when performer is offline in HTML5 Videochat interface and shows on profile page. Can be selected from all videos of user.</p>
+       </div>
+       <div id="Pictures" class="tab-pane fade">
+         <div class="container-fluid">
+           <div class="border-shadow">
+             <h5 class="ui-header large">Manage Pictures</h5>
+             <a class="btn btn-lg btn-default" data-toggle="collapse" data-target="#uploadpicture">Upload</a>
+             <div id="uploadpicture" class="collapse border-shadow">
+               <h1 class="text-primary">Picture Upload</h1>
+               <form method="POST">
+                 <div class="form-group">
+                   <label>Category</label>
+                         <select name="picture_cat" id="picture_cat" class="form-control">
+                           <option value="Uncategorized">Uncategorized</option>
+                           <option value="Teen">Teen</option>
+                           <option value="Mature">Mature</option>
+                           <option value="Gender">Gender</option>
+                           <option value="Female" selected="selected">Female</option>
+                           <option value="Male">Male</option>
+                           <option value="Transgender">Transgender</option>
+                           <option value="Fetish">Fetish</option>
+                           <option value="Role play">Role play</option>
+                           <option value="Couples">Couples</option>
+                           <option value="Straight couples">Straight couples</option>
+                           <option value="Gay couples">Gay couples</option>
+                           <option value="Lesbian couples">Lesbian couples</option>
+                           <option value="My Free Show">My Free Show</option>
+                           <option value="My Nude Show Photos">My Nude Show Photos</option>
+                         </select>
+                       </div>
+                 <div class="form-group">
+                   <label>Gallery</label>
+                   <input type="text" name="picture_gallery" id="picture_gallery" class="form-control" value="jensen" disabled>
+                 </div>
+                 <div class="form-group">
+                   <label>Tag(s)</label>
+                   <input type="text" name="picture_tags" id="picture_tags" class="form-control">
+                   <p>picture_</p>
+                 </div>
+                 <div class="form-group">
+                   <label>Description</label>
+                   <textarea rows="2" name="picture_description" id="picture_description" class="form-control"></textarea>
+                 </div>
+                 <div class="form-group">
+                   <label>Pictures to Upload</label>
+                   <input type="file" name="picture_upload" id="picture_upload" class="form-control">
+                 </div>
+                 <div class="form-group">
+                   <input type="submit" name="picture_upload_submit" id="picture_upload_submit" class="btn btn-lg btn-default" value="Done Uploading Pictures">
+                 </div>
+               </form>
+             </div>
+           </div>
+
+           <div class="border-shadow">
+             <h5 class="ui-header large">jensen - Pictures</h5>
+
+             <form class="form-inline" method="POST">
+                <select class="form-control mr-2 mt-2" name="pic_category" id="pic_category">
+                   <option value="All" selected="selected">All</option>
+                   <option value="Uncategorized">Uncategorized</option>
+                   <option value="Teen">Teen</option>
+                   <option value="Female">Female</option>
+                   <option value="Fetish">Fetish</option>
+                 </select>
+                 <select class="form-control mr-2 mt-2" id="pic_order_by" name="pic_order_by">
+                   <option value="">Order By:</option>
+                   <option value="post_date" selected="">Video Date</option>
+                   <option value="video-views">Views</option>
+                   <option value="video-lastview">Watched Recently</option>
+                   <option value="rateStarReview_rating">Rating</option>
+                   <option value="rateStarReview_ratingNumber">Most Rated</option>
+                   <option value="rateStarReview_ratingPoints">Rate Popularity</option>
+                   <option value="rand">Random</option>
+                 </select>
+                <div class="input-container mr-2 mt-2">
+                   <i class="fa fa-tags icon"></i>
+                   <input class="input-field form-control" type="text" placeholder="Tags" name="pic_tags" id="pic_tags">
+                </div>
+                <div class="input-container mr-2 mt-2">
+                   <i class="fa fa-asterisk icon"></i>
+                   <input class="input-field form-control" type="text" placeholder="Name" name="pic_name" id="pic_name">
+                </div>
+                <button type="button" class="input-container btn-sm btn btn-primary mb-1 mt-1"><i class="fa fa-search" style="padding: 4.5px 20px;"></i></button>
+                <button type="button" class="input-container btn-sm btn btn-primary mb-1 mt-1"><i class="fa fa-refresh" style="padding: 4.5px 20px;"></i></button>
+             </form>
+               <div class="row mt-3 plr-10px">
+                 <div class="col-lg-3 col-md-4 col-sm-6 grid">
+                   <div class="img-container">
+                     <a href="#"><img src="../../../../../assets/img/model/thumb.jpg" class="img-responsive w-100"></a>
+                     <div class="top-left">jensen 9:58 6 Aug 2020 Free Chat</div>
+                     <div class="bottom-right">9 views<br>21d 6h 6m ago</div>
+                   </div>
+                 </div>
+                 <div class="col-lg-3 col-md-4 col-sm-6 grid">
+                   <div class="img-container">
+                     <a href="#"><img src="../../../../../assets/img/model/thumb.jpg" class="img-responsive w-100"></a>
+                     <div class="top-left">jensen 9:58 6 Aug 2020 Free Chat</div>
+                     <div class="bottom-right">9 views<br>21d 6h 6m ago</div>
+                   </div>
+                 </div>
+                 <div class="col-lg-3 col-md-4 col-sm-6 grid">
+                   <div class="img-container">
+                     <a href="#"><img src="../../../../../assets/img/model/thumb.jpg" class="img-responsive w-100"></a>
+                     <div class="top-left">jensen 9:58 6 Aug 2020 Free Chat</div>
+                     <div class="bottom-right">9 views<br>21d 6h 6m ago</div>
+                   </div>
+                 </div>
+                 <div class="col-lg-3 col-md-4 col-sm-6 grid">
+                   <div class="img-container">
+                     <a href="#"><img src="../../../../../assets/img/model/thumb.jpg" class="img-responsive w-100"></a>
+                     <div class="top-left">jensen 9:58 6 Aug 2020 Free Chat</div>
+                     <div class="bottom-right">9 views<br>21d 6h 6m ago</div>
+                   </div>
+                 </div>
+                 <div class="col-lg-3 col-md-4 col-sm-6 grid">
+                   <div class="img-container">
+                     <a href="#"><img src="../../../../../assets/img/model/thumb.jpg" class="img-responsive w-100"></a>
+                     <div class="top-left">jensen 9:58 6 Aug 2020 Free Chat</div>
+                     <div class="bottom-right">9 views<br>21d 6h 6m ago</div>
+                   </div>
+                 </div>
+               </div>
+               <ul class="pagination mt-3">
+                 <li class="active"><a href="#">1</a></li>
+                 <li><a href="#">2</a></li>
+                 <li><a href="#">3</a></li>
+                 <li><a href="#">4</a></li>
+                 <li><a href="#">Next</a></li>
+               </ul>
+               <p class="mt-2 text-secondary">Multiple profile pictures can show on webcam listing page. Each listing has own pictures.</p>
+
+             </div>
+           </div>
+       </div>
+       <div id="Bans" class="tab-pane fade">
+         <div class="container-fluid">
+           <h5 class="ui-header large">Bans</h5>
+           <p class="mt-3">There are no bans for this room.</p>
+           <p class="text-secondary">Bans occur when performer kicks or bans users from videochat interface. Kicks result in short bans (15 minutes) and full bans have longer cooldown (1 week). Bans prevent viewers from accessing or remaining in chat room.</p>
+         </div>
+       </div>
+       <div id="MyCred" class="tab-pane fade">
+         <div class="container-fluid">
+           <h5 class="ui-header large">My Credits</h5>
+
+           <ul class="pagination mt-3">
+               <li class="active"><a href="#">1</a></li>
+               <li><a href="#">2</a></li>
+               <li><a href="#">3</a></li>
+               <li><a href="#">4</a></li>
+               <li><a href="#">Next</a></li>
+             </ul>
+
+           <div class="mt-3">
+             <div class="table-responsive">
+                <table class="table table-bordered">
+                   <thead>
+                      <tr>
+                         <th id="time" class="text-center">Date</th>
+                         <th id="creds" class="text-center">Candies</th>
+                         <th id="entry" class="text-center">Entry</th>
+                      </tr>
+                   </thead>
+                   <tbody>
+                       <tr>
+                          <td><time>August 26, 2020 2:47 am</time></td>
+                          <td>20.00</td>
+                          <td>Tip of Candies from paul</td>
+                       </tr>
+                       <tr>
+                          <td><time>August 26, 2020 2:47 am</time></td>
+                          <td>20.00</td>
+                          <td>Tip of Candies from paul</td>
+                       </tr>
+                       <tr>
+                          <td><time>August 26, 2020 2:47 am</time></td>
+                          <td>20.00</td>
+                          <td>Tip of Candies from paul</td>
+                       </tr>
+                       <tr>
+                          <td><time>August 26, 2020 2:47 am</time></td>
+                          <td>20.00</td>
+                          <td>Tip of Candies from paul</td>
+                       </tr>
+                       <tr>
+                          <td><time>August 26, 2020 2:47 am</time></td>
+                          <td>20.00</td>
+                          <td>Tip of Candies from paul</td>
+                       </tr>
+                       <tr>
+                          <td><time>August 26, 2020 2:47 am</time></td>
+                          <td>20.00</td>
+                          <td>Tip of Candies from paul</td>
+                       </tr>
+                       <tr>
+                          <td><time>August 26, 2020 2:47 am</time></td>
+                          <td>20.00</td>
+                          <td>Tip of Candies from paul</td>
+                       </tr>
+                       <tr>
+                          <td><time>August 26, 2020 2:47 am</time></td>
+                          <td>20.00</td>
+                          <td>Tip of Candies from paul</td>
+                       </tr>
+                       <tr>
+                          <td><time>August 26, 2020 2:47 am</time></td>
+                          <td>20.00</td>
+                          <td>Tip of Candies from paul</td>
+                       </tr>
+                       <tr>
+                          <td><time>August 26, 2020 2:47 am</time></td>
+                          <td>20.00</td>
+                          <td>Tip of Candies from paul</td>
+                       </tr>
+                   </tbody>
+                   <tfoot>
+                      <tr>
+                         <th class="text-center">Date</th>
+                         <th class="text-center">Candies</th>
+                         <th class="text-center">Entry</th>
+                      </tr>
+                   </tfoot>
+                </table>
+             </div>
+
+             <ul class="pagination mt-3">
+               <li class="active"><a href="#">1</a></li>
+               <li><a href="#">2</a></li>
+               <li><a href="#">3</a></li>
+               <li><a href="#">4</a></li>
+               <li><a href="#">Next</a></li>
+             </ul>
+
+
+           </div>
+         </div>
+       </div>
+       <div id="Overview" class="tab-pane fade in active">
+         <div class="container-fluid">
+           <h5 class="ui-header large">Webcam Room Listing Overview</h5>
+           <div class="mt-2">
+             <p class="border-shadow-2">Listing (Room) Name: jensen</p>
+             <p class="border-shadow-2">Current Room Performer: jensen</p>
+             <p class="border-shadow-2">Current Room Performer ID: 887</p>
+             <p class="border-shadow-2">Your Performer Name: jensen</p>
+             <p class="border-shadow-2">Room Label:</p>
+             <p class="border-shadow-2">Room Status: publish</p>
+             <p class="border-shadow-2">Room URL: https://mycamcandy.com/webcam/jensen/</p>
+             <p class="border-shadow-2">Room Slug: jensen</p>
+             <p class="border-shadow-2">Room ID: 9961</p>
+             <p class="border-shadow-2">Featured: No</p>
+             <p class="border-shadow-2">Client CPM: 30</p>
+             <p class="border-shadow-2">Earning Ratio: 100%</p>
+             <p class="border-shadow-2">Videos: Yes</p>
+             <p class="border-shadow-2">Pictures: Yes</p>
+             <p class="border-shadow-2">HTML5 Transcoding: Yes</p>
+             <p class="border-shadow-2">Multiple Cameras: Yes (2 extra)</p>
+             <p class="border-shadow-2">Description:</p>
+           </div>
+         </div>
+       </div>
+     </div>
+  </div>
+  <div class="border-shadow">
+     This is the performer dashboard area. This HTML content section can be edited from plugin settings and can include announcements, instructions, links to help.
+  </div>
+</div>

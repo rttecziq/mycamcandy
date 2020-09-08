@@ -1,0 +1,12 @@
+.mt-4, .my-4 {
+    margin-top: 1.5rem!important;
+}
+.form-group {
+    margin-bottom: 1rem;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+}
