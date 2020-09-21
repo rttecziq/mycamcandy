@@ -83,6 +83,8 @@ import { FormsModule } from '@angular/forms';
 // ckeditor modules for model profile edit
 import { CKEditorModule } from 'ng2-ckeditor';
 
+import {TimeAgoPipe} from 'time-ago-pipe';
+
 import { TitleService } from '../common/services/title.service';
 
 import {CheckStreamerService} from '../common/services/check-streamer.service';
@@ -231,7 +233,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         PerformerDashboardComponent,
         StartStreamingComponent,
         UpdateAccountRecordComponent,
-        ModelDashboardComponent
+        ModelDashboardComponent,
+        TimeAgoPipe
     ],
     imports: [
         CommonModule,
