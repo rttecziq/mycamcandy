@@ -1,259 +1,35 @@
-<!-- <div class="top-spacing"></div> -->
-<div class="container-fluid p-0">
-    <div class="alert alert-secondary alert-dismissible" id="dismissible-banner">
-      <button type="button" class="close" data-dismiss="alert">×</button>
-      <img src="../assets/img/homepage/ad.png" class="img-responsive">
-            <!-- <div class="banner-text">
-                <form class="" #userRegistrationForm="ngForm" (ngSubmit)="userRegistration(userRegistrationForm)">
-                    <input type="text" class="form-control pl-1 pr-1" id="user_join"  [(ngModel)]="user.name" required name="name" minlength="2" maxlength="50" autocomplete="off" placeholder="Username">
-                    <input type="password" class="form-control pl-1 pr-1" id="password_join" [(ngModel)]="user.password" name="password" required autocomplete="off" placeholder="Password">
-                    <input type="email" class="form-control pl-1 pr-1"  [(ngModel)]="user.email" name="email" required autocomplete="off" placeholder="Email">
-                    <input type="submit" class="btn btn-primary pl-1 pr-1" name="login_join" id="login_join" value="Join for Free" style="background: #ffc107;">
-                </form>
-                <p class="mt-2 text-light pl-5 pr-5" style="font-size: 14px">By registering on mycamcandy, I certify i am at least 18 years old and have read and agree to its <a href="#">Terms of Use</a> and  <a href="#">Privacy Policy</a>, and consent to the use of  <a href="#">Cookies</a>.</p>
-            </div> -->
-            <!-- <quick-signup></quick-signup> -->
-    </div>
+<div class="page-bg">
+  <div class="mobile-img">
+     <img src="../../../../../assets/img/model/slider1.jpg" class="img-responsive">
+  </div>
+  <div class="owl-carousel home-slider" *ngIf="sliders.length > 0">
+      <div *ngFor="let slider of sliders">
+        <div class="item item-1" [style.background]="'url(' + slider.img + ')'">
+           <div class="text-over-img">
+              <p>{{slider.caption_text}}</p><br>
+              <a routerLink="/register" class="mt-3 signup-button">Sign Up!</a>
+           </div>
+        </div>
+      </div>
+        <!-- <div class="item item-2">
+           <div class="text-over-img fadeIn">
+              <p>Earn 5%-15% Residual Income from every model you register to your team for life!! Build Your Team & Earn Tons of Residual Money Every Month!!</p><br>
+              <a href="/register" class="mt-3 signup-button">Join Us</a>
+           </div>
+        </div> -->
   </div>
 
-  <!-- SECONDARY HEADER -->
-  <div class="container-fluid" id="second_header">
-    <div class="float-left mt-2">
-        <a href="#" class="second_header_button active">Female</a>
-        <a href="#" class="second_header_button">Male</a>
-        <a href="#" class="second_header_button">Trans</a>
-    </div>
-    <div class="float-right">
-          <div style="display: inline;">
-              <a id="by6"><img src="../assets/img/6by6.png"></a>
-              <a id="by4"><img src="../assets/img/4by4.png"></a>
-              <a id="by3"><img src="../assets/img/3by3.png"></a>
-          </div>
-        
-        <form method="POST" class="form-inline" style="display: inline;">
-        <div class="region">
-            <select name="region" id="region" class="form-control">
-                <option value="">Region</option>
-                <option value="All">All</option>
-                <option value="USA">USA</option>
-                <option value="Europe">Europe</option>
-                <option value="Russia">Russia</option>
-                <option value="Asia">Asia</option>
-                <option value="Africa">Africa</option>
-                <option value="South America">South America</option>
-            </select>
+
+  <div class="container-fluid post-contant">
+     <div class="row bg-white">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-3">
+           
+           <h1>Why sign up with us?</h1>
+           <p class="p">MyCamCandy has a ton of different ways to make money and reward your hard work. In addition to revenue from private shows and tips, you can get ongoing payouts for both the paying customers and the performers you sign up with us, as well as the videos and photos you upload to your room. Make money while you sleep, literally!</p>
+
+           <h1>What will you need?</h1>
+
         </div>
-        <div class="language">
-            <select name="language" id="language" class="form-control">
-                <option value="">Language</option>
-                <option value="All">All</option>
-                <option value="USA">English</option>
-                <option value="Europe">France</option>
-                <option value="Russia">Italian</option>
-            </select>
-        </div>
-    </form>
-    </div>
+     </div>
+  </div>
 </div>
-
-<!-- MAIN SECTION STARTS --><div class="container-fluid">
-      	<div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                
-         <div id="mySidebar" class="sidebar">
-
-          <a href="javascript:void(0)" class="closebtn" id="toggler_close">×</a>
-          <ul>
-              <li><a href="#" class="sidebar_menu active">All Girls Cam</a></li>
-              <li><a href="#" class="sidebar_menu">New Model</a></li>
-              <li><a  class="sidebar_menu dropdown-btn">Age <i class="fa fa-chevron-down"></i></a>
-                <ul class="dropdown-container">
-                    <li><a href="#">Age 1</a></li>
-                    <li><a href="#">Age 2</a></li>
-                    <li><a href="#">Age 3</a></li>
-                </ul>
-              </li>
-          <li>
-            <a  class="sidebar_menu dropdown-btn">Hair Color <i class="fa fa-chevron-down"></i></a>
-            <ul class="dropdown-container">
-                <li><a href="#">Color 1</a></li>
-                <li><a href="#">Color 2</a></li>
-                <li><a href="#">Color 3</a></li>
-            </ul>
-          </li>
-          <li><a href="#" class="sidebar_menu ">Contact</a></li>
-        </ul>
-      </div>
-
-    <div id="main_home">
-        <button class="openbtn" id="openbtn" (click)="openNav()"><i class="fa fa-chevron-right"></i></button>  
-        <button class="openbtn" id="closebtn" (click)="closeNav()"><i class="fa fa-chevron-left"></i></button>  
-    <div>
-            <div id="grid1">
-              <div class="row">
-                           <div class="mt-2 grid col-lg-2 col-md-2 col-sm-3 col-xs-4">
-                              <a href="#" class="text-dark">
-                                  <div class="img-container">
-                                 <img src="../assets/img/homepage/1.jpeg" class="img-responsive model-img">
-                                 <div class="bottom-left">
-                                    <div class="p-2 name">Model name </div>
-                                </div>
-                                <div class="bottom-right age"> 
-                                   <span><i class="fa fa-circle online age"></i></span>&nbsp; 
-                                   <span><i class="fa fa-flag age"></i></span>&nbsp;
-                                   <span class="p-2 age">|&nbsp;37</span>
-                               </div>
-                             </div>
-                               </a>
-                           </div>
-                           <div class="mt-2 grid col-lg-2 col-md-2 col-sm-3 col-xs-4">
-                              <a href="#" class="text-dark">
-                                  <div class="img-container">
-                                 <img src="../assets/img/homepage/2.jpg" class="img-responsive model-img">
-                                 <div class="bottom-left">
-                                     <div class="p-2 name">Model name </div>
-                                 </div>
-                                 <div class="bottom-right age"> 
-                                    <span><i class="fa fa-circle online age"></i></span>&nbsp; 
-                                    <span><i class="fa fa-flag age"></i></span>&nbsp;
-                                    <span class="p-2 age">|&nbsp;37</span>
-                                </div>
-                             </div>
-                               </a>
-                           </div>
-                           <div class="mt-2 grid col-lg-2 col-md-2 col-sm-3 col-xs-4">
-                              <a href="#" class="text-dark">
-                                  <div class="img-container">
-                                 <img src="../assets/img/homepage/3.jpg" class="img-responsive model-img">
-                                 <div class="bottom-left">
-                                    <div class="p-2 name">Model name </div>
-                                </div>
-                                <div class="bottom-right age"> 
-                                   <span><i class="fa fa-circle online age"></i></span>&nbsp; 
-                                   <span><i class="fa fa-flag age"></i></span>&nbsp;
-                                   <span class="p-2 age">|&nbsp;37</span>
-                               </div>
-                             </div>
-                               </a>
-                           </div>
-                           <div class="mt-2 grid col-lg-2 col-md-2 col-sm-3 col-xs-4">
-                              <a href="#" class="text-dark">
-                                  <div class="img-container">
-                                 <img src="../assets/img/homepage/4.jpg" class="img-responsive model-img">
-                                 <div class="bottom-left">
-                                    <div class="p-2 name">Model name </div>
-                                </div>
-                                <div class="bottom-right age"> 
-                                   <span><i class="fa fa-circle online age"></i></span>&nbsp; 
-                                   <span><i class="fa fa-flag age"></i></span>&nbsp;
-                                   <span class="p-2 age">|&nbsp;37</span>
-                               </div>
-                             </div>
-                               </a>
-                           </div>
-                           <div class="mt-2 grid col-lg-2 col-md-2 col-sm-3 col-xs-4">
-                              <a href="#" class="text-dark">
-                                  <div class="img-container">
-                                 <img src="../assets/img/homepage/5.jpg" class="img-responsive model-img">
-                                 <div class="bottom-left">
-                                    <div class="p-2 name">Model name </div>
-                                </div>
-                                <div class="bottom-right age"> 
-                                   <span><i class="fa fa-circle online age"></i></span>&nbsp; 
-                                   <span><i class="fa fa-flag age"></i></span>&nbsp;
-                                   <span class="p-2 age">|&nbsp;37</span>
-                               </div>
-                             </div>
-                               </a>
-                           </div>
-                           <div class="mt-2 grid col-lg-2 col-md-2 col-sm-3 col-xs-4">
-                              <a href="#" class="text-dark">
-                                  <div class="img-container">
-                                 <img src="../assets/img/homepage/6.jpg" class="img-responsive model-img">
-                                 <div class="bottom-left">
-                                    <div class="p-2 name">Model name </div>
-                                </div>
-                                <div class="bottom-right age"> 
-                                   <span><i class="fa fa-circle online age"></i></span>&nbsp; 
-                                   <span><i class="fa fa-flag age"></i></span>&nbsp;
-                                   <span class="p-2 age">|&nbsp;37</span>
-                               </div>
-                             </div>
-                               </a>
-                           </div>
-                           <div class="mt-2 grid col-lg-2 col-md-2 col-sm-3 col-xs-4">
-                              <a href="#" class="text-dark">
-                                  <div class="img-container">
-                                 <img src="../assets/img/homepage/7.jpg" class="img-responsive model-img">
-                                 <div class="bottom-left">
-                                    <div class="p-2 name">Model name </div>
-                                </div>
-                                <div class="bottom-right age"> 
-                                   <span><i class="fa fa-circle online age"></i></span>&nbsp; 
-                                   <span><i class="fa fa-flag age"></i></span>&nbsp;
-                                   <span class="p-2 age">|&nbsp;37</span>
-                               </div>
-                             </div>
-                               </a>
-                           </div>
-                           <div class="mt-2 grid col-lg-2 col-md-2 col-sm-3 col-xs-4">
-                              <a href="#" class="text-dark">
-                                  <div class="img-container">
-                                 <img src="../assets/img/homepage/8.jpg" class="img-responsive model-img">
-                                 <div class="bottom-left">
-                                    <div class="p-2 name">Model name </div>
-                                </div>
-                                <div class="bottom-right age"> 
-                                   <span><i class="fa fa-circle online age"></i></span>&nbsp; 
-                                   <span><i class="fa fa-flag age"></i></span>&nbsp;
-                                   <span class="p-2 age">|&nbsp;37</span>
-                               </div>
-                             </div>
-                               </a>
-                           </div>
-                           <div class="mt-2 grid col-lg-2 col-md-2 col-sm-3 col-xs-4">
-                              <a href="#" class="text-dark">
-                                  <div class="img-container">
-                                 <img src="../assets/img/homepage/9.jpg" class="img-responsive model-img">
-                                 <div class="bottom-left">
-                                    <div class="p-2 name">Model name </div>
-                                </div>
-                                <div class="bottom-right age"> 
-                                   <span><i class="fa fa-circle online age"></i></span>&nbsp; 
-                                   <span><i class="fa fa-flag age"></i></span>&nbsp;
-                                   <span class="p-2 age">|&nbsp;37</span>
-                               </div>
-                             </div>
-                               </a>
-                           </div>
-                           <div class="mt-2 grid col-lg-2 col-md-2 col-sm-3 col-xs-4">
-                              <a href="#" class="text-dark">
-                                  <div class="img-container">
-                                 <img src="../assets/img/homepage/10.jpg" class="img-responsive model-img">
-                                 <div class="bottom-left">
-                                    <div class="p-2 name">Model name </div>
-                                </div>
-                                <div class="bottom-right age"> 
-                                   <span><i class="fa fa-circle online age"></i></span>&nbsp; 
-                                   <span><i class="fa fa-flag age"></i></span>&nbsp;
-                                   <span class="p-2 age">|&nbsp;37</span>
-                               </div>
-                             </div>
-                               </a>
-                           </div>
-                        </div>
-            </div>
-            
-          </div>
-            <ul class="pagination mt-5" style="justify-content: center;display: flex;">
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">Next</a></li>
-              <li class="float-right"><a href="#">View All</a></li>
-            </ul>
-</div>
-</div>
-      </div>
-    </div>
