@@ -4,73 +4,76 @@
   <user-profile-tabs></user-profile-tabs>
 
   <div class="row mt-5 mb-5">
-    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
-    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-      <div class="msg mt-5 mb-5">
-        <div class="row">
-          <div class="col-lg-3 col-md-4 col-sm-5 mt-3">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12" style="padding: 0px 30px;">
+     <div class="msg mt-4 mb-5">
+       <div class="text-center" *ngIf="loader"><i class="fa fa-spinner fa-spin fa-2x p-2"></i></div>
+       <div class="row" *ngIf="user_list.length > 0; else noMsgFound">
+         <div class="col-lg-3 col-md-4 col-sm-5 mt-3">
            <ul class="active_msg">
-             <li class="active">
-           <div class="border p-1 mt-1">
-              <a href="#"><img src="http://mycamcandy-server.local/images/default-profile.jpg" id="model-profile-pic" class="img-circle" height="50" width="50">
-               <span class="">Username <i class="fa fa-circle"></i></span> 
-              </a>
-           </div>
-         </li>
-           <li>
-           <div class="border p-1 mt-1">
-              <a href="#"><img src="http://mycamcandy-server.local/images/default-profile.jpg" id="model-profile-pic" class="img-circle" height="50" width="50">
-               <span class="">Username <i class="fa fa-circle"></i></span> 
-              </a>
-           </div>
-         </li>
-         <li>
-           <div class="border p-1 mt-1">
-              <a href="#"><img src="http://mycamcandy-server.local/images/default-profile.jpg" id="model-profile-pic" class="img-circle" height="50" width="50">
-               <span class="">Username <i class="fa fa-circle"></i></span> 
-              </a>
-           </div>
-         </li>
-         </ul>
-          </div>
-          <div class="col-lg-9 col-md-8 col-sm-7 border mt-3">
-            <div class="row mt-4">
-              <div class="col-lg-12 col-md-12">
-                 <div class="float-left">
-                    <a href="#"><img src="http://mycamcandy-server.local/images/default-profile.jpg" id="model-profile-pic" class="img-circle" height="50" width="50">
-                    <span class="">Username</span> 
-                    </a>
-                 </div>
-                 <div class="float-right mt-3">
-                    <a href="#"><i class="fa fa-ban text-danger" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;
-                    <a href="#"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a>
-                 </div>
-              </div>
-            </div>
-             <hr>
-            <div class="chat-box mt-4">
-              <p class="p-2 bg-receive">hi, how are you?</p>
-              <p class="p-2 bg-sent">hi, i am fine...<a href="#"><i class="fa fa-trash text-danger float-right"></i></a></p>
-              <p class="p-2 bg-sent">hello<a href="#"><i class="fa fa-trash text-danger float-right"></i></a></p>
-              <p class="p-2 bg-receive">hi</p>
-              <p class="p-2 bg-sent">hiaaaaaaaaa aaaaaaa aaaaaaaaaaaa aaaaaa aaaaa aaaaaaaaaaaaaaa
-               aaaaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaa aaaaaaaaaaa aaaaaaaaaaaaaaaaaaaa
-               aaaaaaaaaaaaaa aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaa aaaaaaaaa
-               aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaa aaaaaaaaaa aaaaaaaaaaaa
-               aaaaa aaaaaa aaaaaaa<a href="#"><i class="fa fa-trash text-danger float-right"></i></a></p>
-              <p class="p-2 bg-receive">hi</p>
-            </div>
-            <form method="POST">
-             <div class="form-group">
-               <textarea class="form-control chat-message" placeholder="Type a message" name="message" id="sent_msg"></textarea>
+             <li class="active" *ngFor="let user of user_list" role="button">
+               <div class="border p-1 mt-1" (click)="switchMessage(user)">
+                   <img [src]="user.chat_picture" id="model-profile-pic" class="img-circle" height="50" width="50">
+                   <span class="">{{ user.username }} <i class="fa fa-circle" *ngIf="user.login_status"></i></span>
+               </div>
+             </li>                   
+           </ul>
+         </div>
+         <div class="col-lg-9 col-md-8 col-sm-7 border mt-3">
+           <div class="row mt-4">
+             <div class="col-lg-12 col-md-12">
+                <div class="float-left">
+                   <img [src]="active_message_model_picture" id="model-profile-pic" class="img-circle" height="50" width="50">
+                   <span class="">{{active_message_model_username }}</span> 
+                </div>
+                <div class="float-right mt-3">
+                   <i class="fa fa-ban text-danger" aria-hidden="true" *ngIf="!is_blocked" title="Block" (click)="actionFn('BLOCK')"></i>&nbsp;&nbsp;&nbsp;
+                   <i class="fa fa-trash text-danger" aria-hidden="true" *ngIf="messages?.length > 0" title="Delete all messages" (click)="actionFn('TRASH')"></i>
+                </div>
              </div>
-               <button type="button" name="submit" id="submit" class="mb-3 float-right btn btn-sm btn-primary"><i class="fa fa-envelope p-2" aria-hidden="true" style="font-size: 20px"></i></button>
-            </form>
-            
-          </div>
-        </div>
-   </div>
+           </div>
+            <hr>
+           <div class="chat-box mt-4">
+               <div *ngIf="messages?.length > 0" #messageContainer style="max-height:200px;min-height:200px;overflow-y:scroll;margin-bottom:20px;border-bottom: 2px solid #999;">
+                 <div *ngFor="let message of messages">
+                     <div *ngIf="message.type == 'mu'; else muBlock">
+                        <p class="p-2 bg-sent">{{message.message}}
+                          <i class="fa fa-trash text-danger float-right" (click)="deleteMsg(message.id)"></i>
+                          <span>{{message.created_at | timeAgo}}</span>
+                        </p>
+                     </div>
+                     <ng-template #muBlock>
+                       <p class="p-2 bg-receive">{{message.message}} <span>{{message.created_at | timeAgo}}</span></p>
+                     </ng-template>
+                 </div>
+               </div>
+
+               <!-- <form method="POST">
+                 <div class="form-group">
+                   <textarea class="form-control chat-message" placeholder="Type a message" name="message" id="sent_msg"></textarea>
+                 </div>
+                   <button type="button" name="submit" id="submit" class="mb-3 float-right btn btn-sm btn-primary"><i class="fa fa-envelope p-2" aria-hidden="true" style="font-size: 20px"></i> Send message</button>
+               </form> -->
+               
+               <form #MessageForm="ngForm" name="MessageForm" (ngSubmit)="sendMessageFormFn(MessageForm)">
+                   <div *ngIf="!is_blocked">
+                     <textarea [(ngModel)]="message_text" name="message_text" maxlength="200" class="form-control"></textarea><br>
+                     <button type="submit" class="text-right float-right btn btn-primary"><i class="fa fa-envelope"></i>  Send message</button>
+                     <span class="float-right mr-1">{{ 200 - message_text?.length }} </span>
+                     <div class="mb-5"></div>
+                   </div>
+               </form>
+
+           </div>
+
+         </div>
+       </div>
+
+       <ng-template #noMsgFound>
+         <p class="alert alert-danger text-center"> No message found </p>
+       </ng-template>
+  </div>                   
     </div>
-  </div>
+</div>
 
 </div>

@@ -5,7 +5,7 @@ import { RequestService } from '../../../../../common/services/request.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Album } from '../../../../../models/album';
 
-import { lightgallery } from 'lightgallery';
+//import { lightgallery } from 'lightgallery';
 
 declare var $:any;
 
