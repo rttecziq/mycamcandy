@@ -75,7 +75,7 @@ export class LoginComponent implements AfterViewInit{
                     });
 
                     // Once successfully authenticated by user, redirect home/profile page
-                    this.router.navigate(['/']); //modeldashboard
+                    this.router.navigate(['/model-dashboard']); //modeldashboard
 
                 } else {
 
