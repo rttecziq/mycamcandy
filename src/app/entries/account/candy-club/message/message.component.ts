@@ -146,7 +146,6 @@ export class MessageComponent implements OnInit {
               if (data.success === true) {
                   this.messages = data.data;
                   this.is_blocked = (data.is_blocked == this.active_message_model) ? true : false;
-                  console.log(this.messages)
                   form.reset();
                   setTimeout(() => {
                     this.scrollToBottom();
@@ -196,7 +195,6 @@ export class MessageComponent implements OnInit {
           (data : any) => {
               if (data.success === true) {
                   this.messages = data.data;
-                  console.log(this.messages)
                   this.is_blocked = (data.is_blocked == this.active_message_model) ? true : false; 
                   setTimeout(() => {
                     this.loader = false;
