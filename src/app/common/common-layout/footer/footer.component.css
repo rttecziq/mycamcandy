@@ -20,3 +20,127 @@ a{text-decoration: none!important;}
 margin-left: auto;
 margin-right: auto;
 }
+
+/*Bell Notification custom by shivam start*/
+.open-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
+a {
+  text-decoration: none!important;
+}
+.open-button .fa-bell {
+  background: #313131;
+  color: #fff;
+  font-size: 24px;
+  border-radius: 50%;
+  padding: 15px;
+}
+.notification-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 0px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+  background: #fff;
+  color: #000;
+  height: 100%;
+  width: 400px;
+  overflow-y: auto;
+}
+.float-right {
+  float: right!important;
+}
+.text-left {
+  text-align: left!important;
+}
+.mt-5 {
+  margin-top: 6rem!important;
+}
+#bell-notification ul li {
+  font-size: 13px;
+}
+.about li {
+  border-bottom: 2px solid #c0c0c0;
+}
+.p-2 {
+  padding: .5rem!important;
+}
+#bell-notification ul li .fa {
+  font-size: 16px;
+}
+.mt-3 {
+  margin-top: 1rem!important;
+}
+.rounded-circle {
+  border-radius: 50%!important;
+}
+#bell-notification ul li p {
+  margin-top: -20px;
+}
+.ml-5 {
+  margin-left: 4.5rem!important;
+}
+.mb-0 {
+  margin-bottom: 0!important;
+}
+.ml-1{
+margin-left: .5rem;
+}
+.mt-2{
+margin-top: 1rem;
+}
+#bell-notification .btn {
+  display: inline-block!important;
+  font-weight: 400!important;
+  color: #212529!important;
+  text-align: center!important;
+  vertical-align: middle!important;
+  background-color: transparent!important;
+  border: 1px solid transparent!important;
+  padding: .375rem .75rem!important;
+  font-size: 1rem!important;
+line-height: 1.5!important;
+box-shadow: none!important;
+  border-radius: .25rem!important;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out!important;
+}
+#bell-notification .btn:hover, #bell-notification .btn:active, #bell-notification .btn:focus {
+background: transparent;
+}
+.open-button .badge{
+display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: #777;
+  border-radius: 10px;
+  position: absolute;
+  right: 0;
+}
+.notification-text{
+padding: 10px;
+  float: left;
+  font-size: 20px;
+  border-bottom: 2px solid;
+}
+.p-3 {
+  padding: 1rem!important;
+}
+#bell-notification p {
+  color: #6f6f6f;
+}
+@media screen and (max-width: 399px){
+.notification-popup {
+  width: 100%;
+}
+}
+/*Bell Notification custom by shivam end*/

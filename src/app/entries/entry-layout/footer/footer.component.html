@@ -8,3 +8,88 @@
         <entry-common-footer></entry-common-footer>
     </div>
 </div>
+
+<!--Bell Notifications start-->
+<div *ngIf="userId">
+    <a class="open-button" id="open-button" (click)="notificationStatusChange()">
+        <i class="fa fa-bell"></i>
+        <span class="badge" *ngIf="notification_count > 0">{{notification_count}}</span>
+    </a>
+    
+              <div class="notification-popup" id="bell-notification">
+                  <span class="notification-text">Notifications</span>
+                 <button type="button" class="btn cancel float-right" (click)="closeNotification()"><i class="fa fa-close mt-2" style="font-size: 18px;"></i></button>
+                  <a href="#" type="button" class="btn cancel float-right"><i class="fa fa-cog mt-2" style="font-size: 18px;"></i></a>
+                <ul class="about text-left mt-5" style="list-style: none;padding:0">
+    
+                        <li class="p-2" *ngFor="let notification of notifications">
+    
+                            <a routerLink="/candy-club/{{username}}/messages" *ngIf="notifications_types.NEW_MESSAGE == notification.type">
+                                <i class="fa fa-close float-right mt-3"></i>
+                                <img src="{{notification.picture}}" class="rounded-circle" style="height:40px;width:40px;"> 
+                                <span class="ml-1" style="position:absolute;">{{notification.notification}}</span>
+                                <p class="ml-5 mb-0"> {{notification.name}} @ {{notification.created_at}}</p>
+                            </a>
+    
+                            <a *ngIf="notifications_types.USER_GIFT == notification.type">
+                                <i class="fa fa-close float-right mt-3"></i>
+                                <img src="{{notification.picture}}" class="rounded-circle" style="height:40px;width:40px;"> 
+                                <span class="ml-1" style="position:absolute;">{{notification.notification}}</span>
+                                <p class="ml-5 mb-0"> {{notification.name}} @ {{notification.created_at}}</p>
+                            </a>
+    
+                            <a *ngIf="notifications_types.USER_TIP == notification.type">
+                                <i class="fa fa-close float-right mt-3"></i>
+                                <img src="{{notification.picture}}" class="rounded-circle" style="height:40px;width:40px;"> 
+                                <span class="ml-1" style="position:absolute;">{{notification.notification}}</span>
+                                <p class="ml-5 mb-0"> {{notification.name}} @ {{notification.created_at}}</p>
+                            </a>
+    
+                            <a *ngIf="notifications_types.ALBUM_BUY == notification.type">
+                                <i class="fa fa-close float-right mt-3"></i>
+                                <img src="{{notification.picture}}" class="rounded-circle" style="height:40px;width:40px;"> 
+                                <span class="ml-1" style="position:absolute;">{{notification.notification}}</span>
+                                <p class="ml-5 mb-0"> {{notification.name}} @ {{notification.created_at}}</p>
+                            </a>
+
+                            <a *ngIf="notifications_types.SWEET_TREAT_BUY == notification.type">
+                                <i class="fa fa-close float-right mt-3"></i>
+                                <img src="{{notification.picture}}" class="rounded-circle" style="height:40px;width:40px;"> 
+                                <span class="ml-1" style="position:absolute;">{{notification.notification}}</span>
+                                <p class="ml-5 mb-0"> {{notification.name}} @ {{notification.created_at}}</p>
+                            </a>
+
+                            <a routerLink="/join-video" [queryParams]="{video_id : notification.link_id}" *ngIf="notifications_types.LIVE_STREAM_STARTED == notification.type">
+                                <i class="fa fa-close float-right mt-3"></i>
+                                <img src="{{notification.picture}}" class="rounded-circle" style="height:40px;width:40px;"> 
+                                <span class="ml-1" style="position:absolute;">{{notification.notification}}</span>
+                                <p class="ml-5 mb-0"> {{notification.name}} @ {{notification.created_at}}</p>
+                            </a>
+
+                            <a routerLink="/view-profile" [queryParams]="{peer_id : notification.link_id}" *ngIf="notifications_types.USER_FOLLOW == notification.type || notifications_types.USER_JOIN_VIDEO == notification.type">
+                                <i class="fa fa-close float-right mt-3"></i>
+                                <img src="{{notification.picture}}" class="rounded-circle" style="height:40px;width:40px;"> 
+                                <span class="ml-1" style="position:absolute;">{{notification.notification}}</span>
+                                <p class="ml-5 mb-0"> {{notification.name}} @ {{notification.created_at}}</p>
+                            </a>
+
+                            <a routerLink="/view-group" [queryParams]="{id : notification.link_id}" [queryParams]="{peer_id : notification.link_id}" *ngIf="notifications_types.USER_GROUP_ADD == notification.type">
+                                <i class="fa fa-close float-right mt-3"></i>
+                                <img src="{{notification.picture}}" class="rounded-circle" style="height:40px;width:40px;"> 
+                                <span class="ml-1" style="position:absolute;">{{notification.notification}}</span>
+                                <p class="ml-5 mb-0"> {{notification.name}} @ {{notification.created_at}}</p>
+                            </a>
+    
+                        </li>
+    
+                        <li class="p-3" *ngIf="notifications.length <= 0">
+                            No notifications found
+                        </li>
+    
+                </ul>
+                <div class="text-center mt-2" *ngIf="notifications.length > 0">
+                    <a routerLink="/notifications">See all notifications</a>
+                </div>
+              </div>
+    </div>
+    <!--Bell Notifications end-->
