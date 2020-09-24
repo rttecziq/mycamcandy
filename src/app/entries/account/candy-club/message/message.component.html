@@ -9,7 +9,7 @@
      <div class="msg mt-4 mb-5">
        <div class="text-center" *ngIf="loader"><i class="fa fa-spinner fa-spin fa-2x p-2"></i></div>
        <div class="row" *ngIf="user_list.length > 0; else noMsgFound">
-         <div class="col-lg-3 col-md-4 col-sm-5 mt-3">
+         <div class="col-lg-4 col-md-4 col-sm-5 mt-3">
            <ul class="active_msg">
              <li class="active" *ngFor="let user of user_list" role="button">
                <div class="border p-1 mt-1" (click)="switchMessage(user)">
@@ -19,14 +19,14 @@
              </li>                   
            </ul>
          </div>
-         <div class="col-lg-9 col-md-8 col-sm-7 border mt-3">
+         <div class="col-lg-8 col-md-8 col-sm-7 border mt-3">
            <div class="row mt-4">
              <div class="col-lg-12 col-md-12">
                 <div class="float-left">
                    <img [src]="active_message_model_picture" id="model-profile-pic" class="img-circle" height="50" width="50">
-                   <span class="">{{active_message_model_username }}</span> 
+                   <span class="ml-1">{{active_message_model_username }}</span> 
                 </div>
-                <div class="float-right mt-3">
+                <div class="float-right" style="margin-top: 1rem;">
                    <i class="fa fa-ban text-danger" aria-hidden="true" *ngIf="!is_blocked" title="Block" (click)="actionFn('BLOCK')"></i>&nbsp;&nbsp;&nbsp;
                    <i class="fa fa-trash text-danger" aria-hidden="true" *ngIf="messages?.length > 0" title="Delete all messages" (click)="actionFn('TRASH')"></i>
                 </div>
@@ -34,16 +34,19 @@
            </div>
             <hr>
            <div class="chat-box mt-4">
-               <div *ngIf="messages?.length > 0" #messageContainer style="max-height:200px;min-height:200px;overflow-y:scroll;margin-bottom:20px;border-bottom: 2px solid #999;">
+               <div *ngIf="messages?.length > 0" #messageContainer style="max-height:200px;min-height:200px;overflow-y:auto;margin-bottom:20px;">
                  <div *ngFor="let message of messages">
-                     <div *ngIf="message.type == 'mu'; else muBlock">
+                     <div *ngIf="message.type == 'mu'; else muBlock" class="sent-msg">
+                      <span class="time">{{message.created_at | timeAgo}}</span>
                         <p class="p-2 bg-sent">{{message.message}}
                           <i class="fa fa-trash text-danger float-right" (click)="deleteMsg(message.id)"></i>
-                          <span>{{message.created_at | timeAgo}}</span>
                         </p>
                      </div>
                      <ng-template #muBlock>
-                       <p class="p-2 bg-receive">{{message.message}} <span>{{message.created_at | timeAgo}}</span></p>
+                      <div class="receive-msg">
+                        <span class="time">{{message.created_at | timeAgo}}</span>
+                       <p class="p-2 bg-receive">{{message.message}} </p>
+                      </div>
                      </ng-template>
                  </div>
                </div>
@@ -59,7 +62,7 @@
                    <div *ngIf="!is_blocked">
                      <textarea [(ngModel)]="message_text" name="message_text" maxlength="200" class="form-control"></textarea><br>
                      <button type="submit" class="text-right float-right btn btn-primary"><i class="fa fa-envelope"></i>  Send message</button>
-                     <span class="float-right mr-1">{{ 200 - message_text?.length }} </span>
+                     <span class="float-right" style="margin-top: .5rem;margin-right: 1rem;">{{ 200 - message_text?.length }} </span>
                      <div class="mb-5"></div>
                    </div>
                </form>

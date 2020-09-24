@@ -1,3 +1,9 @@
+.profile-background .container{
+    background: #fff;
+    padding:0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
 /*************Message Start****************/
 
 .p-1 {
@@ -5,6 +11,9 @@
 }
 .mt-1 {
     margin-top: .25rem!important;
+}
+.ml-1{
+    margin-left: .5rem;
 }
 .mt-4 {
     margin-top: 1.5rem!important;
@@ -45,31 +54,57 @@
   padding: 0;
   list-style: none;
   margin: 0;
+  max-height: 450px;
+  overflow-y: auto;
 }
 .active_msg li.active {
     background-color: #dadada;
 }
-.chat-box {
+/* .chat-box {
     height: 500px;
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-}
+} */
 hr{border-top: 1px solid #d4d1d1;}
 .chat-box .bg-receive {
     background: rgba(30, 115, 190, 0.8);
-    width: 70%;
-    float: left;
+    width: 100%;
+    /* float: left; */
     border-radius: 4px;
     color: #fff;
 }
+.receive-msg{
+    float: left;
+    width: 70%;
+    position: relative;
+}
+.receive-msg .time{
+    position: absolute;
+    right: -60px;
+    font-size: 12px;
+    color: #adacac;
+    top: 23%;
+}
 .chat-box .bg-sent {
     background: #3738370f;
-    width: 70%;
-    float: right;
+    width: 100%;
+    /* float: right; */
     text-align: left;
     border-radius: 4px;
     overflow: hidden;
+}
+.sent-msg{
+    float: right;
+    width: 70%;
+    position: relative;
+}
+.sent-msg .time{
+    position: absolute;
+    left: -60px;
+    font-size: 12px;
+    color: #adacac;
+    top: 23%;
 }
 .chat-message{padding-right: 30px;}
 .smilies{
