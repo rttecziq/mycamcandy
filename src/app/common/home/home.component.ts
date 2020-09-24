@@ -13,12 +13,18 @@ declare var $: any;
 export class HomeComponent implements OnInit {
 
   errorMessages : string;
+  userId : string;
 
   // slider
   sliders : any[];
 
   constructor(private requestService : RequestService, private router : Router) {
     this.sliders = [];
+
+    this.userId = (localStorage.getItem('userId') != '' && localStorage.getItem('userId') != null && localStorage.getItem('userId') != undefined) ? localStorage.getItem('userId') : '';
+    if(this.userId != '' && this.userId != null && this.userId != undefined) {
+        this.router.navigate(['/model-dashboard']);
+    }
   }
 
   ngOnInit() {

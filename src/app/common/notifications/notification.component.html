@@ -7,6 +7,19 @@
     <ul class="p-0 m-0 notification-sec">
         <li *ngFor="let notification of notifications">
 
+            <!-- user model message notification -->
+            <a routerLink="/candy-club/{{username}}/messages" *ngIf="notifications_types.NEW_MESSAGE == notification.type">
+                <div class="display-inline pt-10 pb-10">
+                    <div class="noti-img-sec relative">
+                        <img src="{{notification.picture}}" alt="live_video_img">
+                    </div>
+                    <div class="noti-text-sec">
+                        <h4>{{notification.notification}}</h4>
+                        <p>{{notification.name}} @ {{notification.created_at}}</p>
+                    </div>
+                </div>
+            </a>
+
             <a routerLink="/join-video" [queryParams]="{video_id : notification.link_id}" *ngIf="notifications_types.LIVE_STREAM_STARTED == notification.type">
                 <div class="display-inline pt5 pb-10">
                     <div class="noti-img-sec relative">
@@ -56,13 +69,13 @@
     </div>
 
     <div class="text-center" *ngIf="skipCount > 0 && dataAvailable > 0">
-        <button class="show-more-btn" (click)="showMore()">{{'show_more' | translate}}</button>
+        <button class="show-more-btn btn btn-primary" (click)="showMore()">{{'show_more' | translate}}</button>
     </div>
 
     <div class="no_result_class text-center" *ngIf="skipCount <= 0">
         <div>
             <h3 class="tab-head text-center">No notifications found</h3>
-            <img class="noresult-img" src="../../../assets/img/no-result.gif">
+            <img class="noresult-img img-responsive" src="../../../assets/img/no-result.gif">
         </div>
     </div>
 </div>

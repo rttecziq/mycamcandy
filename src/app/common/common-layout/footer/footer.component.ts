@@ -70,9 +70,9 @@ export class FooterComponent implements OnInit,AfterViewInit, OnDestroy {
     this.pagesListFn('pages/footer_list', "");
 }
 
-ngOnDestroy() {
+    ngOnDestroy() {
 
-    //    clearInterval(this.bellNotificationStatus);
+        clearInterval(this.bellNotificationStatus);
 
     }
 
@@ -87,11 +87,6 @@ ngOnDestroy() {
             this.site_logo = site_logo.length > 0 ? site_logo[0].value : '';
         }, 1000);
     }
-
-    // openNotification() {
-    //     document.getElementById("bell-notification").style.display = "block";
-    //     document.getElementById("open-button").style.display = "none";
-    //   }
       
     closeNotification() {
         document.getElementById("bell-notification").style.display = "none";
@@ -250,5 +245,41 @@ ngOnDestroy() {
 
           );
   }
+
+  deleteNotificationFn(notify_id, li_id) {
+    this.requestService.postMethod("delete_notification", {notify_id : notify_id}) 
+        .subscribe(
+            (data : any) => {
+                if (data.success == true) {    
+                    document.getElementById("notif"+li_id).style.display = "none";
+                } else {
+                    this.errorMessages = data.error_messages;
+                    $.toast({
+                        heading: 'Error',
+                        text: this.errorMessages,
+                    // icon: 'error',
+                        position: 'top-right',
+                        stack: false,
+                        textAlign: 'left',
+                        loader : false,
+                        showHideTransition: 'slide'
+                    });
+                }
+            },
+            (err : HttpErrorResponse) => {
+                this.errorMessages = 'Oops! Something Went Wrong';    
+                $.toast({
+                    heading: 'Error',
+                    text: this.errorMessages,
+                // icon: 'error',
+                    position: 'top-right',
+                    stack: false,
+                    textAlign: 'left',
+                    loader : false,
+                    showHideTransition: 'slide'
+                });
+            }
+        );
+}
 
 }

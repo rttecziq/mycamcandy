@@ -23,13 +23,18 @@ export class LoginComponent implements AfterViewInit{
     //         input.className = '';
     //     }
     // };
-    
+    userId : string;
     errorMessages : string;
     uType : string; //The user is streamer / viewer
 
     constructor(private userService : UserService, private router : Router, private route:ActivatedRoute, public translate : TranslateService) {
         this.errorMessages = '';
-        this.uType = 'creator';        
+        this.uType = 'creator';
+        
+        this.userId = (localStorage.getItem('userId') != '' && localStorage.getItem('userId') != null && localStorage.getItem('userId') != undefined) ? localStorage.getItem('userId') : '';
+        if(this.userId != '' && this.userId != null && this.userId != undefined) {
+            this.router.navigate(['/model-dashboard']);
+        }
     }
         
     // After Page load below files will load for this particular page
