@@ -15,6 +15,7 @@ import { EntryFooterComponent } from './entry-layout/footer/footer.component';
 import { EntryFooterContentComponent } from './entry-layout/footer/footer-content.component';
 import { EntrySidebarComponent } from './entry-layout/sidebar/sidebar.component';
 import { PagesComponent } from './static/pages/pages.component';
+import { NewsComponent } from './static/news/news.component';
 
 import { ProfileComponent } from './account/profile/profile.component';
 import { FollowersComponent } from './account/followers/followers.component';
@@ -153,6 +154,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         EntryFooterContentComponent,
         EntrySidebarComponent,
         PagesComponent,
+        NewsComponent,
         ProfileComponent,
         FollowersComponent,
         FollowingComponent,
@@ -234,7 +236,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         StartStreamingComponent,
         UpdateAccountRecordComponent,
         ModelDashboardComponent,
-        TimeAgoPipe
+        TimeAgoPipe,
     ],
     imports: [
         CommonModule,

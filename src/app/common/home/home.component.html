@@ -4,19 +4,13 @@
   </div>
   <div class="owl-carousel home-slider" *ngIf="sliders.length > 0">
       <div *ngFor="let slider of sliders">
-        <div class="item item-1" [style.background]="'url(' + slider.img + ')'">
-           <div class="text-over-img">
-              <p>{{slider.caption_text}}</p><br>
-              <a routerLink="/register" class="mt-3 signup-button">Sign Up!</a>
-           </div>
-        </div>
+         <div class="item item-1" [style.background]="'url(' + slider.img + ')'">
+            <div class="text-over-img" id="caption_{{slider.id}}">
+               <p>{{slider.caption_text}}</p><br>
+               <a routerLink="/register" class="mt-3 signup-button">Sign Up!</a>
+            </div>
+         </div>
       </div>
-        <!-- <div class="item item-2">
-           <div class="text-over-img fadeIn">
-              <p>Earn 5%-15% Residual Income from every model you register to your team for life!! Build Your Team & Earn Tons of Residual Money Every Month!!</p><br>
-              <a href="/register" class="mt-3 signup-button">Join Us</a>
-           </div>
-        </div> -->
   </div>
 
 

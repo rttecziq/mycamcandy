@@ -5,6 +5,7 @@ import { EntryLayoutComponent } from './entry-layout/entry-layout.component';
 import { MainLayoutComponent } from './entry-layout/main-layout/main.layout.component';
 
 import { PagesComponent } from './static/pages/pages.component';
+import { NewsComponent } from './static/news/news.component';
 
 import { ProfileComponent } from './account/profile/profile.component';
 import { ActivityComponent } from './account/candy-club/activity/activity.component';
@@ -169,6 +170,12 @@ const entryRoutes: Routes = [
             {
                 path: "page",
                 component: PagesComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Static Page", expectedRole: 'guestUser'},
+            },
+            {
+                path: "news",
+                component: NewsComponent,
                 canActivate: [AuthGuard],
                 data: {title : "Static Page", expectedRole: 'guestUser'},
             },
