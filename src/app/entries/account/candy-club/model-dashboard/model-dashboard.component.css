@@ -309,7 +309,8 @@ a.post {
 }
 .chat-message-div2 img.media-object {
     border-radius: 0px !important;
-    width: 40px !important;
+    width: 45px !important;
+    height: 45px!important;;
 }
 .dashboard-earning .chat-message-div2 a.media-heading {
     font-size: 13px;
@@ -350,7 +351,7 @@ a.post {
     font-size: 19px;
 }
 .chat-message-div2 .message-input img.media-object {
-    width: 30px !important;
+    width: 45px !important;
 }
 .chat-message-div2 .message-input textarea.form-control {
     height: 50px;
@@ -562,7 +563,7 @@ ul.followers-list li img{
 }
 .post-footer-option .list-unstyled li a{padding: 10px}
 .small, small {
-    font-size: 80%;
+    font-size: 80%!important;
     font-weight: 400;
 }
 .text-danger{
@@ -573,8 +574,8 @@ color: #CF3046!important;
 }
 .edit-delete{
     position: absolute;
-    right: 15px;
-    top: 5px;
+    right: 25px;
+    top: 35px;
 }
 .dropdown-menu {
     left: 0;
@@ -600,4 +601,45 @@ color: #CF3046!important;
 }   
 .enable-edit div{
     display: block !important;
+}
+.border-left{
+    border-left: 2px solid #cccccc;
+    border-spacing: 15px 10px;
+  }
+  .vertical-align-middle{
+    vertical-align: middle;
+  }
+  .d-inline-table{
+    display: inline-table;
+  }
+  .d-inline-flex{
+    display: inline-flex;
+  }
+  .ml-1{
+    margin-left:.5rem;
+  }
+  .ml-3{
+    margin-left: 2.5rem;
+  }
+  .d-inline-flex .fa{
+      font-size: 16px!important;
+  }
+  .chat-message-div2 .media{
+    border-bottom: 0px solid #fff!important;
+  }
+  .ml-5{
+    margin-left: 3rem;
+  }
+  .custom-textarea{
+    width:90%;
+  }
+  .list-unstyled.d-inline-flex{
+      margin-top: -7px!important;
+  }
+  .btn-warning{
+    background: #ff8d13!important;
+    color: #fff!important;
+  }
+  .post-comment .media-left, .reply-to-reply .media-left {
+    padding-right: 0px!important;
 }

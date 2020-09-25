@@ -477,7 +477,7 @@
                          </div>
                        </div> 
                      </div>
-                     <div class="tab-body-bg" *ngIf="!model_of_the_months.name"><p>No model of this month </p></div>                    
+                     <div class="tab-body-bg" *ngIf="!model_of_the_months.name"><p class="no-model-found">No model of this month </p></div>                    
                   </div>
                  <div class="tab-pane fad tab-div"  id="About">
                     <div class="col-md-4 col-sm-4 col-xs-12">
@@ -518,7 +518,7 @@
                            <img src="" class="uploaded-img" height="100" width="100">
                         </div>
                         <div class="col-md-9 col-sm-9 col-xs-9">
-                           <button href="" name="submit"  class="post">POST</button>
+                           <button href="" name="submit"  class="post float-right btn btn-sm btn-warning">POST</button>
                         </div>
                      </div>
                      </form>
@@ -709,7 +709,7 @@
            <div class="dashboard-earning">
               <h2><i class="fa fa-video-camera" aria-hidden="true"></i> <a href="">Top Models</a></h2>
               <div class="media" *ngIf="top_models.length > 0">
-                  <div *ngFor="let top_model of top_models">
+                  <div *ngFor="let top_model of top_models" class="p-2">
                      <div class="media-left">
                         <img [src]="top_model.chat_picture" class="media-object" style="width:60px">
                      </div>
