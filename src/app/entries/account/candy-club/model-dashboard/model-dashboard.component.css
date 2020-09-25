@@ -2,6 +2,10 @@
     background: #C8C3E5;
     padding: 7px;
 }
+.dashboard-img img {
+    max-width: 69%;
+    margin-top: 0.7rem;
+}
 a{
 	text-decoration: none!important;
 }
@@ -205,29 +209,23 @@ border-color: #000;
     padding: 10px 0px;
     display: inline-block;
     width: 100%;
+    padding-bottom: 0;
 }
+
 .tab-body-bg {
     background-image: url('../../../../../assets/img/model/heart-img.png');
-    height: 250px;
+    /* height: 250px; */
     width: 100%;
     background-size: cover;
     z-index: 2;
     position: relative;
 }
-.tab-body-bg p {
-    position: absolute;
-    z-index: 9;
+.tab-body-bg .no-model-found {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
     color: #fff;
     text-align: center;
-    right: 0;
-    display: block;
-    width: 100%;
-    height: auto;
-    bottom: 0;
-    top: 50%;
     margin: auto;
-    left: 0;
-    transform: translateY(-20%);
     font-size: 28px;
 }
 .tab-div {
@@ -512,6 +510,9 @@ ul.followers-list li img{
 }
 }
 @media screen and (max-width: 767px){
+.margin-top-2{
+    margin-top: 1rem;
+}
 .center-text{
 	text-align: center;
 }
@@ -534,4 +535,69 @@ ul.followers-list li img{
     margin-top: 40px;
     text-align: center;
 }
+}
+
+.text-white{
+    color:#fff!important;
+}
+.font-2rem{
+    font-size: 2rem!important;
+}
+.mx-auto{
+    margin-left: auto;
+    margin-right: auto;
+}
+.mt-2{
+    margin-top: 1rem;
+}
+@media screen and (min-width:768px){
+    .model-month-row{
+        align-items: center;
+        display: flex;
+    }
+}
+/* activities css */
+.post-footer-option .list-unstyled {
+    display: inline-flex;
+}
+.post-footer-option .list-unstyled li a{padding: 10px}
+.small, small {
+    font-size: 80%;
+    font-weight: 400;
+}
+.text-danger{
+color: #CF3046!important;
+}
+.text-secondary{
+    color: #9c9a9a!important;
+}
+.edit-delete{
+    position: absolute;
+    right: 15px;
+    top: 5px;
+}
+.dropdown-menu {
+    left: 0;
+    right: unset;
+}
+.dropdown-right-0 {
+    left: unset;
+    right: 0;
+}
+.actions{
+    margin-right: 10px;
+      margin-top: -37px;
+  }
+.actions .dropdown-menu{left: -110px}
+.d-none{
+    display: none;
+}
+.enable-edit p{
+    display: none;
+}
+.enable-edit h5 span{
+    display: none;
+}   
+.enable-edit div{
+    display: block !important;
 }

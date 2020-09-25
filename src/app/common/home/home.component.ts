@@ -22,18 +22,18 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sliderFn('getLandingPageSlider', '');
+    let data={type:'home'};
+    this.sliderFn('getModelSlider', data);
     this.Customjs();
   }
 
   sliderFn(url, object) {
-    this.requestService.getMethod(url,object) 
+    this.requestService.postMethod(url,object) 
             .subscribe(
                 (data : any) => {
                     if (data.success == true) {
                       // success
                       this.sliders = data.data;
-                      console.log(data);
                     } else {
                         this.errorMessages = data.error_messages;
                         $.toast({
@@ -67,7 +67,6 @@ export class HomeComponent implements OnInit {
 
   
   Customjs() {
-
       setTimeout (() => {
         $('.owl-carousel').slick({
           loop:true,
