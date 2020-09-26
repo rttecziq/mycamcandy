@@ -593,7 +593,7 @@ color: #CF3046!important;
 .d-none{
     display: none;
 }
-.enable-edit p{
+.enable-edit p,.enable-edit img{
     display: none;
 }
 .enable-edit h5 span{
@@ -649,4 +649,17 @@ i.fa.fa-close {
 .my-gifts li {
     margin: 1.5rem;
     text-align: left;
+}
+.activity-image{
+    max-width: 225px;
+}
+.img-responsive.act-image {
+    width: 100% !important;
+}
+#uploaded-file{
+    width: 25px;
+    position: absolute;
+    left: 55px;
+    opacity: 0;
+    top: 20.5%;
 }

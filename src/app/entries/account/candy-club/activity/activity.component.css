@@ -148,7 +148,7 @@ a{
 .d-none{
   display: none;
 }
-.enable-edit p{
+.enable-edit p,.enable-edit img{
   display: none;
 }
 .enable-edit h5 span{
@@ -197,4 +197,11 @@ i.fa.fa-close {
   width:95%;
   height: 35px;
 }
+.activity-image{
+  max-width: 225px;
+}
+.img-responsive.act-image {
+  width: 100% !important;
+}
+
 /********************User end Activity End**********************/

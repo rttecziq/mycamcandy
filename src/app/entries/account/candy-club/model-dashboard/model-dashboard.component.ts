@@ -32,6 +32,8 @@ export class ModelDashboardComponent implements OnInit {
   likeUsers:any[];
   userId : string;
   content_comment :string;
+  activity_perview_image:string;
+  upload_activity_image:File;
   constructor(private requestService : RequestService, private router : Router) {
     this.sliders = [];
     this.errorMessages = '';
@@ -49,13 +51,11 @@ export class ModelDashboardComponent implements OnInit {
     this.content_comment="";
     this.activities = [];
     this.activity_like = [];
-    this.likeUsers = [];
+    this.likeUsers = [];  
   }
 
   ngOnInit() {
-    let data={type:'profile'};
-    this.sliderFn('getModelSlider', data);
-    this.earningFn('getTopEarning', data);
+    this.earningFn('getTopEarning', this.model_id);
     this.model_total_candies_fn("modelTotalCandies", this.model_id);
     this.top_model_fn("topModel", this.model_id);
     this.model_giftFn("modelGiftReceiveList", this.model_id);
@@ -63,12 +63,40 @@ export class ModelDashboardComponent implements OnInit {
   }
 
   ngAfterViewInit(){
-
-    // Load Logged In User Profile
+    let data1={type:'profile'};
+    this.sliderFn('getModelSlider', data1);
+    // Load Logged In User Profile    
     let data={user_id:this.userId,listActivityData:'getActivitiesList'};
       this.getActivities('userActivities',data);
+  }
+  openCommentImage() {
+    let activity_image: HTMLElement = document.getElementsByClassName('myimage')[0] as HTMLElement;
+    activity_image.click();
+  }
+   // To save the temporary file object into this variable with preview image
+   handleProfilePicture(files: FileList) {
+    this.upload_activity_image = files.item(0);
+    if(!files.item(0).type.match('image')) {
+        $.toast({
+            heading: 'Warning',
+            text: "Please choose image with extensions .png, .jpg, .jpeg",
+        // icon: 'error',
+            position: 'top-right',
+            stack: false,
+            textAlign: 'left',
+            loader : false,
+            showHideTransition: 'slide'
+        });
+        return false;
+    }
 
-}
+    var reader = new FileReader();  
+    reader.onload = (event: any) => {    
+    this.activity_perview_image = event.target.result;
+    }
+    reader.readAsDataURL(files.item(0));
+
+  }
   model_giftFn(url, object) {  
     this.requestService.postMethod(url, object)
       .subscribe((data : any ) => {
@@ -221,7 +249,9 @@ export class ModelDashboardComponent implements OnInit {
       this.toast_message("Error", this.errorMessages);
     });
   }
-   
+  userFocus(id){
+    document.getElementById("focus_"+id).focus();
+  }
   replyShowHide(id) {    
     
     if(document.getElementById("comment_"+id).parentElement.classList.contains('enable-edit')){
@@ -313,9 +343,11 @@ export class ModelDashboardComponent implements OnInit {
   userActivities(form:NgForm){
       let data ={
           user_id:this.userId,
-          content_comment:form.value['content_comment']
+          content_comment:form.value['content_comment'],
+          activity_image:this.upload_activity_image
       }
       form.reset();
+      this.activity_perview_image="";
     this.requestService.postMethod('activities', data)
     .subscribe((data : any ) => {
       if (data.success == true) {

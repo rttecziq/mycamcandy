@@ -330,10 +330,10 @@ const entryRoutes: Routes = [
                 data: {title : "My Nude Show Photo", expectedRole: 'onlyUser'},
             },
             {
-                path: "candy-club/:username/model-news",
+                path: "model-news",
                 component: ModelNewsComponent,
                 canActivate: [AuthGuard],
-                data: {title : "Model News", expectedRole: 'onlyUser'},
+                data: {title : "Model News", expectedRole: 'guestUser'},
             },
             {
                 path: "candy-club/:username/model-schedule",

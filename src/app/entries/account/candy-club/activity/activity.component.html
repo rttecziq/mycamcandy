@@ -12,9 +12,12 @@
                   <h4>Post on your wall</h4>
                   <div class="form-group">
                      <textarea class="form-control" placeholder="What's on your mind?" [(ngModel)]="content_comment" name="content_comment" id="content_comment"></textarea>
+                  </div>                     
+                  <input type="file" class="myimage" accept="image/png,image/jpeg" name="uploaded-file" id="uploaded-file" (change)="handleProfilePicture($event.target.files)">
+                  <div *ngIf="activity_perview_image">
+                     <img [src]="activity_perview_image" class="img-responsive activity-image">
                   </div>
-                     <!-- <i class="fa fa-camera p-1" aria-hidden="true" style="font-size: 22px"></i> -->
-                     <!-- <input type="file" name="uploaded-file" id="uploaded-file"> -->
+                  <a (click)="openCommentImage()" role="button"><i class="fa fa-camera p-1" aria-hidden="true" style="font-size: 22px"></i></a>      
                   <div class="text-right"><button class="btn btn-sm btn-warning mb-1" name="submit">Post</button></div>
                </form>
             </div>
@@ -53,6 +56,7 @@
                         </section>
                         <section class="post-body mt-3">
                            <p>{{user_activities.comment_content}}</p>
+                           <img [src]="user_activities.activity_image" class="img-responsive act-image">
                            <div id="comment_{{user_activities.id}}" class="d-none" *ngIf="user_activities.user.id == userId">
                               <textarea class="form-control" placeholder="What's on your mind?" (keydown.enter)="updateActivities(user_activities)" [(ngModel)]="user_activities.comment_content" name="content_comment" id="content_comment"></textarea>
                            </div>
@@ -70,7 +74,12 @@
                                     </a>
                                     {{user_activities.comment_like_count}} Likes
                                  </li>
-                                 <li class="font-18"><a href="#"><i class="fa fa-comment ml-5"></i> {{user_activities.replies_count}} Comments</a></li>
+                                 <li class="font-18">
+                                    <a role="button" (click)="userFocus(user_activities.id)" >
+                                       <i class="fa fa-comment ml-5"></i> 
+                                       {{user_activities.replies_count}} Comments
+                                    </a>
+                                 </li>
                               </ul>
                            </div>
                            <div class="post-footer-option">
@@ -81,7 +90,7 @@
                                  <li *ngIf="user_activities.like_user_id == false || user_activities.comment_like_count == 0">
                                     <a role="button" (click)="userActivityLike(user_activities.id)" class="small text-danger"> Like</a>
                                  </li>
-                                 <li><a href="#"><i class="fa fa-comment ml-5 text-secondary"></i> <span class="text-danger">&nbsp;Comment</span></a></li>
+                                 <li><a role="button" (click)="userFocus(user_activities.id)"><i class="fa fa-comment ml-5 text-secondary"></i> <span class="text-danger">&nbsp;Comment</span></a></li>
                               </ul>
                            </div>
                            <div class="post-footer-comment-wrapper">
@@ -96,7 +105,7 @@
                                     </div>
                                     &nbsp;&nbsp;
                                     <div class="media-body">
-                                          <textarea class="form-control" [attr.data-commentid]="user_activities.id" placeholder="What's on your mind?" (keydown.enter)="userActivitiesChild($event)" name="content_comment" id="content_comment"></textarea>
+                                          <textarea class="form-control" id="focus_{{user_activities.id}}" [attr.data-commentid]="user_activities.id" placeholder="What's on your mind?" (keydown.enter)="userActivitiesChild($event)" name="content_comment" id="content_comment"></textarea>
                                     </div>
                                  </div>
                               </div>
