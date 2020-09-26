@@ -590,121 +590,147 @@
                        </div>
                     </div>
                     <div *ngIf="user_activities.replies.length > 0">
-                     <div *ngFor="let user_activities_reply of user_activities.replies;let i = index;">
-                        <div class="post-comment mt-3">
-                           <div class="media">
-                              <div class="media-left">
-                                 <a href="#">
-                                 <img class="media-object photo-profile" [src]="user_activities_reply.user.chat_picture" width="40" height="40" alt="...">
-                                 </a>
-                              </div>
-                              <div class="media-body">
-                                    <span>
-                                       <h5 class="media-heading" *ngIf="user_activities_reply.user.is_content_creator==1">&nbsp;&nbsp;<a href="/#/candy-club/models/{{user_activities_reply.user.name}}" class="anchor-username">{{user_activities_reply.user.name}}</a> 
-                                          <span class="comment-msg">&nbsp;&nbsp;{{user_activities_reply.comment_content}}</span>
-                                       </h5>
-                                       <h5 class="media-heading" *ngIf="user_activities_reply.user.is_content_creator==0">&nbsp;&nbsp;<a href="/#/candy-club/{{user_activities_reply.user.name}}" class="anchor-username">{{user_activities_reply.user.name}}</a> 
-                                          <span class="comment-msg">&nbsp;&nbsp;{{user_activities_reply.comment_content}}</span>
-                                       </h5>
-                                       <div id="edit_comment_{{user_activities_reply.id}}" class="d-none" *ngIf="user_activities_reply.user.id == userId">
-                                          <textarea class="ml-1 custom-textarea form-control" placeholder="What's on your mind?" (keydown.enter)="updateActivities(user_activities_reply)" [(ngModel)]="user_activities_reply.comment_content" name="content_comment" id="content_comment"></textarea>
-                                       </div>
-                                    </span>
-                                    
-                                    <ul class="list-unstyled ml-1 d-inline-flex">
-                                       <li *ngIf="user_activities_reply.like_user_id == true">
-                                          <a role="button" (click)="userActivityLike(user_activities_reply.id)" class="small"> Unlike</a>
-                                       </li>
-                                       <li *ngIf="user_activities_reply.like_user_id == false || user_activities_reply.replyCommentLikeCount == 0">
-                                          <a role="button" (click)="userActivityLike(user_activities_reply.id)" class="small"> Like</a>
-                                       </li>
-                                       <li *ngIf="user_activities_reply.replyCommentLikeCount != 0">
-                                          <a role="button" (click)="getUsers(user_activities_reply.id)" class="small ml-1 text-secondary" data-toggle="modal" data-target="#likeModal"> 
-                                             <i class="fa fa-thumbs-up"></i> 
-                                             {{user_activities_reply.replyCommentLikeCount}}
-                                          </a>
-                                       </li>
-                                       <li><a role="button" (click)="replyShowHide(user_activities_reply.id)" class="small ml-1"> Reply</a></li>
-                                       
-                                    </ul>
-                                    
-                                    <span class="anchor-time small">&nbsp;&nbsp;{{user_activities_reply.created_at | timeAgo }} &nbsp;&nbsp;</span>
-                                    <div class="d-inline-flex" *ngIf="user_activities_reply.user.id == userId">
-                                       <a (click)="replyEditShowHide(user_activities_reply.id)" id="pencil_{{user_activities_reply.id}}"><i class="fa fa-pencil"></i></a>
-                                    </div>
-                                    <div *ngIf="user_activities_reply.user.id == userId" style="float: right;margin-top: -17px;margin-right: 5px;">
-                                       <a role="button" (click)="deleteUserComent(user_activities_reply.id)"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                    <div>
-                                       <div id="comment_{{user_activities_reply.id}}" class="d-none">
-                                          <textarea class="form-control" [attr.data-commentid]="user_activities_reply.id" placeholder="What's on your mind?" (keydown.enter)="userActivitiesChild($event)" name="content_comment" id="content_comment"></textarea>
-                                       </div>
-                                    </div>
-                                    
-                              </div>
-                           </div>
-                        </div>
-                        <div *ngIf="user_activities_reply.replies.length > 0">
-                           <div class="reply-to-reply" *ngFor="let user_activities_re_reply of user_activities_reply.replies;">
-                              <div class="ml-3 border-left">
-                                 <div class="media">
-                                    <div class="media-left">
-                                       <a href="#">
-                                       <img class="media-object photo-profile" [src]="user_activities_re_reply.user.chat_picture" width="40" height="40" alt="...">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
+                        <div *ngFor="let user_activities_reply of user_activities.replies;let i = index;">
+                           <div class="post-comment mt-3">
+                              <div class="media">
+                                 <div class="media-left">
+                                    <a href="#">
+                                    <img class="media-object photo-profile" [src]="user_activities_reply.user.chat_picture" width="40" height="40" alt="...">
+                                    </a>
+                                 </div>
+                                 <div class="media-body">
                                        <span>
-                                          <h5 class="media-heading" *ngIf="user_activities_re_reply.user.is_content_creator==1"><a href="/#/candy-club/models/{{user_activities_re_reply.user.name}}" class="anchor-username">{{user_activities_re_reply.user.name}}</a> 
-                                             <span class="comment-msg">&nbsp;&nbsp;{{user_activities_re_reply.comment_content}}</span>
+                                          <h5 class="media-heading" *ngIf="user_activities_reply.user.is_content_creator==1">&nbsp;&nbsp;<a href="/#/candy-club/models/{{user_activities_reply.user.name}}" class="anchor-username">{{user_activities_reply.user.name}}</a> 
+                                             <span class="comment-msg">&nbsp;&nbsp;{{user_activities_reply.comment_content}}</span>
                                           </h5>
-                                          <h5 class="media-heading" *ngIf="user_activities_re_reply.user.is_content_creator==0"><a href="/#/candy-club/{{user_activities_re_reply.user.name}}" class="anchor-username">{{user_activities_re_reply.user.name}}</a> 
-                                             <span class="comment-msg">&nbsp;&nbsp;{{user_activities_re_reply.comment_content}}</span>
+                                          <h5 class="media-heading" *ngIf="user_activities_reply.user.is_content_creator==0">&nbsp;&nbsp;<a href="/#/candy-club/{{user_activities_reply.user.name}}" class="anchor-username">{{user_activities_reply.user.name}}</a> 
+                                             <span class="comment-msg">&nbsp;&nbsp;{{user_activities_reply.comment_content}}</span>
                                           </h5>
-                                          <div id="edit_comment_{{user_activities_re_reply.id}}" class="d-none" *ngIf="user_activities_re_reply.user.id == userId">
-                                             <textarea class="custom-textarea form-control" placeholder="What's on your mind?" (keydown.enter)="updateActivities(user_activities_re_reply)" [(ngModel)]="user_activities_re_reply.comment_content" name="content_comment" id="content_comment"></textarea>
+                                          <div id="edit_comment_{{user_activities_reply.id}}" class="d-none" *ngIf="user_activities_reply.user.id == userId">
+                                             <textarea class="ml-1 custom-textarea form-control" placeholder="What's on your mind?" (keydown.enter)="updateActivities(user_activities_reply)" [(ngModel)]="user_activities_reply.comment_content" name="content_comment" id="content_comment"></textarea>
                                           </div>
-                                       </span>                                                      
-                                       <ul class="list-unstyled d-inline-flex">
-                                          <li *ngIf="user_activities_re_reply.like_user_id == true">
-                                             <a href="javascript:void(0);" (click)="userActivityLike(user_activities_re_reply.id)" class="small"> Unlike</a>
+                                       </span>
+                                       
+                                       <ul class="list-unstyled ml-1 d-inline-flex">
+                                          <li *ngIf="user_activities_reply.like_user_id == true">
+                                             <a role="button" (click)="userActivityLike(user_activities_reply.id)" class="small"> Unlike</a>
                                           </li>
-                                          <li *ngIf="user_activities_re_reply.like_user_id == false || user_activities_re_reply.reReplyCommentLikeCount == 0">
-                                             <a href="javascript:void(0);" (click)="userActivityLike(user_activities_re_reply.id)" class="small"> Like</a>
+                                          <li *ngIf="user_activities_reply.like_user_id == false || user_activities_reply.replyCommentLikeCount == 0">
+                                             <a role="button" (click)="userActivityLike(user_activities_reply.id)" class="small"> Like</a>
                                           </li>
-                                          <li *ngIf="user_activities_re_reply.reReplyCommentLikeCount != 0">
-                                             <a role="button" (click)="getUsers(user_activities_re_reply.id)" class="small ml-1 text-secondary" data-toggle="modal" data-target="#likeModal"> 
+                                          <li *ngIf="user_activities_reply.replyCommentLikeCount != 0">
+                                             <a role="button" (click)="getUsers(user_activities_reply.id)" class="small ml-1 text-secondary" data-toggle="modal" data-target="#likeModal"> 
                                                 <i class="fa fa-thumbs-up"></i> 
-                                                {{user_activities_re_reply.reReplyCommentLikeCount}}
+                                                {{user_activities_reply.replyCommentLikeCount}}
                                              </a>
                                           </li>
-                                          <li><a role="button" (click)="replyShowHide(user_activities_re_reply.id)" class="small ml-1"> Reply</a></li>
+                                          <li><a role="button" (click)="replyShowHide(user_activities_reply.id)" class="small ml-1"> Reply</a></li>
+                                          
                                        </ul>
-                                       <span class="anchor-time small">&nbsp;&nbsp;{{user_activities_re_reply.created_at | timeAgo }} &nbsp;&nbsp;</span>
-                                       <div class="d-inline-flex" *ngIf="user_activities_re_reply.user.id == userId">
-                                          <a (click)="replyEditShowHide(user_activities_re_reply.id)" id="pencil_{{user_activities_re_reply.id}}"><i class="fa fa-pencil"></i></a>
+                                       
+                                       <span class="anchor-time small">&nbsp;&nbsp;{{user_activities_reply.created_at | timeAgo }} &nbsp;&nbsp;</span>
+                                       <div class="d-inline-flex" *ngIf="user_activities_reply.user.id == userId">
+                                          <a (click)="replyEditShowHide(user_activities_reply.id)" id="pencil_{{user_activities_reply.id}}"><i class="fa fa-pencil"></i></a>
+                                          <a (click)="replyEditShowHide(user_activities_reply.id)" id="pencilclose_{{user_activities_reply.id}}" class="d-none"><i class="fa fa-close"></i></a>
+
                                        </div>
-                                       <div *ngIf="user_activities_re_reply.user.id == userId" style="float: right;margin-top: -17px;margin-right: 5px;">
-                                          <a role="button" (click)="deleteUserComent(user_activities_re_reply.id)"><i class="fa fa-trash"></i></a>
+                                       <div *ngIf="user_activities_reply.user.id == userId" style="float: right;margin-top: -17px;margin-right: 5px;">
+                                          <a role="button" (click)="deleteUserComent(user_activities_reply.id)"><i class="fa fa-trash"></i></a>
                                        </div>
                                        <div>
-                                          <div id="comment_{{user_activities_re_reply.id}}" class="d-none">
+                                          <div id="comment_{{user_activities_reply.id}}" class="d-none">
                                              <textarea class="form-control" [attr.data-commentid]="user_activities_reply.id" placeholder="What's on your mind?" (keydown.enter)="userActivitiesChild($event)" name="content_comment" id="content_comment"></textarea>
                                           </div>
-                                       </div> 
-                                          
-                                    </div>
+                                       </div>
+                                       
                                  </div>
-                              </div>            
+                              </div>
                            </div>
+                           <div *ngIf="user_activities_reply.replies.length > 0">
+                              <div class="reply-to-reply" *ngFor="let user_activities_re_reply of user_activities_reply.replies;">
+                                 <div class="ml-3 border-left">
+                                    <div class="media">
+                                       <div class="media-left">
+                                          <a href="#">
+                                          <img class="media-object photo-profile" [src]="user_activities_re_reply.user.chat_picture" width="40" height="40" alt="...">
+                                          </a>
+                                       </div>
+                                       <div class="media-body">
+                                          <span>
+                                             <h5 class="media-heading" *ngIf="user_activities_re_reply.user.is_content_creator==1"><a href="/#/candy-club/models/{{user_activities_re_reply.user.name}}" class="anchor-username">{{user_activities_re_reply.user.name}}</a> 
+                                                <span class="comment-msg">&nbsp;&nbsp;{{user_activities_re_reply.comment_content}}</span>
+                                             </h5>
+                                             <h5 class="media-heading" *ngIf="user_activities_re_reply.user.is_content_creator==0"><a href="/#/candy-club/{{user_activities_re_reply.user.name}}" class="anchor-username">{{user_activities_re_reply.user.name}}</a> 
+                                                <span class="comment-msg">&nbsp;&nbsp;{{user_activities_re_reply.comment_content}}</span>
+                                             </h5>
+                                             <div id="edit_comment_{{user_activities_re_reply.id}}" class="d-none" *ngIf="user_activities_re_reply.user.id == userId">
+                                                <textarea class="custom-textarea form-control" placeholder="What's on your mind?" (keydown.enter)="updateActivities(user_activities_re_reply)" [(ngModel)]="user_activities_re_reply.comment_content" name="content_comment" id="content_comment"></textarea>
+                                             </div>
+                                          </span>                                                      
+                                          <ul class="list-unstyled d-inline-flex">
+                                             <li *ngIf="user_activities_re_reply.like_user_id == true">
+                                                <a href="javascript:void(0);" (click)="userActivityLike(user_activities_re_reply.id)" class="small"> Unlike</a>
+                                             </li>
+                                             <li *ngIf="user_activities_re_reply.like_user_id == false || user_activities_re_reply.reReplyCommentLikeCount == 0">
+                                                <a href="javascript:void(0);" (click)="userActivityLike(user_activities_re_reply.id)" class="small"> Like</a>
+                                             </li>
+                                             <li *ngIf="user_activities_re_reply.reReplyCommentLikeCount != 0">
+                                                <a role="button" (click)="getUsers(user_activities_re_reply.id)" class="small ml-1 text-secondary" data-toggle="modal" data-target="#likeModal"> 
+                                                   <i class="fa fa-thumbs-up"></i> 
+                                                   {{user_activities_re_reply.reReplyCommentLikeCount}}
+                                                </a>
+                                             </li>
+                                             <li><a role="button" (click)="replyShowHide(user_activities_re_reply.id)" class="small ml-1"> Reply</a></li>
+                                          </ul>
+                                          <span class="anchor-time small">&nbsp;&nbsp;{{user_activities_re_reply.created_at | timeAgo }} &nbsp;&nbsp;</span>
+                                          <div class="d-inline-flex" *ngIf="user_activities_re_reply.user.id == userId">
+                                             <a (click)="replyEditShowHide(user_activities_re_reply.id)" id="pencil_{{user_activities_re_reply.id}}"><i class="fa fa-pencil"></i></a>
+                                             <a (click)="replyEditShowHide(user_activities_re_reply.id)" id="pencilclose_{{user_activities_re_reply.id}}" class="d-none"><i class="fa fa-close"></i></a>
+                                          </div>
+                                          <div *ngIf="user_activities_re_reply.user.id == userId" style="float: right;margin-top: -17px;margin-right: 5px;">
+                                             <a role="button" (click)="deleteUserComent(user_activities_re_reply.id)"><i class="fa fa-trash"></i></a>
+                                          </div>
+                                          <div>
+                                             <div id="comment_{{user_activities_re_reply.id}}" class="d-none">
+                                                <textarea class="form-control" [attr.data-commentid]="user_activities_reply.id" placeholder="What's on your mind?" (keydown.enter)="userActivitiesChild($event)" name="content_comment" id="content_comment"></textarea>
+                                             </div>
+                                          </div> 
+                                             
+                                       </div>
+                                    </div>
+                                 </div>            
+                              </div>
+                           </div>
+                           
                         </div>
-                        
                      </div>
-                  </div>
                  </div>
               </div>
            </div>
-        </div>
+           <div id="likeModal" class="modal fade" role="dialog">
+               <div class="modal-dialog">   
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <p class="modal-title">People who like this</p>
+                     </div>
+                     <div class="modal-body" *ngIf="activities.length > 0">
+                        <div *ngFor="let users of likeUsers" class="media mt-1">
+                           <div class="media-left">
+                              <a href="#">
+                              <img class="media-object photo-profile" [src]="users.user.chat_picture" width="40" height="40" alt="...">
+                              </a>
+                           </div>
+                           <div class="media-body vertical-align-middle">
+                              <h5 class="media-heading ml-1"><a href="#" class="anchor-username">{{users.user.name}}</a></h5>
+                           </div>
+                        </div>            
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
         <div class="col-md-3 col-sm-7 col-xs-12 third-div">
            <div class="dashboard-earning">
               <h2><i class="fa fa-video-camera" aria-hidden="true"></i> <a href="">Top Models</a></h2>
@@ -727,7 +753,7 @@
            </div>
            <div class="dashboard-earning">
               <h2><i class="fa fa-gift" aria-hidden="true"></i> <a href="">My Gifts</a></h2>
-               <ul class="list-unstyled my-gifts *ngIf="model_gift_lists.length >
+               <ul class="list-unstyled my-gifts tab-body-bg" *ngIf="model_gift_lists.length > 0">
                   <li *ngFor="let model_gift_list of model_gift_lists"><img [src]="model_gift_list.gift['gift_image']" alt="" class="img-responsive" /></li>
                </ul>
            </div>

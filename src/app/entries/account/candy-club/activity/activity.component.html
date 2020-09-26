@@ -3,94 +3,247 @@
     <!--Common user's profile tab -->
   <user-profile-tabs></user-profile-tabs>
           
-		      <div class="row">
-               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
-               <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12" style="padding: 0px 30px;">
-                     
-                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="post-on-wall">
-                        <div>
-                        <form class="p-2 bg-light" method="POST">
-                           <h4>Post on your wall</h4>
-                           <div class="form-group">
-                                    <textarea class="form-control" placeholder="What's on your mind?" name="post" id="post"></textarea>
-                                 </div>
-                                 <i class="fa fa-camera p-1" aria-hidden="true" style="font-size: 22px"></i>
-                                 <input type="file" name="uploaded-file" id="uploaded-file">
-                                 <button class="btn btn-sm btn-warning float-right" name="submit" id="submit" type="button">Post</button>
-                        </form>
-                        </div>
-                        <div class="user-activity mt-5">
-                           <div class="panel panel-default mt-2">
-                                             <div class="panel-body p-2">
-                                                <section class="post-heading">
-                                                   <div class="row">
-                                                      <div class="col-md-12 col-sm-12  col-xs-12">
-                                                         <div class="media">
-                                                            <div class="media-left">
-                                                               <a href="#">
-                                                               <img class="media-object photo-profile" [src]="user_profile_picture" width="40" height="40" alt="...">
-                                                               </a>
-                                                            </div>
-                                                            <div class="media-body">
-                                                               
-                                                                  <h5 class="media-heading" style="margin-bottom: 0;">&nbsp;&nbsp;<a href="#" class="anchor-username">Model</a></h5>
-                                                               <a href="#" class="anchor-time">&nbsp;&nbsp;September 27 at 10:25am</a>
-                                                            </div>
-                                                         </div>
-                                                      </div>
-                                                   </div>
-                                                </section>
-                                                <section class="post-body mt-3">
-                                                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras 
-                                                      turpis sem, dictum id bibendum eget, malesuada ut massa. Ut scel
-                                                      erisque nulla sed luctus dapibus. Nulla sit amet mi vitae purus sol
-                                                      licitudin venenatis. Praesent et sem urna. Integer vitae lectus nis
-                                                      l. Fusce sapien ante, tristique efficitur lorem et, laoreet ornare lib
-                                                      ero. Nam fringilla leo orci. Vivamus semper quam nunc, sed ornare magna dignissim sed. Etiam interdum justo quis risus
-                                                      efficitur dictum. Nunc ut pulvinar quam. N
-                                                      unc mollis, est a dapibus dignissim, eros elit tempor diam, eu tempus quam felis eu velit.
-                                                   </p>
-                                                </section>
-                                                <section class="post-body mt-3">
-                                                   <img [src]="user_profile_picture" class="img-responsive">
-                                                </section>
-                                                <section class="post-body mt-3">
-                                                   <!-- Videos section-->
-                                                </section>
-                                                <section class="post-footer">
-                                                   <hr>
-                                                   <div class="post-footer-option">
-                                                      <ul class="list-unstyled">
-                                                         <li><a href="#"><i class="fa fa-thumbs-up"></i> Like</a></li>
-                                                         <!--<li><a href="#"><i class="fa fa-thumbs-down"></i> Unlike</a></li>-->
-                                                         <li><a href="#"><i class="fa fa-comment ml-5"></i> Comment</a></li>
-                                                      </ul>
-                                                   </div>
-                                                   <div class="post-footer-comment-wrapper">
-                                                      <div class="comment-form">
-                                                      </div>
-                                                      <div class="comment">
-                                                         <div class="media">
-                                                            <div class="media-left">
-                                                               <a href="#">
-                                                               <img class="media-object photo-profile mt-2" [src]="user_profile_picture" width="40" height="40" alt="...">
-                                                               </a>
-                                                            </div>
-                                                            &nbsp;&nbsp;
-                                                            <div class="media-body">
-                                                                  <form method="POST">
-                                                                     <textarea class="form-control" placeholder="Write a comment..." name="comment" id="comment"></textarea>
-                                                                  </form>
-                                                            </div>
-                                                         </div>
-                                                      </div>
-                                                   </div>
-                                                </section>
-                                             </div>
+  <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12" style="padding: 0px 30px;">               
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="post-on-wall">
+            <div class="border">
+               <form class="p-2 bg-light" #userActivityForm="ngForm" (ngSubmit)="userActivities(userActivityForm)">
+                  <h4>Post on your wall</h4>
+                  <div class="form-group">
+                     <textarea class="form-control" placeholder="What's on your mind?" [(ngModel)]="content_comment" name="content_comment" id="content_comment"></textarea>
+                  </div>
+                     <!-- <i class="fa fa-camera p-1" aria-hidden="true" style="font-size: 22px"></i> -->
+                     <!-- <input type="file" name="uploaded-file" id="uploaded-file"> -->
+                  <div class="text-right"><button class="btn btn-sm btn-warning mb-1" name="submit">Post</button></div>
+               </form>
+            </div>
+         </div>
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-5">
+            <div class="user-activity mt-5">
+               <div class="panel-default mt-2">
+                  <div class="panel-body p-2" *ngIf="activities.length > 0">
+                     <div *ngFor="let user_activities of activities" class="border p-2 mb-2">
+                        <section class="post-heading">
+                           <div class="row">
+                              <div class="col-md-12 col-sm-12  col-xs-12">
+                                 <div class="media">
+                                    <div class="media-left">
+                                       <a href="#">
+                                       <img class="media-object photo-profile" [src]="user_activities.user.chat_picture" width="40" height="40" alt="...">
+                                       </a>
+                                    </div>
+                                    <div class="media-body">                                       
+                                          <h5 class="media-heading" style="margin-bottom: 0;" *ngIf="user_activities.user.is_content_creator==1">&nbsp;&nbsp;<a href="/#/candy-club/models/{{user_activities.user.name}}" class="anchor-username">{{user_activities.user.name}}</a></h5>
+                                          <h5 class="media-heading" style="margin-bottom: 0;" *ngIf="user_activities.user.is_content_creator==0">&nbsp;&nbsp;<a href="/#/candy-club/{{user_activities.user.name}}" class="anchor-username">{{user_activities.user.name}}</a></h5>
+                                       <a href="#" class="anchor-time">&nbsp;&nbsp;{{ user_activities.created_at | date }} at {{ user_activities.created_at | date:'shortTime' }}</a>
+                                       <div class="edit-delete" *ngIf="user_activities.user.id == userId">
+                                          <div class="dropdown">
+                                             <a href="#" type="button" data-toggle="dropdown"><i class="fa fa-chevron-down"></i></a>
+                                             <ul class="dropdown-menu dropdown-right-0">
+                                             <li><a role="button" (click)="editParentComment(user_activities.id)">Edit</a></li>
+                                             <li><a role="button" (click)="deleteUserComent(user_activities.id)" >Delete</a></li>
+                                             </ul>
                                           </div>
-                        </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </section>
+                        <section class="post-body mt-3">
+                           <p>{{user_activities.comment_content}}</p>
+                           <div id="comment_{{user_activities.id}}" class="d-none" *ngIf="user_activities.user.id == userId">
+                              <textarea class="form-control" placeholder="What's on your mind?" (keydown.enter)="updateActivities(user_activities)" [(ngModel)]="user_activities.comment_content" name="content_comment" id="content_comment"></textarea>
+                           </div>
+                        </section>
+                        <section class="post-body mt-3">
+                           <!-- Videos section-->
+                        </section>
+                        <section class="post-footer">
+                           <hr>
+                           <div class="post-footer-option">
+                              <ul class="list-unstyled">
+                                 <li *ngIf="user_activities.comment_like_count != 0">
+                                    <a role="button" (click)="getUsers(user_activities.id)" class="small ml-1 text-secondary" [attr.data-comment-id]="" data-toggle="modal" data-target="#likeModal"> 
+                                       <i class="fa fa-thumbs-up"></i>                                        
+                                    </a>
+                                    {{user_activities.comment_like_count}} Likes
+                                 </li>
+                                 <li class="font-18"><a href="#"><i class="fa fa-comment ml-5"></i> {{user_activities.replies_count}} Comments</a></li>
+                              </ul>
+                           </div>
+                           <div class="post-footer-option">
+                              <ul class="list-unstyled">
+                                 <li *ngIf="user_activities.like_user_id == true">
+                                    <a role="button" (click)="userActivityLike(user_activities.id)" class="small text-danger"> Unlike</a>
+                                 </li>
+                                 <li *ngIf="user_activities.like_user_id == false || user_activities.comment_like_count == 0">
+                                    <a role="button" (click)="userActivityLike(user_activities.id)" class="small text-danger"> Like</a>
+                                 </li>
+                                 <li><a href="#"><i class="fa fa-comment ml-5 text-secondary"></i> <span class="text-danger">&nbsp;Comment</span></a></li>
+                              </ul>
+                           </div>
+                           <div class="post-footer-comment-wrapper">
+                              <div class="comment-form">
+                              </div>
+                              <div class="comment">
+                                 <div class="media d-inline-table">
+                                    <div class="media-left">
+                                       <a href="#">
+                                       <img class="media-object photo-profile mt-2" [src]="user_activities.user.chat_picture" width="40" height="40" alt="..." style="margin-top: 0.45em;">
+                                       </a>
+                                    </div>
+                                    &nbsp;&nbsp;
+                                    <div class="media-body">
+                                          <textarea class="form-control" [attr.data-commentid]="user_activities.id" placeholder="What's on your mind?" (keydown.enter)="userActivitiesChild($event)" name="content_comment" id="content_comment"></textarea>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div *ngIf="user_activities.replies.length > 0">
+                                 <div *ngFor="let user_activities_reply of user_activities.replies;let i = index;">
+                                    <div class="post-comment mt-3">
+                                       <div class="media">
+                                          <div class="media-left">
+                                             <a href="#">
+                                             <img class="media-object photo-profile" [src]="user_activities_reply.user.chat_picture" width="40" height="40" alt="...">
+                                             </a>
+                                          </div>
+                                          <div class="media-body">
+                                                <span>
+                                                   <h5 class="media-heading" *ngIf="user_activities_reply.user.is_content_creator==1">&nbsp;&nbsp;<a href="/#/candy-club/models/{{user_activities_reply.user.name}}" class="anchor-username">{{user_activities_reply.user.name}}</a> 
+                                                      <span class="comment-msg">&nbsp;&nbsp;{{user_activities_reply.comment_content}}</span>
+                                                   </h5>
+                                                   <h5 class="media-heading" *ngIf="user_activities_reply.user.is_content_creator==0">&nbsp;&nbsp;<a href="/#/candy-club/{{user_activities_reply.user.name}}" class="anchor-username">{{user_activities_reply.user.name}}</a> 
+                                                      <span class="comment-msg">&nbsp;&nbsp;{{user_activities_reply.comment_content}}</span>
+                                                   </h5>
+                                                   <div id="edit_comment_{{user_activities_reply.id}}" class="d-none" *ngIf="user_activities_reply.user.id == userId">
+                                                      <textarea class="ml-1 custom-textarea form-control" placeholder="What's on your mind?" (keydown.enter)="updateActivities(user_activities_reply)" [(ngModel)]="user_activities_reply.comment_content" name="content_comment" id="content_comment"></textarea>
+                                                   </div>
+                                                </span>
+                                                
+                                                <ul class="list-unstyled ml-1 d-inline-flex">
+                                                   <li *ngIf="user_activities_reply.like_user_id == true">
+                                                      <a role="button" (click)="userActivityLike(user_activities_reply.id)" class="small"> Unlike</a>
+                                                   </li>
+                                                   <li *ngIf="user_activities_reply.like_user_id == false || user_activities_reply.replyCommentLikeCount == 0">
+                                                      <a role="button" (click)="userActivityLike(user_activities_reply.id)" class="small"> Like</a>
+                                                   </li>
+                                                   <li *ngIf="user_activities_reply.replyCommentLikeCount != 0">
+                                                      <a role="button" (click)="getUsers(user_activities_reply.id)" class="small ml-1 text-secondary" data-toggle="modal" data-target="#likeModal"> 
+                                                         <i class="fa fa-thumbs-up"></i> 
+                                                         {{user_activities_reply.replyCommentLikeCount}}
+                                                      </a>
+                                                   </li>
+                                                   <li><a role="button" (click)="replyShowHide(user_activities_reply.id)" class="small ml-1"> Reply</a></li>
+                                                   
+                                                </ul>
+                                                
+                                                <span class="anchor-time small">&nbsp;&nbsp;{{user_activities_reply.created_at | timeAgo }} &nbsp;&nbsp;</span>
+                                                <div class="d-inline-flex" *ngIf="user_activities_reply.user.id == userId">
+                                                   <a (click)="replyEditShowHide(user_activities_reply.id)" id="pencil_{{user_activities_reply.id}}"><i class="fa fa-pencil"></i></a>
+                                                </div>
+                                                <div *ngIf="user_activities_reply.user.id == userId" style="float: right;margin-top: -17px;margin-right: 5px;">
+                                                   <a role="button" (click)="deleteUserComent(user_activities_reply.id)"><i class="fa fa-trash"></i></a>
+                                                </div>
+                                                <div>
+                                                   <div id="comment_{{user_activities_reply.id}}" class="d-none">
+                                                      <textarea class="form-control" [attr.data-commentid]="user_activities_reply.id" placeholder="What's on your mind?" (keydown.enter)="userActivitiesChild($event)" name="content_comment" id="content_comment"></textarea>
+                                                   </div>
+                                                </div>
+                                                
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div *ngIf="user_activities_reply.replies.length > 0">
+                                       <div class="reply-to-reply" *ngFor="let user_activities_re_reply of user_activities_reply.replies;">
+                                          <div class="ml-3 border-left">
+                                             <div class="media">
+                                                <div class="media-left">
+                                                   <a href="#">
+                                                   <img class="media-object photo-profile" [src]="user_activities_re_reply.user.chat_picture" width="40" height="40" alt="...">
+                                                   </a>
+                                                </div>
+                                                <div class="media-body">
+                                                   <span>
+                                                      <h5 class="media-heading" *ngIf="user_activities_re_reply.user.is_content_creator==1"><a href="/#/candy-club/models/{{user_activities_re_reply.user.name}}" class="anchor-username">{{user_activities_re_reply.user.name}}</a> 
+                                                         <span class="comment-msg">&nbsp;&nbsp;{{user_activities_re_reply.comment_content}}</span>
+                                                      </h5>
+                                                      <h5 class="media-heading" *ngIf="user_activities_re_reply.user.is_content_creator==0"><a href="/#/candy-club/{{user_activities_re_reply.user.name}}" class="anchor-username">{{user_activities_re_reply.user.name}}</a> 
+                                                         <span class="comment-msg">&nbsp;&nbsp;{{user_activities_re_reply.comment_content}}</span>
+                                                      </h5>
+                                                      <div id="edit_comment_{{user_activities_re_reply.id}}" class="d-none" *ngIf="user_activities_re_reply.user.id == userId">
+                                                         <textarea class="custom-textarea form-control" placeholder="What's on your mind?" (keydown.enter)="updateActivities(user_activities_re_reply)" [(ngModel)]="user_activities_re_reply.comment_content" name="content_comment" id="content_comment"></textarea>
+                                                      </div>
+                                                   </span>                                                      
+                                                   <ul class="list-unstyled d-inline-flex">
+                                                      <li *ngIf="user_activities_re_reply.like_user_id == true">
+                                                         <a href="javascript:void(0);" (click)="userActivityLike(user_activities_re_reply.id)" class="small"> Unlike</a>
+                                                      </li>
+                                                      <li *ngIf="user_activities_re_reply.like_user_id == false || user_activities_re_reply.reReplyCommentLikeCount == 0">
+                                                         <a href="javascript:void(0);" (click)="userActivityLike(user_activities_re_reply.id)" class="small"> Like</a>
+                                                      </li>
+                                                      <li *ngIf="user_activities_re_reply.reReplyCommentLikeCount != 0">
+                                                         <a role="button" (click)="getUsers(user_activities_re_reply.id)" class="small ml-1 text-secondary" data-toggle="modal" data-target="#likeModal"> 
+                                                            <i class="fa fa-thumbs-up"></i> 
+                                                            {{user_activities_re_reply.reReplyCommentLikeCount}}
+                                                         </a>
+                                                      </li>
+                                                      <li><a role="button" (click)="replyShowHide(user_activities_re_reply.id)" class="small ml-1"> Reply</a></li>
+                                                   </ul>
+                                                   <span class="anchor-time small">&nbsp;&nbsp;{{user_activities_re_reply.created_at | timeAgo }} &nbsp;&nbsp;</span>
+                                                   <div class="d-inline-flex" *ngIf="user_activities_re_reply.user.id == userId">
+                                                      <a (click)="replyEditShowHide(user_activities_re_reply.id)" id="pencil_{{user_activities_re_reply.id}}"><i class="fa fa-pencil"></i></a>
+                                                   </div>
+                                                   <div *ngIf="user_activities_re_reply.user.id == userId" style="float: right;margin-top: -17px;margin-right: 5px;">
+                                                      <a role="button" (click)="deleteUserComent(user_activities_re_reply.id)"><i class="fa fa-trash"></i></a>
+                                                   </div>
+                                                   <div>
+                                                      <div id="comment_{{user_activities_re_reply.id}}" class="d-none">
+                                                         <textarea class="form-control" [attr.data-commentid]="user_activities_reply.id" placeholder="What's on your mind?" (keydown.enter)="userActivitiesChild($event)" name="content_comment" id="content_comment"></textarea>
+                                                      </div>
+                                                   </div> 
+                                                      
+                                                </div>
+                                             </div>
+                                          </div>            
+                                       </div>
+                                    </div>
+                                    
+                                 </div>
+                              </div>
+                           </div>
+                        </section>
                      </div>
-                     
+                  </div>
                </div>
-		      </div>
+            </div>
+         </div>   
+      </div>
+   </div>
+
+   <!-- likeModal -->
+   <div id="likeModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">   
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <p class="modal-title">People who like this</p>
+            </div>
+            <div class="modal-body" *ngIf="activities.length > 0">
+               <div *ngFor="let users of likeUsers" class="media mt-1">
+                  <div class="media-left">
+                     <a href="#">
+                     <img class="media-object photo-profile" [src]="users.user.chat_picture" width="40" height="40" alt="...">
+                     </a>
+                  </div>
+                  <div class="media-body vertical-align-middle">
+                     <h5 class="media-heading ml-1"><a href="#" class="anchor-username">{{users.user.name}}</a></h5>
+                  </div>
+               </div>            
+            </div>
+         </div>
+      </div>
+   </div>
 </div>

@@ -48,9 +48,16 @@
 /***Sidebar menu End**/
 
 .mt-3{margin-top: 2rem;}
+.mt-1{margin-top: .8rem;}
 .mt-5{margin-top: 3rem;}
+.mb-5{margin-bottom: 3rem!important;}
+.mb-1{margin-bottom:.5rem;}
 .p-2{padding: .5rem;}
 .bg-light{background: #f7f7f7;}
+.border{
+  border: 1px solid #ccc;
+  border-radius: 0px;
+}
 
 .user-row{background: #efefef;margin-top: 10px;}
 .user-pic img{
@@ -64,8 +71,9 @@
 }
 .actions .dropdown-menu{left: -110px}
 #post-on-wall{
-  margin: 3rem 0rem;
-  box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;
+  margin: 3rem 0rem 0rem;
+  /* border: 1px solid #ccc;
+  border-radius: 5px; */
 }
 #uploaded-file{
   width: 25px;
@@ -99,5 +107,94 @@
   .user-pic img {
     top: -65px;
 }
+}
+
+.media-left{
+  padding-right: 0px;
+}
+.ml-1{
+  margin-left:.5rem;
+}
+.ml-3{
+  margin-left: 1.3rem;
+}
+.text-danger{
+  color: #CF3046!important;
+}
+.text-secondary{
+  color: #9c9a9a!important;
+}
+a{
+  text-decoration: none!important;
+}
+.post-footer-option {
+  background: #fff;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+.border-left{
+  border-left: 2px solid #cccccc;
+  border-spacing: 15px 10px;
+}
+.vertical-align-middle{
+  vertical-align: middle;
+}
+.d-inline-table{
+  display: inline-table;
+}
+.d-inline-flex{
+  display: inline-flex;
+}
+.d-none{
+  display: none;
+}
+.enable-edit p{
+  display: none;
+}
+.enable-edit h5 span{
+  display: none;
+}
+.enable-edit div{
+  display: block !important;
+}
+i.fa.fa-close {
+  color: #d21b1b;
+}
+.media{
+  position: relative;
+  overflow: unset;
+}
+.edit-delete{
+  position: absolute;
+  right: 15px;
+  top: 5px;
+}
+.font-18{
+  font-size: 18px;
+}
+.small, small {
+  font-size: 80%;
+  font-weight: 400;
+}
+.dropdown-menu {
+  left: 0;
+  right: unset;
+}
+.dropdown-right-0 {
+  left: unset;
+  right: 0;
+}
+.media-body {
+  overflow: unset;
+}
+.post-comment .media:hover .hide-comment,.reply-to-reply .media:hover .hide-comment{
+  display: block;
+}
+.mb-2{
+  margin-bottom: 1.5rem; 
+}
+.custom-textarea{
+  width:95%;
+  height: 35px;
 }
 /********************User end Activity End**********************/

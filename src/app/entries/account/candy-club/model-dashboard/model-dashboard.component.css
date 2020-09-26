@@ -643,3 +643,10 @@ color: #CF3046!important;
   .post-comment .media-left, .reply-to-reply .media-left {
     padding-right: 0px!important;
 }
+i.fa.fa-close {
+    color: #d21b1b;
+}
+.my-gifts li {
+    margin: 1.5rem;
+    text-align: left;
+}

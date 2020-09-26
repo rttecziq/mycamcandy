@@ -237,14 +237,14 @@ export class ModelDashboardComponent implements OnInit {
   }
   replyEditShowHide(id) {   
     
-    if(document.getElementById("comment_"+id).parentElement.classList.contains('enable-edit')){
+    if(document.getElementById("edit_comment_"+id).parentElement.classList.contains('enable-edit')){
       document.getElementById("edit_comment_"+id).parentElement.classList.remove("enable-edit");
-      document.getElementById("pencil_"+id).getElementsByClassName( 'fa-close' )[0].classList.add('fa-pencil');
-      document.getElementById("pencil_"+id).getElementsByClassName('fa-pencil' )[0].classList.remove('fa-close');
+      document.getElementById("pencilclose_"+id).classList.add('d-none');
+      document.getElementById("pencil_"+id).classList.remove('d-none');
     }else{
       document.getElementById("edit_comment_"+id).parentElement.classList.add("enable-edit");
-      document.getElementById("pencil_"+id).getElementsByClassName( 'fa-pencil' )[0].classList.add('fa-close');
-      document.getElementById("pencil_"+id).getElementsByClassName( 'fa-close' )[0].classList.remove('fa-pencil');
+      document.getElementById("pencilclose_"+id).classList.remove('d-none');
+      document.getElementById("pencil_"+id).classList.add('d-none');
     }
 
   }
