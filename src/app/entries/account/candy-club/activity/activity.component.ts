@@ -1,8 +1,10 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 import { RequestService } from '../../../../common/services/request.service';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { User } from '../../../../models/user';
+import {TimeAgoPipe} from 'time-ago-pipe';
 declare var $: any ;
 
 
@@ -27,9 +29,11 @@ export class ActivityComponent implements AfterViewInit{
   user_cover_picture : string;
   
   is_content_creator : boolean;
-  
-  
+  activities:any[];
+  activity_like:any[];
+  likeUsers:any[];
   userId : string;
+  content_comment :string;
   
   constructor(private requestService : RequestService, private router : Router) {
   
@@ -49,85 +53,217 @@ export class ActivityComponent implements AfterViewInit{
           login_by : "",
           gallery_description : ""
       }
-  
+      this.userId = (localStorage.getItem('userId') != '' && localStorage.getItem('userId') != null && localStorage.getItem('userId') != undefined) ? localStorage.getItem('userId') : '';
       this.user_profile_picture = "../../../../assets/img/pro-img.jpg";
   
       this.user_cover_picture = "../../../../assets/img/bg-image.jpg";
   
       this.is_content_creator = false;
+      this.content_comment="";
+      this.activities = [];
+      this.activity_like = [];
+      this.likeUsers = [];
   }
   
-  ngAfterViewInit(){
-     /* $.getScript('../../../../assets/js/script.js',function(){
-      });
-      $.getScript('../../../../assets/js/custom-file-input.js',function(){
-      });
-      $.getScript('../../../../assets/js/classie.js',function(){
-      });
-      $.getScript('../../../../assets/js/form.js',function(){
-      });
-      $.getScript('../../../../assets/js/lightbox.min.js',function(){
-      }); */
-  
-      // Load Logged In User Profile
-  
-      setTimeout(()=>{
-  
-          this.user_profile_fn("userDetails", "");
-  
-      }, 1000);
-  
-  }
-  
-  user_profile_fn(url, object) {
-  
-      this.requestService.getMethod(url, object)
-          .subscribe(
-              (data : any ) => {
-  
-                  if (data.success == true) {
-                      this.user_details = data;
-                      this.user_cover_picture = data.cover;  
-                      this.user_profile_picture = data.picture;  
-                      this.is_content_creator = data.is_content_creator;
-                  } else {
-  
-                      this.errorMessages = data.error_messages;
-  
-                      $.toast({
-                          heading: 'Error',
-                          text: this.errorMessages,
-                      // icon: 'error',
-                          position: 'top-right',
-                          stack: false,
-                          textAlign: 'left',
-                          loader : false,
-                          showHideTransition: 'slide'
-                      });
-                      
-                  }
-  
-              },
-  
-              (err : HttpErrorResponse) => {
-  
-                  this.errorMessages = 'Oops! Something Went Wrong';
-  
-                  $.toast({
-                      heading: 'Error',
-                      text: this.errorMessages,
-                  // icon: 'error',
-                      position: 'top-right',
-                      stack: false,
-                      textAlign: 'left',
-                      loader : false,
-                      showHideTransition: 'slide'
-                  });
-  
-              }
-  
-          );
-  
-  }
+    ngAfterViewInit(){  
+        // Load Logged In User Profile  
+        setTimeout(()=>{  
+            this.user_profile_fn("userDetails", "");  
+        }, 1000);  
+        let data={user_id:this.userId,listActivityData:'getActivitiesList'};
+        this.getActivities('userActivities',data);
+    }
+     // update user comment
+    updateActivities(user_activities){
+        let data ={
+        user_id:this.userId,
+        comment_id:user_activities.id,
+        content_comment:user_activities.comment_content
+        }
+        document.getElementById("comment_"+user_activities.id).parentElement.classList.remove("enable-edit");
+        this.requestService.postMethod('updateActivities', data)
+        
+        .subscribe((data : any ) => {
+            if (data.success == true) {
+                this.toast_message("Success", "Activities updated successfully");
+                this.activities = data.data;
+                console.log(this.likeUsers);
+            } else {
+                this.errorMessages = data.error_messages;
+                this.toast_message("Error", this.errorMessages);
+            }
+        },(err : HttpErrorResponse) => {
+            this.errorMessages = 'Oops! Something Went Wrong';
+            this.toast_message("Error", this.errorMessages);
+        });
+    }
+    //Delete User coment Soft Delete
+    deleteUserComent(id){
+        let data ={
+            user_id:this.userId,
+            comment_id:id
+        }
+        this.requestService.postMethod('updateActivities', data)        
+        .subscribe((data : any ) => {
+            if (data.success == true) {
+                this.toast_message("Success", "Activities deleted successfully");
+                this.activities = data.data;
+                console.log(this.likeUsers);
+            } else {
+                this.errorMessages = data.error_messages;
+                this.toast_message("Error", this.errorMessages);
+            }
+        },(err : HttpErrorResponse) => {
+            this.errorMessages = 'Oops! Something Went Wrong';
+            this.toast_message("Error", this.errorMessages);
+        });
+    }
 
+    getUsers(id){
+        let data ={
+            user_id:this.userId,
+            comment_id:id
+        }
+        this.requestService.postMethod('likeUsers', data)
+        .subscribe((data : any ) => {
+            if (data.success == true) {
+                this.likeUsers = data.data;
+            } else {
+                this.errorMessages = data.error_messages;
+                this.toast_message("Error", this.errorMessages);
+            }
+        },(err : HttpErrorResponse) => {
+            this.errorMessages = 'Oops! Something Went Wrong';
+            this.toast_message("Error", this.errorMessages);
+        });
+    }
+    
+    replyShowHide(id) {   
+        if(document.getElementById("comment_"+id).parentElement.classList.contains('enable-edit')){
+            document.getElementById("comment_"+id).parentElement.classList.remove("enable-edit");
+        }else{
+            document.getElementById("comment_"+id).parentElement.classList.add("enable-edit");
+        }        
+    }
+    editParentComment(id) {    
+        document.getElementById("comment_"+id).parentElement.classList.add("enable-edit");        
+    }
+    replyEditShowHide(id) {           
+        if(document.getElementById("edit_comment_"+id).parentElement.classList.contains('enable-edit')){
+            document.getElementById("edit_comment_"+id).parentElement.classList.remove("enable-edit");
+            document.getElementById("pencil_"+id).getElementsByClassName( 'fa-close' )[0].classList.add('fa-pencil');
+            document.getElementById("pencil_"+id).getElementsByClassName('fa-pencil' )[0].classList.remove('fa-close');
+        }else{
+            document.getElementById("edit_comment_"+id).parentElement.classList.add("enable-edit");
+            document.getElementById("pencil_"+id).getElementsByClassName( 'fa-pencil' )[0].classList.add('fa-close');
+            document.getElementById("pencil_"+id).getElementsByClassName( 'fa-close' )[0].classList.remove('fa-pencil');
+        }
+    }
+    
+    getActivities(url,object){
+        this.requestService.postMethod('activities', object)
+        .subscribe((data : any ) => {
+          if (data.success == true) {
+              //this.toast_message("Success", "Wall updated successfully");
+              this.activities = data.data;
+          } else {
+            this.errorMessages = data.error_messages;
+            this.toast_message("Error", this.errorMessages);
+          }
+        },
+    
+        (err : HttpErrorResponse) => {
+          this.errorMessages = 'Oops! Something Went Wrong';
+          this.toast_message("Error", this.errorMessages);
+        });
+      }
+    userActivityLike(id){
+        let data ={
+          user_id:this.userId,
+          comment_id:id
+        }
+        this.requestService.postMethod('activity_like', data)        
+        .subscribe((data : any ) => {    
+            if (data.success == true) {
+                //this.toast_message("Success", "Like updated successfully");
+                this.activities = data.data;
+            } else {
+                this.errorMessages = data.error_messages;
+                this.toast_message("Error", this.errorMessages);
+            }
+        },(err : HttpErrorResponse) => {
+            this.errorMessages = 'Oops! Something Went Wrong';
+            this.toast_message("Error", this.errorMessages);
+        });
+    }
+    userActivitiesChild(event){
+        let data ={
+            user_id:this.userId,
+            comment_parent:event.target.getAttribute('data-commentid'),
+            content_comment:event.target.value
+        }
+        this.requestService.postMethod('activities', data)
+        .subscribe((data : any ) => {    
+            if (data.success == true) {
+                this.toast_message("Success", "Wall updated successfully");
+                this.activities = data.data;
+            } else {
+                this.errorMessages = data.error_messages;
+                this.toast_message("Error", this.errorMessages);
+            }
+        },(err : HttpErrorResponse) => {
+            this.errorMessages = 'Oops! Something Went Wrong';
+            this.toast_message("Error", this.errorMessages);
+        });
+    }
+    //user save activity
+    userActivities(form:NgForm){
+        let data ={
+            user_id:this.userId,
+            content_comment:form.value['content_comment']
+        }
+        form.reset();
+        this.requestService.postMethod('activities', data)
+        .subscribe((data : any ) => {
+            if (data.success == true) {
+                this.toast_message("Success", "Wall updated successfully");
+                this.activities = data.data;
+            } else {
+                this.errorMessages = data.error_messages;
+                this.toast_message("Error", this.errorMessages);
+            }
+        },(err : HttpErrorResponse) => {
+            this.errorMessages = 'Oops! Something Went Wrong';
+            this.toast_message("Error", this.errorMessages);
+        });
+    }
+  
+    user_profile_fn(url, object) {  
+        this.requestService.getMethod(url, object)
+        .subscribe((data : any ) => {  
+            if (data.success == true) {
+                this.user_details = data;
+                this.user_cover_picture = data.cover;  
+                this.user_profile_picture = data.picture;  
+                this.is_content_creator = data.is_content_creator;
+            } else {  
+                this.errorMessages = data.error_messages;  
+                this.toast_message("Error", this.errorMessages);                      
+            }
+        },(err : HttpErrorResponse) => {  
+            this.errorMessages = 'Oops! Something Went Wrong';  
+            this.toast_message("Error", this.errorMessages);
+        });  
+    }
+    toast_message(heading, message) {
+        $.toast({
+            heading: heading,
+            text: message,
+            position: 'top-right',
+            stack: false,
+            textAlign: 'left',
+            loader : false,
+            showHideTransition: 'slide'
+        });
+    }
 }
