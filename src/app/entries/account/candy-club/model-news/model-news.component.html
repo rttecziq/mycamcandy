@@ -5,65 +5,27 @@
            <h1 class="p-2 text-light">Models News</h1>
         </div>
      </div>
-     <div class="row">
-        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 mt-3">
-           <img src="../../../../../assets/img/model/img-1.png" class="img-responsive border">
-        </div>
-        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 text-dark postdate mt-3">
-           <div class="row">
-              <div class="f-10 text-center col-lg-6  col-sm-6">
-                 POST CATEGORY - Latest news&amp; policies   
-              </div>
-              <div class="f-10 text-center col-lg-6 col-sm-6">
-                 <time datetime="2019-06-19T12:09:20+00:00" itemprop="datePublished">PUBLISH DATE - June 19, 2019</time>
-              </div>
-           </div>
-           <div class="customepost-contant text-left mt-4">
-              <h3><a href="#">Performers: Going to the YNOT Cam Awards?</a></h3>
-              <p>Do you want to win an award at the YNOT Cam Awards this summer? Ten spots are available for Cams.com nominees, so hurry over to the link below and get nominated. Nominations close on June 14, 2019, so don’t wait!</p>
-              <p class="post-author"><span class="by">By</span> <span class="pauthor">MyCam Candy</span></p>
-           </div>
-        </div>
-     </div>
-     <div class="row">
-        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 mt-3">
-           <img src="../../../../../assets/img/model/img-2.png" class="img-responsive border">
-        </div>
-        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 text-dark postdate mt-3">
-           <div class="row">
-              <div class="f-10 text-center col-lg-6 col-sm-6">
-                 POST CATEGORY - Latest news&amp; policies   
-              </div>
-              <div class="f-10 text-center col-lg-6 col-sm-6">
-                 <time datetime="2019-06-19T12:09:20+00:00" itemprop="datePublished">PUBLISH DATE - June 19, 2019</time>
-              </div>
-           </div>
-           <div class="customepost-contant text-left mt-4">
-              <h3><a href="#">Performers: Going to the YNOT Cam Awards?</a></h3>
-              <p>Do you want to win an award at the YNOT Cam Awards this summer? Ten spots are available for Cams.com nominees, so hurry over to the link below and get nominated. Nominations close on June 14, 2019, so don’t wait!</p>
-              <p class="post-author"><span class="by">By</span> <span class="pauthor">MyCam Candy</span></p>
-           </div>
-        </div>
-     </div>
-     <div class="row">
-        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 mt-3">
-           <img src="../../../../../assets/img/model/img-1.png" class="img-responsive border">
-        </div>
-        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 text-dark postdate mt-3">
-           <div class="row">
-              <div class="f-10 text-center col-lg-6 col-sm-6">
-                 POST CATEGORY - Latest news&amp; policies   
-              </div>
-              <div class="f-10 text-center col-lg-6 col-sm-6">
-                 <time datetime="2019-06-19T12:09:20+00:00" itemprop="datePublished">PUBLISH DATE - June 19, 2019</time>
-              </div>
-           </div>
-           <div class="customepost-contant text-left mt-4">
-              <h3><a href="#">Performers: Going to the YNOT Cam Awards?</a></h3>
-              <p>Do you want to win an award at the YNOT Cam Awards this summer? Ten spots are available for Cams.com nominees, so hurry over to the link below and get nominated. Nominations close on June 14, 2019, so don’t wait!</p>
-              <p class="post-author"><span class="by">By</span> <span class="pauthor">MyCam Candy</span></p>
-           </div>
-        </div>
-     </div>
+      <div *ngIf="model_news.length > 0">
+         <div class="row" *ngFor="let news of model_news">
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 mt-3">
+               <img [src]="news.feature_image" class="img-responsive border">
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 text-dark postdate mt-3">
+               <div class="row">
+                  <div class="f-10 text-center col-lg-6  col-sm-6">
+                        Latest News&amp; policies   
+                  </div>
+                  <div class="f-10 text-center col-lg-6 col-sm-6">
+                     <time datetime="2019-06-19T12:09:20+00:00" itemprop="datePublished">PUBLISH DATE - {{news.created_at | date }}</time>
+                  </div>
+               </div>
+               <div class="customepost-contant text-left mt-4">
+                  <h3><a [routerLink]="['/news']" [queryParams]="{news_id:news.id}" role="button">{{news.title}}</a></h3>
+                  <p class="about-para" [innerHTML]="news.description"></p>
+                  <p class="post-author"><span class="by">By</span> <span class="pauthor">MyCam Candy</span></p>
+               </div>
+            </div>
+         </div>
+      </div>
   </div>
 </div>

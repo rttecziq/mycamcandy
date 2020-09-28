@@ -14,10 +14,10 @@ declare var $: any;
 export class ModelNewsComponent implements OnInit {
 
   errorMessages : string;
-  sliders : any[];
+  model_news : any[];
   constructor(private requestService : RequestService, private router : Router) { 
     this.errorMessages='';
-    this.sliders = [];
+    this.model_news = [];
   }
 
   ngOnInit() {
@@ -29,7 +29,7 @@ export class ModelNewsComponent implements OnInit {
     this.requestService.postMethod(url,object) 
     .subscribe((data : any) => {
       if (data.success == true) {
-        this.sliders = data.data;
+        this.model_news = data.data;
       } else {
           this.errorMessages = data.error_messages;
           this.toast_message("Error", this.errorMessages);
