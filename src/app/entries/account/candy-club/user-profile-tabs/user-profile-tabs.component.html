@@ -1,7 +1,18 @@
 <div class="">
   <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 mt-3">
     <div class="profile-primary-div">
-      
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <a routerLink="/candy-club/{{username}}/followers">
+               <button class="btn-followers">Followers<br>{{followers.length}}</button>
+            </a>
+        </div>
+         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <a routerLink="/candy-club/{{username}}/followings">
+               <button class="btn-following">Following<br>{{followings.length}}</button>
+            </a>
+         </div>
+      </div>
       <ul class="list-group user-profile-list">
         <a routerLink="/candy-club/{{username}}/about"><li class="list-group-item active"><i class="fa fa-user float-left" aria-hidden="true"></i> <span class="link">About</span></li></a>
         <a routerLink="/candy-club/{{username}}/activity"><li class="list-group-item"><i class=" fa fa-pencil-square-o float-left" aria-hidden="true"></i>  <span class="link">Activity</span></li></a>

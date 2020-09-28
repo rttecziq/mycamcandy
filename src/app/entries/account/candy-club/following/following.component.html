@@ -1,0 +1,37 @@
+
+<div class="container-fluid profile-background">
+    <user-profile-tabs></user-profile-tabs>
+    <div class="row mt-3">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" style="padding:0px 42px">
+            <div class="row signup-row" *ngIf="following_details.length > 0">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 follower" *ngFor="let following_detail of following_details;let i = index;">
+                    <div class="media">
+                       <div class="media-left">
+                          <a>
+                          <img class="media-object photo-profile" [src]="following_detail.picture" width="40" height="40" alt="...">
+                          </a>
+                       </div>
+                       <div class="media-body">
+                          <span class="bold small" style="margin-bottom: 0;">&nbsp;&nbsp;<a class="anchor-username">{{following_detail.name}}</a></span>
+                          <span class="ml-2 small" *ngIf="following_detail.is_follow_me == 1">FOLLOWS YOU</span>
+                          <p><a class="small">&nbsp;&nbsp; <!--Lorel ipsum... --> </a></p>
+                          <p>
+                          </p>
+                       </div>
+                    </div>
+                    <a class="btn btn-sm btn-custom-following" id="unfollow{{i}}" *ngIf="following_detail.status == 1" (click)="unFollowUser(following_detail.follower_id, i)">Following</a>
+                    <a class="btn btn-sm btn-custom-following" *ngIf="following_detail.status == 0" (click)="followUser(following_detail.follower_id, i)">Follow</a>
+                 </div>                 
+            </div>
+
+            <div class="no_result_class text-center" *ngIf="following_details.length <= 0">
+                <div>
+                    <h3 class="tab-head text-center">No Following history found</h3>
+                    <img class="noresult-img img-responsive" src="../../../../assets/img/no-result.gif">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

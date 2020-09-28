@@ -54,6 +54,9 @@ export class UserProfileTabsComponent implements AfterViewInit {
   album_videos_urls : string[] = [];
   heic_array : string[] = [];
 
+  followers : any[];
+  followings : any[];
+
   constructor(private userService : UserService, private requestService : RequestService, private router : Router) {
   
       this.profile_picture = null;  
@@ -68,6 +71,9 @@ export class UserProfileTabsComponent implements AfterViewInit {
       this.album_videos = [];
       this.album_photo = null;
       this.album_photos = [];
+
+      this.followers = [];
+      this.followings = [];
 
       this.user_details = {  
           name : "",
@@ -165,6 +171,8 @@ toggleCandies(e) { this.candies_check = e.target.checked; if(this.candies_check 
                       this.user_cover_picture = data.cover;
                       this.user_profile_picture = data.picture;
                       this.is_content_creator = data.is_content_creator;
+                      this.followers = data.followers;
+                      this.followings = data.followings;
                   } else {
   
                       this.errorMessages = data.error_messages;
@@ -213,7 +221,6 @@ toggleCandies(e) { this.candies_check = e.target.checked; if(this.candies_check 
             if (data.success == true) {
                 this.collection_list = data.data;
                 this.sweet_shop_count = data.sweet_shop_count;
-                console.log(data);
             } else {
                 this.errorMessages = data.error_messages;
                 this.toast_message("Error", this.errorMessages);
@@ -291,7 +298,6 @@ handleAlbumVideo(event) {
 
 handleAlbumPhoto(event) {
     this.album_photo = event.target.files;
-    console.log(this.album_photo);
     if (event.target.files && event.target.files[0]) {
         var filesAmount = event.target.files.length;
         for (let i = 0; i < filesAmount; i++) {

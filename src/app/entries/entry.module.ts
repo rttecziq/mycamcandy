@@ -18,8 +18,8 @@ import { PagesComponent } from './static/pages/pages.component';
 import { NewsComponent } from './static/news/news.component';
 
 import { ProfileComponent } from './account/profile/profile.component';
-import { FollowersComponent } from './account/followers/followers.component';
-import { FollowingComponent } from './account/following/following.component';
+import { FollowersComponent } from './account/candy-club/followers/followers.component';
+import { FollowingComponent } from './account/candy-club/following/following.component';
 import { PaidVideosComponent } from './account/paid-videos/paid-videos.component';
 import { StreamedVideosComponent } from './account/streamed-videos/streamed-videos.component';
 import { SettingsComponent } from './account/settings/settings.component';
