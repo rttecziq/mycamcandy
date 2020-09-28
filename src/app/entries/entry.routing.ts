@@ -11,8 +11,8 @@ import { ActivityComponent } from './account/candy-club/activity/activity.compon
 import { MyAccountComponent } from './account/candy-club/user-my-account/my-account.component';
 import { UserUpdateProfileComponent } from './account/candy-club/user-edit-profile/user-update-profile.component';
 import { AboutComponent } from './account/candy-club/about/about.component';
-import { FollowersComponent } from './account/followers/followers.component';
-import { FollowingComponent } from './account/following/following.component';
+import { FollowersComponent } from './account/candy-club/followers/followers.component';
+import { FollowingComponent } from './account/candy-club/following/following.component';
 import { PaidVideosComponent } from './account/paid-videos/paid-videos.component';
 import { StreamedVideosComponent } from './account/streamed-videos/streamed-videos.component';
 import { SettingsComponent } from './account/settings/settings.component';
@@ -383,13 +383,13 @@ const entryRoutes: Routes = [
                 data: {title : "My Account", expectedRole: 'onlyUser'},
             },
             {
-                path: 'followers', 
+                path: 'candy-club/:username/followers', 
                 component: FollowersComponent,
                 canActivate: [AuthGuard],
                 data: {title : "My Followers", expectedRole: 'onlyUser'},
             },
             {
-                path: 'followings', 
+                path: 'candy-club/:username/followings',
                 component: FollowingComponent,
                 canActivate: [AuthGuard],
                 data: {title : "Who I am Following", expectedRole: 'onlyUser'},

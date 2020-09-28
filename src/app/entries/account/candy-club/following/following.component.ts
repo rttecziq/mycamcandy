@@ -1,93 +1,59 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { RequestService } from '../../../common/services/request.service';
+import { RequestService } from '../../../../common/services/request.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 declare var $: any;
 
 @Component({
-    templateUrl: 'followers.component.html',
-    styleUrls:['../../../../assets/css/bootstrap/css/bootstrap.css',
-                '../../../../assets/css/font-awesome/css/font-awesome.min.css',
-                '../../../../assets/css/jquery-ui.css',
-                '../../../../assets/css/style.css',
-                '../../../../assets/css/responsive.css'
+    templateUrl: 'following.component.html',
+    styleUrls:['./following.component.css'
+    // '../../../../../assets/css/style.css'
     ]   
 })
 
-export class FollowersComponent implements AfterViewInit{
+export class FollowingComponent implements AfterViewInit{
 
-    errorMessages : string;
-
-    follower_details : any[];
-
-    showFollowersLoader : boolean;
-
-    followersSkipCount : number;
-
+    errorMessages = '';
+    following_details : any[];
+    showFollowingLoader : boolean;
+    followingsSkipCount : number;
     datasAvailable : number;
 
-    constructor(private requestService : RequestService, private router: Router) {
+    constructor(private requestService : RequestService, private router : Router) {
 
         this.errorMessages = '';
-
-        this.follower_details = [];
-
-        this.showFollowersLoader = false;
-
-        this.followersSkipCount = 0;
-
+        this.following_details = [];
+        this.showFollowingLoader = false;
+        this.followingsSkipCount = 0;        
         this.datasAvailable = 0;
-
     }
-
+    
     ngAfterViewInit() {
-
         setTimeout(() => {
-
-            let details = {skip:0};
-
-            this.followerDetailsFn('followers_list', details);
-
+            let details = {skip : 0};
+            this.followingDetailsFn('followings_list', details);
         }, 2000);
-
     }
 
-    followerDetailsFn(url, object) {
-
-        this.showFollowersLoader = true;
-
+    followingDetailsFn(url, object) {
+        this.showFollowingLoader = true;
         this.requestService.postMethod(url,object)
             .subscribe(
-
                 (data : any) => {
-
                     if (data.success == true) {
-
-                        this.datasAvailable = 1;
-
-                        if (this.followersSkipCount > 0) {
-
-                            this.follower_details = [...this.follower_details, ...data.data];
-                        
+                        this.datasAvailable = 1;                        
+                        if (this.followingsSkipCount > 0) {
+                            this.following_details = [...this.following_details, ...data.data];                        
                         } else {
-
-                            this.follower_details = data.data;
-                        
+                            this.following_details = data.data;                        
                         }
-
-                        this.followersSkipCount += data.data.length;
-
+                        this.followingsSkipCount += data.data.length;
                         if (data.data.length <= 0) {
-
-                            this.datasAvailable = 0;
-
+                            this.datasAvailable = 0;    
                         }
-
                     } else {
-
                         this.errorMessages = data.error_messages;
-
                         $.toast({
                             heading: 'Error',
                             text: this.errorMessages,
@@ -97,16 +63,11 @@ export class FollowersComponent implements AfterViewInit{
                             textAlign: 'left',
                             loader : false,
                             showHideTransition: 'slide'
-                        });
-                        
+                        });                        
                     }
-
                 },
-
                 (err : HttpErrorResponse) => {
-
                     this.errorMessages = 'Oops! Something Went Wrong';
-
                     $.toast({
                         heading: 'Error',
                         text: this.errorMessages,
@@ -117,164 +78,23 @@ export class FollowersComponent implements AfterViewInit{
                         loader : false,
                         showHideTransition: 'slide'
                     });
-
                 },
                 () => {
-
                     setTimeout(() => {
-
-                        this.showFollowersLoader = false;
-
+                        this.showFollowingLoader = false;
                     }, 2000);
                 }
-
             );
-
     }
 
-
-    // To add follower
-
-    followUser(user_id, index) {
-
-        let details = {follower_id : user_id};
-
-        this.requestService.postMethod('add_follower', details)
-            .subscribe(
-                (data : any ) => {
-
-                    if (data.success == true) {
-
-                        this.follower_details[index] = data.data;
-
-                        $.toast({
-                            heading: 'Success',
-                            text: "You have now started following the User, you will be notified when the User goes live",
-                        // icon: 'error',
-                            position: 'top-right',
-                            stack: false,
-                            textAlign: 'left',
-                            loader : false,
-                            showHideTransition: 'slide'
-                        });
-
-                    } else {
-
-                        this.errorMessages = data.error_messages;
-
-                        $.toast({
-                            heading: 'Error',
-                            text: this.errorMessages,
-                        // icon: 'error',
-                            position: 'top-right',
-                            stack: false,
-                            textAlign: 'left',
-                            loader : false,
-                            showHideTransition: 'slide'
-                        });
-                        
-                    }
-
-                },
-
-                (err : HttpErrorResponse) => {
-
-                    this.errorMessages = 'Oops! Something Went Wrong';
-
-                    $.toast({
-                        heading: 'Error',
-                        text: this.errorMessages,
-                    // icon: 'error',
-                        position: 'top-right',
-                        stack: false,
-                        textAlign: 'left',
-                        loader : false,
-                        showHideTransition: 'slide'
-                    });
-
-                }
-
-            );
-
-    }
-
-    // REmove follower
-
-    unFollowUser(user_id, index) {
-
-        let details = {follower_id : user_id};
-
-        this.requestService.postMethod('remove_follower', details)
-            .subscribe(
-                (data : any ) => {
-
-                    if (data.success == true) {
-
-                        this.follower_details[index] = data.data;
-
-                        $.toast({
-                            heading: 'Success',
-                            text: "You have now stopped following the user, you will not get any further notifications from the User",
-                        // icon: 'error',
-                            position: 'top-right',
-                            stack: false,
-                            textAlign: 'left',
-                            loader : false,
-                            showHideTransition: 'slide'
-                        });
-
-                    } else {
-
-                        this.errorMessages = data.error_messages;
-
-                        $.toast({
-                            heading: 'Error',
-                            text: this.errorMessages,
-                        // icon: 'error',
-                            position: 'top-right',
-                            stack: false,
-                            textAlign: 'left',
-                            loader : false,
-                            showHideTransition: 'slide'
-                        });
-                        
-                    }
-
-                },
-
-                (err : HttpErrorResponse) => {
-
-                    this.errorMessages = 'Oops! Something Went Wrong';
-
-                    $.toast({
-                        heading: 'Error',
-                        text: this.errorMessages,
-                    // icon: 'error',
-                        position: 'top-right',
-                        stack: false,
-                        textAlign: 'left',
-                        loader : false,
-                        showHideTransition: 'slide'
-                    });
-
-                }
-
-            );
-
-    }
 
     unBlockUser(user_id, index) {
-
         let details = {blocker_id : user_id};
-
         this.requestService.postMethod('unblock_user', details)
             .subscribe(
                 (data : any ) => {
-
                     if (data.success == true) {
-
-                        this.follower_details[index] = data.data;
-                        
+                        this.following_details[index] = data.data;
                         $.toast({
                             heading: 'Success',
                             text: "You are unblocking the user, you will get the user in suggestions list.",
@@ -287,9 +107,7 @@ export class FollowersComponent implements AfterViewInit{
                         });
 
                     } else {
-
                         this.errorMessages = data.error_messages;
-
                         $.toast({
                             heading: 'Error',
                             text: this.errorMessages,
@@ -300,15 +118,11 @@ export class FollowersComponent implements AfterViewInit{
                             loader : false,
                             showHideTransition: 'slide'
                         });
-                        
                     }
-
                 },
 
                 (err : HttpErrorResponse) => {
-
                     this.errorMessages = 'Oops! Something Went Wrong';
-
                     $.toast({
                         heading: 'Error',
                         text: this.errorMessages,
@@ -319,16 +133,114 @@ export class FollowersComponent implements AfterViewInit{
                         loader : false,
                         showHideTransition: 'slide'
                     });
-
                 }
+            );
+    }
 
+    // REmove follower
+
+    unFollowUser(user_id, index) {
+        let details = {follower_id : user_id};
+        this.requestService.postMethod('remove_follower', details)
+            .subscribe(
+                (data : any ) => {
+                    if (data.success == true) {
+                        //this.following_details[index] = data.data;
+                        document.getElementById("unfollow"+index).style.display = "none";
+                        $.toast({
+                            heading: 'Success',
+                            text: "You have now stopped following the user, you will not get any further notifications from the User",
+                        // icon: 'error',
+                            position: 'top-right',
+                            stack: false,
+                            textAlign: 'left',
+                            loader : false,
+                            showHideTransition: 'slide'
+                        });
+
+                    } else {
+                        this.errorMessages = data.error_messages;
+                        $.toast({
+                            heading: 'Error',
+                            text: this.errorMessages,
+                        // icon: 'error',
+                            position: 'top-right',
+                            stack: false,
+                            textAlign: 'left',
+                            loader : false,
+                            showHideTransition: 'slide'
+                        });                        
+                    }
+                },
+                (err : HttpErrorResponse) => {
+                    this.errorMessages = 'Oops! Something Went Wrong';
+                    $.toast({
+                        heading: 'Error',
+                        text: this.errorMessages,
+                    // icon: 'error',
+                        position: 'top-right',
+                        stack: false,
+                        textAlign: 'left',
+                        loader : false,
+                        showHideTransition: 'slide'
+                    });
+                }
+            );
+    }
+
+    // To add follower
+
+    followUser(user_id, index) {
+        let details = {follower_id : user_id};
+        this.requestService.postMethod('add_follower', details)
+            .subscribe(
+                (data : any ) => {
+                    if (data.success == true) {
+                        this.following_details[index] = data.data;
+                        $.toast({
+                            heading: 'Success',
+                            text: "You have now started following the User, you will be notified when the User goes live",
+                        // icon: 'error',
+                            position: 'top-right',
+                            stack: false,
+                            textAlign: 'left',
+                            loader : false,
+                            showHideTransition: 'slide'
+                        });
+
+                    } else {
+                        this.errorMessages = data.error_messages;
+                        $.toast({
+                            heading: 'Error',
+                            text: this.errorMessages,
+                        // icon: 'error',
+                            position: 'top-right',
+                            stack: false,
+                            textAlign: 'left',
+                            loader : false,
+                            showHideTransition: 'slide'
+                        });
+                    }
+                },
+
+                (err : HttpErrorResponse) => {
+                    this.errorMessages = 'Oops! Something Went Wrong';
+                    $.toast({
+                        heading: 'Error',
+                        text: this.errorMessages,
+                    // icon: 'error',
+                        position: 'top-right',
+                        stack: false,
+                        textAlign: 'left',
+                        loader : false,
+                        showHideTransition: 'slide'
+                    });
+                }
             );
 
     }
 
-    showMoreFollowers() {
-
-        this.followerDetailsFn('followers_list', {skip : this.followersSkipCount});
-
+    showMoreFollowings() {
+        this.followingDetailsFn('followings_list', {skip : this.followingsSkipCount});
     }
 }
