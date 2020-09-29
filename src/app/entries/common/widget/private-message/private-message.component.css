@@ -1,0 +1,130 @@
+.profile-background .container{
+    background: #fff;
+    padding:0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+/*************Message Start****************/
+
+.p-1 {
+    padding: .25rem!important;
+}
+.mt-1 {
+    margin-top: .25rem!important;
+}
+.ml-1{
+    margin-left: .5rem;
+}
+.mt-4 {
+    margin-top: 1.5rem!important;
+}
+.mb-5 {
+    margin-bottom: 3rem;
+}
+.mt-5 {
+    margin-top: 3rem;
+}
+.mt-3 {
+    margin-top: 2rem;
+}
+.p-2 {
+    padding: .5rem;
+}
+.float-right {
+    float: right;
+}
+.float-left {
+    float: left;
+}
+.border {
+    border: 1px solid #dee2e6!important;
+}
+.msg{
+  padding-left: 1.5rem;
+  padding-right: 3rem;
+}
+.msg .fa-circle{
+  font-size: 12px;
+  color: #0bb30b;
+  float: right;
+  margin-top: 18px;
+  margin-right: 10px;
+}
+.active_msg{
+  padding: 0;
+  list-style: none;
+  margin: 0;
+  max-height: 450px;
+  overflow-y: auto;
+}
+.active_msg li.active {
+    background-color: #dadada;
+}
+/* .chat-box {
+    height: 500px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+} */
+hr{border-top: 1px solid #d4d1d1;}
+.chat-box .bg-receive {
+    background: rgba(30, 115, 190, 0.8);
+    width: 100%;
+    /* float: left; */
+    border-radius: 4px;
+    color: #fff;
+}
+.receive-msg{
+    float: left;
+    width: 70%;
+    position: relative;
+}
+.receive-msg .time{
+    position: absolute;
+    right: -60px;
+    font-size: 12px;
+    color: #adacac;
+    top: 23%;
+}
+.chat-box .bg-sent {
+    background: #3738370f;
+    width: 100%;
+    /* float: right; */
+    text-align: left;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.sent-msg{
+    float: right;
+    width: 70%;
+    position: relative;
+}
+.sent-msg .time{
+    position: absolute;
+    left: -60px;
+    font-size: 12px;
+    color: #adacac;
+    top: 23%;
+}
+.chat-message{padding-right: 30px;}
+.smilies{
+    position: absolute;
+    right: 29px;
+    bottom: 12%;
+}
+.chat-box .bg-sent .fa-trash{display: none;}
+.chat-box .bg-sent:hover .fa.fa-trash.text-danger.float-right {
+    display: block!important;
+}
+@media screen and (max-width: 767px){
+  .msg {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+.smilies{
+    position: absolute;
+    right: 29px;
+    bottom: 7%;
+}
+}
+/*************Message End****************/

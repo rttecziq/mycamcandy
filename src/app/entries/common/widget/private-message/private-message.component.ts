@@ -1,17 +1,18 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input, ViewChild, ElementRef, OnDestroy} from '@angular/core';
+import { Router  } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { RequestService } from '../../../../common/services/request.service';
 import {TimeAgoPipe} from 'time-ago-pipe';
 declare var $: any ;
 
+
 @Component({
-  selector: 'app-message',
-  templateUrl: './message.component.html',
-  styleUrls: ['./message.component.css']
+  selector: 'app-private-message',
+  templateUrl: './private-message.component.html',
+  styleUrls: ['./private-message.component.css']
 })
-export class MessageComponent implements OnInit, OnDestroy {
+export class PrivateMessageComponent implements OnInit, OnDestroy {
   
   @ViewChild('messageContainer') private myScrollContainer: ElementRef;
 
@@ -244,5 +245,4 @@ export class MessageComponent implements OnInit, OnDestroy {
     } catch (err) {}
   }
   
-
 }
