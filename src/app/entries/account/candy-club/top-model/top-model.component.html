@@ -8,85 +8,13 @@
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
       <div class="row mt-5 mb-5">
         <div class="top-model mb-5">
-          <h3 class="text-center">My Free Show Photos</h3>
-          <div class="model-scroll">
-            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-              <a href="#">
+          <h3 class="text-center">Top Models </h3>
+          <div class="model-scroll" *ngIf="all_top_models.length > 0">
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3" *ngFor="let model of all_top_models">
+              <a role="button" routerLink="/candy-club/{{model.name}}">
                 <div class="model-img">
-                    <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                    <p class="model-name">Modelname</p>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-              <a href="#">
-                <div class="model-img">
-                    <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                    <p class="model-name">Modelname</p>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-              <a href="#">
-                <div class="model-img">
-                    <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                    <p class="model-name">Modelname</p>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-              <a href="#">
-                <div class="model-img">
-                    <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                    <p class="model-name">Modelname</p>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-              <a href="#">
-                <div class="model-img">
-                    <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                    <p class="model-name">Modelname</p>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-              <a href="#">
-                <div class="model-img">
-                    <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                    <p class="model-name">Modelname</p>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-              <a href="#">
-                <div class="model-img">
-                    <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                    <p class="model-name">Modelname</p>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-              <a href="#">
-                <div class="model-img">
-                    <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                    <p class="model-name">Modelname</p>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-              <a href="#">
-                <div class="model-img">
-                    <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                    <p class="model-name">Modelname</p>
-                </div>
-              </a>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-              <a href="#">
-                <div class="model-img">
-                    <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                    <p class="model-name">Modelname</p>
+                    <img [src]="model.picture" class="img-responsive">
+                    <p class="model-name">{{model.name | titlecase}}</p>
                 </div>
               </a>
             </div>
