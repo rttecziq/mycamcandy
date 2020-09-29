@@ -139,6 +139,7 @@ import { PerformerDashboardComponent } from './account/candy-club/performer-dash
 import { StartStreamingComponent } from './account/candy-club/start-streaming/start-streaming.component';
 import { UpdateAccountRecordComponent } from './account/candy-club/update-account-record/update-account-record.component';
 import { ModelDashboardComponent } from './account/candy-club/model-dashboard/model-dashboard.component';
+import { PrivateMessageComponent } from './common/widget/private-message/private-message.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -237,6 +238,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         UpdateAccountRecordComponent,
         ModelDashboardComponent,
         TimeAgoPipe,
+        PrivateMessageComponent,
     ],
     imports: [
         CommonModule,
