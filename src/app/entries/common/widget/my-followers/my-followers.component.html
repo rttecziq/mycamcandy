@@ -1,0 +1,16 @@
+<div class="dashboard-earning">
+  <h2><i class="fa fa-video-camera" aria-hidden="true"></i> <a href="">My Followers</a></h2>
+      <h5  class="f-18">Followers</h5>
+      <ul class="followers-list" *ngIf="follower_details.length > 0">
+         <li *ngFor="let follower of follower_details">
+            <a routerLink="/candy-club/user/{{follower.name}}"><img [src]="follower.picture" height="45" width="45"></a>
+         </li>
+      </ul>
+      <h5  class="f-18">Following</h5>
+      <ul class="followers-list" *ngIf="following_details.length > 0">
+         <li *ngFor="let following of following_details">
+            <a routerLink="/candy-club/user/{{following.name}}"><img [src]="following.picture" height="45" width="45"></a>
+         </li>
+      </ul>
+      <span><a routerLink="/candy-club/{{username}}/followers" class="f-18">All followers</a></span> | <span><a routerLink="/candy-club/{{username}}/followings" class="f-18">All following</a></span>
+</div>
