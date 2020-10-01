@@ -9,39 +9,35 @@ declare var $: any ;
 
 @Component({
     templateUrl: 'pages.component.html',
-    styleUrls:['../../../../assets/css/bootstrap/css/bootstrap.css',
-                '../../../../assets/css/font-awesome/css/font-awesome.min.css',
-                '../../../../assets/css/style.css',
-                '../../../../assets/css/responsive.css',
+    styleUrls:['./pages.component.css'
+                // '../../../../assets/css/bootstrap/css/bootstrap.css',
+                // '../../../../assets/css/font-awesome/css/font-awesome.min.css',
+                // '../../../../assets/css/style.css',
+                // '../../../../assets/css/responsive.css',
     ]
 })
 
 export class PagesComponent{
 
     errorMessages : string;
-
     page_view : Page;
-
     page_id : number;
+    is_page_dcma : boolean;
 
     constructor(private requestService : RequestService, private router : Router,private route : ActivatedRoute) {
 
-        this.errorMessages = "";
-
+        this.errorMessages = "";        
         this.page_view  = {
-
-            title : "",
-            
+            title : "",            
             description : ""
-
         }
 
         this.route.queryParams.subscribe(params => {
-
             this.page_id = params['page_id'];
 
+            // page_id = 16 is dcma page which consist dcma form
+            this.is_page_dcma = this.page_id == 16 ? true : false;
             let details = {page_id : this.page_id};
-
             this.pageViewFn('pages/view' , details);
 
         });

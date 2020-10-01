@@ -5,7 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 declare var $:any;
 
-const BOTTOM_MENU_LINKS = [2, 3, 4, 11, 12];
+const BOTTOM_MENU_LINKS = [14, 15, 16, 18, 19];
 
 @Component({
     selector: 'entry-common-footer',
@@ -25,7 +25,8 @@ export class EntryFooterContentComponent implements OnInit{
 
 
     ngOnInit(){
-        this.pagesListFn('pages/footer_list', "");
+        let details = {type:'ModelFooter'};
+        this.pagesListFn('pages/footer_list', details);
     }
 
     pagesListFn(url, object) {
