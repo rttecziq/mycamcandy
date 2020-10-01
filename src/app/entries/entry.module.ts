@@ -238,7 +238,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         UpdateAccountRecordComponent,
         ModelDashboardComponent,
         TimeAgoPipe,
-        PrivateMessageComponent,        
+        PrivateMessageComponent,
     ],
     imports: [
         CommonModule,
