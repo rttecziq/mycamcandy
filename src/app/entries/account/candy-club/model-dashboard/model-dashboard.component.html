@@ -56,34 +56,9 @@
               </ul>
               <a href="" class="channel">Create new channel</a>
            </div>
-           <div class="dashboard-earning">
-              <h2><i class="fa fa-video-camera" aria-hidden="true"></i> <a href="">My Followers</a></h2>
-              <h5  class="f-18">Followers</h5>
-              <ul class="followers-list">
-                 <li>
-                    <a href="#"><img src="../../../../../assets/img/model/download.jpg" height="45" width="45"></a>
-                 </li>
-                 <li>
-                    <a href="#"><img src="../../../../../assets/img/model/download.jpg" height="45" width="45"></a>
-                 </li>
-                 <li>
-                    <a href="#"><img src="../../../../../assets/img/model/download.jpg" height="45" width="45"></a>
-                 </li>
-                 <li>
-                    <a href="#"><img src="../../../../../assets/img/model/download.jpg" height="45" width="45"></a>
-                 </li>
-              </ul>
-              <h5  class="f-18">Following</h5>
-              <ul class="followers-list">
-                 <li>
-                    <a href="#"><img src="../../../../../assets/img/model/download.jpg" height="45" width="45"></a>
-                 </li>
-                 <li>
-                    <a href="#"><img src="../../../../../assets/img/model/download.jpg" height="45" width="45"></a>
-                 </li>
-              </ul>
-              <span><a href="#" class="f-18">All followers</a></span> | <span><a href="#" class="f-18">All following</a></span>
-           </div>
+           <!-- My followers -->
+           <app-my-followers></app-my-followers>
+
            <div class="dashboard-earning">
               <h2><i class="fa fa-comment" aria-hidden="true"></i> <a href="">Private Messages</a></h2>
               <app-private-message></app-private-message>
@@ -99,7 +74,10 @@
                  <li class="bold"><a href="">Manage Fan club videos</a></li>
               </ul>
            </div>
-           <div class="dashboard-earning">
+
+           <!-- Broadcast Schedule -->
+            <app-broadcast-schedule></app-broadcast-schedule>
+           <!-- <div class="dashboard-earning">
               <h2><i class="fa fa-calendar" aria-hidden="true"></i> <a href="#">Broadcast Schedule</a></h2>
               <a class="mt-4 f-18 text-dark" data-toggle="collapse" data-target="#demo">Add to schedule</a>
               <div id="demo" class="collapse">
@@ -368,7 +346,7 @@
                     </div>
                  </form>
               </div>
-           </div>
+           </div> -->
         </div>
         <div class="col-md-6 col-sm-7 col-xs-12 center-div">
            <div class="model-tabs">

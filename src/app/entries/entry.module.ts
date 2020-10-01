@@ -130,7 +130,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AlbumDetailsComponent } from './account/candy-club/album/album-details/album-details.component';
 import { PrivacyPolicyComponent } from './account/candy-club/privacy-policy/privacy-policy.component';
 import { CookiePolicyComponent } from './account/candy-club/cookie-policy/cookie-policy.component';
-import { DcmaCompliantComponent } from './account/candy-club/dcma-compliant/dcma-compliant.component';
+
 import { NoticeAboutPerformerComponent } from './account/candy-club/notice-about-performer/notice-about-performer.component';
 import { ComplianceStatementComponent } from './account/candy-club/compliance-statement/compliance-statement.component';
 import { MakeMoreMoneyComponent } from './account/candy-club/make-more-money/make-more-money.component';
@@ -141,6 +141,7 @@ import { UpdateAccountRecordComponent } from './account/candy-club/update-accoun
 import { ModelDashboardComponent } from './account/candy-club/model-dashboard/model-dashboard.component';
 import { PrivateMessageComponent } from './common/widget/private-message/private-message.component';
 import { DcmaCompliantFormComponent } from './static/dcma-compliant-form/dcma-compliant-form.component';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -228,8 +229,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         SweetTreatDetailsComponent,
         AlbumDetailsComponent,
         PrivacyPolicyComponent,
-        CookiePolicyComponent,
-        DcmaCompliantComponent,
+        CookiePolicyComponent,        
         NoticeAboutPerformerComponent,
         ComplianceStatementComponent,
         MakeMoreMoneyComponent,
