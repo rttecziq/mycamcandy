@@ -141,7 +141,9 @@ import { UpdateAccountRecordComponent } from './account/candy-club/update-accoun
 import { ModelDashboardComponent } from './account/candy-club/model-dashboard/model-dashboard.component';
 import { PrivateMessageComponent } from './common/widget/private-message/private-message.component';
 import { DcmaCompliantFormComponent } from './static/dcma-compliant-form/dcma-compliant-form.component';
-
+import { DcmaCompliantComponent } from './account/candy-club/dcma-compliant/dcma-compliant.component';
+import { MyFollowersComponent } from './common/widget/my-followers/my-followers.component';
+import { BroadcastScheduleComponent } from './common/widget/broadcast-schedule/broadcast-schedule.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -241,6 +243,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         TimeAgoPipe,
         PrivateMessageComponent,
         DcmaCompliantFormComponent,
+        DcmaCompliantComponent,
+        MyFollowersComponent,
+        BroadcastScheduleComponent,
     ],
     imports: [
         CommonModule,
