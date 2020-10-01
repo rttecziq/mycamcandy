@@ -9,7 +9,7 @@ import { Constant } from '../../../constant/Constant';
 
 declare var $:any;
 
-const BOTTOM_MENU_LINKS = [2, 3, 4, 11, 12];
+const BOTTOM_MENU_LINKS = [14, 15, 16, 18, 19];
 
 @Component({
   selector: 'common-footer',
@@ -67,7 +67,8 @@ export class FooterComponent implements OnInit,AfterViewInit, OnDestroy {
 
 
   ngOnInit(){    
-    this.pagesListFn('pages/footer_list', "");
+    let details = {type:'ModelFooter'};
+    this.pagesListFn('pages/footer_list', details);
 }
 
     ngOnDestroy() {
@@ -177,7 +178,6 @@ export class FooterComponent implements OnInit,AfterViewInit, OnDestroy {
                     this.notification_count = 0;
                     this.notifications = data.notifications;
                     // this.notifications = [...data.notifications, ...this.notifications];
-
                 },
                 (err : HttpErrorResponse) => {
                     this.errorMessages = 'Oops! Something Went Wrong';    

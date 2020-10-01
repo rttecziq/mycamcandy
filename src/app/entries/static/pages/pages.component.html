@@ -1,8 +1,27 @@
-<!-- MAIN SECTION STARTS -->
+<!-- MAIN SECTION STARTS 
 <div class="left-spacing1">
     <div class=" sec-padding padd">
         <h2 class="about-head">{{page_view.title}}</h2>
         <p class="about-para" [innerHTML]="page_view.description"></p>
     </div>
 </div>
-<!-- MAIN SECTION ENDS -->
+ MAIN SECTION ENDS -->
+
+
+<div class="page-bg">
+    <div class="container post-contant">
+       <div class="row bg-white">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center main-heading">
+             <h1 class="pb-2 text-light">{{page_view.title}}</h1>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-3">
+            <p [innerHTML]="page_view.description"></p>
+
+            <div *ngIf="is_page_dcma">
+                <app-dcma-compliant-form></app-dcma-compliant-form>
+            </div>
+
+          </div>
+       </div>
+    </div>
+  </div>
