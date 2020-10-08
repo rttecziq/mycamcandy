@@ -17,3 +17,14 @@
     padding: 5px;
     width: 50%;
 }
+.fb-comments.s_comntPanlars_M {
+  height: 100%;
+  position: absolute;
+  /* overflow: auto; */
+  right: 0;
+  top: 0;
+  width: 420px;
+  z-index: 99999;
+  background: #fff;
+  text-align: left;
+}

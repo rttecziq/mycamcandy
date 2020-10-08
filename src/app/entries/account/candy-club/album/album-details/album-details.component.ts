@@ -79,6 +79,7 @@ export class AlbumDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    $.getScript('../../../../../assets/lightgallery/js/lightgallery-all.min.js');
     this.route.params.subscribe(params => {
       this.album_id = params['id'];
       
@@ -91,6 +92,7 @@ export class AlbumDetailsComponent implements OnInit {
   ngAfterViewInit(){ 
     $(document).ready(function() {
         var $commentBox = $('.s_sCommentBoxPanelLarge');
+        console.log($commentBox);
         $commentBox.lightGallery({
           appendSubHtmlTo: '.lg-item',
           addClass: 'fb-comments',
@@ -108,8 +110,7 @@ export class AlbumDetailsComponent implements OnInit {
            $('.lg-loaded .fb-comments').html('hkhk');
         //   });
         }); 
-    });
-    $.getScript('../../../../../assets/lightgallery/js/lightgallery-all.min.js');
+    });    
 }
 
   togglePassword(e) { this.password_check = e.target.checked; }
