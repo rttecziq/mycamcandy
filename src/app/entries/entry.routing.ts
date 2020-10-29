@@ -95,6 +95,10 @@ import { StartStreamingComponent } from './account/candy-club/start-streaming/st
 import { UpdateAccountRecordComponent } from './account/candy-club/update-account-record/update-account-record.component';
 import { WhySignupWithUsComponent } from './account/candy-club/why-signup-with-us/why-signup-with-us.component';
 import { ModelDashboardComponent } from './account/candy-club/model-dashboard/model-dashboard.component';
+import { ViewModelProfileComponent } from './view-model-profile/view-model-profile.component';
+import { ModelFollowersComponent } from './view-model-profile/model-followers/model-followers.component';
+import { ModelFollowingsComponent } from './view-model-profile/model-followings/model-followings.component';
+import { ModelActivityComponent } from './view-model-profile/model-activity/model-activity.component';
 
 const entryRoutes: Routes = [
     { path: 'viewer-video', 
@@ -249,7 +253,37 @@ const entryRoutes: Routes = [
                 path: "model-dashboard",
                 component: ModelDashboardComponent,
                 canActivate: [AuthGuard],
-                data: {title : "Model Dashboard", expectedRole: 'guestUser'},
+                data: {title : "Model Dashboard", expectedRole: 'onlyUser'},
+            },
+            {
+                path: 'candy-club/model/:modelname',
+                component: ViewModelProfileComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Profile view", expectedRole: 'onlyUser'},
+            },
+            {
+                path: 'candy-club/model/:modelname/about',
+                component: ViewModelProfileComponent,
+                canActivate: [AuthGuard],
+                data: {title : "About", expectedRole: 'onlyUser'},
+            },
+            {
+                path: 'candy-club/model/:modelname/followers',
+                component: ModelFollowersComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Followers", expectedRole: 'onlyUser'},
+            },
+            {
+                path: 'candy-club/model/:modelname/followings',
+                component: ModelFollowingsComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Followings", expectedRole: 'onlyUser'},
+            },
+            {
+                path: 'candy-club/model/:modelname/activity',
+                component: ModelActivityComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Followings", expectedRole: 'onlyUser'},
             },
             {
                 path: "candy-club/:username",

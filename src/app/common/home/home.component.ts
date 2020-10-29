@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
     this.requestService.postMethod(url,object) 
             .subscribe(
                 (data : any) => {
+                  console.log(data);
                     if (data.success == true) {
                       // success
                       this.sliders = data.data;
@@ -79,7 +80,7 @@ export class HomeComponent implements OnInit {
           autoplay:true,
           infinite: true,
           fade: true,
-          speed: 500,
+          speed: 1000,
           prevArrow: false,
           nextArrow: false,
           pauseOnHover:false,

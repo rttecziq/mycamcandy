@@ -1,0 +1,118 @@
+<div class="container-fluid profile-background">
+  
+  <!--Common other model profile view profile tab -->
+  <sidebar-tabs></sidebar-tabs>
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 mt-3 mb-3"></div>
+    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 mt-3 mb-3">
+      <div class="user-row">
+      <ul class="model_about">
+        <li><strong>Zodiac Signs</strong>&nbsp;&nbsp;
+          <span *ngFor="let zodiac_signs of general.zodiac_signs.profile_categories_views">
+            <span *ngIf="model_details.zodiac_signs == zodiac_signs.id">{{zodiac_signs.name}}</span>
+          </span>
+        </li>
+        <li><strong><i class="fa fa-calendar">&nbsp;&nbsp;</i>Birth Date</strong>&nbsp;&nbsp;<span *ngIf="model_details.dob != 0">{{ model_details.dob }}</span></li>
+
+        <li><strong>Public Age</strong>&nbsp;&nbsp;
+          <span *ngFor="let public_age of general.public_age.profile_categories_views">
+            <span *ngIf="model_details.public_age == public_age.id">{{public_age.name}}</span>
+          </span>
+        </li>
+        <li><strong>Public Country</strong>&nbsp;&nbsp;
+          <span *ngFor="let public_country of general.public_country.profile_categories_views">
+            <span *ngIf="model_details.public_country == public_country.id">{{public_country.name}}</span>
+          </span>
+        </li>
+        <li><strong>Languages Spoken</strong>&nbsp;&nbsp;
+          <span *ngFor="let language_spoken of general.language_spoken.profile_categories_views">
+            <span *ngIf="model_details.language_spoken == language_spoken.id">{{language_spoken.name}}</span>
+          </span>
+        </li>
+        <li><strong>Gender</strong>&nbsp;&nbsp;
+          <span *ngFor="let gender of general.gender.profile_categories_views">
+            <span *ngIf="model_details.gender == gender.id">{{gender.name}}</span>
+          </span>
+        </li>
+        <li><strong>Shoe Size</strong>&nbsp;&nbsp;
+          <span *ngFor="let shoe_size of general.shoe_size.profile_categories_views">
+            <span *ngIf="model_details.shoe_size == shoe_size.id">{{shoe_size.name}}</span>
+          </span>
+        </li>
+        <li><strong>Body Type</strong>&nbsp;&nbsp;
+          <span *ngFor="let body_type of general.body_type.profile_categories_views">
+            <span *ngIf="model_details.body_type == body_type.id">{{body_type.name}}</span>
+          </span>
+        </li>
+        <li><strong>Ethinicity</strong>&nbsp;&nbsp;
+          <span *ngFor="let ethnicity of general.ethnicity.profile_categories_views">
+            <span *ngIf="model_details.ethnicity == ethnicity.id">{{ethnicity.name}}</span>
+          </span>
+        </li>
+        <li><strong>Height</strong>&nbsp;&nbsp;
+          <span *ngFor="let height of general.height.profile_categories_views">
+            <span *ngIf="model_details.height == height.id">{{height.name}}</span>
+          </span>
+        </li>
+        <li><strong>Weight</strong>&nbsp;&nbsp;
+          <span *ngFor="let weight of general.weight.profile_categories_views">
+            <span *ngIf="model_details.weight == weight.id">{{weight.name}}</span>
+          </span>
+        </li>
+        <li><strong>Weight</strong>&nbsp;&nbsp;
+          <span *ngFor="let breast_size_number of general.breast_size_number.profile_categories_views">
+            <span *ngIf="model_details.breast_size_number == breast_size_number.id">{{breast_size_number.name}}</span>
+          </span>
+        </li>
+        <li><strong>Breast Size (Letter)</strong>&nbsp;&nbsp;
+          <span *ngFor="let breast_size_letter of general.breast_size_letter.profile_categories_views">
+            <span *ngIf="model_details.breast_size_letter == breast_size_letter.id">{{breast_size_letter.name}}</span>
+          </span>
+        </li>
+        <li><strong>Breast Type</strong>&nbsp;&nbsp;
+          <span *ngFor="let breast_type of general.breast_type.profile_categories_views">
+            <span *ngIf="model_details.breast_type == breast_type.id">{{breast_type.name}}</span>
+          </span>
+        </li>
+        <li><strong>Hair Length</strong>&nbsp;&nbsp;
+          <span *ngFor="let hair_length of general.hair_length.profile_categories_views">
+            <span *ngIf="model_details.hair_length == hair_length.id">{{hair_length.name}}</span>
+          </span>
+        </li>
+        <li><strong>Hair Color</strong>&nbsp;&nbsp;
+          <span *ngFor="let hair_color of general.hair_color.profile_categories_views">
+            <span *ngIf="model_details.hair_color == hair_color.id">{{hair_color.name}}</span>
+          </span>
+        </li>
+        <li><strong>Public Hair</strong>&nbsp;&nbsp;
+          <span *ngFor="let public_hair of general.public_hair.profile_categories_views">
+            <span *ngIf="model_details.public_hair == public_hair.id">{{public_hair.name}}</span>
+          </span>
+        </li>
+        <li><strong>Eye</strong>&nbsp;&nbsp;
+          <span *ngFor="let eyes of general.eyes.profile_categories_views">
+            <span *ngIf="model_details.eyes == eyes.id">{{eyes.name}}</span>
+          </span>
+        </li>
+      </ul>
+      <ul class="model_about_2">
+        <li><strong>Orientation</strong>&nbsp;&nbsp;
+          <span *ngFor="let orientation of general.orientation.profile_categories_views">
+            <span *ngIf="model_details.orientation == orientation.id">{{orientation.name}}</span>
+          </span>
+        </li>
+        <li><strong>How would you describe your personality?</strong><br>          
+            <span *ngIf="model_details.describe_your_personality" [innerHtml]="model_details.describe_your_personality"></span>
+        </li>
+        <li><strong>fetishes</strong>&nbsp;&nbsp;<span *ngIf="model_details.fetishes">
+          <span *ngFor="let fetishes of general.fetishes.profile_categories_views">
+            <span *ngIf="model_details.fetishes == fetishes.id">{{fetishes.name}}</span>
+          </span>
+        </span></li>
+        <li><strong>Wish List</strong>&nbsp;&nbsp;<span *ngIf="model_details.wish_list" [innerHtml] ="model_details.wish_list"></span></li>
+        <!-- <li><strong>Category</strong>&nbsp;&nbsp;Celebrity, Hot Flirt, Transgirl, Amateur, Lesbian, Couple</li> -->
+      </ul>
+      </div>
+    </div>
+  </div>
+</div>

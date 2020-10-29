@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, CollectionChangeRecord } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../../../../common/services/user.service';

@@ -38,7 +38,7 @@ export class DcmaCompliantFormComponent implements OnInit {
         loader : false,
         showHideTransition: 'slide'
     });
-}
+  }
 
   dcmaFormFn(form : NgForm) {
     if (form.value['url'] == undefined || form.value['url'] == '' || form.value['url'] == null) {
