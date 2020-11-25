@@ -144,6 +144,11 @@ import { DcmaCompliantFormComponent } from './static/dcma-compliant-form/dcma-co
 import { DcmaCompliantComponent } from './account/candy-club/dcma-compliant/dcma-compliant.component';
 import { MyFollowersComponent } from './common/widget/my-followers/my-followers.component';
 import { BroadcastScheduleComponent } from './common/widget/broadcast-schedule/broadcast-schedule.component';
+import { ViewModelProfileComponent } from './view-model-profile/view-model-profile.component';
+import { SidebarTabsComponent } from './view-model-profile/sidebar-tabs/sidebar-tabs.component';
+import { ModelFollowersComponent } from './view-model-profile/model-followers/model-followers.component';
+import { ModelFollowingsComponent } from './view-model-profile/model-followings/model-followings.component';
+import { ModelActivityComponent } from './view-model-profile/model-activity/model-activity.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -246,6 +251,11 @@ export function HttpLoaderFactory(http: HttpClient) {
         DcmaCompliantComponent,
         MyFollowersComponent,
         BroadcastScheduleComponent,
+        ViewModelProfileComponent,
+        SidebarTabsComponent,
+        ModelFollowersComponent,
+        ModelFollowingsComponent,
+        ModelActivityComponent,
     ],
     imports: [
         CommonModule,

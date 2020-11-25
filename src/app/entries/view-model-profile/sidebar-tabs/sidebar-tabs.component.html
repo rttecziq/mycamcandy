@@ -1,0 +1,109 @@
+<div class="">
+  <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 mt-3">
+    <div class="profile-primary-div">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <a routerLink="/candy-club/model/{{username}}/followers">
+               <button class="btn-followers">Followers<br>{{no_of_followers}}</button>
+            </a>
+        </div>
+         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <a routerLink="/candy-club/model/{{username}}/followings">
+               <button class="btn-following">Following<br>{{no_of_followings}}</button>
+            </a>
+         </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div *ngIf="model_id != userId">
+            <button class="btn-followers" *ngIf="is_follow_current_model == '0'" (click)="followUser(model_id)">Follow</button>
+        </div>
+            <button class="btn-followers" *ngIf="is_follow_current_model == '1'" (click)="unFollowUser(model_id)">Following</button>            
+        </div>
+         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <button class="btn-following" *ngIf="model_id != userId" (click)="showMessagePopUp()">Message</button>
+         </div>
+      </div>
+
+      <ul class="list-group user-profile-list" *ngIf="model_id != userId">
+        <a routerLink="/candy-club/model/{{username}}/about"><li class="list-group-item active"><i class="fa fa-user float-left" aria-hidden="true"></i> <span class="link">About</span></li></a>
+        <a routerLink="/candy-club/model/{{username}}/activity"><li class="list-group-item"><i class=" fa fa-pencil-square-o float-left" aria-hidden="true"></i>  <span class="link">Activity</span></li></a>
+      </ul>
+    </div>
+  </div>
+  <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 mt-3">
+    <div class="img-container user-cover">
+      <div *ngIf="user_cover_picture">
+        <img [src]="user_cover_picture" class="img-responsive user-cover-photo w-100">
+      </div>
+    </div>
+    <div class="user-row">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <div class="user-pic">
+            <div *ngIf="user_profile_picture">
+              <img [src]="user_profile_picture" class="img-responsive img-circle profile-picture">
+            </div>
+            
+          </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+          <div class="username">
+            <h3> {{ model_name }}  <i class="fa fa-circle" style="font-size: 16px;color: #0bb30b;"></i></h3>
+          </div>
+          <div class="desc">
+            <p class="p-2">{{ model_description }}</p>
+          </div>
+        </div>
+      </div>
+      </div>
+  
+    </div>
+</div>
+
+<div class="backdrop" [ngStyle]="{'display':display}"></div>
+<!-- message model -->
+<div class="modal white-text" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="text-center" *ngIf="loader"><i class="fa fa-spinner fa-spin fa-2x p-2"></i></div>
+        <form #MessageForm="ngForm" name="MessageForm" (ngSubmit)="sendMessageFormFn(MessageForm)" *ngIf="!loader">
+          <div class="modal-header">
+              <button type="button" class="close" (click)="hideMessagePopUp()">&times;</button>
+              <img [src]="chat_picture" width="55px" class="img-circle"><h4 class="d-inline ml-1 modal-title text-capitalize">{{username}}</h4>
+              <span class="delete-right float-right">
+                <i class="fa fa-ban p-2" *ngIf="!is_blocked" title="Block" (click)="actionFn('BLOCK')"></i>
+                <i class="fa fa-trash" *ngIf="messages?.length > 0" title="Delete all messages" (click)="actionFn('TRASH')"></i>
+              </span>
+            </div>
+          <div class="modal-body profile-bg-image">   
+              <div class="light-blue-bg modal-body1">
+                 <div #messageContainer style="max-height:200px;min-height:200px;overflow-y:auto;margin-bottom:20px;">
+                    <div *ngIf="messages?.length > 0" class="chat-box">
+                        <div *ngFor="let message of messages">
+                            <div *ngIf="message['type'] == 'um'; else muBlock" class="sent-msg">
+                              <span class="time">{{message.created_at | timeAgo}}</span>
+                              <p class="p-1 bg-sent">{{message.message}}
+                                <i class="fa fa-trash text-danger float-right" (click)="deleteMsg(message.id)"></i></p>
+                            </div>
+                            <ng-template #muBlock>
+                              <div class="receive-msg">
+                              <span class="time">{{message.created_at | timeAgo}}</span>
+                              <p class="p-1 bg-receive"> {{message.message}}</p>
+                              </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                 </div>
+                 <div *ngIf="!is_blocked">
+                    <textarea [(ngModel)]="message_text" name="message_text" placeholder="Type your message" maxlength="200" class="form-control"></textarea><br>
+                    <button type="submit" class="text-right float-right btn btn-primary"><i class="fa fa-envelope"></i> &nbsp; Send message</button>
+                    <span class="float-right mr-1 mt-1">{{ 200 - message_text?.length }} </span>
+                    <div class="mb-5"></div>
+                </div>
+              </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>

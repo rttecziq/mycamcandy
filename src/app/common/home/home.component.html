@@ -1,11 +1,12 @@
-<div class="page-bg">
+<div class=""> 
+   <!-- page-bg -->
   <div class="mobile-img">
-     <img src="../../../../../assets/img/model/slider1.jpg" class="img-responsive">
+     <img [src]="sliders[0]?.img" class="img-responsive">
   </div>
   <div class="owl-carousel home-slider" *ngIf="sliders.length > 0">
       <div *ngFor="let slider of sliders">
          <div class="item item-1" [style.background]="'url(' + slider.img + ')'">
-            <div class="text-over-img" id="caption_{{slider.id}}">
+            <div class="text-over-img-{{slider.position}}" id="caption_{{slider.id}}">
                <p>{{slider.caption_text}}</p><br>
                <a routerLink="/register" class="mt-3 signup-button">Sign Up!</a>
             </div>

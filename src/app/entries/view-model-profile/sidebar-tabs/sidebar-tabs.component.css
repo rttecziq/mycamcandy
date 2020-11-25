@@ -1,0 +1,338 @@
+/*dropzones*/
+
+ngx-dropzone,
+.custom-dropzone {
+  margin: 20px;
+}
+
+.custom-dropzone {
+	height: 250px;
+	background: #333;
+	color: #fff;
+	border: 5px dashed rgb(235, 79, 79);
+	border-radius: 5px;
+	font-size: 20px;
+}
+
+.custom-dropzone.ngx-dz-hovered {
+  border: 5px solid rgb(235, 79, 79);
+}
+.btn-followers, .btn-following {
+  width: 100%;
+  cursor: pointer;
+  background: #ffc107;
+  border: 0;
+  margin-bottom: 5px;
+  padding: 7px;
+  color: #fff;
+}
+/********************User end About Start**********************/
+
+.profile-background .container{
+  background: #fff;
+  padding:0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.user-profile-list{
+  margin:0px;
+}
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+.list-group-item:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+.list-group-item:first-child {
+  border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+.user-profile-list a{
+  color:#484747!important;
+}
+a {text-decoration: none!important;}
+.float-left{
+  float: left;
+}
+.float-right{
+  float: right;
+}
+.profile-primary-div ul li{background: #ffbf0047;border-color: #ffc107;}
+.user-profile-list a:hover li{
+  background-color: #ffc107;
+    border-color: #ffc107;
+    color: #fff;
+}
+.user-profile-list li{text-align: center;}
+.user-profile-list li i.fa{font-size:22px;}
+.user-profile-list a:hover li.active{
+  background-color: #ffc107;
+    border-color: #ffc107;
+    color: #fff;
+}
+.user-profile-list li.active{
+  background-color: #ffc107!important;
+  border-color: #ffc107;
+}
+/***Sidebar menu End**/
+
+.mt-3{margin-top: 2rem;}
+.mt-5{margin-top: 3rem;}
+.mb-5{margin-bottom: 3rem;}
+.p-2{padding: .5rem;}
+.p-5{padding: 3rem;}
+.ml-1{margin-left:1em;}
+.bg-light{background: #f7f7f7;}
+
+.user-row{background: #efefef;}
+.user-pic img{
+  padding:10px;
+  position: absolute;
+  top:-100px;
+  width: 200px;
+}
+.actions{
+  margin-right: 10px;
+    margin-top: -37px;
+}
+.user-activity{
+    height: 500px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.post-footer-option .list-unstyled {
+    display: inline-flex;
+}
+.clear{
+  width: 100%;
+  height: 1px;
+  background: silver;
+  clear: both;
+}
+.post-footer-option .list-unstyled li a{padding: 10px}
+.about-ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.about-ul li{
+  border-bottom: 2px solid #e0e0e0;
+    padding: 10px;
+}
+.actions .dropdown-menu{left: -110px}
+#post-on-wall{
+  padding:3rem;
+}
+.p-image{
+  position: absolute;
+  left: 49%;
+  margin-top: -7%;
+  font-size: 22px;
+}
+.profile-pic-upload{
+  height: 24px;
+  width: 24px;
+  position: absolute;
+    top: 5%;
+    opacity: 0;
+    cursor: pointer;
+}
+.fa-camera.upload-button-profile-pic {
+    color: #f7f7f7;
+}
+.img-container {
+  position: relative;
+  color: white;
+}
+.mt-2 {margin-top:1em;}
+.user-profile1 {
+  width: 100px;
+  height: 100px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #fff;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.user-cover .fa-camera{font-size: 22px;color: #f7f7f7;}
+.cover-pic-upload{display: none!important;}
+@media screen and (max-width: 767px){
+  .user-pic img {
+    position: relative;
+    top: unset;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+.desc, .username{text-align: center;}
+.p-image {
+    position: absolute;
+    left: 48%;
+    margin-top: -118px;
+    font-size: 22px;
+}
+}
+@media screen and (max-width: 991px) and (min-width: 768px){
+  .user-pic img {
+    top: -65px;
+}
+}
+
+.top-left {
+  position: absolute;
+  top: 0px;
+  /*left: 16px;*/
+  width: 100%;
+  background: #00000057;
+}
+.text-center{
+  text-align:center;
+}
+
+.cover-menu ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  width: 100%;
+}
+.cover-menu ul li a{
+  color: #fff;
+}
+.cover-menu li {
+    list-style: none;
+    display: inline-flex;
+    padding: 5px 5px;
+    text-align: center;
+}
+.w-100 {
+  width:100%;
+}
+.bold {font-weight: bold;}
+
+/*************Message Start****************/
+
+.p-1 {
+  padding: .25rem!important;
+}
+.mt-1 {
+  margin-top: .25rem!important;
+}
+.ml-1{
+  margin-left: .5rem;
+}
+.mt-4 {
+  margin-top: 1.5rem!important;
+}
+.mb-5 {
+  margin-bottom: 3rem;
+}
+.p-2 {
+  padding: .5rem;
+}
+.float-right {
+  float: right;
+}
+.float-left {
+  float: left;
+}
+.border {
+  border: 1px solid #dee2e6!important;
+}
+.msg{
+padding-left: 1.5rem;
+padding-right: 3rem;
+}
+.msg .fa-circle{
+font-size: 12px;
+color: #0bb30b;
+float: right;
+margin-top: 18px;
+margin-right: 10px;
+}
+.active_msg{
+padding: 0;
+list-style: none;
+margin: 0;
+max-height: 450px;
+overflow-y: auto;
+}
+.active_msg li.active {
+  background-color: #dadada;
+}
+/* .chat-box {
+  height: 500px;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+} */
+hr{border-top: 1px solid #d4d1d1;}
+.chat-box .bg-receive {
+  background: rgba(30, 115, 190, 0.8);
+  width: 100%;
+  /* float: left; */
+  border-radius: 4px;
+  color: #fff;
+}
+.receive-msg{
+  float: left;
+  width: 70%;
+  position: relative;
+}
+.receive-msg .time{
+  position: absolute;
+  right: -60px;
+  font-size: 12px;
+  color: #adacac;
+  top: 23%;
+}
+.chat-box .bg-sent {
+  background: #3738370f;
+  width: 100%;
+  /* float: right; */
+  text-align: left;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.sent-msg{
+  float: right;
+  width: 70%;
+  position: relative;
+}
+.sent-msg .time{
+  position: absolute;
+  left: -60px;
+  font-size: 12px;
+  color: #adacac;
+  top: 23%;
+}
+.chat-message{padding-right: 30px;}
+.smilies{
+  position: absolute;
+  right: 29px;
+  bottom: 12%;
+}
+.chat-box .bg-sent .fa-trash{display: none;}
+.chat-box .bg-sent:hover .fa.fa-trash.text-danger.float-right {
+  display: block!important;
+}
+@media screen and (max-width: 767px){
+.msg {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.smilies{
+  position: absolute;
+  right: 29px;
+  bottom: 7%;
+}
+}
+/*************Message End****************/

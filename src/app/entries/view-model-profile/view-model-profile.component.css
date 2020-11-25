@@ -1,0 +1,34 @@
+/**********Model Profile Start*************/
+.user-row{
+    background: #efefef;
+    margin-left: .5em;
+    margin-right: 1.0em;
+  }
+  .model_about{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 2;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .model_about li {
+      font-size: 16px;
+      padding-bottom: 2px;
+      padding-top: 15px;
+      border-bottom: 2px solid #a7a3a3;
+  }
+  .model_about_2{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .model_about_2 li {
+      font-size: 16px;
+      padding-bottom: 2px;
+      padding-top: 35px;
+      border-bottom: 2px solid #a7a3a3;
+  }
+  /**********Model Profile end*************/
