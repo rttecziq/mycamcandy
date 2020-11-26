@@ -1,14 +1,14 @@
-import { Component, ElementRef, OnDestroy } from "@angular/core";
+import { Component, ElementRef, OnDestroy } from '@angular/core';
 
-import { RequestService } from "../../../common/services/request.service";
-import { ActivatedRoute, UrlHandlingStrategy, Router } from "@angular/router";
-import { HttpErrorResponse, HttpClient } from "@angular/common/http";
+import { RequestService } from '../../../common/services/request.service';
+import { ActivatedRoute, UrlHandlingStrategy, Router } from '@angular/router';
+import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 
-import { JoinVideo } from "../../../models/join-video";
+import { JoinVideo } from '../../../models/join-video';
 
-import { Chat } from "../../../common/services/model/chat";
-import { Event } from "../../../common/services/model/event";
-import { ChatSocketService } from "../../../common/services/chat-socket.service";
+import { Chat } from '../../../common/services/model/chat';
+import { Event } from '../../../common/services/model/event';
+import { ChatSocketService } from '../../../common/services/chat-socket.service';
 
 declare var $: any;
 
@@ -21,13 +21,13 @@ declare function getBrowser(): any;
 declare var jwplayer: any;
 
 @Component({
-    templateUrl: "join-video.component.html",
+    templateUrl: 'join-video.component.html',
     styleUrls: [
-        "../../../../assets/css/bootstrap/css/bootstrap.css",
-        "../../../../assets/css/font-awesome/css/font-awesome.min.css",
-        "../../../../assets/css/jquery-ui.css",
-        "../../../../assets/css/style.css",
-        "../../../../assets/css/responsive.css"
+        '../../../../assets/css/bootstrap/css/bootstrap.css',
+        '../../../../assets/css/font-awesome/css/font-awesome.min.css',
+        '../../../../assets/css/jquery-ui.css',
+        '../../../../assets/css/style.css',
+        '../../../../assets/css/responsive.css'
     ]
 })
 export class AndroidJoinComponent implements OnDestroy {
@@ -59,50 +59,50 @@ export class AndroidJoinComponent implements OnDestroy {
         private router: Router,
         private http: HttpClient
     ) {
-        this.errorMessages = "";
+        this.errorMessages = '';
 
         this.video_details = {
-            title: "",
-            type: "",
+            title: '',
+            type: '',
             amount: 0,
-            description: "",
-            viewer_cnt: "",
-            name: "",
-            snapshot: "",
+            description: '',
+            viewer_cnt: '',
+            name: '',
+            snapshot: '',
             is_streaming: 0,
             live_group_id: 0
         };
 
         this.requestService
-            .getMethod("site/settings", "")
+            .getMethod('site/settings', '')
             .subscribe((data: any) => {
                 this.site_settings = data.settings;
             });
 
         setTimeout(() => {
-            console.log("timeout fn");
+            console.log('timeout fn');
 
-            let socket_url = this.site_settings.filter(obj => {
-                return obj.key === "SOCKET_URL";
+            const socket_url = this.site_settings.filter(obj => {
+                return obj.key === 'SOCKET_URL';
             });
 
-            let jwplayer_key = this.site_settings.filter(obj => {
-                return obj.key === "jwplayer_key";
+            const jwplayer_key = this.site_settings.filter(obj => {
+                return obj.key === 'jwplayer_key';
             });
 
-            jwplayer.key = jwplayer_key.length > 0 ? jwplayer_key[0].value : "";
+            jwplayer.key = jwplayer_key.length > 0 ? jwplayer_key[0].value : '';
 
             /********************** WEBRTC connection **************************/
 
             // by default, socket.io server is assumed to be deployed on your own URL
 
             this.connection.socketURL =
-                socket_url.length > 0 ? socket_url[0].value : "";
+                socket_url.length > 0 ? socket_url[0].value : '';
 
             // comment-out below line if you do not have your own socket.io server
             // connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
 
-            this.connection.socketMessageEvent = "video-broadcast-demo";
+            this.connection.socketMessageEvent = 'video-broadcast-demo';
 
             this.connection.session = {
                 audio: true,
@@ -116,57 +116,57 @@ export class AndroidJoinComponent implements OnDestroy {
             };
 
             this.connection.videosContainer = document.getElementById(
-                "videos-container"
+                'videos-container'
             );
 
             this.connection.onstream = function(event) {
-                var existing = document.getElementById(event.streamid);
+                const existing = document.getElementById(event.streamid);
                 if (existing && existing.parentNode) {
                     existing.parentNode.removeChild(existing);
                 }
 
-                event.mediaElement.removeAttribute("src");
-                event.mediaElement.removeAttribute("srcObject");
+                event.mediaElement.removeAttribute('src');
+                event.mediaElement.removeAttribute('srcObject');
                 event.mediaElement.muted = true;
                 event.mediaElement.volume = 0;
 
-                var video = document.createElement("video");
+                const video = document.createElement('video');
 
                 try {
                     video.setAttributeNode(
-                        document.createAttribute("autoplay")
+                        document.createAttribute('autoplay')
                     );
                     video.setAttributeNode(
-                        document.createAttribute("playsinline")
+                        document.createAttribute('playsinline')
                     );
                 } catch (e) {
-                    video.setAttribute("autoplay", this.video_attribute);
-                    video.setAttribute("playsinline", this.video_attribute);
+                    video.setAttribute('autoplay', this.video_attribute);
+                    video.setAttribute('playsinline', this.video_attribute);
                 }
 
-                if (event.type === "local") {
+                if (event.type === 'local') {
                     video.volume = 0;
                     try {
                         video.setAttributeNode(
-                            document.createAttribute("muted")
+                            document.createAttribute('muted')
                         );
                     } catch (e) {
-                        video.setAttribute("muted", this.video_attribute);
+                        video.setAttribute('muted', this.video_attribute);
                     }
                 }
                 video.srcObject = event.stream;
 
                 // this.width = parseInt(document.getElementById("videos-container").clientWidth / 3) - 20;
 
-                var mediaElement = getHTMLMediaElement(video, {
+                const mediaElement = getHTMLMediaElement(video, {
                     title: event.userid,
                     buttons: [],
-                    width: "100%",
+                    width: '100%',
                     showOnMouseEnter: false
                 });
 
                 document
-                    .getElementById("videos-container")
+                    .getElementById('videos-container')
                     .appendChild(mediaElement);
 
                 setTimeout(function() {
@@ -176,21 +176,21 @@ export class AndroidJoinComponent implements OnDestroy {
                 mediaElement.id = event.streamid;
             };
 
-            var ended = 0;
+            let ended = 0;
 
             this.connection.onstreamended = function(event) {
-                console.log("Streaming Endeddd. " + ended);
+                console.log('Streaming Endeddd. ' + ended);
 
                 if (ended) {
-                    console.log("Streaming Ende.");
+                    console.log('Streaming Ende.');
 
                     // document.location.reload(true);
                 }
 
-                var mediaElement = document.getElementById(event.streamid);
+                const mediaElement = document.getElementById(event.streamid);
 
                 if (mediaElement) {
-                    console.log("Streaming Ended inside.");
+                    console.log('Streaming Ended inside.');
 
                     mediaElement.parentNode.removeChild(mediaElement);
 
@@ -202,29 +202,29 @@ export class AndroidJoinComponent implements OnDestroy {
                     } */
 
                     setTimeout(() => {
-                        console.log("Streaming Ended timeout.");
+                        console.log('Streaming Ended timeout.');
 
                         // this.router.reload();
                         window.location.reload(true);
 
-                        $("#join-room").click();
+                        $('#join-room').click();
                     }, 1000);
                 }
             };
 
             this.route.queryParams.subscribe(params => {
-                this.video_id = params["video_id"];
+                this.video_id = params['video_id'];
 
-                this.userId = params["user_id"];
+                this.userId = params['user_id'];
 
                 this.browser = getBrowser();
 
-                let details = {
+                const details = {
                     video_id: this.video_id,
                     browser: this.browser
                 };
 
-                this.singleVideoDetail("single_video", details);
+                this.singleVideoDetail('single_video', details);
             });
         }, 3000);
     }
@@ -232,23 +232,25 @@ export class AndroidJoinComponent implements OnDestroy {
     ngOnDestroy(): any {}
 
     singleVideoDetail(url, object) {
-        let formData = new FormData();
+        const formData = new FormData();
 
         // By Default added device type and login type in future use
-        formData.append("id", this.userId);
-        formData.append("token", "");
+        formData.append('id', this.userId);
+        formData.append('token', '');
 
         // append your data
-        for (var key in object) {
+        // tslint:disable-next-line:forin
+        for (const key in object) {
             formData.append(key, object[key]);
         }
 
         // By Default added device type and login type in future use
         // formData.append('login_by', );
-        formData.append("device_type", "android");
+        formData.append('device_type', 'android');
 
         this.http.post(this.requestService.apiUrl + url, formData).subscribe(
             (data: any) => {
+                // tslint:disable-next-line:triple-equals
                 if (data.success == true) {
                     this.video_details = data.data;
 
@@ -257,7 +259,7 @@ export class AndroidJoinComponent implements OnDestroy {
                     this.viewer_cnt = data.data.viewer_cnt;
 
                     if (data.data.video_url) {
-                        var playerInstance = jwplayer("videos-container");
+                        const playerInstance = jwplayer('videos-container');
 
                         console.log(data.data.video_url);
 
@@ -265,21 +267,20 @@ export class AndroidJoinComponent implements OnDestroy {
 
                         playerInstance.setup({
                             file: data.data.video_url,
-                            // file:"https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8",
                             image: data.data.snapshot,
-                            width: "100%",
-                            aspectratio: "16:9",
+                            width: '100%',
+                            aspectratio: '16:9',
                             // primary: "flash",
                             controls: true,
-                            "controlbar.idlehide": false,
-                            controlBarMode: "floating",
+                            'controlbar.idlehide': false,
+                            controlBarMode: 'floating',
                             autostart: false,
                             hlshtml: true,
-                            type: "hls",
+                            type: 'hls',
                             androidhls: true
                         });
                     } else {
-                        console.log("Jinroom");
+                        console.log('Jinroom');
 
                         this.joinRoom();
                     }
@@ -293,7 +294,7 @@ export class AndroidJoinComponent implements OnDestroy {
             },
 
             (err: HttpErrorResponse) => {
-                this.errorMessages = "Oops! Something Went Wrong";
+                this.errorMessages = 'Oops! Something Went Wrong';
 
                 alert(this.errorMessages);
 
@@ -303,9 +304,9 @@ export class AndroidJoinComponent implements OnDestroy {
     }
 
     joinRoom() {
-        console.log("Join Room");
+        console.log('Join Room');
 
-        let room_id = this.room;
+        const room_id = this.room;
 
         setTimeout(() => {
             this.connection.sdpConstraints.mandatory = {
@@ -315,23 +316,23 @@ export class AndroidJoinComponent implements OnDestroy {
 
             this.connection.join(room_id);
 
-            document.getElementById("defaultImage").style.display = "none";
+            document.getElementById('defaultImage').style.display = 'none';
         }, 2000);
     }
 
     /*private initIoConnection() {
         this.chatSocketService.initSocket(this.room);
-    
+
         this.ioConnection = this.chatSocketService.getViewersCnt()
           .subscribe((data : any) => {
             this.viewer_cnt = data;
         });
-    
+
         this.chatSocketService.onEvent(Event.CONNECT)
           .subscribe(() => {
             console.log('connected');
           });
-          
+
         this.chatSocketService.onEvent(Event.DISCONNECT)
           .subscribe(() => {
             console.log('disconnected');

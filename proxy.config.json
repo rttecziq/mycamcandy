@@ -1,0 +1,11 @@
+[{
+    "context": [
+      "/socket.io"
+    ],
+    "target": "http://128.199.26.155:9001",
+    "pathRewrite": {
+      "^/socket.io": "/socket.io"
+    },
+    "secure": "false"
+  }
+]

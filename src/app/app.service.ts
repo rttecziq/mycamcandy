@@ -9,9 +9,9 @@ export class AppService implements OnInit{
 
   readonly apiUrl = environment.apiUrl;
 
-  site_settings : any;
+  site_settings: any;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
 
       this.site_settings = [];
 
@@ -19,15 +19,15 @@ export class AppService implements OnInit{
 
   ngOnInit() {
 
-    console.log("App service");
+    console.log('App service');
 
-    //this.appDetails();
+    // this.appDetails();
 
   }
 
   appDetails() {
 
-      return this.http.get(this.apiUrl+"site/settings")
+      return this.http.get(this.apiUrl + 'site/settings')
       .subscribe(
 
         (data : any) => {
