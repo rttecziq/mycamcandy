@@ -125,6 +125,11 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
 
   kurentoObj: any;
 
+  // declare params for checking the payment status here.
+  paymentChecker: any = null;
+  paymentTimerDuration = 5;// 5 minute as default. Redeived in minutes from server
+  readonly noOfMiliSecondsAMinute = 60000;
+
   constructor(
     myElement: ElementRef,
     private requestService: RequestService,
@@ -374,15 +379,22 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
                     alert('Please select external microphone. Check github issue number 483.');
                     return;
                 }
-        
+
                 var secondaryMic = DetectRTC.audioInputDevices[1].deviceId;
                 connection.mediaConstraints.audio = {
                     deviceId: secondaryMic
                 };
-        
+
                 connection.join(connection.sessionid);
             }
         };*/
+
+  // set time duration for payment deductions
+
+  let streaming_charge_deduction_duration = this.site_settings.filter(obj => {
+    return obj.key === "streaming_charge_deduction_duration";
+  });
+  this.paymentTimerDuration = streaming_charge_deduction_duration[0].value
   }
 
   snapShotFn() {
@@ -433,6 +445,24 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
 
         // this.start();
       }
+
+      // set interval here which will keep checking for the payment status.
+        // this will also keep updating the payment at the backend
+        if( this.paymentChecker == null){
+          console.log('setting timer');
+          this.paymentChecker = setInterval(() => {
+            this.checkAndUpdateUserPaymentStatus();
+        }, this.paymentTimerDuration * this.noOfMiliSecondsAMinute ); 
+        }
+    });
+  }
+
+  checkAndUpdateUserPaymentStatus() {
+    let url = "deduct_for_streamer";
+    let details = {video_id : this.video_id};
+    console.log('opening room with' , this.paymentTimerDuration * this.noOfMiliSecondsAMinute , "seconds" , "hitting " + url );
+    this.requestService.postMethod(url, details).subscribe(data => {
+      console.log(data)
     });
   }
 
@@ -469,6 +499,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
               loader: false,
               showHideTransition: "slide"
             });
+            clearInterval(this.paymentChecker);
 
             return this.router.navigate(["/broadcast"]);
           } else {
@@ -508,6 +539,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.paymentChecker = null;
     /*$.getScript('../../../../assets/js/kurento/adapter.js',function(){});
 
         $.getScript('../../../../assets/js/kurento/index.js',function(){});
@@ -695,7 +727,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
     // this.stopLive();
 
     clearInterval(this.snapshot_capture);
-
+    clearInterval(this.paymentChecker);
     let details = { video_id: this.video_id };
 
     $(".side-menubar").removeClass("disable-links");

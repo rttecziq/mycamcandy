@@ -4,13 +4,13 @@ import {
     ViewChild,
     OnDestroy,
     OnInit
-} from "@angular/core";
+} from '@angular/core';
 
-import { RequestService } from "../../../common/services/request.service";
-import { ActivatedRoute, UrlHandlingStrategy, Router } from "@angular/router";
-import { HttpErrorResponse, HttpClient } from "@angular/common/http";
+import { RequestService } from '../../../common/services/request.service';
+import { ActivatedRoute, UrlHandlingStrategy, Router } from '@angular/router';
+import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 
-import { JoinVideo } from "../../../models/join-video";
+import { JoinVideo } from '../../../models/join-video';
 
 declare var $: any;
 
@@ -27,13 +27,13 @@ declare function getMobileOperatingSystem(): any;
 declare var kurentoObject: any;
 
 @Component({
-    templateUrl: "streamer-video.component.html",
+    templateUrl: 'streamer-video.component.html',
     styleUrls: [
-        "../../../../assets/css/bootstrap/css/bootstrap.css",
-        "../../../../assets/css/font-awesome/css/font-awesome.min.css",
-        "../../../../assets/css/jquery-ui.css",
-        "../../../../assets/css/style.css",
-        "../../../../assets/css/responsive.css"
+        '../../../../assets/css/bootstrap/css/bootstrap.css',
+        '../../../../assets/css/font-awesome/css/font-awesome.min.css',
+        '../../../../assets/css/jquery-ui.css',
+        '../../../../assets/css/style.css',
+        '../../../../assets/css/responsive.css'
     ]
 })
 export class AndroidStreamerComponent implements OnInit, OnDestroy {
@@ -83,16 +83,16 @@ export class AndroidStreamerComponent implements OnInit, OnDestroy {
         private router: Router,
         private http: HttpClient
     ) {
-        this.errorMessages = "";
+        this.errorMessages = '';
 
         this.video_details = {
-            title: "",
-            type: "",
+            title: '',
+            type: '',
             amount: 0,
-            description: "",
-            viewer_cnt: "",
-            name: "",
-            snapshot: "",
+            description: '',
+            viewer_cnt: '',
+            name: '',
+            snapshot: '',
             is_streaming: 0,
             live_group_id: 0
         };
@@ -109,45 +109,45 @@ export class AndroidStreamerComponent implements OnInit, OnDestroy {
         this.mobile_browser = getMobileOperatingSystem();
 
         this.requestService
-            .getMethod("site/settings", "")
+            .getMethod('site/settings', '')
             .subscribe((data: any) => {
                 this.site_settings = data.settings;
             });
 
         setTimeout(() => {
-            console.log("timeout fn");
+            console.log('timeout fn');
 
-            let socket_url = this.site_settings.filter(obj => {
-                return obj.key === "SOCKET_URL";
+            const socket_url = this.site_settings.filter(obj => {
+                return obj.key === 'SOCKET_URL';
             });
 
-            let wowza_ip_address = this.site_settings.filter(obj => {
-                return obj.key === "wowza_ip_address";
+            const wowza_ip_address = this.site_settings.filter(obj => {
+                return obj.key === 'wowza_ip_address';
             });
 
-            let kurento_socket_url = this.site_settings.filter(obj => {
-                return obj.key === "kurento_socket_url";
+            const kurento_socket_url = this.site_settings.filter(obj => {
+                return obj.key === 'kurento_socket_url';
             });
 
             this.wowza_ip_address =
-                wowza_ip_address.length > 0 ? wowza_ip_address[0].value : "";
+                wowza_ip_address.length > 0 ? wowza_ip_address[0].value : '';
 
             this.kurento_socket_url =
                 kurento_socket_url.length > 0
                     ? kurento_socket_url[0].value
-                    : "";
+                    : '';
 
             this.route.queryParams.subscribe(params => {
-                this.video_id = params["video_id"];
+                this.video_id = params['video_id'];
 
-                this.userId = params["user_id"];
+                this.userId = params['user_id'];
 
-                let details = {
+                const details = {
                     video_id: this.video_id,
                     browser: this.browser
                 };
 
-                this.singleVideoDetail("single_video", details);
+                this.singleVideoDetail('single_video', details);
             });
 
             /***************************Kurento Code****************************/
@@ -155,8 +155,8 @@ export class AndroidStreamerComponent implements OnInit, OnDestroy {
             this.is_kurento_running = false;
 
             setTimeout(() => {
-                if (this.browser == "Safari" || this.mobile_browser == "ios") {
-                    console.log("kurento not supported..!");
+                if (this.browser == 'Safari' || this.mobile_browser == 'ios') {
+                    console.log('kurento not supported..!');
                 } else {
                     if (this.wowza_ip_address && this.kurento_socket_url) {
                         this.is_kurento_running = true;
@@ -164,7 +164,7 @@ export class AndroidStreamerComponent implements OnInit, OnDestroy {
                         // let kurentoObj = new kurentoObject(this.kurento_socket_url,this.wowza_ip_address);
                     } else {
                         console.log(
-                            "Wowza / Kurento Not configured...! so IOS Mobile Device wil not work..!"
+                            'Wowza / Kurento Not configured...! so IOS Mobile Device wil not work..!'
                         );
                     }
                 }
@@ -176,12 +176,12 @@ export class AndroidStreamerComponent implements OnInit, OnDestroy {
 
             // by default, socket.io server is assumed to be deployed on your own URL
             this.connection.socketURL =
-                socket_url.length > 0 ? socket_url[0].value : "";
+                socket_url.length > 0 ? socket_url[0].value : '';
 
             // comment-out below line if you do not have your own socket.io server
             // connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
 
-            this.connection.socketMessageEvent = "video-broadcast-demo";
+            this.connection.socketMessageEvent = 'video-broadcast-demo';
 
             this.connection.session = {
                 audio: true,
@@ -195,57 +195,57 @@ export class AndroidStreamerComponent implements OnInit, OnDestroy {
             };
 
             this.connection.videosContainer = document.getElementById(
-                "videos-container"
+                'videos-container'
             );
 
             this.connection.onstream = function(event) {
-                var existing = document.getElementById(event.streamid);
+                const existing = document.getElementById(event.streamid);
                 if (existing && existing.parentNode) {
                     existing.parentNode.removeChild(existing);
                 }
 
-                event.mediaElement.removeAttribute("src");
-                event.mediaElement.removeAttribute("srcObject");
+                event.mediaElement.removeAttribute('src');
+                event.mediaElement.removeAttribute('srcObject');
                 event.mediaElement.muted = true;
                 event.mediaElement.volume = 0;
 
-                var video = document.createElement("video");
+                const video = document.createElement('video');
 
                 try {
                     video.setAttributeNode(
-                        document.createAttribute("autoplay")
+                        document.createAttribute('autoplay')
                     );
                     video.setAttributeNode(
-                        document.createAttribute("playsinline")
+                        document.createAttribute('playsinline')
                     );
                 } catch (e) {
-                    video.setAttribute("autoplay", this.video_attribute);
-                    video.setAttribute("playsinline", this.video_attribute);
+                    video.setAttribute('autoplay', this.video_attribute);
+                    video.setAttribute('playsinline', this.video_attribute);
                 }
 
-                if (event.type === "local") {
+                if (event.type === 'local') {
                     video.volume = 0;
                     try {
                         video.setAttributeNode(
-                            document.createAttribute("muted")
+                            document.createAttribute('muted')
                         );
                     } catch (e) {
-                        video.setAttribute("muted", this.video_attribute);
+                        video.setAttribute('muted', this.video_attribute);
                     }
                 }
                 video.srcObject = event.stream;
 
                 // this.width = parseInt(document.getElementById("videos-container").clientWidth / 3) - 20;
 
-                var mediaElement = getHTMLMediaElement(video, {
+                const mediaElement = getHTMLMediaElement(video, {
                     title: event.userid,
                     buttons: [],
-                    width: "100%",
+                    width: '100%',
                     showOnMouseEnter: false
                 });
 
                 document
-                    .getElementById("videos-container")
+                    .getElementById('videos-container')
                     .appendChild(mediaElement);
 
                 setTimeout(function() {
@@ -261,25 +261,25 @@ export class AndroidStreamerComponent implements OnInit, OnDestroy {
                 // document.getElementById('start-live').click();
 
                 function takePhoto(video) {
-                    var canvas = document.createElement("canvas");
+                    const canvas = document.createElement('canvas');
                     canvas.width = video.videoWidth || video.clientWidth;
                     canvas.height = video.videoHeight || video.clientHeight;
 
-                    var context = canvas.getContext("2d");
+                    const context = canvas.getContext('2d');
                     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-                    return canvas.toDataURL("image/png");
+                    return canvas.toDataURL('image/png');
                 }
 
-                var yourVideoElement = document.querySelector("video");
+                const yourVideoElement = document.querySelector('video');
 
                 this.capture = function() {
                     this.snapshot_pic = takePhoto(yourVideoElement);
 
-                    $("#snapshot").val(this.snapshot_pic);
+                    $('#snapshot').val(this.snapshot_pic);
 
                     setTimeout(() => {
-                        $("#snapshot_id").click();
+                        $('#snapshot_id').click();
                     }, 1000);
                 };
 
@@ -289,7 +289,7 @@ export class AndroidStreamerComponent implements OnInit, OnDestroy {
             };
 
             this.connection.onstreamended = function(event) {
-                var mediaElement = document.getElementById(event.streamid);
+                const mediaElement = document.getElementById(event.streamid);
                 if (mediaElement) {
                     mediaElement.parentNode.removeChild(mediaElement);
 
@@ -311,20 +311,20 @@ export class AndroidStreamerComponent implements OnInit, OnDestroy {
     ngOnInit() {}
 
     singleVideoDetail(url, object) {
-        let formData = new FormData();
+        const formData = new FormData();
 
         // By Default added device type and login type in future use
-        formData.append("id", this.userId);
-        formData.append("token", "");
+        formData.append('id', this.userId);
+        formData.append('token', '');
 
         // append your data
-        for (var key in object) {
+        for (const key in object) {
             formData.append(key, object[key]);
         }
 
         // By Default added device type and login type in future use
         // formData.append('login_by', );
-        formData.append("device_type", "android");
+        formData.append('device_type', 'android');
 
         this.http.post(this.requestService.apiUrl + url, formData).subscribe(
             (data: any) => {
@@ -334,7 +334,7 @@ export class AndroidStreamerComponent implements OnInit, OnDestroy {
                     this.room = data.data.unique_id;
 
                     this.port_no =
-                        data.data.port_no > 0 ? data.data.port_no : "33124";
+                        data.data.port_no > 0 ? data.data.port_no : '33124';
 
                     setTimeout(() => {
                         //this.openRoom();
@@ -349,7 +349,7 @@ export class AndroidStreamerComponent implements OnInit, OnDestroy {
             },
 
             (err: HttpErrorResponse) => {
-                this.errorMessages = "Oops! Something Went Wrong";
+                this.errorMessages = 'Oops! Something Went Wrong';
 
                 alert(this.errorMessages);
 
@@ -359,24 +359,24 @@ export class AndroidStreamerComponent implements OnInit, OnDestroy {
     }
 
     snapShotFn() {
-        this.snapshot_pic = $("#snapshot").val();
+        this.snapshot_pic = $('#snapshot').val();
 
-        let formData = new FormData();
+        const formData = new FormData();
 
         // By Default added device type and login type in future use
-        formData.append("id", this.userId);
-        formData.append("token", "");
+        formData.append('id', this.userId);
+        formData.append('token', '');
 
-        formData.append("snapshot", this.snapshot_pic);
+        formData.append('snapshot', this.snapshot_pic);
 
-        formData.append("video_id", this.video_id);
+        formData.append('video_id', this.video_id);
 
         // By Default added device type and login type in future use
         // formData.append('login_by', );
-        formData.append("device_type", "android");
+        formData.append('device_type', 'android');
 
         this.http
-            .post(this.requestService.apiUrl + "live-video/snapshot", formData)
+            .post(this.requestService.apiUrl + 'live-video/snapshot', formData)
             .subscribe(
                 (data: any) => {
                     if (data.success == true) {
@@ -390,7 +390,7 @@ export class AndroidStreamerComponent implements OnInit, OnDestroy {
                 },
 
                 (err: HttpErrorResponse) => {
-                    this.errorMessages = "Oops! Something Went Wrong";
+                    this.errorMessages = 'Oops! Something Went Wrong';
                 }
             );
     }
@@ -398,7 +398,7 @@ export class AndroidStreamerComponent implements OnInit, OnDestroy {
     openRoom(deviceId) {
         // alert(deviceId);
 
-        let room_id = this.room;
+        const room_id = this.room;
 
         this.connection.attachStreams.forEach(function(stream) {
             stream.stop();
@@ -416,7 +416,7 @@ export class AndroidStreamerComponent implements OnInit, OnDestroy {
             };
 
             this.connection.open(room_id, () => {
-                document.getElementById("defaultImage").style.display = "none";
+                document.getElementById('defaultImage').style.display = 'none';
 
                 /*if(this.is_kurento_running) {
 
@@ -430,7 +430,7 @@ export class AndroidStreamerComponent implements OnInit, OnDestroy {
     }
 
     checkAndOpenRoom() {
-        let deviceId = "";
+        let deviceId = '';
 
         this.cameras.forEach(camera => {
             if (this.currentDeviceId == camera.deviceId) {
@@ -449,7 +449,7 @@ export class AndroidStreamerComponent implements OnInit, OnDestroy {
     switch_cameras() {
         /*********************Switch camera*************/
 
-        var cameras = [];
+        const cameras = [];
         DetectRTC.load(() => {
             DetectRTC.videoInputDevices.forEach(function(camera) {
                 cameras.push({

@@ -1,7 +1,7 @@
 var kurentoObject = function (kurento_socket_url, wowza_ip_address) {
    
 
-    var ws = new WebSocket('wss://'+kurento_socket_url+'/rtprelay');
+    var ws = new WebSocket('ws://'+kurento_socket_url+'/rtprelay');
 
     var videoInput;
     var videoOutput;
