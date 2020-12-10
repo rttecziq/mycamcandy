@@ -149,6 +149,7 @@ import { SidebarTabsComponent } from './view-model-profile/sidebar-tabs/sidebar-
 import { ModelFollowersComponent } from './view-model-profile/model-followers/model-followers.component';
 import { ModelFollowingsComponent } from './view-model-profile/model-followings/model-followings.component';
 import { ModelActivityComponent } from './view-model-profile/model-activity/model-activity.component';
+import { CollectionDetailsComponent } from './account/candy-club/collection/collection-details/collection-details.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -256,6 +257,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ModelFollowersComponent,
         ModelFollowingsComponent,
         ModelActivityComponent,
+        CollectionDetailsComponent,
     ],
     imports: [
         CommonModule,

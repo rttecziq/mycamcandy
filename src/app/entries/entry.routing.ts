@@ -99,6 +99,7 @@ import { ViewModelProfileComponent } from './view-model-profile/view-model-profi
 import { ModelFollowersComponent } from './view-model-profile/model-followers/model-followers.component';
 import { ModelFollowingsComponent } from './view-model-profile/model-followings/model-followings.component';
 import { ModelActivityComponent } from './view-model-profile/model-activity/model-activity.component';
+import { CollectionDetailsComponent } from './account/candy-club/collection/collection-details/collection-details.component';
 
 const entryRoutes: Routes = [
     { path: 'viewer-video', 
@@ -350,6 +351,12 @@ const entryRoutes: Routes = [
                 component: CollectionComponent,
                 canActivate: [AuthGuard],
                 data: {title : "My Collections", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/:username/collection/:collection_id",
+                component: CollectionDetailsComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Collections details", expectedRole: 'onlyUser'},
             },
             {
                 path: "candy-club/:username/free-show-photo",
