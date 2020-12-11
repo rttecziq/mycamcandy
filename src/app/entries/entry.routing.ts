@@ -293,6 +293,30 @@ const entryRoutes: Routes = [
                 data: {title : "Profile", expectedRole: 'onlyUser'},
             },
             {
+                path: "candy-club/user/:username",
+                component: ViewUserProfileComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Profile", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/user/:username/about",
+                component: ViewUserProfileComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Profile", expectedRole: 'onlyUser'},
+            },
+            {
+                path: 'candy-club/user/:username/followers', 
+                component: UserFollowersComponent,
+                canActivate: [AuthGuard],
+                data: {title : "My Followers", expectedRole: 'onlyUser'},
+            },
+            {
+                path: 'candy-club/user/:username/followings',
+                component: UserFollowingsComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Who I am Following", expectedRole: 'onlyUser'},
+            },
+            {
                 path: "candy-club/:username/about",
                 component: AboutComponent,
                 canActivate: [AuthGuard],

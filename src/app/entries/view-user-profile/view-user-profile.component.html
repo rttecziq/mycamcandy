@@ -1,0 +1,72 @@
+<div class="container-fluid">
+  <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 mt-3">
+    <div class="profile-primary-div">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <a routerLink="/candy-club/user/{{member.name}}/followers">
+               <button class="btn-followers">Followers<br>{{member.followers?.length}}</button>
+            </a>
+        </div>
+         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <a routerLink="/candy-club/user/{{member.name}}/followings">
+               <button class="btn-following">Following<br>{{member.followings?.length}}</button>
+            </a>
+         </div>
+      </div>
+      <ul class="list-group user-profile-list">
+        <a routerLink="/candy-club/user/{{member.name}}/about"><li class="list-group-item active"><i class="fa fa-user float-left" aria-hidden="true"></i> <span class="link">About</span></li></a>    
+      </ul>
+    </div>
+  </div>
+  <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 mt-3">
+    <div class="img-container user-cover">
+      <div *ngIf="user_cover_picture">
+        <img [src]="user_cover_picture" class="img-responsive user-cover-photo w-100">
+      </div>
+    <!-- <div class="centered">
+      <i class="fa fa-camera upload-button-cover-pic"></i>
+      <input class="cover-pic-upload" type="file"/>
+    </div> -->
+    </div>
+    <div class="user-row">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <div class="user-pic">
+            <div *ngIf="user_profile_picture">
+              <img [src]="user_profile_picture" class="img-responsive img-circle profile-picture">
+            </div>
+            <!-- <div class="p-image">
+               <i class="fa fa-camera upload-button-profile-pic"></i>
+                <input class="profile-pic-upload" type="file"/>
+             </div> -->
+          </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+          <div class="username">
+            <h3> {{member.name}}  <i class="fa fa-circle" style="font-size: 16px;color: #0bb30b;"></i></h3>
+          </div>
+          <!-- <div class="actions float-right">
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-cog" aria-hidden="true" style="font-size:28px"></i></a>
+                <ul class="dropdown-menu">
+                  <li><a routerLink="/candy-club/{{username}}/edit-profile">Edit Profile</a></li>
+                  <li><a routerLink="/account">My Account</a></li>
+                  <li><a (click)="logout()" role="button">Logout</a></li>
+                  <li><a role="button" class="dropdown-toggle" type="button" data-toggle="dropdown">Cancel</a></li>
+                </ul>
+              </div>
+          </div> -->
+          <div class="desc">
+            <p class="p-2">{{member.description}}</p>
+          </div>
+        </div>
+      </div>
+      </div>
+  
+    </div>
+  </div>
+
+
+
+
+
