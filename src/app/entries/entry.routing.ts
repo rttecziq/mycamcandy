@@ -100,7 +100,9 @@ import { ModelFollowersComponent } from './view-model-profile/model-followers/mo
 import { ModelFollowingsComponent } from './view-model-profile/model-followings/model-followings.component';
 import { ModelActivityComponent } from './view-model-profile/model-activity/model-activity.component';
 import { CollectionDetailsComponent } from './account/candy-club/collection/collection-details/collection-details.component';
-
+import { ViewUserProfileComponent } from './view-user-profile/view-user-profile.component';
+import { UserFollowersComponent } from './view-user-profile/user-followers/user-followers.component';
+import { UserFollowingsComponent } from './view-user-profile/user-followings/user-followings.component';
 const entryRoutes: Routes = [
     { path: 'viewer-video', 
         component:AndroidJoinComponent ,

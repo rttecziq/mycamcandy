@@ -150,6 +150,9 @@ import { ModelFollowersComponent } from './view-model-profile/model-followers/mo
 import { ModelFollowingsComponent } from './view-model-profile/model-followings/model-followings.component';
 import { ModelActivityComponent } from './view-model-profile/model-activity/model-activity.component';
 import { CollectionDetailsComponent } from './account/candy-club/collection/collection-details/collection-details.component';
+import { ViewUserProfileComponent } from './view-user-profile/view-user-profile.component';
+import { UserFollowersComponent } from './view-user-profile/user-followers/user-followers.component';
+import { UserFollowingsComponent } from './view-user-profile/user-followings/user-followings.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -258,6 +261,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         ModelFollowingsComponent,
         ModelActivityComponent,
         CollectionDetailsComponent,
+        ViewUserProfileComponent,
+        UserFollowersComponent,
+        UserFollowingsComponent,
     ],
     imports: [
         CommonModule,
