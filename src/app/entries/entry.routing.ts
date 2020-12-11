@@ -95,7 +95,9 @@ import { StartStreamingComponent } from './account/candy-club/start-streaming/st
 import { UpdateAccountRecordComponent } from './account/candy-club/update-account-record/update-account-record.component';
 import { WhySignupWithUsComponent } from './account/candy-club/why-signup-with-us/why-signup-with-us.component';
 import { ModelDashboardComponent } from './account/candy-club/model-dashboard/model-dashboard.component';
-
+import { ViewUserProfileComponent } from './view-user-profile/view-user-profile.component';
+import { UserFollowersComponent } from './view-user-profile/user-followers/user-followers.component';
+import { UserFollowingsComponent } from './view-user-profile/user-followings/user-followings.component';
 const entryRoutes: Routes = [
     { path: 'viewer-video', 
         component:AndroidJoinComponent ,
@@ -256,6 +258,30 @@ const entryRoutes: Routes = [
                 component: AboutComponent,
                 canActivate: [AuthGuard],
                 data: {title : "Profile", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/user/:username",
+                component: ViewUserProfileComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Profile", expectedRole: 'onlyUser'},
+            },
+            {
+                path: "candy-club/user/:username/about",
+                component: ViewUserProfileComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Profile", expectedRole: 'onlyUser'},
+            },
+            {
+                path: 'candy-club/user/:username/followers', 
+                component: UserFollowersComponent,
+                canActivate: [AuthGuard],
+                data: {title : "My Followers", expectedRole: 'onlyUser'},
+            },
+            {
+                path: 'candy-club/user/:username/followings',
+                component: UserFollowingsComponent,
+                canActivate: [AuthGuard],
+                data: {title : "Who I am Following", expectedRole: 'onlyUser'},
             },
             {
                 path: "candy-club/:username/about",
