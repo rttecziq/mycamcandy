@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy } from "@angular/core";
+import { Component, ElementRef, OnDestroy, OnInit } from "@angular/core";
 
 import videojs from "video.js";
 import { RequestService } from "../../../common/services/request.service";
@@ -31,7 +31,7 @@ declare var ActiveXObject;
     "../../../../assets/css/responsive.css"
   ]
 })
-export class JoinVideoComponent implements OnDestroy {
+export class JoinVideoComponent implements OnDestroy, OnInit {
   public elementRef;
 
   public player: any;
@@ -82,6 +82,11 @@ export class JoinVideoComponent implements OnDestroy {
 
   viewer_cnt: number;
 
+  is_streamer: any;
+  paymentChecker: any;
+  paymentTimerDuration: any = 5;
+  noOfMiliSecondsAMinute: any = 60000;
+
   constructor(
     myElement: ElementRef,
     private requestService: RequestService,
@@ -123,6 +128,11 @@ export class JoinVideoComponent implements OnDestroy {
 
     jwplayer.key = jwplayer_key.length > 0 ? jwplayer_key[0].value : "";
 
+    const streaming_charge_deduction_duration = this.site_settings.filter(obj => {
+      return obj.key === 'streaming_charge_deduction_duration';
+    });
+    this.paymentTimerDuration = streaming_charge_deduction_duration[0].value;
+
     this.route.queryParams.subscribe(params => {
       this.video_id = params["video_id"];
 
@@ -150,6 +160,9 @@ export class JoinVideoComponent implements OnDestroy {
     this.site_settings = JSON.parse(localStorage.getItem("site_settings"));
 
     this.webrtc();
+  }
+  ngOnInit(): void {
+    this.paymentChecker = null;
   }
 
   webrtc() {
@@ -261,9 +274,13 @@ export class JoinVideoComponent implements OnDestroy {
                   location.reload();
                 } */
       }
+      this.removePChecker();
     };
   }
-  ngOnDestroy(): any {}
+
+  ngOnDestroy(): any {
+        this.removePChecker();
+    }
 
   user_profile_fn(url, object) {
     this.requestService.getMethod(url, object).subscribe(
@@ -376,7 +393,7 @@ export class JoinVideoComponent implements OnDestroy {
                 $("#flash_error_display").show();
 
                 $("#main_video_setup_error").show();
-
+                this.removePChecker();
                 return false;
               }
 
@@ -393,10 +410,20 @@ export class JoinVideoComponent implements OnDestroy {
           } else {
             $("#chat-input").attr("disabled", true);
           }
+          if(!data.data.is_streamer){
+            if ( this.paymentChecker == null) {
+              console.log('setting paymentChecker');
+              this.paymentChecker = setInterval(() => {
+                this.checkAndUpdateUserPaymentStatus();
+              }, this.paymentTimerDuration * this.noOfMiliSecondsAMinute );
+            }
+          }
+
         } else {
           // The video is PPV
 
           if (data.error_code == 156) {
+            this.removePChecker();
             return this.router.navigate(["/video/invoice"], {
               queryParams: { video_id: this.liveVideoID }
             });
@@ -414,7 +441,7 @@ export class JoinVideoComponent implements OnDestroy {
             loader: false,
             showHideTransition: "slide"
           });
-
+          this.removePChecker();
           return this.router.navigate(["/"]);
         }
       },
@@ -432,8 +459,44 @@ export class JoinVideoComponent implements OnDestroy {
           loader: false,
           showHideTransition: "slide"
         });
+        this.removePChecker();
       }
     );
+  }
+  
+  removePChecker(){
+    clearInterval(this.paymentChecker);
+  }
+  checkAndUpdateUserPaymentStatus() {
+    const url = 'deduct_from_wallet';
+    const details = {video_id : this.video_id};
+    console.log('opening room with' , this.paymentTimerDuration * this.noOfMiliSecondsAMinute , 'seconds' , 'hitting ' + url );
+    this.requestService.postMethod(url, details).subscribe((data: any) => {
+      console.log(data);
+      if (data.success == true) {
+      } else {
+        if (data.error_code == 156) {
+          return this.router.navigate(['/video/invoice'], {
+            queryParams: { video_id: this.liveVideoID }
+          });
+        } else{
+          this.errorMessages = data.error_messages;
+
+          $.toast({
+            heading: 'Error',
+            text: this.errorMessages,
+            // icon: 'error',
+            position: 'top-right',
+            stack: false,
+            textAlign: 'left',
+            loader: false,
+            showHideTransition: 'slide'
+          });
+        }
+      }
+    }, (error) => {
+      console.log(error);
+    });
   }
 
   joinRoom() {
