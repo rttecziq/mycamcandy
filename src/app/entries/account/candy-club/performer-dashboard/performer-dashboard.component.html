@@ -33,7 +33,7 @@
           </select>
 
           <div *ngIf="selectedChannel != ''" class="mt-3">
-            <label class="bold">Cost Per Minute (Private):</label>
+            <label class="bold">Cost Per Minute (Private-tkCandy/m):</label>
             <input type="number" name="channel_cpm" placeholder="Ex (30)"  [(ngModel)]="channel_price" pattern="[0-9]*" class="form-control w-auto"  required>
           </div>
       </div>
@@ -63,8 +63,8 @@
            <div class="form-group mt-3">
              <label class="bold">Channel Name :</label>
              <input type="text" class="form-control" name="channelName" #channelName ngModel autocomplete="off" pattern="[a-zA-Z0-9\_ ]*" maxlength="20" required>
-             <label class="bold mt-3">Price :</label>
-             <input type="text" class="form-control" name="channelPrice" #channelPrice ngModel autocomplete="off" pattern="[0-9]*" maxlength="7" required>
+             <label class="bold mt-3">Price (Private Cost Per Minute) : </label>
+             <input type="text" class="form-control" name="channelPrice" value="{{performer_details.private_show_price}}" #channelPrice ngModel autocomplete="off" pattern="[0-9]*" maxlength="7" required>
              <div class="text-center mt-3">
                <input type="submit" [disabled]="!channelForm.valid" name="save_channel" class="btn btn-sm btn-info mt-2" value="Save Channel">
              </div>

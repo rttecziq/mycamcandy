@@ -57,10 +57,11 @@ export class PerformerDashboardComponent implements AfterViewInit {
       return false;
     }
 
-    let details = {show_type:form.value['show_type'], channel_id:this.selectedChannel, channel_price:form.value['channel_cpm']}
+    let details = {type:'public',show_type:form.value['show_type'], channel_id:this.selectedChannel, cpm:form.value['channel_cpm']}
     console.log(details);
 
     this.update_show_price("channel/save", details);
+    this.saveBroadcasting("save_live_video", details);
     
   }
 
@@ -83,6 +84,82 @@ export class PerformerDashboardComponent implements AfterViewInit {
         }
     );
   }
+
+  saveBroadcasting(url, object) {
+
+    //var browser = getBrowser();
+
+    //form.value['browser'] = browser;
+
+    this.requestService.postMethod(url, object)
+    .subscribe(
+
+        (data : any) => {
+
+            if (data.success == true) {
+            
+                $('body').removeClass('modal-open');
+                
+                $('.modal-backdrop').remove();
+
+                $.toast({
+        heading: 'Success',
+        text: "Your Live Broadcasting saved successfully..!",
+      // icon: 'error',
+        position: 'top-right',
+        stack: false,
+        textAlign: 'left',
+        loader : false,
+        showHideTransition: 'slide'
+      });
+
+                this.router.navigate(['/single-video'] ,{queryParams : {video_id : data.video_id}}); 
+
+            } else {
+
+                this.errorMessages = data.error_messages;
+
+                $.toast({
+                    heading: 'Error',
+                    text: this.errorMessages,
+                // icon: 'error',
+                    position: 'top-right',
+                    stack: false,
+                    textAlign: 'left',
+                    loader : false,
+                    showHideTransition: 'slide'
+                });
+
+                if (data.error_code == 154) {
+
+                    return this.router.navigate(['/subscription']);
+
+                }
+                
+            }
+
+        },
+
+        (err : HttpErrorResponse) => {
+
+            this.errorMessages = 'Oops! Something Went Wrong';
+
+            $.toast({
+                heading: 'Error',
+                text: this.errorMessages,
+            // icon: 'error',
+                position: 'top-right',
+                stack: false,
+                textAlign: 'left',
+                loader : false,
+                showHideTransition: 'slide'
+            });
+
+        }
+
+    );
+
+}
 
 
   performer_details_fn(url, object) {
