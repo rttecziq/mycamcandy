@@ -525,7 +525,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
             });
             clearInterval(this.paymentChecker);
 
-            return this.router.navigate(['/broadcast']);
+            return this.router.navigate(['/performer-dashboard']);
           } else {
             this.errorMessages = data.error_messages;
 
@@ -632,7 +632,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
             showHideTransition: 'slide'
           });
 
-          return this.router.navigate(['/broadcast']);
+          return this.router.navigate(['/performer-dashboard']);
         }
       },
 
@@ -780,7 +780,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
             showHideTransition: 'slide'
           });
 
-          return this.router.navigate(['/broadcast']);
+          return this.router.navigate(['/performer-dashboard']);
         } else {
           this.errorMessages = data.error_messages;
 
