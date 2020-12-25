@@ -7,6 +7,8 @@ import { RequestService } from '../../../../common/services/request.service';
 
 declare var $: any ;
 
+declare function getBrowser() : any;
+
 @Component({
   selector: 'app-performer-dashboard',
   templateUrl: './performer-dashboard.component.html',
@@ -56,8 +58,9 @@ export class PerformerDashboardComponent implements AfterViewInit {
       this.toast_message("Error", "Enter Cost per minute");
       return false;
     }
-
-    let details = {type:'public',show_type:form.value['show_type'], channel_id:this.selectedChannel, cpm:form.value['channel_cpm']}
+    var browser = getBrowser();
+    form.value['browser'] = browser;
+    let details = {type:'public',show_type:form.value['show_type'], channel_id:this.selectedChannel, cpm:form.value['channel_cpm'],browser:form.value['browser']}
     console.log(details);
 
     this.update_show_price("channel/save", details);
