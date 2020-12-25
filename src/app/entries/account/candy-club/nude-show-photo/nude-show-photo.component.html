@@ -9,60 +9,29 @@
       <div class="row">
         <div class="my_nude_show_photos">
           <h3 class="text-center">My Nude Show Photos</h3>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-            <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-            <input type="checkbox" name="" id="">
+
+          <div *ngIf="photo_lists.length">
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3" *ngFor="let photo of photo_lists">
+              <img [src]="app_url + photo.image_name" class="img-responsive">
+              <!-- <input type="checkbox" name="" id=""> -->
+            </div>
           </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-            <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-            <input type="checkbox" name="" id="">
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-            <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-            <input type="checkbox" name="" id="">
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-            <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-            <input type="checkbox" name="" id="">
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-            <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-            <input type="checkbox" name="" id="">
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-            <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-            <input type="checkbox" name="" id="">
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-            <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-            <input type="checkbox" name="" id="">
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-            <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-            <input type="checkbox" name="" id="">
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-            <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-            <input type="checkbox" name="" id="">
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-            <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-            <input type="checkbox" name="" id="">
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-            <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-            <input type="checkbox" name="" id="">
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-            <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-            <input type="checkbox" name="" id="">
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-            <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-            <input type="checkbox" name="" id="">
-          </div>
+
         </div>
       </div>
+
+      <div class="loader" *ngIf="loader">
+        <div class="spin"></div>
+        <div class="bounce"></div>
+      </div>
+
+      <div class="no_result_class text-center" *ngIf="photo_lists.length <= 0">
+        <div>
+            <h3 class="tab-head text-center">No photos found</h3>
+            <img class="noresult-img img-responsive" src="../../../assets/img/no-result.gif">
+        </div>
+    </div>
+<!--       
       <ul class="pagination mt-5 mb-5 p-3" style="display: flex;">
           <li><a href="#">1</a></li>
           <li><a href="#">2</a></li>
@@ -70,7 +39,7 @@
           <li><a href="#">4</a></li>
           <li><a href="#">Next</a></li>
           <li><a href="#">View All</a></li>
-      </ul>
+      </ul> -->
     </div>
   </div>
 
