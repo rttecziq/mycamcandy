@@ -9,71 +9,34 @@
       
         <div class="row mt-5">
           <div class="model-album" *ngIf="album_details?.length > 0">
-                <div class="container">
-                  <div class="col-lg-11">
-                    <h3 class="heading ml-2">{{ albums.title }}<button class="btn btn-primary pull-right" data-toggle="modal" data-target="#album_model"><i class="fa fa-pencil"></i> Edit</button></h3>
-                  </div>
-                </div>
-            
-                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mb-3" *ngFor="let album of album_details">
-                  <div *ngIf="album.type == 'IMAGE'">
-                        <div class="img-container" >
-                          <a class="example-image-link" href="{{album['photo']}}" data-lightbox="example-set" >
-                            <img class="example-image img-responsive" src="{{album['photo']}}" alt=""/>
-                          </a>
-
-                          <div class="top-right">
-                            <i class="fa fa-trash" role="button" (click)="deleteAlblumItem(album.item_id)"></i>
-                        </div>
-                    </div>
-                  </div>
-
-                  <div *ngIf="album.type == 'VIDEO'">
-                    <a class="example-image-link" href="{{album['video']}}" data-lightbox="example-set">
-                      <video class="gif-video" autoplay loop>     
-                        <source [src]="album['video']" type="video/webm">
-                        <source [src]="album['video']" type="video/mp4">
-                      </video>
-                    </a>
-
-                    <div class="top-right">
-                      <i class="fa fa-trash" role="button" (click)="deleteAlblumItem(album.item_id)"></i>
-                    </div>
-                  </div>
-                </div>
-          </div>
-          <div *ngIf="album_details?.length == 0">
-            <p class="text-center alert alert-danger"> No data found </p>
+            <div class="container">
+              <div class="col-lg-11">
+                <h3 class="heading ml-2">{{ albums.title }}<button class="btn btn-primary pull-right" data-toggle="modal" data-target="#album_model"><i class="fa fa-pencil"></i> Edit</button></h3>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="demo-gallery">
-          <div class="list-unstyled row s_sCommentBoxPanelLarge">
-              <div class="col-xs-6 col-sm-4 col-md-3" data-responsive="img/1-375.jpg 375, img/1-480.jpg 480, img/1.jpg 800" data-src="assets/demo/img/1-1600.jpg" data-sub-html="&lt;div class=&quot;fb-comments s_comntPanlars_M&quot; data-width=&quot;400&quot; data-numposts=&quot;0&quot;&gt;&lt;/div&gt;">
-                  <a href="">
-                      <img class="img-responsive" src="assets/demo/img/thumb-1.jpg">
-                  </a>
+        <div class="demo-gallery" *ngIf="album_details?.length > 0">
+          <div class="list-unstyled row s_sCommentBoxPanelLarge" id="lightgallery">
+              <div *ngFor="let album of album_photos" class="col-xs-6 col-sm-4 col-md-3">
+                <div attr.data-src="{{album['photo']}}" class="item">
+                  <img class="img-responsive" src="{{album['photo']}}">
+                </div>
               </div>
-              <div class="col-xs-6 col-sm-4 col-md-3" data-responsive="img/2-375.jpg 375, img/2-480.jpg 480, img/2.jpg 800" data-src="assets/demo/img/2-1600.jpg" data-sub-html="&lt;div class=&quot;fb-comments s_comntPanlars_M&quot; data-width=&quot;400&quot; data-numposts=&quot;0&quot;&gt;&lt;/div&gt;">
-                  <a href="">
-                      <img class="img-responsive" src="assets/demo/img/thumb-2.jpg">
-                  </a>
-              </div>
-              <div class="col-xs-6 col-sm-4 col-md-3" data-responsive="img/13-375.jpg 375, img/13-480.jpg 480, img/13.jpg 800" data-src="assets/demo/img/13-1600.jpg" data-sub-html="&lt;div class=&quot;fb-comments s_comntPanlars_M&quot; data-width=&quot;400&quot; data-numposts=&quot;0&quot;&gt;&lt;/div&gt;">
-                  <a href="">
-                      <img class="img-responsive" src="assets/demo/img/thumb-13.jpg">
-                  </a>
-              </div>
-              <div class="col-xs-6 col-sm-4 col-md-3" data-responsive="img/4-375.jpg 375, img/4-480.jpg 480, img/4.jpg 800" data-src="assets/demo/img/4-1600.jpg" data-sub-html="&lt;div class=&quot;fb-comments s_comntPanlars_M&quot; data-width=&quot;400&quot; data-numposts=&quot;0&quot;&gt;&lt;/div&gt;">
-                  <a href="">
-                      <img class="img-responsive" src="assets/demo/img/thumb-4.jpg">
-                  </a>
-              </div>
+              <!-- <div *ngFor="let album of album_videos" class="col-xs-6 col-sm-4 col-md-3">
+                <div attr.data-html="{{album['video']}}" class="item">
+                  <img class="img-responsive" src="{{album['album_cover_image']}}">
+                </div>
+              </div> -->
           </div>
+        </div>
+        <div *ngIf="album_details?.length == 0">
+          <p class="text-center alert alert-danger"> No data found </p>
         </div>
       </div>
     </div>
 
-  <!--Album edit -->
+    <!--Album edit -->
   <div class="modal fade" id="album_model"  role="dialog" *ngIf="album_details?.length > 0">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -139,5 +102,4 @@
       </div>
     </div>
   </div>
-
 </div>

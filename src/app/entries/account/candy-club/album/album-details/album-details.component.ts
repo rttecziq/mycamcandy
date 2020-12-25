@@ -5,7 +5,11 @@ import { RequestService } from '../../../../../common/services/request.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Album } from '../../../../../models/album';
 
-//import { lightgallery } from 'lightgallery';
+// import lightGallery from 'lightgallery';
+// import 'lg-zoom';
+// import 'lg-share';
+// import 'lg-video';
+// import 'lg-thumbnail';
 
 declare var $:any;
 
@@ -85,51 +89,14 @@ export class AlbumDetailsComponent implements OnInit {
       let details = {album_id : this.album_id};
       this.editAlbumFn("album_list", details);
       this.model_collection_fn("listCollection", "");
-
-   });
-  }
-  ngAfterViewInit(){ 
-    $(document).ready(function() {
-        var $commentBox = $('.s_sCommentBoxPanelLarge');
-        $commentBox.lightGallery({
-          appendSubHtmlTo: '.lg-item',
-          addClass: 'fb-comments',
-          mode: 'lg-fade',
-          download: false,
-          enableDrag: false,
-          actualSize: false,
-          autoplayControls: true,
-          enableSwipe: false
-        });
-        $commentBox.on('onAfterSlide.lg', function(event, prevIndex, index) {
-          var postid=$('#post_'+index).val();
-        //   $.post("", function(data){  
-           $('.lg-outer .lg-thumb-outer').width($(document).width()-420)
-           $('.lg-loaded .fb-comments').html('hkhk');
-        //   });
-        }); 
     });
-    $.getScript('../../../../../assets/lightgallery/js/lightgallery-all.min.js');
-}
+  }
 
   togglePassword(e) { this.password_check = e.target.checked; }
   toggleCandies(e)  { this.candies_check = e.target.checked;  }
 
     handleAlbumPhoto(event) {
         this.album_photo = event.target.files;
-        // if (event.target.files && event.target.files[0]) {
-        //     var filesAmount = event.target.files.length;
-        //     for (let i = 0; i < filesAmount; i++) {
-        //             var reader = new FileReader();
-
-        //             reader.onload = (event:any) => {
-        //                this.album_photos_urls.push(event.target.result);
-        //             }
-        //             reader.readAsDataURL(event.target.files[i]);
-        //     }
-        //            // console.log(this.album_photos_urls);  
-
-        // }
     }
 
     handleAlbumVideo(event) {
@@ -200,7 +167,10 @@ export class AlbumDetailsComponent implements OnInit {
                 if (data.success == true) {
                   this.albums = data.data[0];
                   this.album_details = data.data;
-                  console.log(this.album_details);
+
+                  this.album_photos = this.album_details.filter(album => album.type == 'IMAGE')
+                  this.album_videos = this.album_details.filter(album => album.type == 'VIDEO')
+
                   this.candies_check = data.data[0]['candies'] != 0.00 ? true : false;
                   this.password_check = data.data[0]['password'] != '' ? true : false;
                 } else {
