@@ -9,7 +9,8 @@
       <div class="row">
         <div class="recorded-video">
           <h2 class="text-center p-3">MY RECORDED VIDEOS</h2>
-          <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
+          <div class="col-lg-12 col-md-12 col-sm-12 mt-3" *ngIf="recorded_video_lists.length">
+
             <ul class="nav nav-tabs">
               <li class="btn btn-sm btn-tab active"><a data-toggle="tab" href="#tab1">Recorded Video Lists</a></li>
               <li class="btn btn-sm btn-tab"><a data-toggle="tab" href="#tab2">Select And Delete Videos</a></li>
@@ -19,52 +20,12 @@
               <div id="tab1" class="tab-pane fade in active">
                 <div class="video-scroll">
                   <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-                      <a href="#">
-                        <div class="img-container">
-                          <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                          <div class="centered"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-                        </div>
-                      </a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-                      <a href="#">
-                        <div class="img-container">
-                          <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                          <div class="centered"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-                        </div>
-                      </a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-                      <a href="#">
-                        <div class="img-container">
-                          <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                          <div class="centered"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-                        </div>
-                      </a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-                      <a href="#">
-                        <div class="img-container">
-                          <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                          <div class="centered"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-                        </div>
-                      </a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-                      <a href="#">
-                        <div class="img-container">
-                          <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                          <div class="centered"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-                        </div>
-                      </a>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3">
-                      <a href="#">
-                        <div class="img-container">
-                          <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                          <div class="centered"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-                        </div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3" *ngFor="let video of recorded_video_lists">
+                      <a *ngIf="video">
+                        <video controls (click)="toggleVideo()" #videoPlayer>
+                          <source [src]="app_url+'/video_capture/'+video.user_id+'/'+video.video_name" type="video/mp4" />
+                          Browser not supported
+                      </video>
                       </a>
                     </div>
                   </div>
@@ -73,40 +34,14 @@
               <div id="tab2" class="tab-pane fade">
                 <div class="video-scroll">
                   <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-2">
-                        <div class="img-container">
-                          <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                          <div class="centered"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-                        </div>
-                        <input type="checkbox" class="form-control" name="" id="" value="">
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-2">
-                        <div class="img-container">
-                          <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                          <div class="centered"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-                        </div>
-                        <input type="checkbox" class="form-control" name="" id="" value="">
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-2">
-                        <div class="img-container">
-                          <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                          <div class="centered"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-                        </div>
-                        <input type="checkbox" class="form-control" name="" id="" value="">
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-2">
-                        <div class="img-container">
-                          <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                          <div class="centered"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-                        </div>
-                        <input type="checkbox" class="form-control" name="" id="" value="">
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-2">
-                        <div class="img-container">
-                          <img src="../../../../../assets/img/model/download.jpg" class="img-responsive">
-                          <div class="centered"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
-                        </div>
-                        <input type="checkbox" class="form-control" name="" id="" value="">
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-2" *ngFor="let video of recorded_video_lists">
+                      <div *ngIf="video">
+                      <video controls>
+                          <source [src]="app_url+'/video_capture/'+video.user_id+'/'+video.video_name" type="video/mp4" />
+                          Browser not supported
+                        </video>
+                        <!-- <input type="checkbox" class="form-control" name="" id="" value=""> -->
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -114,6 +49,7 @@
                   <button class="btn btn-primary mt-3">Delete Videos</button>
               </div>
             </div>
+
           </div>
         </div>
       </div>
