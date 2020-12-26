@@ -43,6 +43,7 @@ export class PerformerDashboardComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.channel_list_fn("channel/list", "");
     this.performer_details_fn("show_type_with_price", "");
+    this.clearOngoingStreaming("erase_videos","");
   }
 
   goLive(form : NgForm) {
@@ -66,6 +67,7 @@ export class PerformerDashboardComponent implements AfterViewInit {
     this.update_show_price("channel/save", details);
     this.saveBroadcasting("save_live_video", details);
     
+    
   }
 
   update_show_price(url, object) {
@@ -74,7 +76,6 @@ export class PerformerDashboardComponent implements AfterViewInit {
         (data : any ) => {
             if (data.success == true) {
               //this.toast_message("Success", "Price updated successfully");
-
               // proceed with broadcast
             } else {
                 this.errorMessages = data.error_message;
@@ -162,7 +163,7 @@ export class PerformerDashboardComponent implements AfterViewInit {
 
     );
 
-}
+ }
 
 
   performer_details_fn(url, object) {
@@ -254,4 +255,48 @@ export class PerformerDashboardComponent implements AfterViewInit {
       }
   }
 
+  clearOngoingStreaming(url, object) {
+    this.requestService.postMethod(url, object)
+    //this.requestService.postMethod("erase_videos", "")
+        .subscribe(
+            (data : any) => {
+                if (data.success == true) {
+                    $.toast({
+                        heading: 'Success',
+                        text: "Now you can proceed to start a live streaming",
+                        position: 'top-right',
+                        stack: false,
+                        textAlign: 'left',
+                        loader : false,
+                        showHideTransition: 'slide'
+                    });
+                } else {
+                    this.errorMessages = data.error_messages;
+                    $.toast({
+                        heading: 'Error',
+                        text: this.errorMessages,
+                        position: 'top-right',
+                        stack: false,
+                        textAlign: 'left',
+                        loader : false,
+                        showHideTransition: 'slide'
+                    });
+                    
+                }
+            },
+            (err : HttpErrorResponse) => {
+                this.errorMessages = 'Oops! Something Went Wrong';
+                $.toast({
+                    heading: 'Error',
+                    text: this.errorMessages,
+                    position: 'top-right',
+                    stack: false,
+                    textAlign: 'left',
+                    loader : false,
+                    showHideTransition: 'slide'
+                });
+
+            }
+        ); 
+  }
 }
