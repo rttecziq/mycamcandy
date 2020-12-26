@@ -79,7 +79,7 @@ import { AuthGuard } from '../common/auth/auth.guard';
 
 // Dependancy modules for formsand request
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 // ckeditor modules for model profile edit
 import { CKEditorModule } from 'ng2-ckeditor';
@@ -270,6 +270,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         EntryRoutingModule,
         HttpClientModule,
         FormsModule,
+        ReactiveFormsModule,
         CKEditorModule,
         // NoopAnimationsModule,
         MatDatepickerModule,

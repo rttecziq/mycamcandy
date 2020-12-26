@@ -222,7 +222,7 @@ export class PerformerDashboardComponent implements AfterViewInit {
       return;
     }
 
-    let details = {model_id:this.model_id,channel_name:channelName,channel_price:channelPrice};
+    let details = {model_id:this.model_id,channel_name:channelName,cpm:channelPrice};
     this.requestService.postMethod("channel/save", details)
     .subscribe(
         (data : any ) => {

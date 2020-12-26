@@ -88,4 +88,8 @@ export class EarningHistoryComponent implements AfterViewInit {
     );
   }
 
+  onSubmit() {
+    this.transactionsFn('candies_transactions', this.filterForm.value);
+  }
+
 }
