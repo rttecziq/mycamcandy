@@ -5,12 +5,6 @@ import { RequestService } from '../../../../../common/services/request.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Album } from '../../../../../models/album';
 
-// import lightGallery from 'lightgallery';
-// import 'lg-zoom';
-// import 'lg-share';
-// import 'lg-video';
-// import 'lg-thumbnail';
-
 declare var $:any;
 
 @Component({
@@ -46,6 +40,9 @@ export class AlbumDetailsComponent implements OnInit {
 
   album_details = [];
 
+  lightgallery = '';
+  commentSelector = '';
+
   constructor(private requestService : RequestService, private router : Router, private route: ActivatedRoute, private elementRef:ElementRef) {
 
     this.collection_list = [];
@@ -75,6 +72,7 @@ export class AlbumDetailsComponent implements OnInit {
       status : 0
   }
   this.album_details = [];
+  this.commentSelector = '<album-comments></album-comments>';
 
   this.is_content_creator = true;
       this.username = (localStorage.getItem('username') != '' && localStorage.getItem('username') != null && localStorage.getItem('username') != undefined) ? localStorage.getItem('username') : '';
@@ -90,6 +88,35 @@ export class AlbumDetailsComponent implements OnInit {
       this.editAlbumFn("album_list", details);
       this.model_collection_fn("listCollection", "");
     });
+  }
+
+  ngAfterViewInit(){ 
+    this.loadLightgallery();
+  }
+
+  ngOnChanges () {
+    this.destroyLightGallery();
+    this.loadLightgallery();
+  }
+
+  loadLightgallery() {
+    $(document).ready(function() {
+        $("#lightgallery").lightGallery({
+          selector: '.item',
+          thumbnail: true,
+          appendSubHtmlTo: '.lg-item',
+          addClass: 'fb-comments',
+          download: false,
+          enableDrag: false,
+          actualSize: false,
+          autoplayControls: true,
+          enableSwipe: false
+        }); 
+    });
+  }
+
+  destroyLightGallery() {
+    $("#lightgallery").data('lightGallery').destroy(true);
   }
 
   togglePassword(e) { this.password_check = e.target.checked; }

@@ -16,18 +16,18 @@
             </div>
           </div>
         </div>
-        <div class="demo-gallery" *ngIf="album_details?.length > 0">
+        <div *ngIf="album_details?.length > 0">
           <div class="list-unstyled row s_sCommentBoxPanelLarge" id="lightgallery">
               <div *ngFor="let album of album_photos" class="col-xs-6 col-sm-4 col-md-3">
-                <div attr.data-src="{{album['photo']}}" class="item">
+                <div attr.data-src="{{album['photo']}}" class="item" data-sub-html='<div class="fb-comments" data-href="http://sachinchoolur.github.io/lightGallery/demos/comment-box.html#lg=1&slide=0" data-width="400" data-numposts="5"></div>'>
                   <img class="img-responsive" src="{{album['photo']}}">
                 </div>
               </div>
-              <!-- <div *ngFor="let album of album_videos" class="col-xs-6 col-sm-4 col-md-3">
-                <div attr.data-html="{{album['video']}}" class="item">
+              <div *ngFor="let album of album_videos; let i = index" class="col-xs-6 col-sm-4 col-md-3">
+                <div attr.data-poster="assets/img/video-icon.png" attr.data-html="#video{{i}}" class="item" data-sub-html='<div class="fb-comments" data-href="http://sachinchoolur.github.io/lightGallery/demos/comment-box.html#lg=1&slide=0" data-width="400" data-numposts="5"></div>'>
                   <img class="img-responsive" src="{{album['album_cover_image']}}">
                 </div>
-              </div> -->
+              </div>
           </div>
         </div>
         <div *ngIf="album_details?.length == 0">
@@ -36,6 +36,14 @@
       </div>
     </div>
 
+    <div *ngFor="let album of album_videos; let i = index" class="col-xs-6 col-sm-4 col-md-3">
+      <div style="display:none;" id="video{{i}}">
+        <video class="lg-video-object lg-html5" controls preload="none">
+          <source src="{{album['video']}}" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+    </div>
     <!--Album edit -->
   <div class="modal fade" id="album_model"  role="dialog" *ngIf="album_details?.length > 0">
     <div class="modal-dialog">
