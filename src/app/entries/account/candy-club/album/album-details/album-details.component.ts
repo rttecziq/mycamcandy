@@ -40,9 +40,6 @@ export class AlbumDetailsComponent implements OnInit {
 
   album_details = [];
 
-  lightgallery = '';
-  commentSelector = '';
-
   constructor(private requestService : RequestService, private router : Router, private route: ActivatedRoute, private elementRef:ElementRef) {
 
     this.collection_list = [];
@@ -72,7 +69,6 @@ export class AlbumDetailsComponent implements OnInit {
       status : 0
   }
   this.album_details = [];
-  this.commentSelector = '<album-comments></album-comments>';
 
   this.is_content_creator = true;
       this.username = (localStorage.getItem('username') != '' && localStorage.getItem('username') != null && localStorage.getItem('username') != undefined) ? localStorage.getItem('username') : '';
