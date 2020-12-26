@@ -97,7 +97,7 @@ export class AlbumDetailsComponent implements OnInit {
 
   loadLightgallery() {
     $(document).ready(function() {
-        $("#lightgallery").lightGallery({
+        var lightInstance = $("#lightgallery").lightGallery({
           selector: '.item',
           thumbnail: true,
           appendSubHtmlTo: '.lg-item',
@@ -106,8 +106,16 @@ export class AlbumDetailsComponent implements OnInit {
           enableDrag: false,
           actualSize: false,
           autoplayControls: true,
-          enableSwipe: false
-        }); 
+          enableSwipe: false,
+          mode: 'lg-fade'
+        });
+
+        lightInstance.on('onAfterSlide.lg', function(event, prevIndex, index) {
+          $.post("https://models.streamvertigo.com/wp-content/plugins/custom-model-data/getComments.php?id=171327", function(data){	
+            $('.lg-outer .lg-thumb-outer').width($(document).width()-420)
+            $('.lg-loaded .fb-comments').html(data);
+          });
+        });
     });
   }
 

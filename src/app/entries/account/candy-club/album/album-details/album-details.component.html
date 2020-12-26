@@ -19,12 +19,12 @@
         <div *ngIf="album_details?.length > 0">
           <div class="list-unstyled row s_sCommentBoxPanelLarge" id="lightgallery">
               <div *ngFor="let album of album_photos" class="col-xs-6 col-sm-4 col-md-3">
-                <div attr.data-src="{{album['photo']}}" class="item" data-sub-html='<div class="fb-comments" data-href="http://sachinchoolur.github.io/lightGallery/demos/comment-box.html#lg=1&slide=0" data-width="400" data-numposts="5"></div>'>
+                <div attr.data-src="{{album['photo']}}" class="item" data-sub-html='<div class="fb-comments s_comntPanlars_M" data-width="400" data-numposts="0"></div>'>
                   <img class="img-responsive" src="{{album['photo']}}">
                 </div>
               </div>
               <div *ngFor="let album of album_videos; let i = index" class="col-xs-6 col-sm-4 col-md-3">
-                <div attr.data-poster="assets/img/video-icon.png" attr.data-html="#video{{i}}" class="item" data-sub-html='<div class="fb-comments" data-href="http://sachinchoolur.github.io/lightGallery/demos/comment-box.html#lg=1&slide=0" data-width="400" data-numposts="5"></div>'>
+                <div attr.data-poster="assets/img/video-icon.png" attr.data-html="#video{{i}}" class="item" data-sub-html='<div class="fb-comments s_comntPanlars_M" data-width="400" data-numposts="0"></div>'>
                   <img class="img-responsive" src="{{album['album_cover_image']}}">
                 </div>
               </div>
