@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { RequestService } from '../../../../common/services/request.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -14,6 +14,7 @@ declare var $: any;
   './model-dashboard.component.css']
 })
 export class ModelDashboardComponent implements OnInit {
+  @ViewChild('channelBtn') channelBtn;
 
   sliders : any[];
   errorMessages : string;
@@ -34,6 +35,9 @@ export class ModelDashboardComponent implements OnInit {
   content_comment :string;
   activity_perview_image:string;
   upload_activity_image:File;
+  channel_list : any[];
+  GiftErr : string;
+
   constructor(private requestService : RequestService, private router : Router) {
     this.sliders = [];
     this.errorMessages = '';
@@ -51,10 +55,13 @@ export class ModelDashboardComponent implements OnInit {
     this.content_comment="";
     this.activities = [];
     this.activity_like = [];
-    this.likeUsers = [];  
+    this.likeUsers = [];
+    this.channel_list = [];
+    this.GiftErr = "";
   }
 
   ngOnInit() {
+    this.channel_list_fn("channel/list", "");
     this.earningFn('getTopEarning', this.model_id);
     this.model_total_candies_fn("modelTotalCandies", this.model_id);
     this.top_model_fn("topModel", this.model_id);
@@ -72,6 +79,51 @@ export class ModelDashboardComponent implements OnInit {
   openCommentImage() {
     let activity_image: HTMLElement = document.getElementsByClassName('myimage')[0] as HTMLElement;
     activity_image.click();
+  }
+
+  channel_list_fn(url, object) {
+    this.requestService.getMethod(url, object)
+    .subscribe(
+        (data : any ) => {
+            if (data.success == true) {
+                this.channel_list = data.data;
+                console.log(this.channel_list);
+            } else {
+                this.errorMessages = data.error_messages;
+                this.toast_message("Error", this.errorMessages);
+            }
+        },
+        (err : HttpErrorResponse) => {
+            this.errorMessages = 'Oops! Something Went Wrong';
+            this.toast_message("Error", this.errorMessages);
+        }
+    );
+  }
+
+  addChannel(channelName, channelPrice){
+    if(channelName == "" || channelPrice == ""){
+      this.toast_message("Error", "Channel Name/price can not be empty");
+      return;
+    }
+
+    let details = {model_id:this.model_id,channel_name:channelName,cpm:channelPrice};
+    this.requestService.postMethod("channel/save", details)
+    .subscribe(
+        (data : any ) => {
+            if (data.success == true) {
+                this.toast_message("Success", "Channel saved successfully");
+                this.channel_list = data.data;
+                this.channelBtn.nativeElement.click();
+            } else {
+                this.errorMessages = data.error_message;
+                this.toast_message("Error", this.errorMessages);
+            }
+        },
+        (err : HttpErrorResponse) => {
+            this.errorMessages = 'Oops! Something Went Wrong';
+            this.toast_message("Error", this.errorMessages);
+        }
+    );
   }
    // To save the temporary file object into this variable with preview image
    handleProfilePicture(files: FileList) {
@@ -101,11 +153,9 @@ export class ModelDashboardComponent implements OnInit {
     this.requestService.postMethod(url, object)
       .subscribe((data : any ) => {
           if (data.success == true) { 
-            this.model_gift_lists =data.data;   
-            console.log(this.model_gift_lists);
+            this.model_gift_lists =data.data;
           } else {
-            this.errorMessages = data.error_messages;
-            this.toast_message("Error", this.errorMessages);
+            this.GiftErr = data.error_messages;
           }
 
       },(err : HttpErrorResponse) => {
