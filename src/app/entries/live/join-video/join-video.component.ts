@@ -470,7 +470,6 @@ export class JoinVideoComponent implements OnDestroy, OnInit {
   checkAndUpdateUserPaymentStatus() {
     const url = 'deduct_from_wallet';
     const details = {video_id : this.video_id};
-    console.log('opening room with' , this.paymentTimerDuration * this.noOfMiliSecondsAMinute , 'seconds' , 'hitting ' + url );
     this.requestService.postMethod(url, details).subscribe((data: any) => {
       console.log(data);
       if (data.success == true) {

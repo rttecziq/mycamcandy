@@ -125,6 +125,37 @@ v=0
           <h3 class="captalize mt-15">{{ video_details.title }}</h3>
           <p class="m-0 text-grey-clr">{{ video_details.description }}</p>
         </div>
+
+        <div class="white-bg spacing1 shadow" style="margin-top:-5px;">
+          <div class="panel-heading white-text">
+            <i class="fa fa-commenting icon"></i>
+            Private Mode Request
+          </div>
+          <div
+            class="panel-body chat-container">
+            <span *ngFor="let request of privateRequests">
+              <div class="media">
+                <div class="media-left">
+                  <img
+                    src="{{ request.user.chat_picture }}"
+                    class="media-object media1"
+                  />
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading"> {{request.user.name}}</h4>
+                  <p></p>
+                </div>
+                </div>
+              <hr />
+              <div class="media-right">
+                <a hre="#"><button class="btn btn-default btn-block btn-br size-14 mr-5" (click)="acceptPrivateMode(request.user.id, request.id, request.live_video_id)"
+                  disabled="request.status == 'Accepted'">{{request.status == 'Accepted' ? 'In Private Mode' : 'Request Private Mode'}}</button></a>
+              </div>
+            </span>
+          </div>  
+        </div>
+      
+
       </div>
     </div>
     <!-- BROADCAST IMAGE SECTION ENDS -->
