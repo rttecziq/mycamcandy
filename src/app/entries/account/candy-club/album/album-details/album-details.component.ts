@@ -111,7 +111,7 @@ export class AlbumDetailsComponent implements OnInit {
         });
 
         lightInstance.on('onAfterSlide.lg', function(event, prevIndex, index) {
-          $.post("https://models.streamvertigo.com/wp-content/plugins/custom-model-data/getComments.php?id=171327", function(data){	
+          $.post("https://models.streamvertigo.com/wp-content/plugins/custom-model-data/getComments.php?id=" + $("#post_" + index).val(), function(data){	
             $('.lg-outer .lg-thumb-outer').width($(document).width()-420)
             $('.lg-loaded .fb-comments').html(data);
           });
@@ -198,9 +198,6 @@ export class AlbumDetailsComponent implements OnInit {
                 if (data.success == true) {
                   this.albums = data.data[0];
                   this.album_details = data.data;
-
-                  this.album_photos = this.album_details.filter(album => album.type == 'IMAGE')
-                  this.album_videos = this.album_details.filter(album => album.type == 'VIDEO')
 
                   this.candies_check = data.data[0]['candies'] != 0.00 ? true : false;
                   this.password_check = data.data[0]['password'] != '' ? true : false;

@@ -18,14 +18,14 @@
         </div>
         <div *ngIf="album_details?.length > 0">
           <div class="list-unstyled row s_sCommentBoxPanelLarge" id="lightgallery">
-              <div *ngFor="let album of album_photos" class="col-xs-6 col-sm-4 col-md-3">
-                <div attr.data-src="{{album['photo']}}" class="item" data-sub-html='<div class="fb-comments s_comntPanlars_M" data-width="400" data-numposts="0"></div>'>
+              <div *ngFor="let album of album_details; let i = index;" class="col-xs-6 col-sm-4 col-md-3">
+                <div *ngIf="album.type == 'IMAGE'" attr.data-src="{{album['photo']}}" class="item" data-sub-html='<div class="fb-comments s_comntPanlars_M" data-width="400" data-numposts="0"></div>'>
                   <img class="img-responsive" src="{{album['photo']}}">
+                  <input type="hidden" value="{{album['item_id']}}" id="post_{{i}}"/>
                 </div>
-              </div>
-              <div *ngFor="let album of album_videos; let i = index" class="col-xs-6 col-sm-4 col-md-3">
-                <div attr.data-poster="assets/img/video-icon.png" attr.data-html="#video{{i}}" class="item" data-sub-html='<div class="fb-comments s_comntPanlars_M" data-width="400" data-numposts="0"></div>'>
+                <div *ngIf="album.type == 'VIDEO'" attr.data-poster="assets/img/video-icon.png" attr.data-html="#video{{i}}" class="item" data-sub-html='<div class="fb-comments s_comntPanlars_M" data-width="400" data-numposts="0"></div>'>
                   <img class="img-responsive" src="{{album['album_cover_image']}}">
+                  <input type="hidden" value="{{album['item_id']}}" id="post_{{i}}"/>
                 </div>
               </div>
           </div>
@@ -36,8 +36,8 @@
       </div>
     </div>
 
-    <div *ngFor="let album of album_videos; let i = index" class="col-xs-6 col-sm-4 col-md-3">
-      <div style="display:none;" id="video{{i}}">
+    <div *ngFor="let album of album_details; let i = index" class="col-xs-6 col-sm-4 col-md-3">
+      <div *ngIf="album.type == 'VIDEO'" style="display:none;" id="video{{i}}">
         <video class="lg-video-object lg-html5" controls preload="none">
           <source src="{{album['video']}}" type="video/mp4">
           Your browser does not support HTML5 video.
