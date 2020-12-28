@@ -1,3 +1,4 @@
+import { PrivateModeRequest } from './../../../models/join-video';
 /* tslint:disable:triple-equals */
 import {
   Component,
@@ -56,8 +57,6 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
   chat_messages: any[];
 
   // Chat Variables
-
-  liveVideoID: string;
 
   liveVideoViewerID: string;
 
@@ -123,10 +122,18 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
 
   paymentChecker: any = null;
   snapShotCaptureUtil: any = null;
+  getPrivateRequestUtil: any = null;
   paymentTimerDuration = 5; // 5 minute as default. Redeived in minutes from server
   snapShotTimerDuration = 5; // in seconds
   readonly noOfMiliSecondsAMinute = 60000;
   readonly noOfMiliSecondsASecond = 1000;
+  privateRequests: any;
+  isPrivate: number;
+  privateViewers: any;
+  cpm: number;
+  status: number;
+  publicVideoFileName: string;
+  privateVideoFileName: string;
   constructor(
     myElement: ElementRef,
     private requestService: RequestService,
@@ -220,7 +227,11 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
             const fileSavePath = dir + 'stream_' + this.video_id + '.webm';
 
             const serverFileSavePath = 'stream_' + this.video_id + '.webm';
+            
+            this.publicVideoFileName = serverFileSavePath;
 
+            this.privateVideoFileName = 'stream_' + this.video_id + '_1' + '.webm';
+            
             this.saveVideoName(serverFileSavePath);
             this.kurentoObj = new kurentoObject(
             this.kurento_socket_url,
@@ -251,7 +262,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
     this.connection.session = {
       audio: true,
       video: true,
-      oneway: true
+      oneway: this.isPrivate == 1? false : true
     };
 
     this.connection.sdpConstraints.mandatory = {
@@ -485,7 +496,14 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
           this.snapShotCaptureUtil = setInterval(() => {
             this.snapShotFn();
         }, this.snapShotTimerDuration * this.noOfMiliSecondsASecond );
-        }
+        };
+        // set getrequest timer
+        if ( this.getPrivateRequestUtil == null) {
+          console.log('setting getPrivateRequestUtil timer');
+          this.getPrivateRequestUtil = setInterval(() => {
+            this.getPrivateVideoRequest();
+        }, 10000 );
+        };
     });
   }
 
@@ -595,6 +613,14 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
 
           this.isStreaming = data.data.is_streaming;
 
+          this.isPrivate = data.data.is_private;
+
+          this.privateViewers = data.data.private_viewer;
+
+          this.cpm = data.data.cpm;
+          
+          this.status = data.data.status;
+          
           this.initIoConnection();
 
           this.getViewers('get_viewers', { video_id: this.video_id });
@@ -653,6 +679,71 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
     );
   }
 
+  // /get_private_request
+  //get private video request
+  // this method fetches the private mode request
+  // is being called every 5 seconds
+  getPrivateVideoRequest(): any{
+    let body = {live_video_id : this.video_id};
+    this.requestService.postMethod('get_private_request', body).subscribe(
+      (data: any) => {
+        if (data.success == true) {
+          this.privateRequests = data.data;
+      }
+    },
+      (err: HttpErrorResponse) => {
+        this.errorMessages = 'Oops! Something Went Wrong';
+
+        $.toast({
+          heading: 'Error',
+          text: this.errorMessages,
+          // icon: 'error',
+          position: 'top-right',
+          stack: false,
+          textAlign: 'left',
+          loader: false,
+          showHideTransition: 'slide'
+        });
+      }
+    );
+  }
+
+  //accept_private_request
+  acceptPrivateMode(userId: number, privateVideoId: number, liveVideoId: number) : any {
+    let acceptPrivateRequest : PrivateModeRequest;
+    console.log(userId, privateVideoId, liveVideoId);
+    acceptPrivateRequest = { 
+      id: this.userID, 
+      live_video_id: liveVideoId, 
+      user_id : userId, 
+      private_cpm : 10,
+      video_name : this.privateVideoFileName, 
+      video_url: '',
+      snapshot: '', 
+      is_streaming: this.isStreaming, 
+      status: this.status,
+      cpm: this.cpm,
+    }; 
+      this.requestService.postMethod('accept_private_request', acceptPrivateRequest).subscribe(
+        (data: any) => {
+          if (data.success == true) {
+              console.log(data);
+          }
+        },(err: HttpErrorResponse) => {
+          this.errorMessages = 'Oops! Something Went Wrong';
+  
+          $.toast({
+            heading: 'Error',
+            text: this.errorMessages,
+            // icon: 'error',
+            position: 'top-right',
+            stack: false,
+            textAlign: 'left',
+            loader: false,
+            showHideTransition: 'slide'
+          });
+        })
+  }
   // Chat connection
 
   private initIoConnection() {
