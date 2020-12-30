@@ -97,7 +97,7 @@ export class AlbumDetailsComponent implements OnInit {
   }
 
   loadLightgallery() {
-    $(document).ready(function() {
+    $(window).bind("load", function() {
         var lightInstance = $("#lightgallery").lightGallery({
           selector: '.item',
           thumbnail: true,
