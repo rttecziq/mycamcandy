@@ -4,8 +4,7 @@ import { NgForm } from '@angular/forms';
 import { RequestService } from '../../../../../common/services/request.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Album } from '../../../../../models/album';
-
-//import { lightgallery } from 'lightgallery';
+import { environment } from '../../../../../../environments/environment';
 
 declare var $:any;
 
@@ -85,51 +84,165 @@ export class AlbumDetailsComponent implements OnInit {
       let details = {album_id : this.album_id};
       this.editAlbumFn("album_list", details);
       this.model_collection_fn("listCollection", "");
-
-   });
+    });
   }
+
   ngAfterViewInit(){ 
-    $(document).ready(function() {
-        var $commentBox = $('.s_sCommentBoxPanelLarge');
-        $commentBox.lightGallery({
+    this.loadLightgallery();
+  }
+
+  ngOnChanges () {
+    this.destroyLightGallery();
+    this.loadLightgallery();
+  }
+
+  loadLightgallery() {
+    $(window).bind("load", function() {
+        var lightInstance = $("#lightgallery").lightGallery({
+          selector: '.item',
+          thumbnail: true,
           appendSubHtmlTo: '.lg-item',
           addClass: 'fb-comments',
-          mode: 'lg-fade',
           download: false,
           enableDrag: false,
           actualSize: false,
           autoplayControls: true,
-          enableSwipe: false
+          enableSwipe: false,
+          mode: 'lg-fade'
         });
-        $commentBox.on('onAfterSlide.lg', function(event, prevIndex, index) {
-          var postid=$('#post_'+index).val();
-        //   $.post("", function(data){  
-           $('.lg-outer .lg-thumb-outer').width($(document).width()-420)
-           $('.lg-loaded .fb-comments').html('hkhk');
-        //   });
-        }); 
+
+        var post_id = 0;
+        var user_id = (localStorage.getItem('userId') != '' && localStorage.getItem('userId') != null && localStorage.getItem('userId') != undefined) ? localStorage.getItem('userId') : '';
+
+        lightInstance.on('onAfterSlide.lg', function(event, prevIndex, index) {
+            post_id = $("#post_" + index).val();
+
+            $.get(environment.apiUrl + 'comments/' + post_id + '/album/' + user_id, function(data){	
+                $('.lg-outer .lg-thumb-outer').width($(document).width()-420)
+                $('.lg-loaded .fb-comments').html(data);
+
+                emoji();
+                replyFocus();
+            });
+        });
+
+        function emoji () {
+            $("div.lg-current .emojionearea").emojioneArea({
+                pickerPosition: "top",
+                filtersPosition: "bottom",
+                tones: false,
+                autocomplete: false,
+                inline: true,
+                hidePickerOnBlur: false,
+                events: {
+                    keyup: function(editor, event) {      				
+                      if (event.which == 13) {
+                            var commentType = $('div.lg-current #s_replyArea').attr('data-type');
+                            if(commentType != 'post'){
+                                var parent_id = $('div.lg-current #s_replyArea').attr('data-id');
+                            }
+                            var comment = $('div.lg-current .emojionearea-editor').html();
+
+                            var author = user_id;
+                            var commenData=	{
+                                  author : author,
+                                  comment : comment,
+                                  parent_id : parent_id ? parent_id : 0
+                              }
+                            if(comment === '') {
+                              alert("Enter your comment!");
+                           } else {
+                              $.ajax({
+                                  type:'POST',
+                                  url: environment.apiUrl + 'comments/' + post_id + '/album',
+                                  datatype: "json",
+                                  data: commenData,
+                                  success:function(data) {
+                                        $('.s_commentBoxAreaBox').html(data);
+
+                                        emoji();
+                                  }
+                              })
+                            }
+                      }
+                    }
+              }
+            });
+        }
+
+        $('body').on('click', "div.lg-current .s_deleteComment", function (e) {
+            var comment_id = $(this).val();
+
+            $.ajax({
+                type: 'POST',
+                url: environment.apiUrl + 'comments/' + post_id + '/album/' + comment_id + '/' + user_id,
+                success:function(data) {
+                    $('.s_commentBoxAreaBox').html(data);
+
+                    emoji();
+                }
+            })
+        });
+
+        function replyFocus() {
+            $('body').on('click', '.replyComment', function(){  
+                var str = $(this).val();
+                $('div.lg-current #s_replyArea').attr('data-id', str);
+                $('div.lg-current #s_replyArea').attr('data-type', 'comment');
+                $('div.lg-current .emojionearea-editor').focus();
+            });
+        }
+
+        $('body').on('click', '.s_likeIconFI', function(){
+	       	$.ajax({
+		   		type:'POST',
+				url: environment.apiUrl + 'postLike/' + post_id + '/album',
+				data:'user_id='+user_id,
+				success:function(data) {
+                    console.log(data)
+					$('div.lg-current .commentLikeDetails').html(data.text);
+					$('.likeValue').html(data.like);
+					$('.s_likeIconFI').hide();
+					$('.showLikes').css("display", "block");
+				}
+	   		})
+        });
+        
+        $('body').on('click', ".s_likeComment", function (e) { 
+            var comment_id = $(this).val();
+            var $this = $(this);
+
+            var obj2 = $('.liked_comment_' + comment_id);
+            $.ajax({
+                type:'POST',
+                url: environment.apiUrl + 'commentLike/' + post_id + '/'+ comment_id + '/album',
+                data: '&user_id=' + user_id,
+                success:function(res) {
+                    if (res.like == 0) {
+                        obj2.html(' ');
+                        $this.html('Like');
+                    }else{
+                        var obj = res;
+                        obj2.html('<img src="https://mycamcandy.com/wp-content/uploads/sites/2/2019/05/facebook-thumb-icon.png"><span class="likeValue2">'+obj.like+'</span>');
+                        // console.log(obj)
+                        $this.html('Unlike');
+                    }
+                }
+            })
+    
+          });
     });
-    $.getScript('../../../../../assets/lightgallery/js/lightgallery-all.min.js');
-}
+  }
+
+  destroyLightGallery() {
+    $("#lightgallery").data('lightGallery').destroy(true);
+  }
 
   togglePassword(e) { this.password_check = e.target.checked; }
   toggleCandies(e)  { this.candies_check = e.target.checked;  }
 
     handleAlbumPhoto(event) {
         this.album_photo = event.target.files;
-        // if (event.target.files && event.target.files[0]) {
-        //     var filesAmount = event.target.files.length;
-        //     for (let i = 0; i < filesAmount; i++) {
-        //             var reader = new FileReader();
-
-        //             reader.onload = (event:any) => {
-        //                this.album_photos_urls.push(event.target.result);
-        //             }
-        //             reader.readAsDataURL(event.target.files[i]);
-        //     }
-        //            // console.log(this.album_photos_urls);  
-
-        // }
     }
 
     handleAlbumVideo(event) {
@@ -200,7 +313,7 @@ export class AlbumDetailsComponent implements OnInit {
                 if (data.success == true) {
                   this.albums = data.data[0];
                   this.album_details = data.data;
-                  console.log(this.album_details);
+
                   this.candies_check = data.data[0]['candies'] != 0.00 ? true : false;
                   this.password_check = data.data[0]['password'] != '' ? true : false;
                 } else {
