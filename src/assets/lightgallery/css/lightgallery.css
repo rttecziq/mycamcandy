@@ -1845,7 +1845,7 @@ button.btn.btn-success {
 }*/
 @media all and (max-width: 1280px) and (min-width: 768px){
   .s_commentaraPnalI,.page-id-6954 .s_commentaraPnalI{
-    height: 44vh !important;
+    height: 50vh !important;
 
   }
    .lg-outer.fb-comments .fb-comments{
@@ -1916,6 +1916,8 @@ button.s_deleteComment {
     border: none;
     background: none;
     cursor: pointer;
+    top: 10px;
+    position: absolute !important;
 }
 .commentLikeNmae{
   margin: 0px 0px 9px 0px;
@@ -1972,7 +1974,7 @@ h1.postheader.title {
 }
 @media only screen and (min-width : 1224px) {
   .s_commentaraPnalI,.page-id-6954 .s_commentaraPnalI{
-    height: 44vh !important;
+    height: 50vh !important;
   }
 }
 .form-inline.row.col-md-9 {
@@ -2003,4 +2005,18 @@ input#addAmount {
 .sendPrice:hover {
     background: 
     #f3f3f3 !important;
+}
+
+.comments-area {
+  position: relative;
+  float: left;
+}
+.s_likeunlikeBx {
+  top: 5px;
+}
+.s_replyComtn .s_usercomtnPanl.row {
+  margin-bottom: 18px;
+}
+.s_replyComtn {
+  margin-top: 18px;
 }
