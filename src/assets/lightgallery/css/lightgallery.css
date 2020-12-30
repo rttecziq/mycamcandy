@@ -2020,3 +2020,25 @@ input#addAmount {
 .s_replyComtn {
   margin-top: 18px;
 }
+@media screen and (min-width: 1224px) {
+  .s_commentaraPnalI {
+ height: 46vh !important;
+   }
+}
+img.likeHeart {
+   width: 22px;
+}
+.likeValue {
+  font-weight: 900;
+}
+.tooltip1 {
+  display: -webkit-box;
+ -webkit-line-clamp: 1;
+ -webkit-box-orient: vertical;
+ overflow: hidden;
+ margin-top: -5px;
+}
+.likeHeartPost {
+ float: left;
+ margin-right: 10px;
+}
