@@ -134,6 +134,8 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
   status: number;
   publicVideoFileName: string;
   privateVideoFileName: string;
+  show_type: string;
+
   constructor(
     myElement: ElementRef,
     private requestService: RequestService,
@@ -448,7 +450,8 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
     this.requestService
       .postMethod('live-video/snapshot', {
         video_id: this.video_id,
-        snapshot: this.snapshot_pic
+        snapshot: this.snapshot_pic,
+        show_type: this.show_type,
       })
       .subscribe(
         (data: any) => {
@@ -622,6 +625,8 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
 
           this.cpm = data.data.cpm;
           
+          this.show_type = data.data.show_type;
+
           this.status = data.data.status;
           
           this.initIoConnection();
