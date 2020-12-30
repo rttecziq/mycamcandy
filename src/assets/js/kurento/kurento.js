@@ -148,9 +148,7 @@ var kurentoObject = function (kurento_socket_url, wowza_ip_address, fileSavePath
 
 // starts here
 
-    // var kurentoIp = 'tecziq.atwpl.com', // replace this with your kurento server IP
-    //     kurentoPort = '8888', // replace this with your kurento server port
-        fileSavePath = fileSavePath;
+    fileSavePath = fileSavePath;
     const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
     var args = {
        // ws_uri:  protocol + kurentoIp + ':' + kurentoPort + '/kurento',

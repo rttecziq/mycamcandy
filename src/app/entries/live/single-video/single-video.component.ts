@@ -223,7 +223,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
         if (this.wowza_ip_address && this.kurento_socket_url) {
           this.is_kurento_running = true;
            const date = new Date();
-            const dir = 'file:///var/www/html/streamnow-backend/public/video_capture/' + this.userID + '/';
+            const dir = 'file:///var/www/html/stream/mycamcandy-server/public/video_capture/' + this.userID + '/';
             const fileSavePath = dir + 'stream_' + this.video_id + '.webm';
 
             const serverFileSavePath = 'stream_' + this.video_id + '.webm';
@@ -523,12 +523,15 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
               stream.stop();
             });
 
-            if (this.is_kurento_running) {
-              // ws.close();
-
-              // let kurentoObj = new kurentoObject(this.kurento_socket_url, this.wowza_ip_address);
-
-              this.kurentoObj.stop();
+            try{
+              if (this.is_kurento_running) {
+                // ws.close();
+                // let kurentoObj = new kurentoObject(this.kurento_socket_url, this.wowza_ip_address);
+  
+                this.kurentoObj.stop();
+              }
+            } catch(err){
+              console.log(err);
             }
 
             $.toast({

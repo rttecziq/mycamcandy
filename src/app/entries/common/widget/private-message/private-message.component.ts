@@ -67,7 +67,7 @@ export class PrivateMessageComponent implements OnInit, OnDestroy {
     }
 
     this.interval = setInterval(()=>{
-      if(this.messages.length > 0 && this.is_blocked === false) {
+      if(this.messages && this.messages.length > 0 && this.is_blocked === false) {
         let data = {user_id:this.userId, model_id:this.active_message_model};
         this.listUserModelMessages("listUserModelMessages", data);
       }

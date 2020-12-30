@@ -67,7 +67,13 @@ a {text-decoration: none!important;}
 }
 .user-profile-list li{text-align: center;}
 .user-profile-list li i.fa{font-size:22px;}
-.user-profile-list a:hover li.active{
+.user-profile-list a.active li{
+  background-color: #ffc107;
+    border-color: #ffc107;
+    color: #fff;
+}
+/*
+.user-profile-list a.active{
   background-color: #ffc107;
     border-color: #ffc107;
     color: #fff;
@@ -76,6 +82,7 @@ a {text-decoration: none!important;}
   background-color: #ffc107!important;
   border-color: #ffc107;
 }
+*/
 /***Sidebar menu End**/
 
 .mt-3{margin-top: 2rem;}
