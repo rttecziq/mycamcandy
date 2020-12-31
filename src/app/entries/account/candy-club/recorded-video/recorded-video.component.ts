@@ -48,7 +48,7 @@ export class RecordedVideoComponent implements AfterViewInit  {
         (data : any) => {
             if (data.success == true) {
               this.recorded_video_lists = data.data;
-              // console.log(this.recorded_video_lists);
+               console.log(this.recorded_video_lists);
               this.loader = false;
             } else {
               this.loader = false;

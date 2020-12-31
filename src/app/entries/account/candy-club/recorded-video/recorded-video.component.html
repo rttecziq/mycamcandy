@@ -23,7 +23,7 @@
                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3" *ngFor="let video of recorded_video_lists">
                       <a *ngIf="video">
                         <video controls (click)="toggleVideo()" #videoPlayer>
-                          <source [src]="app_url+'/video_capture/'+video.user_id+'/'+video.video_name" type="video/mp4" />
+                          <source [src]="app_url+'/video_capture/'+video.model_id+'/'+video.video_name" type="video/mp4" />
                           Browser not supported
                       </video>
                       </a>
@@ -37,7 +37,7 @@
                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-2" *ngFor="let video of recorded_video_lists">
                       <div *ngIf="video">
                       <video controls>
-                          <source [src]="app_url+'/video_capture/'+video.user_id+'/'+video.video_name" type="video/mp4" />
+                          <source [src]="app_url+'/video_capture/'+video.model_id+'/'+video.video_name" type="video/mp4" />
                           Browser not supported
                         </video>
                         <!-- <input type="checkbox" class="form-control" name="" id="" value=""> -->
