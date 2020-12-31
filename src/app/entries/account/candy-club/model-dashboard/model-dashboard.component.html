@@ -40,12 +40,12 @@
      <div class="row">
         <div class="col-md-3 col-sm-5 col-xs-12">
            <div class="dashboard-earning">
-              <h2><i class="fa fa-money" aria-hidden="true"></i> <a href="">My Earnings</a></h2>
+              <h2><i class="fa fa-money" aria-hidden="true"></i> <a routerLink="/candy-club/{{username}}/earning-history">My Earnings</a></h2>
               <ul class="list-unstyled">
                  <li class="bold">Earning Candy Balance: <strong>{{total_candies}}</strong></li>
-                 <li class="bold"><a>Earning History Details</a></li>
-                 <li class="bold"><a>Referral income</a></li>
-                 <li class="bold"><a>Referral Stats</a></li>
+                 <li class="bold"><a routerLink="/candy-club/{{username}}/earning-history">Earning History Details</a></li>
+                 <!-- <li class="bold"><a>Referral income</a></li>
+                 <li class="bold"><a>Referral Stats</a></li> -->
               </ul>
            </div>
            <div class="dashboard-earning">
@@ -64,7 +64,7 @@
               <h2><i class="fa fa-comment" aria-hidden="true"></i> <a href="">Private Messages</a></h2>
               <app-private-message></app-private-message>
            </div>
-           <div class="dashboard-earning">
+           <!-- <div class="dashboard-earning">
               <h2><i class="fa fa-users" aria-hidden="true"></i> <a href="">My Fan Club</a></h2>
               <div class="members">
                  <h3><span>Members</span> <span class="counted">3</span></h3>
@@ -74,7 +74,7 @@
                  <li class="bold"><a href="">Manage Fan club photos</a></li>
                  <li class="bold"><a href="">Manage Fan club videos</a></li>
               </ul>
-           </div>
+           </div> -->
 
            <!-- Broadcast Schedule -->
             <app-broadcast-schedule></app-broadcast-schedule>
@@ -380,12 +380,12 @@
                  </div>
               </div>
            </div>
-           <div class="dashboard-earning money">
+           <!-- <div class="dashboard-earning money">
               <h2><i class="fa fa-usd" aria-hidden="true"></i> <a href="">Make More Money</a></h2>
               <h3 class="follow-color">My followers</h3>
               <h3 class="follow-color">Referral tools</h3>
               <p><a href="#" class="bold">Click to learn about our member referral program</a></p>
-           </div>
+           </div> -->
            <div class="dashboard-earning">
               <h2><i class="fa fa-gift" aria-hidden="true"></i> <a href="">My Gifts</a></h2>
                <ul class="list-unstyled my-gifts tab-body-bg" *ngIf="model_gift_lists.length > 0">
