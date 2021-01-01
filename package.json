@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 4200  --proxy-config ./proxy.config.json",
+    "start": "ng serve --ssl --port 4200  --proxy-config ./proxy.config.json",
     "build": "ng build --prod --proxy-config  ./proxy.config.json",
     "test": "ng test",
     "lint": "ng lint",

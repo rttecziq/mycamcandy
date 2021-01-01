@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2020 Akash Kumar Shukla
+ *   All rights reserved.
+ */
 import { PrivateModeRequest } from './../../../models/join-video';
 /* tslint:disable:triple-equals */
 import {
@@ -135,6 +139,8 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
   publicVideoFileName: string;
   privateVideoFileName: string;
   show_type: string;
+  kurentoPrivateFileSavePath: string;
+  video_type: any;
 
   constructor(
     myElement: ElementRef,
@@ -208,46 +214,9 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
 
     this.chat_messages = [];
 
-    /**************************Save Video Code**************************
+    /**************************Save Video Code**************************/
 
-    /***************************Kurento Code****************************/
-
-    this.is_kurento_running = false;
-
-    setTimeout(() => {
-      if (this.browser == 'Safari' || this.mobile_browser == 'ios') {
-        console.log('kurento not supported..!');
-      } else {
-        console.log(this.wowza_ip_address);
-
-        console.log(this.kurento_socket_url);
-
-        if (this.wowza_ip_address && this.kurento_socket_url) {
-          this.is_kurento_running = true;
-           const date = new Date();
-            const dir = 'file:///var/www/html/stream/mycamcandy-server/public/video_capture/' + this.userID + '/';
-            const fileSavePath = dir + 'stream_' + this.video_id + '.webm';
-
-            const serverFileSavePath = 'stream_' + this.video_id + '.webm';
-            
-            this.publicVideoFileName = serverFileSavePath;
-
-            this.privateVideoFileName = 'stream_' + this.video_id + '_1' + '.webm';
-            
-            this.saveVideoName(serverFileSavePath);
-            this.kurentoObj = new kurentoObject(
-            this.kurento_socket_url,
-            this.wowza_ip_address,
-              fileSavePath
-          );
-        } else {
-          console.log(
-            'Wowza / Kurento Not configured...! so IOS Mobile Device wil not work..!'
-          );
-        }
-      }
-    }, 1000);
-
+    
     /*************************End Kurento Code****************************/
 
     /********************** WEBRTC connection **************************/
@@ -528,9 +497,6 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
 
             try{
               if (this.is_kurento_running) {
-                // ws.close();
-                // let kurentoObj = new kurentoObject(this.kurento_socket_url, this.wowza_ip_address);
-  
                 this.kurentoObj.stop();
               }
             } catch(err){
@@ -597,6 +563,46 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
         $.getScript('../../../../assets/js/kurento.js',function(){}); */
   }
 
+  webRtc (isRecordingNeeded: boolean, isPrivate: boolean) {
+    /***************************Kurento Code****************************/
+    console.log('setting up kurento with', isRecordingNeeded);
+  this.is_kurento_running = false;
+    setTimeout(() => {
+      if (this.browser == 'Safari' || this.mobile_browser == 'ios') {
+        console.log('kurento not supported..!');
+      } else {
+        console.log(this.wowza_ip_address);
+
+        console.log(this.kurento_socket_url);
+
+        if (this.wowza_ip_address && this.kurento_socket_url) {
+          this.is_kurento_running = true;
+            const dir = 'file:///var/www/html/stream/mycamcandy-server/public/video_capture/' + this.userID + '/';
+            const kurentoFileSavePath = dir + 'stream_' + this.video_id + '.webm';
+            this.kurentoPrivateFileSavePath = dir + 'stream_' + this.video_id + '_1' + '.webm';
+
+            const serverFileSavePath = 'stream_' + this.video_id + '.webm';
+            
+            this.publicVideoFileName = serverFileSavePath;
+
+            this.privateVideoFileName = 'stream_' + this.video_id + '_1' + '.webm';
+            
+            this.saveVideoName(serverFileSavePath);
+            this.kurentoObj = new kurentoObject(
+            this.kurento_socket_url,
+            this.wowza_ip_address,
+            (isRecordingNeeded && isPrivate ? this.kurentoPrivateFileSavePath : kurentoFileSavePath),
+            isRecordingNeeded,
+           );
+        } else {
+          console.log(
+            'Wowza / Kurento Not configured...! so IOS Mobile Device wil not work..!'
+          );
+        }
+      }
+    }, 1000);
+  }
+  
   singleVideoDetail(url, object) {
     this.requestService.postMethod(url, object).subscribe(
       (data: any) => {
@@ -626,6 +632,20 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
           this.cpm = data.data.cpm;
           
           this.show_type = data.data.show_type;
+
+          this.video_type = data.data.type;
+
+          if(this.isPrivate == 1){
+            // record it as private mode file
+            this.webRtc(true, true);
+          } else if((!(this.show_type == 'Free' && this.video_type == 'public')) && this.isPrivate != 1){
+            // record it but not as private file.
+            this.webRtc(true, false);
+          } 
+          else{
+            // don't record it.
+            this.webRtc(false, false);  
+          }
 
           this.status = data.data.status;
           
@@ -735,8 +755,21 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
       this.requestService.postMethod('accept_private_request', acceptPrivateRequest).subscribe(
         (data: any) => {
           if (data.success == true) {
-              console.log(data);
+          console.log(data);
+          
+           if (this.is_kurento_running) {
+            this.kurentoObj.stop();
+            // this.kurentoObj = new kurentoObject(
+            //   this.kurento_socket_url,
+            //   this.wowza_ip_address,
+            //   this.kurentoPrivateFileSavePath,
+            //   true
+            //  );
+            // record it as private file.
+            this.webRtc(true, true);
+            this.kurentoObj.start();
           }
+        }
         },(err: HttpErrorResponse) => {
           this.errorMessages = 'Oops! Something Went Wrong';
   
