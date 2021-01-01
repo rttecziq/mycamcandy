@@ -17,13 +17,19 @@ export class FreeShowPhotoComponent implements AfterViewInit  {
   photo_lists : any[];
   app_url : string;
 
+  skipCount : number;
+  datasAvailable : number;
+
   constructor(private requestService : RequestService, private router : Router) {
     this.errorMessages = "";
     this.loader = false;
     this.photo_lists = [];
     this.app_url = this.requestService.adminUrl;
 
-    let detail = {show_type:"Free"};
+    this.skipCount = 0;
+    this.datasAvailable = 0;
+
+    let detail = {show_type:"Free",skip : 0};
     this.free_show_photo_list("recorded_photos/list", detail);
   }
 
@@ -49,7 +55,19 @@ export class FreeShowPhotoComponent implements AfterViewInit  {
     .subscribe(
         (data : any) => {
             if (data.success == true) {
-              this.photo_lists = data.data;
+              this.datasAvailable = 1;
+
+                if (this.skipCount > 0) {
+                    this.photo_lists = [...this.photo_lists, ...data.data];
+                } else {
+                    this.photo_lists = data.data;
+                }
+
+                this.skipCount += data.data.length;
+                if (data.data.length <= 0) {
+                    this.datasAvailable = 0;
+                }
+              //this.photo_lists = data.data;
               this.loader = false;
             } else {
               this.loader = false;
@@ -58,10 +76,23 @@ export class FreeShowPhotoComponent implements AfterViewInit  {
         (err : HttpErrorResponse) => {
             this.errorMessages = 'Oops! Something Went Wrong';
             this.toast_message("Error", this.errorMessages);
+        },
+        () => {
+
+            setTimeout(() => {
+
+                this.loader = false;
+
+            }, 2000);
         }
 
     );
 
+}
+
+showMore() {
+  let detail = {show_type:"Free",skip:this.skipCount};
+  this.free_show_photo_list("recorded_photos/list", detail);
 }
 
 }

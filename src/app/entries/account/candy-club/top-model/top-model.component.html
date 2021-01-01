@@ -11,7 +11,7 @@
           <h3 class="text-center">Top Models </h3>
           <div class="model-scroll" *ngIf="all_top_models.length > 0">
             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3" *ngFor="let model of all_top_models">
-              <a role="button" routerLink="/candy-club/{{model.name}}">
+              <a role="button" routerLink="/candy-club/model/{{model.name}}">
                 <div class="model-img">
                     <img [src]="model.picture" class="img-responsive">
                     <p class="model-name">{{model.name | titlecase}}</p>
