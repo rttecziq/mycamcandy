@@ -1,4 +1,9 @@
-var kurentoObject = function (kurento_socket_url, wowza_ip_address, fileSavePath) {
+/*
+ *   Copyright (c) 2020 Akash Kumar Shukla
+ *   All rights reserved.
+ */
+var kurentoObject = function (kurento_socket_url, wowza_ip_address, fileSavePath, isRecordingNeeded) {
+    console.log('passed values are', 'isRecordingNeeded', isRecordingNeeded, 'fileSavePath', fileSavePath);
 
     const socketProtocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
     var ws = new WebSocket(socketProtocol + kurento_socket_url + '/rtprelay');
@@ -162,10 +167,6 @@ var kurentoObject = function (kurento_socket_url, wowza_ip_address, fileSavePath
         client,
         pipeline;
 
-    const IDLE = 0;
-    const DISABLED = 1;
-    const CALLING = 2;
-    
     window.onload = function () {
         localVideo = document.getElementById('localVideo');
         remoteVideo = document.getElementById('remoteVideo');
@@ -192,8 +193,6 @@ var kurentoObject = function (kurento_socket_url, wowza_ip_address, fileSavePath
             pipeline.release();
             pipeline = null;
         }
-
-        stop();
     }
 
     function onStartOffer(error, sdpOffer) {
@@ -210,7 +209,9 @@ var kurentoObject = function (kurento_socket_url, wowza_ip_address, fileSavePath
                 var recorder = yield pipeline.create('RecorderEndpoint', { uri: args.file_uri });
                 yield webRtc.connect(recorder);
                 yield webRtc.connect(webRtc);
-                yield recorder.record();
+                if(isRecordingNeeded == true){
+                    yield recorder.record();        
+                }
                 var sdpAnswer = yield webRtc.processOffer(sdpOffer);
                 webRtc.gatherCandidates(onError);
                 webRtcPeer.processAnswer(sdpAnswer);
