@@ -886,12 +886,16 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
   }
 
   getPrivateRequestId(privateViewers){
-    if(this.isPrivate == 1){
-      privateViewers.forEach(element => {
-        if(element['status'] == 'Accepted')
-        console.log(element,'these are private requested');
-        this.livePrivateRequestId = element['id'];
-      });
+    try{
+      if(this.isPrivate == 1){
+        privateViewers.forEach(element => {
+          if(element['status'] == 'Accepted')
+          console.log(element,'these are private requested');
+          this.livePrivateRequestId = element['id'];
+        });
+      }
+    } catch(err){
+      console.log(err);
     }
   }
 
