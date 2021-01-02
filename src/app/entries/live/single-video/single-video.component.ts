@@ -288,11 +288,15 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
         showOnMouseEnter: false
       });
 
-      if(this.isPrivate){
-        document.getElementById('videos-container').appendChild(mediaElement);
-      } else{
-        document.getElementById('videos-container').appendChild(mediaElement);
-      }
+      if(document.getElementById('videos-container').childElementCount > 2){
+        console.log('replace')
+        document.getElementById('videos-container').removeChild(document.getElementById('videos-container').firstElementChild);
+      } 
+      console.log('append')
+      document.getElementById('videos-container').appendChild(mediaElement);
+      
+      
+      
       setTimeout(() => {
         mediaElement.media.play();
 
