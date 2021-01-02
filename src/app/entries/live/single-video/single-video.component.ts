@@ -141,6 +141,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
   show_type: string;
   kurentoPrivateFileSavePath: string;
   video_type: any;
+  livePrivateRequestId: number;
 
   constructor(
     myElement: ElementRef,
@@ -287,8 +288,11 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
         showOnMouseEnter: false
       });
 
-      document.getElementById('videos-container').appendChild(mediaElement);
-
+      if(this.isPrivate){
+        document.getElementById('videos-container').appendChild(mediaElement);
+      } else{
+        document.getElementById('videos-container').appendChild(mediaElement);
+      }
       setTimeout(() => {
         mediaElement.media.play();
 
@@ -629,6 +633,8 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
 
           this.privateViewers = data.data.private_viewer;
 
+          this.getPrivateRequestId(this.privateViewers);
+          
           this.cpm = data.data.cpm;
           
           this.show_type = data.data.show_type;
@@ -879,12 +885,26 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
     );
   }
 
+  getPrivateRequestId(privateViewers){
+    try{
+      if(this.isPrivate == 1){
+        privateViewers.forEach(element => {
+          if(element['status'] == 'Accepted')
+          console.log(element,'these are private requested');
+          this.livePrivateRequestId = element['id'];
+        });
+      }
+    } catch(err){
+      console.log(err);
+    }
+  }
+
   ngOnDestroy() {
     // this.stopLive();
 
     clearInterval(this.snapshot_capture);
     clearInterval(this.paymentChecker);
-    const details = { video_id: this.video_id };
+    const details = { video_id: this.video_id, private_video_id: this.livePrivateRequestId };
 
     $('.side-menubar').removeClass('disable-links');
 

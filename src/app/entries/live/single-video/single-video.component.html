@@ -148,8 +148,10 @@ v=0
                 </div>
               <hr />
               <div class="media-right">
-                <a hre="#"><button class="btn btn-default btn-block btn-br size-14 mr-5" (click)="acceptPrivateMode(request.user.id, request.id, request.live_video_id)"
-                  >{{request.status == 'Accepted' ? 'In Private Mode' : 'Accept Private Mode'}}</button></a>
+                <a *ngIf="request.status == 'Accepted'" hre="#"><button class="btn btn-default btn-block btn-br size-14 mr-5"
+                  >In Private Mode</button></a>
+                  <a *ngIf="request.status != 'Accepted'" hre="#"><button class="btn btn-default btn-block btn-br size-14 mr-5" (click)="acceptPrivateMode(request.user.id, request.id, request.live_video_id)"
+                    >Accept Private Mode</button></a>
               </div>
             </span>
           </div>  
