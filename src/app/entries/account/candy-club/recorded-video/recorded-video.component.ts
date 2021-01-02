@@ -16,12 +16,16 @@ export class RecordedVideoComponent implements AfterViewInit  {
   loader : boolean;
   recorded_video_lists : any[];
   app_url : string;
+  active_video : any[];
+
+  showModalBox: boolean = false;
 
   constructor(private requestService : RequestService, private router : Router) {
     this.errorMessages = "";
     this.loader = false;
     this.recorded_video_lists = [];
     this.app_url = this.requestService.adminUrl;
+    this.active_video = [];
     this.recorded_video_lists_fn("recorded_videos/list", "");
   }
 
@@ -48,7 +52,7 @@ export class RecordedVideoComponent implements AfterViewInit  {
         (data : any) => {
             if (data.success == true) {
               this.recorded_video_lists = data.data;
-               console.log(this.recorded_video_lists);
+              //  console.log(this.recorded_video_lists);
               this.loader = false;
             } else {
               this.loader = false;
@@ -59,6 +63,16 @@ export class RecordedVideoComponent implements AfterViewInit  {
             this.toast_message("Error", this.errorMessages);
         }
     );
-}
+  }
+
+  showPopup(video) {
+    // console.log(video);
+    if(0){
+      this.showModalBox = false;
+    } else {
+       this.active_video = video;
+       this.showModalBox = true;
+    }
+  }
 
 }

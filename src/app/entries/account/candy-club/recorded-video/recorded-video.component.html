@@ -11,27 +11,28 @@
           <h2 class="text-center p-3">MY RECORDED VIDEOS</h2>
           <div class="col-lg-12 col-md-12 col-sm-12 mt-3" *ngIf="recorded_video_lists.length">
 
-            <ul class="nav nav-tabs">
+            <!-- <ul class="nav nav-tabs">
               <li class="btn btn-sm btn-tab active"><a data-toggle="tab" href="#tab1">Recorded Video Lists</a></li>
               <li class="btn btn-sm btn-tab"><a data-toggle="tab" href="#tab2">Select And Delete Videos</a></li>
-            </ul>
+            </ul> -->
 
             <div class="tab-content mt-3 mb-3 rec-videos">
               <div id="tab1" class="tab-pane fade in active">
                 <div class="video-scroll">
                   <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3" *ngFor="let video of recorded_video_lists">
-                      <a *ngIf="video">
-                        <video controls (click)="toggleVideo()" #videoPlayer>
+                      <a *ngIf="video" (click)="showPopup(video)" data-toggle="modal" data-target="#videoModel">
+                        <img [src]="video.snapshot" class="img-responsive">
+                        <!-- <video controls (click)="toggleVideo()" #videoPlayer>
                           <source [src]="app_url+'/video_capture/'+video.model_id+'/'+video.video_name" type="video/mp4" />
                           Browser not supported
-                      </video>
+                        </video> -->
                       </a>
                     </div>
                   </div>
                 </div>
               </div>
-              <div id="tab2" class="tab-pane fade">
+              <!-- <div id="tab2" class="tab-pane fade">
                 <div class="video-scroll">
                   <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-2" *ngFor="let video of recorded_video_lists">
@@ -40,14 +41,14 @@
                           <source [src]="app_url+'/video_capture/'+video.model_id+'/'+video.video_name" type="video/mp4" />
                           Browser not supported
                         </video>
-                        <!-- <input type="checkbox" class="form-control" name="" id="" value=""> -->
+                          <input type="checkbox" class="form-control" name="" id="" value="">
                       </div>
                     </div>
                   </div>
                 </div>
 
                   <button class="btn btn-primary mt-3">Delete Videos</button>
-              </div>
+              </div> -->
             </div>
 
           </div>
@@ -56,4 +57,86 @@
     </div>
   </div>
 
+</div>
+
+<!-- The Video model -->
+<div *ngIf="showModalBox" class="modal fade" id="videoModel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <!-- <h4 class="modal-title">Modal Heading</h4> -->
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container-fluid video-control">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 mt-3">
+                <!-- <img src="file:///C:/Users/Rahul%20Kumar/Desktop/lightbox-popup/images/1920x1080.jpg" class="img-responsive object-fit-cover w-100 h-100"> -->
+                <video controls>
+                  <source [src]="app_url+'/video_capture/'+active_video.model_id+'/'+active_video.video_name" type="video/mp4" />
+                  Browser not supported
+                </video>
+
+            </div>
+            <!-- <div class="col-lg-4 col-md-4 mt-3 bg-light">
+              <div class="media mt-3">
+                 <div class="media-left">
+                    <a href="#">
+                    <img class="media-object photo-profile rounded-circle" src="images/smily.gif" width="50" height="50" alt="...">
+                    </a>
+                 </div>
+                 <div class="media-body">                    
+                       <h5 class="media-heading" style="margin-bottom: 0;">&nbsp;&nbsp;<a href="#" class="anchor-username">Model</a></h5>
+                    <a href="#" class="anchor-time">&nbsp;&nbsp;December 21, 2020</a>
+                 </div>
+              </div>
+              <div class="post-footer-option mt-5">
+                 <div class="like-user-list">
+                   <i class="fa fa-thumbs-up"></i> You.
+                 </div>
+                  <ul class="list-unstyled mt-3">
+                     <li><input type="text" class="text-input" name=""></li>
+                     <li><a href="#" class="ml-4 btn-addprice"><i class="fa fa-plus font-23"></i> Add Price</a></li>
+                  </ul>
+                  <div class="price-section">
+                    <div class="price-form-div p-3">
+                      <form class="form-inline text-center">
+                        <div class="input-group">
+                          <label class="bold">Sell Price</label>
+                          <input type="text" class="text-input" name="">
+                          <div class="input-group-btn">
+                            <input type="submit" name="" class="btn btn-success" value="Save">
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+               </div>
+
+               <div class="control-video-footer mt-5">
+                 <div class="media">
+                     <div class="media-left">
+                        <a href="#">
+                        <img class="media-object photo-profile rounded-circle" src="images/smily.gif" width="50" height="50" alt="...">
+                        </a>
+                     </div>
+                     <div class="media-body">
+                        <form method="POST">
+                           <textarea class="form-control comment-textarea" name="comment" id="comment" rows="2"></textarea>
+                         </form>
+                     </div>
+                  </div>
+                 
+               </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 </div>

@@ -25,21 +25,17 @@
         <div class="bounce"></div>
       </div>
 
+      <div class="text-center mt-3" *ngIf="skipCount > 0 && datasAvailable > 0">
+        <button class="show-more-btn" (click)="showMore()">show more</button>
+      </div>
+
       <div class="no_result_class text-center" *ngIf="photo_lists.length <= 0">
         <div>
             <h3 class="tab-head text-center">No photos found</h3>
             <img class="noresult-img img-responsive" src="../../../assets/img/no-result.gif">
         </div>
     </div>
-<!--       
-      <ul class="pagination mt-5 mb-5 p-3" style="display: flex;">
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">Next</a></li>
-          <li><a href="#">View All</a></li>
-      </ul> -->
+
     </div>
   </div>
 
