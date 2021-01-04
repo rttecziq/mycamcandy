@@ -17,10 +17,10 @@ declare function getBrowser() : any;
 export class PerformerDashboardComponent implements AfterViewInit {
 
   @ViewChild('channelBtn') channelBtn;
-  private selectedChannel: string;
+  selectedChannel: string;
 
   errorMessages : string;
-  performer_details : any[];
+  performer_details : any;
   model_id : string;
   model_name : string;
   channel_list : any[];

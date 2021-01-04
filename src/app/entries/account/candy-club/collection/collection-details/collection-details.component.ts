@@ -14,7 +14,7 @@ export class CollectionDetailsComponent implements OnInit {
 
   errorMessages : string;
   model_name : string;
-  collectionData : any[];
+  collectionData : any;
   isUserExists : string;
   model : object;
 

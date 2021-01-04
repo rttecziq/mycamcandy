@@ -9,7 +9,7 @@ import { Preference } from '../../../../models/preference';
 import { sweetTreat } from '../../../../models/sweet-treat';
 import { Collection } from '../../../../models/collection';
 import { CheckStreamerService } from '../../../../common/services/check-streamer.service';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 declare var $: any ;
 const COVER_PICTURE = "COVER_PICTURE";
@@ -24,7 +24,7 @@ export class UserUpdateProfileComponent implements AfterViewInit {
 
     fetishes = [];
     selectedItems = [];
-    dropdownSettings:IDropdownSettings;
+    dropdownSettings:NgMultiSelectDropDownModule;
     ngOnInit() {
       this.fetishes = [
         { item_id: 1, item_text: 'High Heels' },

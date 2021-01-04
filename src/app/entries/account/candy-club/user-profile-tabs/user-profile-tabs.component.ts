@@ -539,7 +539,7 @@ albumUploadFormFn(form : NgForm) {
 
 // heic conversion
     heic_conversion(image_url) {
-        console.log(image_url);
+        //console.log(image_url);
                     //../../../../assets/img/2.heic
                     // { mode: 'no-cors' }
         //http://mycamcandy-server.local/uploads/album/11/heic/6c4f196756173e0c688424c83a17785bd53868d4.heic
@@ -549,20 +549,20 @@ albumUploadFormFn(form : NgForm) {
         .then((conversionResult) => {
 
             var url = URL.createObjectURL(conversionResult);
-            console.log('i am undefined '+url);
+           // console.log('i am undefined '+url);
             var xhr = new XMLHttpRequest;
             xhr.responseType = 'blob';
-            console.log('before onload');
+            //console.log('before onload');
             xhr.onload = (event: any) => { 
                 let recoveredBlob = xhr.response;        
                 let reader = new FileReader;
                 reader.onload = (event: any) => {
                 let blobAsDataUrl = reader.result;
-                console.log('blobAsDataUrl: '+blobAsDataUrl);
+               // console.log('blobAsDataUrl: '+blobAsDataUrl);
                 };
 
                 reader.readAsDataURL(recoveredBlob);
-                console.log('recoveredBlob: '+recoveredBlob);
+                //console.log('recoveredBlob: '+recoveredBlob);
 
             };
 
@@ -571,10 +571,49 @@ albumUploadFormFn(form : NgForm) {
 
         })
         .catch((e) => {
-            console.log(e);
+           // console.log(e);
         });
     }
 
+// logout
+logout() {
+    this.userService.userLogout()
+    .subscribe(
+        (data : any ) =>  {
+            if (data.success == true) {
+                // Remove all the items which is stored in localstorage
+                localStorage.removeItem('accessToken');                    
+                localStorage.removeItem('userId');
+                localStorage.removeItem('username');
+                localStorage.removeItem('profile_picture');
+                localStorage.removeItem('chat_picture');
+                localStorage.removeItem('cover_picture');
+                //localStorage.clear();
 
+                this.toast_message("Success", "You have been logged out successfully");
+                location.reload();
+                //this.router.navigate(['/']);
+
+            } else {
+                // if (data.error_code == 101 || data.error_code == 103 || data.error_code == 104) {
+                    localStorage.removeItem('accessToken');
+                    localStorage.removeItem('userId');
+
+                    // localStorage.clear();
+                    this.toast_message("Success", "You have been logged out successfully");
+                    this.router.navigate(['/']);
+
+                    return false;
+            }
+
+        },
+
+        (err : HttpErrorResponse) => {
+            this.errorMessages = 'Incorrect Username / Password';
+            this.toast_message("Error", this.errorMessages);
+            return false;
+        }	
+    );
+}
 
 }
