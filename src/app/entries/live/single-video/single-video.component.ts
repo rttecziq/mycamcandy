@@ -676,8 +676,9 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
 
           this.privateViewers = data.data.private_viewer;
 
-          this.getPrivateRequestId(this.privateViewers);
-          
+          // this.getPrivateRequestId(this.privateViewers);
+          this.livePrivateRequestId = data.data.private_video_id;
+
           this.cpm = data.data.cpm;
           
           this.show_type = data.data.show_type;
@@ -690,6 +691,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
 
           // this.getTimeDifference(this.video_start_time);
           
+
           if(this.isPrivate == 1){
             // record it as private mode file
             this.webRtc(true, true);
