@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../../../common/services/request.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import {News} from '../../../models/news';
+import { News } from '../../../models/news';
 
 declare var $: any ;
 
@@ -16,12 +16,10 @@ declare var $: any ;
     ]
 })
 
-export class NewsComponent{
+export class NewsComponent implements OnInit{
 
     errorMessages : string;
-
     news_view : News;
-
     news_id : number;
 
     constructor(private requestService : RequestService, private router : Router,private route : ActivatedRoute) {
@@ -29,27 +27,19 @@ export class NewsComponent{
         this.errorMessages = "";
 
         this.news_view  = {
-
-            title : "",
-            
-            description : ""
-
+            title : "",            
+            description : "",
+            created_at : ""
         }
 
         this.route.queryParams.subscribe(params => {
-
             this.news_id = params['news_id'];
-
             let details = {news_id : this.news_id};
-
             this.newsViewFn('news/view' , details);
-
         });
     }
    
     ngOnInit() {
-
-
     }
 
     newsViewFn(url, object) {
@@ -60,13 +50,10 @@ export class NewsComponent{
             (data : any) => {
 
                 if (data.success == true) {
-
-                    this.news_view = data.data;   
-
+                    this.news_view = data.data;
+                    console.log(this.news_view)
                 } else {
-
                     this.errorMessages = data.error_messages;
-
                     $.toast({
                         heading: 'Error',
                         text: this.errorMessages,
@@ -76,16 +63,11 @@ export class NewsComponent{
                         textAlign: 'left',
                         loader : false,
                         showHideTransition: 'slide'
-                    });
-                    
+                    });                    
                 }
-
             },
-
             (err : HttpErrorResponse) => {
-
                 this.errorMessages = 'Oops! Something Went Wrong';
-
                 $.toast({
                     heading: 'Error',
                     text: this.errorMessages,
@@ -96,9 +78,7 @@ export class NewsComponent{
                     loader : false,
                     showHideTransition: 'slide'
                 });
-
             }
-
         );
 
     }

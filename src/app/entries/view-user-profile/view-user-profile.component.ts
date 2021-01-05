@@ -14,7 +14,7 @@ export class ViewUserProfileComponent implements OnInit {
 
   errorMessages : string;
   member_name : string;
-  member : object;
+  member : any;
   user_profile_picture : string;  
   user_cover_picture : string;
 
@@ -54,7 +54,7 @@ export class ViewUserProfileComponent implements OnInit {
                   this.member = data;
                   this.user_cover_picture = data.cover;
                   this.user_profile_picture = data.picture;
-                  console.log(this.member);
+                  //console.log(this.member);
                 } else if(data.error_messages == 'Model not found') {
                   this.router.navigate(['error']);
                 } else {

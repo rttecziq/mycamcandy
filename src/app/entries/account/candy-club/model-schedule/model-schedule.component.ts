@@ -35,7 +35,7 @@ export class ModelScheduleComponent implements AfterViewInit {
   nrEndMinute='00';
   nrStartAmPm='AM';
   nrEndAmPm='AM';
-  schedule_data:object;
+  schedule_data:any;
   
   constructor(private requestService : RequestService, private router : Router, private route : ActivatedRoute) { 
     this.errorMessages = '';  

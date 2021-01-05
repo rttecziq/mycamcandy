@@ -25,7 +25,7 @@ export class ModelDashboardComponent implements OnInit {
   username:string;
   total_candies:number;
   top_models:string;
-  model_of_the_months:object;
+  model_of_the_months:any;
   max_value:string;
   model_gift_lists:any[];
   activities:any[];
@@ -199,7 +199,7 @@ export class ModelDashboardComponent implements OnInit {
     .subscribe((data : any) => {
       if (data.success == true) {
         this.model_of_the_months = data.data;
-        console.log(this.model_of_the_months);
+        //console.log(this.model_of_the_months);
       } else {
           this.errorMessages = data.error_messages;
           this.toast_message("Error", this.errorMessages);

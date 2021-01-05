@@ -29,7 +29,7 @@
     "angular2-datetimepicker": "^1.1.1",
     "core-js": "^2.6.9",
     "heic2any": "0.0.3",
-    "ng-multiselect-dropdown": "^0.2.10",
+    "ng-multiselect-dropdown": "^0.2.3",
     "ng-pick-datetime": "^5.2.6",
     "ng2-ckeditor": "^1.2.7",
     "ngx-dropzone": "^2.2.2",
