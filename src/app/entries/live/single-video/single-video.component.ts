@@ -151,6 +151,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
   timer: any;
   video_start_time: string;
   clockHour: number;
+  candiesChecker: any;
 
   constructor(
     myElement: ElementRef,
@@ -499,6 +500,11 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
             this.getPrivateVideoRequest();
         }, 10000 );
         };
+        if(this.candiesChecker == null){
+          this.candiesChecker = setInterval(() => {
+            this.getUserStatusWithCandies();
+          },this.paymentTimerDuration * this.noOfMiliSecondsAMinute);
+        }
     });
   }
 
@@ -559,7 +565,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
               loader: false,
               showHideTransition: 'slide'
             });
-            clearInterval(this.paymentChecker);
+            clearInterval(this.candiesChecker);
 
             return this.router.navigate(['/performer-dashboard']);
           } else {
@@ -599,7 +605,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.paymentChecker = null;
+    this.candiesChecker = null;
     this.clockTimer = null;
     /*$.getScript('../../../../assets/js/kurento/adapter.js',function(){});
 
@@ -695,9 +701,19 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
           if(this.isPrivate == 1){
             // record it as private mode file
             this.webRtc(true, true);
+            if(this.candiesChecker == null){
+              this.candiesChecker = setInterval(() => {
+                this.getUserStatusWithCandies();
+              },this.paymentTimerDuration * this.noOfMiliSecondsAMinute);
+            }
           } else if((!(this.show_type == 'Free' && this.video_type == 'public')) && this.isPrivate != 1){
             // record it but not as private file.
             this.webRtc(true, false);
+            if(this.candiesChecker == null){
+              this.candiesChecker = setInterval(() => {
+                this.getUserStatusWithCandies();
+              },this.paymentTimerDuration * this.noOfMiliSecondsAMinute);
+            }
           } 
           else{
             // don't record it.
@@ -1020,11 +1036,68 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
   removeCheckers(){
     clearInterval(this.clockTimer);
   }
+
+  getUserStatusWithCandies(){
+    //getLiveStatusWithCandies
+    this.requestService.getMethod('get_user_live_status', this.video_id).subscribe(
+      (data: any) => {
+        if (data.success == true) {
+          //this.total_candies = data.
+          console.log(data);
+        } else if(data.error_code == 160){
+          try{
+            this.connection.attachStreams.forEach(function(stream) {
+            stream.stop();
+          });
+           } catch(error){
+             console.log(error);
+           }
+            this.errorMessages = data.error_messages;
+            $.toast({
+              heading: 'Error',
+              text: this.errorMessages,
+              // icon: 'error',
+              position: 'top-right',
+              stack: false,
+              textAlign: 'left',
+              loader: false,
+              showHideTransition: 'slide'
+            });
+            this.router.navigate(['/']);
+        } else{
+          this.errorMessages = data.error_messages;
+          $.toast({
+            heading: 'Error',
+            text: this.errorMessages,
+            // icon: 'error',
+            position: 'top-right',
+            stack: false,
+            textAlign: 'left',
+            loader: false,
+            showHideTransition: 'slide'
+          });
+        }
+      },(err: HttpErrorResponse) => {
+        this.errorMessages = 'User has exited the private session';
+
+        $.toast({
+          heading: 'Error',
+          text: this.errorMessages,
+          // icon: 'error',
+          position: 'top-right',
+          stack: false,
+          textAlign: 'left',
+          loader: false,
+          showHideTransition: 'slide'
+        });
+      });
+  }
+
   ngOnDestroy() {
     // this.stopLive();
 
     clearInterval(this.snapshot_capture);
-    clearInterval(this.paymentChecker);
+    clearInterval(this.candiesChecker);
     this.removeCheckers();
     
     const details = { video_id: this.video_id, private_video_id: this.livePrivateRequestId };
