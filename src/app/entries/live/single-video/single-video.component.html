@@ -129,9 +129,11 @@
              </div>
          </div>
          <div class="chat-box mt-3">
-          <div class="w-100"><p class="p-2 bg-sent">hi</p></div>
-          <div class="w-100"><p class="p-2 bg-sent">how are you</p></div>
-           <div class="w-100"><p class="p-2 bg-receive">hi, how are you?</p></div>
+           <div *ngFor="let chat_message of chat_messages">
+            <!-- <div class="w-100"><p class="p-2 bg-sent">hi</p></div> -->
+            <div class="w-100"><p class="p-2 bg-sent">{{chat_message.message}}</p></div>  
+           </div>
+           <!-- <div class="w-100"><p class="p-2 bg-receive">hi, how are you?</p></div> -->
          </div>
          <div class="streaming-chat-form mt-3">
             <div class="row">
@@ -145,11 +147,16 @@
                       <button class="btn btn-sm btn-orange mr-2"><i class="fa fa-microphone"></i></button>
                     </span>
                     <span class="input-group-btn">
-                      <button class="btn btn-sm btn-yellow mr-2"><i class="fa fa-smile-o"></i></button>
+                      <button class="btn btn-sm btn-yellow mr-2" ><i class="fa fa-smile-o"></i></button>
                     </span>
-                    <input type="text" name="live-chat-msg" placeholder="Type your message" class="form-control mr-2" style="margin-top: .7rem;">
+                    <input type="text" name="live-chat-msg" [(ngModel)]="messageContent"
+                        (keyup.enter)="sendMessage(messageContent)"
+                        placeholder="Type your message" class="form-control mr-2" 
+                        style="margin-top: .7rem;">
                     <span class="input-group-btn">
-                      <button type="submit" class="btn btn-sm btn-primary ml-2"><i class="fa fa-paper-plane"></i></button>
+                      <button type="submit" 
+                      (click)="sendMessage(messageContent)"
+                      class="btn btn-sm btn-primary ml-2"><i class="fa fa-paper-plane"></i></button>
                     </span> 
                   </div>
                 </form>
