@@ -1,3 +1,7 @@
+/*
+ *   Copyright (c) 2021 Akash Kumar Shukla
+ *   All rights reserved.
+ */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import {environment} from '../../../environments/environment';
@@ -80,7 +84,7 @@ export class RequestService {
 
 	// GetMethod for only to load details from API
 
-	getMethod(url, object) {
+	getMethod(url, video_id) {
 
 		this.userId = (localStorage.getItem('userId') != '' && localStorage.getItem('userId') != null && localStorage.getItem('userId') != undefined) ? localStorage.getItem('userId') : '';
 
@@ -90,7 +94,9 @@ export class RequestService {
 						'model_id' : this.userId,
 						'token' : this.accessToken,
 						'login_by': this.login_by,
-						'device_type': this.device_type};
+						'device_type': this.device_type,
+						'video_id' : video_id
+					};
 
 		return this.http.get(this.apiUrl+url, {params : params});
 

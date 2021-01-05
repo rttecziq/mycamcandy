@@ -1,17 +1,16 @@
 <!--MAIN SECTION STARTS-->
 <div class="">
+  
   <div class="row m-0">
     <!-- BRAODCAST IMAGE SECTION STARTS -->
     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 p-0">
       <div class="left-spacing1 sec-padding">
-        <div class="text-danger" *ngIf="isStreaming > 0">
-          <p>
-            Note : You are now streaming live. Therefore the header and sidebar
-            will be disabled. Once the live streaming has stopped, it will be
-            enabled again.
-          </p>
-        </div>
-
+          <div class="text-danger" *ngIf="isStreaming > 0">
+            <p *ngIf="isStreaming != 1" class="bold mb-0">You are currently offline.</p>
+            <p *ngIf="isStreaming != 1" class="mb-0">Access is disabled: you can enter public room and wait while you get online.</p>
+            <p *ngIf="isStreaming == 1" class="bold mb-0">You are currently Online.</p>
+            <p *ngIf="isStreaming == 1" class="mb-0">you can perform your show.</p>
+          </div>
         <!--<video id="example1" class="video-js vjs-default-skin vjs-big-play-centered" style="width:100%;height:350px;"
                     controls width="700" height="350"
                     poster="http://placeimg.com/640/264/any"
@@ -19,90 +18,77 @@
                     <source  src="../../../assets/video/video.mp4" type='video/mp4' />
                 </video> -->
 
-        <div id="videos-container" class="web">
-          <div id="defaultImage">
-            <img src="{{ video_details.snapshot }}" />
-            <div class="video-loader">
-              <iframe
-                width="100"
-                height="100"
-                class="single-video-loader"
-                style="border:0px solid transparent !important;height:104px;width:100px;overflow:hidden;"
-                src="https://lottiefiles.com/iframe/1562-play-button"
-              ></iframe>
+          <div id="videos-container" class="web">
+            <div id="defaultImage">
+              <img src="{{ video_details.snapshot }}" />
+              <!-- <div class="video-loader">
+                <iframe
+                  width="100"
+                  height="100"
+                  class="single-video-loader"
+                  style="border:0px solid transparent !important;height:104px;width:100px;overflow:hidden;"
+                  src="https://lottiefiles.com/iframe/1562-play-button"
+                ></iframe>
+              </div> -->
             </div>
           </div>
-        </div>
 
-        <div style="display: none">
-          <button id="snapshot_id" (click)="snapShotFn()">snapshot</button>
 
-          <textarea id="snapshot"></textarea>
-
-          <video id="videoInput" autoplay></video>
-
-          <textarea id="rtpSdp">
-v=0
-                   o=- 0 0 IN IP4 {{ wowza_ip_address }}
-                   s=Kurento
-                   c=IN IP4 {{ wowza_ip_address }}
-                   t=0 0
-                   m=video {{ port_no }} RTP/AVP 100
-                   a=rtpmap:100 H264/90000
-                 </textarea
-          >
-        </div>
-
-        <div class="white-bg spacing1 shadow">
-          <div class="display-inline">
-            <div class="pull-left">
-              <a hre="#"
-                ><button class="btn btn-default btn-block btn-br size-14 mr-5">
-                  {{ video_details.type }}
-                </button></a
-              >
-              <a hre="#"
-                ><button class="btn btn-default btn-block btn-br size-14 mr-5">
-                  <i class="fa fa-eye"></i> &nbsp; {{ viewer_cnt }}
-                </button></a
-              >
-              <a hre="#"
-                ><button
-                  class="btn btn-default btn-block btn-br size-14 mr-5 width-35"
-                >
-                  <i class="fa fa-facebook"></i></button
-              ></a>
-              <a hre="#"
-                ><button class="btn btn-default btn-block btn-br size-14 mr-5 ">
-                  <i class="fa fa-twitter"></i></button
-              ></a>
-              <a hre="#"
-                ><button
-                  class="btn btn-default btn-block btn-br size-14 pull-right"
-                  *ngIf="video_details.amount > 0"
-                >
-                  {{ video_details.currency }}{{ video_details.amount }}
-                </button></a
-              >
-            </div>
-            <div class="pull-right">
-              <button
-                class="btn btn-default btn-block btn-br size-14 mr-5"
-                type="button"
-                id="open-room"
-                (click)="openRoom()"
-              >
-                Go Live
-              </button>
-              <button
-                class="btn btn-default btn-block btn-br size-14 mr-5"
-                type="button"
-                id="stop-live"
-                (click)="stopLive()"
-                style="display: none;"
-              >
-                Stop Live
-              </button>
+          <div style="display: none">
+            <button id="snapshot_id" (click)="snapShotFn()">snapshot</button>
+  
+            <textarea id="snapshot"></textarea>
+  
+            <video id="videoInput" autoplay></video>
+  
+            <textarea id="rtpSdp">
+                     v=0
+                     o=- 0 0 IN IP4 {{ wowza_ip_address }}
+                     s=Kurento
+                     c=IN IP4 {{ wowza_ip_address }}
+                     t=0 0
+                     m=video {{ port_no }} RTP/AVP 100
+                     a=rtpmap:100 H264/90000
+                   </textarea
+            >
+          </div>
+  
+        <div class="action-buttons">
+            <div class="row mt-3 pl-3 pr-3">
+              <div class="custom-dropup">
+                <button class="custom-dropbtn btn btn-default"><i class="fa fa-bars"></i></button>
+                <div class="custom-dropup-content">
+                  <a href="#" class="custom-dropup-link">Site Menu</a>
+                  <a href="#" class="custom-dropup-link">My Wallet</a>
+                  <a href="#" class="custom-dropup-link">Performer Dashboard</a>
+                </div>
+              </div>
+              <div class="custom-dropup">
+                <a class="btn btn-success"><i class="fa fa-money"></i> {{total_candies}}</a>
+              </div>                 
+              <div class="custom-dropup float-right mr-2">
+                <button class="custom-dropbtn btn btn-secondary"><i class="fa fa-arrows-alt"></i></button>
+                <div class="custom-dropup-content">
+                  <p class="mb-0">Enter full screen</p>
+                </div>
+              </div> 
+              <div class="custom-dropup float-right mr-2">
+                <a class="btn btn-yellow"><i class="fa fa-clock"></i> {{video_start_time}}</a>
+              </div>
+              <div class="custom-dropup float-right mr-2">
+                <button class="custom-dropbtn btn btn-danger" id="stop-live" (click)="stopLive()">
+                  <i class="fa fa-times"></i>
+                </button>
+                <div class="custom-dropup-content">
+                  <p class="mb-0">Exit</p>
+                </div>
+              </div>
+              <div class="custom-dropup">
+                <button class="custom-dropbtn btn btn-default" type="button" id="open-room"
+                  (click)="openRoom()"> 
+                  Go Live
+                </button>
+              </div>
               <button
                 type="button"
                 id="start-live"
@@ -112,107 +98,127 @@ v=0
                 live start
               </button>
             </div>
-          </div>
-          <div class="clearfix"></div>
-          <h4 class="captalize">
-            Streaming by
-            <span class="theme-clr">{{ video_details.name }} </span>
-          </h4>
-          <h4 class="captalize" *ngIf="video_details.live_group_id > 0">
-            Group Name -
-            <span class="theme-clr">{{ video_details.live_group_name }} </span>
-          </h4>
-          <h3 class="captalize mt-15">{{ video_details.title }}</h3>
-          <p class="m-0 text-grey-clr">{{ video_details.description }}</p>
         </div>
-
-        <div class="white-bg spacing1 shadow" style="margin-top:-5px;">
-          <div class="panel-heading white-text">
-            <i class="fa fa-commenting icon"></i>
-            Private Mode Request
-          </div>
-          <div
-            class="panel-body chat-container">
-            <span *ngFor="let request of privateRequests">
-              <div class="media">
-                <div class="media-left">
-                  <img
-                    src="{{ request.user.chat_picture }}"
-                    class="media-object media1"
-                  />
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading"> {{request.user.name}}</h4>
-                  <p></p>
-                </div>
-                </div>
-              <hr />
-              <div class="media-right">
-                <a *ngIf="request.status == 'Accepted'" hre="#"><button class="btn btn-default btn-block btn-br size-14 mr-5"
-                  >In Private Mode</button></a>
-                  <a *ngIf="request.status != 'Accepted'" hre="#"><button class="btn btn-default btn-block btn-br size-14 mr-5" (click)="acceptPrivateMode(request.user.id, request.id, request.live_video_id)"
-                    >Accept Private Mode</button></a>
-              </div>
-            </span>
-          </div>  
-        </div>
-      
 
       </div>
     </div>
     <!-- BROADCAST IMAGE SECTION ENDS -->
 
     <!-- CHAT SECTION STARTS -->
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 p-0 fixed-chat">
-      <div class="panel panel-default ">
-        <div class="panel-heading white-text">
-          <i class="fa fa-commenting icon"></i>Chat
-        </div>
-        <div
-          class="panel-body chat-container"
-          #scrollMe
-          [scrollTop]="scrollMe.scrollHeight"
-        >
-          <span *ngFor="let chat_message of chat_messages">
-            <!-- LEFT ALIGNED MEDIA OBJECT-->
-            <div class="media">
-              <div class="media-left">
-                <img
-                  src="{{ chat_message.userpicture }}"
-                  class="media-object media1"
-                />
-              </div>
-              <div class="media-body">
-                <h4 class="media-heading">{{ chat_message.username }}</h4>
-                <p>{{ chat_message.message }}</p>
+    <div class="col-lg-4 col-md-5 col-sm-5">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#Chat"><i class="fa fa-comment"></i> Chat</a></li>
+        <li><a data-toggle="tab" href="#Users"><i class="fa fa-users"></i> Users <span class="badge">1</span></a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="Chat" class="tab-pane fade in active">
+          <div class="streaming-chat">
+         <div class="streaming-chat-msg">
+          <!-- <i class="small text-green">12/17/2020 at 10:58:30 AM:</i>:<br> -->
+           <div class="chat-notification bg-white p-3">
+             <p class="small mb-0 text-green"> Welcome to your performer room!</p>
+             <p class="small mb-0 text-green"> Your current balance : {{total_candies}} tkCandy</p>
+             <p class="small mb-0 text-green"> Private show cost per minute for client : {{cpm}} tkCandy/m</p>
+             <p class="small mb-0 text-green"> Charging starts after a grace time : 30s</p>
+             <p class="small mb-0 text-green"> Private show earning per minute for performer: 50 tkCandy/m</p>
+             <!-- <p class="small mb-0 text-green"> You are in room: jensen</p> -->
+             <p class="small mb-0 text-green"> Group mode: <strong>{{show_type}}</strong> </p>
+             <p class="small mb-0 text-green"> Video Type: <strong>{{type}}</strong> </p>
+             <p class="small mb-0 text-green"> Show Price : {{show_type_price}} tkCandy/m</p>  
+             </div>
+         </div>
+         <div class="chat-box mt-3">
+           <div *ngFor="let chat_message of chat_messages">
+            <!-- <div class="w-100"><p class="p-2 bg-sent">hi</p></div> -->
+            <div class="w-100"><p class="p-2 bg-sent">{{chat_message.message}}</p></div>  
+           </div>
+           <!-- <div class="w-100"><p class="p-2 bg-receive">hi, how are you?</p></div> -->
+         </div>
+         <div class="streaming-chat-form mt-3">
+            <div class="row">
+              <div class="col-md-12">
+                <form action="" accept-charset="UTF-8" method="get">
+                  <div class="input-group">
+                    <span class="text-center">
+                      <label for=""><i class="fa fa-user"></i><br> Jensen</label>
+                    </span>
+                    <span class="input-group-btn">
+                      <button class="btn btn-sm btn-orange mr-2"><i class="fa fa-microphone"></i></button>
+                    </span>
+                    <span class="input-group-btn">
+                      <button class="btn btn-sm btn-yellow mr-2" ><i class="fa fa-smile-o"></i></button>
+                    </span>
+                    <input type="text" name="live-chat-msg" [(ngModel)]="messageContent"
+                        (keyup.enter)="sendMessage(messageContent)"
+                        placeholder="Type your message" class="form-control mr-2" 
+                        style="margin-top: .7rem;">
+                    <span class="input-group-btn">
+                      <button type="submit" 
+                      (click)="sendMessage(messageContent)"
+                      class="btn btn-sm btn-primary ml-2"><i class="fa fa-paper-plane"></i></button>
+                    </span> 
+                  </div>
+                </form>
               </div>
             </div>
-            <hr />
-          </span>
+         </div>
+       </div>
         </div>
-        <div class="panel-footer">
-          <form>
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control broad-form"
-                placeholder="Type your message here..."
-                name="message"
-                [(ngModel)]="messageContent"
-                (keyup.enter)="sendMessage(messageContent)"
-                maxlength="128"
-              />
-              <span
-                class="input-group-addon broad-icon"
-                (click)="sendMessage(messageContent)"
-                ><i class="fa fa-paper-plane"></i
-              ></span>
-            </div>
-          </form>
+        <div id="Users" class="tab-pane fade">
+          <ul class="custom-ul user-ul">
+            <li>
+              <div class="dropdown">
+                <a href="javascript:void(0)" class="dropdown-toggle" type="button" data-toggle="dropdown">ERROR_empty &nbsp;
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#"><i class="fa fa-address-card mr-2" style="font-size: 20px"></i> Profile</a></li>
+                  <li><a href="#"><i class="fa fa-sign-out mr-2" style="font-size: 20px"></i> Kick</a></li>
+                  <li><a href="#"><i class="fa fa-ban mr-2" style="font-size: 20px"></i> Ban</a></li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <div class="dropdown">
+                <a href="javascript:void(0)" class="dropdown-toggle" type="button" data-toggle="dropdown">Jensen &nbsp;
+                <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#"><i class="fa fa-address-card mr-2" style="font-size: 20px"></i> Profile</a></li>
+                  <li><a href="#"><i class="fa fa-sign-out mr-2" style="font-size: 20px"></i> Kick</a></li>
+                  <li><a href="#"><i class="fa fa-ban mr-2" style="font-size: 20px"></i> Ban</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
+     </div>
     <!-- CHAT SECTION ENDS -->
   </div>
 </div>
 <!--MAIN SECTION ENDS-->
+<!-- Model section for private requests starts here. -->
+<div *ngFor="let request of privateRequests">
+  <div *ngIf="request.status != 'Accepted' && request.status != 'Rejected'" id="private-chat-req-accept" class="modal fade" role="dialog">
+    <div  class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close close-private-popup" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><i class="fa fa-star"></i> Answer Private Show Request</h4>
+        </div>
+        <div class="modal-body">
+          <p class="bold">User {{request.user.name}} requested starting a private call.</p>
+        </div>
+        <div class="modal-footer">
+          <a  type="button" class="btn btn-danger close-private-popup" data-dismiss="modal"><i class="fa fa-times"></i> Decline</a>
+          <a  type="button" class="btn btn-success" data-dismiss="modal" (click)="acceptPrivateMode(request.user.id, request.id, request.live_video_id)">
+            <i class="fa fa-star"></i> 
+            Accept
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
