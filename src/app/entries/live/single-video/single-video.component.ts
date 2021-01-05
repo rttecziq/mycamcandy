@@ -798,6 +798,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
       (data: any) => {
         if (data.success == true) {
           this.privateRequests = data.data;
+          this.total_candies = data.total_candies;
       }
     },
       (err: HttpErrorResponse) => {
@@ -1044,7 +1045,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
     this.requestService.getMethod('get_user_live_status', this.video_id).subscribe(
       (data: any) => {
         if (data.success == true) {
-          //this.total_candies = data.
+          this.total_candies = data.total_candies;
           console.log(data);
         } else if(data.error_code == 160){
           try{
