@@ -152,6 +152,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
   video_start_time: string;
   clockHour: number;
   candiesChecker: any;
+  show_type_price: any;
 
   constructor(
     myElement: ElementRef,
@@ -695,6 +696,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
 
           this.video_start_time = data.data.video_start_time;
 
+          this.show_type_price = data.data.show_type_price;
           // this.getTimeDifference(this.video_start_time);
           
 
