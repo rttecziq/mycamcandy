@@ -31,15 +31,26 @@
                            <div class="row">
                               <div class="col-md-12 col-sm-12  col-xs-12">
                                  <div class="media">
-                                    <div class="media-left">
-                                       <a href="#">
+                                    <div class="media-left" *ngIf="user_activities.user.is_content_creator==1 && user_activities.user.id !=userId">
+                                       <a routerLink="/candy-club/model/{{user_activities.user.name}}">
+                                       <img class="media-object photo-profile" [src]="user_activities.user.chat_picture" width="40" height="40" alt="...">
+                                       </a>
+                                    </div>
+                                    <div class="media-left" *ngIf="user_activities.user.is_content_creator==1 && user_activities.user.id==userId">
+                                       <a routerLink="/candy-club/{{user_activities.user.name}}">
+                                       <img class="media-object photo-profile" [src]="user_activities.user.chat_picture" width="40" height="40" alt="...">
+                                       </a>
+                                    </div>
+                                    <div class="media-left" *ngIf="user_activities.user.is_content_creator==0">
+                                       <a routerLink="/candy-club/user/{{user_activities.user.name}}">
                                        <img class="media-object photo-profile" [src]="user_activities.user.chat_picture" width="40" height="40" alt="...">
                                        </a>
                                     </div>
                                     <div class="media-body">                                       
-                                          <h5 class="media-heading" style="margin-bottom: 0;" *ngIf="user_activities.user.is_content_creator==1">&nbsp;&nbsp;<a href="/#/candy-club/models/{{user_activities.user.name}}" class="anchor-username">{{user_activities.user.name}}</a></h5>
-                                          <h5 class="media-heading" style="margin-bottom: 0;" *ngIf="user_activities.user.is_content_creator==0">&nbsp;&nbsp;<a href="/#/candy-club/{{user_activities.user.name}}" class="anchor-username">{{user_activities.user.name}}</a></h5>
-                                       <a href="#" class="anchor-time">&nbsp;&nbsp;{{ user_activities.created_at | date }} at {{ user_activities.created_at | date:'shortTime' }}</a>
+                                          <h5 class="media-heading" style="margin-bottom: 0;" *ngIf="user_activities.user.is_content_creator==1 && user_activities.user.id==userId">&nbsp;&nbsp;<a href="/#/candy-club/{{user_activities.user.name}}" class="anchor-username">{{user_activities.user.name}}</a></h5>
+                                          <h5 class="media-heading" style="margin-bottom: 0;" *ngIf="user_activities.user.is_content_creator==1 && user_activities.user.id!=userId">&nbsp;&nbsp;<a href="/#/candy-club/model/{{user_activities.user.name}}" class="anchor-username">{{user_activities.user.name}}</a></h5>
+                                          <h5 class="media-heading" style="margin-bottom: 0;" *ngIf="user_activities.user.is_content_creator==0">&nbsp;&nbsp;<a href="/#/candy-club/user/{{user_activities.user.name}}" class="anchor-username">{{user_activities.user.name}}</a></h5>
+                                       <span class="anchor-time">&nbsp;&nbsp;{{ user_activities.created_at | date }} at {{ user_activities.created_at | date:'shortTime' }}</span>
                                        <div class="edit-delete" *ngIf="user_activities.user.id == userId">
                                           <div class="dropdown">
                                              <a href="#" type="button" data-toggle="dropdown"><i class="fa fa-chevron-down"></i></a>
@@ -98,9 +109,19 @@
                               </div>
                               <div class="comment">
                                  <div class="media d-inline-table">
-                                    <div class="media-left">
-                                       <a href="#">
-                                       <img class="media-object photo-profile mt-2" [src]="user_activities.user.chat_picture" width="40" height="40" alt="..." style="margin-top: 0.45em;">
+                                    <div class="media-left" *ngIf="user_activities.user.is_content_creator==1 && user_activities.user.id!=userId">
+                                       <a routerLink="/candy-club/{{user_activities.user.name}}">
+                                       <img class="media-object photo-profile" [src]="user_activities.user.chat_picture" width="40" height="40" alt="...">
+                                       </a>
+                                    </div>
+                                    <div class="media-left" *ngIf="user_activities.user.is_content_creator==1 && user_activities.user.id==userId">
+                                       <a routerLink="/candy-club/model/{{user_activities.user.name}}">
+                                       <img class="media-object photo-profile" [src]="user_activities.user.chat_picture" width="40" height="40" alt="...">
+                                       </a>
+                                    </div>
+                                    <div class="media-left" *ngIf="user_activities.user.is_content_creator==0">
+                                       <a routerLink="/candy-club/user/{{user_activities.user.name}}">
+                                       <img class="media-object photo-profile" [src]="user_activities.user.chat_picture" width="40" height="40" alt="...">
                                        </a>
                                     </div>
                                     &nbsp;&nbsp;
@@ -113,17 +134,30 @@
                                  <div *ngFor="let user_activities_reply of user_activities.replies;let i = index;">
                                     <div class="post-comment mt-3">
                                        <div class="media">
-                                          <div class="media-left">
-                                             <a href="#">
+                                          <div class="media-left" *ngIf="user_activities_reply.user.is_content_creator==1 && user_activities_reply.user.id!=userId">
+                                             <a routerLink="/candy-club/model/{{user_activities_reply.user.name}}">
+                                             <img class="media-object photo-profile" [src]="user_activities_reply.user.chat_picture" width="40" height="40" alt="...">
+                                             </a>
+                                          </div>
+                                          <div class="media-left" *ngIf="user_activities_reply.user.is_content_creator==1 && user_activities_reply.user.id==userId">
+                                             <a routerLink="/candy-club/{{user_activities_reply.user.name}}">
+                                             <img class="media-object photo-profile" [src]="user_activities_reply.user.chat_picture" width="40" height="40" alt="...">
+                                             </a>
+                                          </div>
+                                          <div class="media-left" *ngIf="user_activities_reply.user.is_content_creator==0">
+                                             <a routerLink="/candy-club/user/{{user_activities_reply.user.name}}">
                                              <img class="media-object photo-profile" [src]="user_activities_reply.user.chat_picture" width="40" height="40" alt="...">
                                              </a>
                                           </div>
                                           <div class="media-body">
                                                 <span>
-                                                   <h5 class="media-heading" *ngIf="user_activities_reply.user.is_content_creator==1">&nbsp;&nbsp;<a href="/#/candy-club/models/{{user_activities_reply.user.name}}" class="anchor-username">{{user_activities_reply.user.name}}</a> 
+                                                   <h5 class="media-heading" *ngIf="user_activities_reply.user.is_content_creator==1 && user_activities_reply.user.id!=userId">&nbsp;&nbsp;<a href="/#/candy-club/model/{{user_activities_reply.user.name}}" class="anchor-username">{{user_activities_reply.user.name}}</a> 
                                                       <span class="comment-msg">&nbsp;&nbsp;{{user_activities_reply.comment_content}}</span>
                                                    </h5>
-                                                   <h5 class="media-heading" *ngIf="user_activities_reply.user.is_content_creator==0">&nbsp;&nbsp;<a href="/#/candy-club/{{user_activities_reply.user.name}}" class="anchor-username">{{user_activities_reply.user.name}}</a> 
+                                                   <h5 class="media-heading" *ngIf="user_activities_reply.user.is_content_creator==1 && user_activities_reply.user.id==userId">&nbsp;&nbsp;<a href="/#/candy-club/{{user_activities_reply.user.name}}" class="anchor-username">{{user_activities_reply.user.name}}</a> 
+                                                      <span class="comment-msg">&nbsp;&nbsp;{{user_activities_reply.comment_content}}</span>
+                                                   </h5>
+                                                   <h5 class="media-heading" *ngIf="user_activities_reply.user.is_content_creator==0">&nbsp;&nbsp;<a href="/#/candy-club/user/{{user_activities_reply.user.name}}" class="anchor-username">{{user_activities_reply.user.name}}</a> 
                                                       <span class="comment-msg">&nbsp;&nbsp;{{user_activities_reply.comment_content}}</span>
                                                    </h5>
                                                    <div id="edit_comment_{{user_activities_reply.id}}" class="d-none" *ngIf="user_activities_reply.user.id == userId">
@@ -168,17 +202,30 @@
                                        <div class="reply-to-reply" *ngFor="let user_activities_re_reply of user_activities_reply.replies;">
                                           <div class="ml-3 border-left">
                                              <div class="media">
-                                                <div class="media-left">
-                                                   <a href="#">
+                                                <div class="media-left" *ngIf="user_activities_re_reply.user.is_content_creator==1 && user_activities_re_reply.user.id==userId">
+                                                   <a href="/candy-club/{{user_activities_re_reply.user.name}}">
+                                                   <img class="media-object photo-profile" [src]="user_activities_re_reply.user.chat_picture" width="40" height="40" alt="...">
+                                                   </a>
+                                                </div>
+                                                <div class="media-left" *ngIf="user_activities_re_reply.user.is_content_creator==1 && user_activities_re_reply.user.id!=userId">
+                                                   <a href="/candy-club/model/{{user_activities_re_reply.user.name}}">
+                                                   <img class="media-object photo-profile" [src]="user_activities_re_reply.user.chat_picture" width="40" height="40" alt="...">
+                                                   </a>
+                                                </div>
+                                                <div class="media-left" *ngIf="user_activities_re_reply.user.is_content_creator==0">
+                                                   <a href="/candy-club/user/{{user_activities_re_reply.user.name}}">
                                                    <img class="media-object photo-profile" [src]="user_activities_re_reply.user.chat_picture" width="40" height="40" alt="...">
                                                    </a>
                                                 </div>
                                                 <div class="media-body">
                                                    <span>
-                                                      <h5 class="media-heading" *ngIf="user_activities_re_reply.user.is_content_creator==1"><a href="/#/candy-club/models/{{user_activities_re_reply.user.name}}" class="anchor-username">{{user_activities_re_reply.user.name}}</a> 
+                                                      <h5 class="media-heading" *ngIf="user_activities_re_reply.user.is_content_creator==1 && user_activities_re_reply.user.id==userId"><a href="/candy-club/{{user_activities_re_reply.user.name}}" class="anchor-username">{{user_activities_re_reply.user.name}}</a> 
                                                          <span class="comment-msg">&nbsp;&nbsp;{{user_activities_re_reply.comment_content}}</span>
                                                       </h5>
-                                                      <h5 class="media-heading" *ngIf="user_activities_re_reply.user.is_content_creator==0"><a href="/#/candy-club/{{user_activities_re_reply.user.name}}" class="anchor-username">{{user_activities_re_reply.user.name}}</a> 
+                                                      <h5 class="media-heading" *ngIf="user_activities_re_reply.user.is_content_creator==1 && user_activities_re_reply.user.id!=userId"><a href="/candy-club/model/{{user_activities_re_reply.user.name}}" class="anchor-username">{{user_activities_re_reply.user.name}}</a> 
+                                                         <span class="comment-msg">&nbsp;&nbsp;{{user_activities_re_reply.comment_content}}</span>
+                                                      </h5>
+                                                      <h5 class="media-heading" *ngIf="user_activities_re_reply.user.is_content_creator==0"><a href="/candy-club/user/{{user_activities_re_reply.user.name}}" class="anchor-username">{{user_activities_re_reply.user.name}}</a> 
                                                          <span class="comment-msg">&nbsp;&nbsp;{{user_activities_re_reply.comment_content}}</span>
                                                       </h5>
                                                       <div id="edit_comment_{{user_activities_re_reply.id}}" class="d-none" *ngIf="user_activities_re_reply.user.id == userId">
