@@ -1036,9 +1036,6 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
     console.log(this.clockHour + ':' + this.clockMin + ':' + this.clockSec);
   }
   
-  removeCheckers(){
-    clearInterval(this.clockTimer);
-  }
 
   getUserStatusWithCandies(){
     //getLiveStatusWithCandies
@@ -1101,8 +1098,8 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
 
     clearInterval(this.snapshot_capture);
     clearInterval(this.candiesChecker);
-    this.removeCheckers();
-    
+    clearInterval(this.clockTimer);
+   
     const details = { video_id: this.video_id, private_video_id: this.livePrivateRequestId };
 
     $('.side-menubar').removeClass('disable-links');
