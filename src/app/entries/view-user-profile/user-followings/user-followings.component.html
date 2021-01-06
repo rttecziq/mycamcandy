@@ -12,6 +12,20 @@
                <button class="btn-following">Following<br>{{member.followings?.length}}</button>
             </a>
          </div>
+         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <div *ngIf="is_follow == 0">
+              <a (click)="followUserSidebar(member.id)">
+                <button class="btn-following">Follow</button>
+              </a>
+          </div>
+          <div *ngIf="is_follow == 1">
+            <a (click)="unFollowUserSidebar(member.id)">
+              <button class="btn-following">Unfollow</button>
+            </a>
+          </div>
+
+         </div>
+
       </div>
       <ul class="list-group user-profile-list">
         <a routerLink="/candy-club/user/{{member.name}}/about"><li class="list-group-item active"><i class="fa fa-user float-left" aria-hidden="true"></i> <span class="link">About</span></li></a>    
@@ -71,9 +85,10 @@
                       </p>
                    </div>
                 </div>
-                
+              
                 <a class="btn btn-sm btn-custom-following" *ngIf="!follower_detail.status" (click)="followUser(follower_detail.follower_id, i)">Follow</a>
-                <a class="btn btn-sm btn-custom-following" id="unfollow{{i}}" *ngIf="follower_detail.status" (click)="unFollowUser(follower_detail.follower_id, i)">Following</a>
+                <a class="btn btn-sm btn-custom-following" id="unfollow{{i}}" *ngIf="follower_detail.status && (follower_detail.follower_id != logged_in_userId)" (click)="unFollowUser(follower_detail.follower_id, i)">Following</a>
+  
               </div>
           </div>
 
