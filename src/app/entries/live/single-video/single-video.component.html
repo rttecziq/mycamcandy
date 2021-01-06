@@ -131,9 +131,16 @@
          <div class="chat-box mt-3">
            <div *ngFor="let chat_message of chat_messages">
             <!-- <div class="w-100"><p class="p-2 bg-sent">hi</p></div> -->
+              <div *ngIf="chat_message.type != 'vu'" class="media-left">
+                <img
+                  src="{{ chat_message.userpicture }}"
+                  class="media-object media1"
+                />
+              </div>
+              <h5 class="media-heading">{{ chat_message.username }}</h5> 
             <div class="w-100"><p class="p-2 bg-sent">{{chat_message.message}}</p></div>  
-           </div>
-           <!-- <div class="w-100"><p class="p-2 bg-receive">hi, how are you?</p></div> -->
+            <!-- <div *ngIf="chat_message.type == 'vu'" class="w-100"><p class="p-2 bg-receive">{{chat_message.message}}</p></div> -->
+          </div>
          </div>
          <div class="streaming-chat-form mt-3">
             <div class="row">
