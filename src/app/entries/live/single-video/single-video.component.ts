@@ -640,8 +640,12 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
             this.publicVideoFileName = serverFileSavePath;
 
             this.privateVideoFileName = 'stream_' + this.video_id + '_1' + '.webm';
-            
-            this.saveVideoName(serverFileSavePath);
+
+            if(isPrivate) {
+              this.saveVideoName(this.privateVideoFileName);
+            } else {
+              this.saveVideoName(this.publicVideoFileName);
+            }
             this.kurentoObj = new kurentoObject(
             this.kurento_socket_url,
             this.wowza_ip_address,
@@ -926,6 +930,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
     this.ioConnection = this.chatSocketService
       .onMessage()
       .subscribe((message: any) => {
+        console.log(message,'message')
         this.chat_messages.push(message);
       });
 
@@ -1036,9 +1041,6 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
     console.log(this.clockHour + ':' + this.clockMin + ':' + this.clockSec);
   }
   
-  removeCheckers(){
-    clearInterval(this.clockTimer);
-  }
 
   getUserStatusWithCandies(){
     //getLiveStatusWithCandies
@@ -1101,8 +1103,8 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
 
     clearInterval(this.snapshot_capture);
     clearInterval(this.candiesChecker);
-    this.removeCheckers();
-    
+    clearInterval(this.clockTimer);
+   
     const details = { video_id: this.video_id, private_video_id: this.livePrivateRequestId };
 
     $('.side-menubar').removeClass('disable-links');
