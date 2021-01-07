@@ -16,6 +16,9 @@ export class UserFollowersComponent implements AfterViewInit {
   user_profile_picture : string;  
   user_cover_picture : string;
 
+  logged_in_userId : string;
+  is_follow : number;
+
   follower_details : any[];
   showFollowersLoader : boolean;
   followersSkipCount : number;
@@ -28,6 +31,9 @@ export class UserFollowersComponent implements AfterViewInit {
     this.user_profile_picture = "../../../../assets/img/pro-img.jpg";  
     this.user_cover_picture = "../../../../assets/img/bg-image.jpg";
 
+    this.logged_in_userId = this.requestService.userId;
+    this.is_follow = 0;
+
     this.follower_details = [];
     this.showFollowersLoader = false;
     this.followersSkipCount = 0;
@@ -38,12 +44,6 @@ export class UserFollowersComponent implements AfterViewInit {
             this.member_name = params['username'];
             let details = {name : this.member_name};
             this.model_profiles_fn("user_profile_details", details);
-
-            setTimeout(() => {
-              let details = {skip:0};
-              //this.followerDetailsFn('followers_list', details);
-            }, 2000);
-
           });
         }
         toast_message(heading, message) {
@@ -63,11 +63,23 @@ export class UserFollowersComponent implements AfterViewInit {
               .subscribe(
                   (data : any) => {
                       if (data.success == true) {
+                        // set default false
+                        this.is_follow = 0;
+                        console.log(data);
                         this.member = data;
                         this.user_cover_picture = data.cover;
                         this.user_profile_picture = data.picture;
                         this.follower_details = data.followers;
-                        console.log(this.member);
+                        
+                        if(this.follower_details) {
+                          for (let key of this.follower_details) {
+                            let value = key['follower_id'];
+                            if(value == this.logged_in_userId) {
+                              this.is_follow = 1;
+                            }
+                          }
+                        }
+
                       } else if(data.error_messages == 'Model not found') {
                         this.router.navigate(['error']);
                       } else {
@@ -81,16 +93,18 @@ export class UserFollowersComponent implements AfterViewInit {
               );
         }
 
-      followUser(user_id, index) {
-
+      followUser(user_id : any, index : any) {
+        
           let details = {follower_id : user_id};
-  
+
           this.requestService.postMethod('add_follower', details)
               .subscribe(
                   (data : any ) => {
   
                       if (data.success == true) {
                           this.follower_details[index] = data.data;
+                          console.log(this.follower_details[index])
+                          //this.model_profiles_fn("user_profile_details", {name:this.member_name});
                           this.toast_message("Success", "You have now started following the User, you will be notified when the User goes live");  
                       } else {
                           this.errorMessages = data.error_messages;
@@ -99,8 +113,7 @@ export class UserFollowersComponent implements AfterViewInit {
   
                   },
   
-                  (err : HttpErrorResponse) => {
-  
+                  (err : HttpErrorResponse) => {  
                       this.errorMessages = 'Oops! Something Went Wrong';
                       this.toast_message("Error", this.errorMessages);
                   }
@@ -110,14 +123,17 @@ export class UserFollowersComponent implements AfterViewInit {
       }
   
       // REmove follower
-      unFollowUser(user_id, index) {
-          let details = {follower_id : user_id};  
+      unFollowUser(user_id, index, is_sidebar_follow_button) {
+          let details = {follower_id : user_id};
+
           this.requestService.postMethod('remove_follower', details)
               .subscribe(
                   (data : any ) => {
                       if (data.success == true) {
-                          //this.follower_details[index] = data.data;
+                          this.follower_details[index] = data.data;
+                          console.log(this.follower_details[index]);
                           document.getElementById("unfollow"+index).style.display = "none";
+                          this.model_profiles_fn("user_profile_details", {name:this.member_name});
                           this.toast_message("Success", "You have now stopped following the user, you will not get any further notifications from the User");  
                       } else {
                           this.errorMessages = data.error_messages;
@@ -132,6 +148,59 @@ export class UserFollowersComponent implements AfterViewInit {
   
               );
   
+      }
+
+
+      // Add follower from sidebar button
+      followUserSidebar(user_id : any) {
+        
+        let details = {follower_id : user_id};
+
+        this.requestService.postMethod('add_follower', details)
+            .subscribe(
+                (data : any ) => {
+                    if (data.success == true) {
+                        this.model_profiles_fn("user_profile_details", {name:this.member_name});
+                        this.toast_message("Success", "You have now started following the User, you will be notified when the User goes live");  
+                    } else {
+                        this.errorMessages = data.error_messages;
+                        this.toast_message("Error", this.errorMessages);
+                    }
+
+                },
+
+                (err : HttpErrorResponse) => {  
+                    this.errorMessages = 'Oops! Something Went Wrong';
+                    this.toast_message("Error", this.errorMessages);
+                }
+
+            );
+
+      }
+
+      // Remove follower from sidebar button
+      unFollowUserSidebar(user_id) {
+        let details = {follower_id : user_id};
+
+        this.requestService.postMethod('remove_follower', details)
+            .subscribe(
+                (data : any ) => {
+                    if (data.success == true) {
+                        this.model_profiles_fn("user_profile_details", {name:this.member_name});
+                        this.toast_message("Success", "You have now stopped following the user, you will not get any further notifications from the User");  
+                    } else {
+                        this.errorMessages = data.error_messages;
+                        this.toast_message("Error", this.errorMessages);
+                    }  
+                },
+
+                (err : HttpErrorResponse) => {  
+                    this.errorMessages = 'Oops! Something Went Wrong';
+                    this.toast_message("Error", this.errorMessages);
+                }
+
+            );
+
       }
 
 }
