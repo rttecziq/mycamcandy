@@ -434,7 +434,7 @@ export class RegisterComponent implements AfterViewInit{
                     
                     // Once successfully authenticated by user, redirect home/profile page
 
-                    //this.router.navigate(['/login']);
+                    this.router.navigate(['/login']);
 
                 } else {
                     if (data.error_code == 9001) {
@@ -450,7 +450,7 @@ export class RegisterComponent implements AfterViewInit{
                         });
                         
                         // Once successfully authenticated by user, redirect home/profile page    
-                        //this.router.navigate(['/login']);
+                        this.router.navigate(['/login']);
 
                     } else {
                         this.errorMessages = data.error_messages;                        
