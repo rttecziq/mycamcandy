@@ -12,7 +12,7 @@
                <button class="btn-following">Following<br>{{member.followings?.length}}</button>
             </a>
          </div>
-         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div *ngIf="is_follow == 0">
               <a (click)="followUserSidebar(member.id)">
                 <button class="btn-following">Follow</button>
@@ -79,7 +79,7 @@
                       </a>
                    </div>
                    <div class="media-body">
-                      <span class="bold small" style="margin-bottom: 0;">&nbsp;&nbsp;<a class="anchor-username">{{follower_detail.name}}</a></span><span class="ml-2 small">FOLLOWS {{username}}</span>
+                      <span class="bold small" style="margin-bottom: 0;">&nbsp;&nbsp;<a class="anchor-username">{{follower_detail.name}}</a></span><span class="ml-2 small"></span>
                       <p><a class="small">&nbsp;&nbsp;<!--{{follower_detail.description}} --></a></p>
                       <p>
                       </p>
