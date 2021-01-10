@@ -59,6 +59,45 @@
           <div class="desc">
             <p class="p-2">{{member.description}}</p>
           </div>
+
+          <!-- User preferences -->
+          <div class="mt-3 mb-3">
+            <h1 class="text-center text-info">MY MODEL PREFERENCES</h1>
+            <div class="clear"></div>
+          </div>
+          <div *ngIf="user_details" class="mb-3">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 about-ul">
+              <li> <strong> Body Type </strong> {{user_details.body_type}} </li>
+            </div>
+      
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 about-ul">
+              <li> <strong> Ethnicity </strong> {{user_details.ethnicity}} </li>
+            </div>
+      
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 about-ul">
+              <li> <strong> Age </strong> {{user_details.age}} </li>
+            </div>
+      
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 about-ul">
+              <li> <strong> Breast </strong> {{user_details.breast}} </li>
+            </div>
+      
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 about-ul">
+              <li> <strong> Breast size </strong> {{user_details.breast_size}} </li>
+            </div>
+      
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 about-ul">
+              <li> <strong> Hair Color </strong> {{user_details.hair_color}} </li>
+            </div>
+      
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 about-ul">
+              <li> <strong> Hair length </strong> {{user_details.hair_length}} </li>
+            </div>
+      
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 about-ul">
+              <li> <strong> Body hair </strong> {{user_details.body_hair}} </li>
+            </div>              
+          </div>
         </div>
       </div>
       </div>

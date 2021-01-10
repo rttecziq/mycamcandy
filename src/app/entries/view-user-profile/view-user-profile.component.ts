@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RequestService } from '../../common/services/request.service';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
+import { UserPreferences } from '../../models/user-preferences';
 
 declare var $:any;
 
@@ -13,6 +14,7 @@ declare var $:any;
 export class ViewUserProfileComponent implements OnInit {
 
   errorMessages : string;
+  user_details : UserPreferences;
   member_name : string;
   member : any;
   user_profile_picture : string;  
@@ -23,6 +25,23 @@ export class ViewUserProfileComponent implements OnInit {
     this.member = {};
     this.user_profile_picture = "../../../../assets/img/pro-img.jpg";  
     this.user_cover_picture = "../../../../assets/img/bg-image.jpg";
+
+    this.user_details = {
+      name : "",
+      gender: "",
+      cover : "",
+      picture : "",
+      orientation : "",
+      description : "",
+      body_type : "",
+      ethnicity : "",
+      age : "",
+      hair_color : "",
+      breast : "",
+      hair_length : "",
+      breast_size : "",
+      body_hair : ""
+    }
   }
 
   ngOnInit() {
@@ -54,7 +73,10 @@ export class ViewUserProfileComponent implements OnInit {
                   this.member = data;
                   this.user_cover_picture = data.cover;
                   this.user_profile_picture = data.picture;
-                  //console.log(this.member);
+                  console.log(this.member);
+
+                  this.user_model_Preference_fn("userModelPreferences", {user_id:data.id});
+
                 } else if(data.error_messages == 'Model not found') {
                   this.router.navigate(['error']);
                 } else {
@@ -66,6 +88,23 @@ export class ViewUserProfileComponent implements OnInit {
                 this.toast_message("Error", this.errorMessages);
             }
         );
+  }
+
+  user_model_Preference_fn(url, object) {
+    this.requestService.postMethod(url, object)
+    .subscribe((data : any ) => {
+        if (data.success == true) {
+            this.user_details = data;
+        } else {
+            this.errorMessages = 'Oops! Something Went Wrong';
+            //this.toast_message("Error", this.errorMessages);                 
+        }
+    },
+
+    (err : HttpErrorResponse) => {
+        this.errorMessages = 'Oops! Something Went Wrong';
+        this.toast_message("Error", this.errorMessages);  
+    });      
   }
 
 }
