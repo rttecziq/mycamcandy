@@ -57,8 +57,10 @@ export class UserProfileTabsComponent implements AfterViewInit {
   followers : any[];
   followings : any[];
 
+  current_page : string;
+
   constructor(private userService : UserService, private requestService : RequestService, private router : Router) {
-  
+
       this.profile_picture = null;  
       this.cover_picture = null;
       this.sweet_treat_image = null;
@@ -126,7 +128,8 @@ export class UserProfileTabsComponent implements AfterViewInit {
       this.user_cover_picture = "../../../../assets/img/bg-image.jpg";
       this.sweet_treat_featured_image = "../../../../assets/img/default-profile.jpg";
       this.collection_featured_image = "../../../../assets/img/default-profile.jpg";
-  
+      this.current_page = this.router.url;
+
       this.is_content_creator = true;
       this.username = (localStorage.getItem('username') != '' && localStorage.getItem('username') != null && localStorage.getItem('username') != undefined) ? localStorage.getItem('username') : '';
       this.isUserExists = (localStorage.getItem('userId') != '' && localStorage.getItem('userId') != null && localStorage.getItem('userId') != undefined) ? localStorage.getItem('userId') : '';
@@ -160,6 +163,25 @@ togglePassword(e) { this.password_check = e.target.checked; if(this.password_che
 
 toggleCandies(e) { this.candies_check = e.target.checked; if(this.candies_check === false) {this.albums.candies = 0;} }
   
+    updateDescriptionFn(form : NgForm) {
+        this.requestService.postMethod('updateUserDescription', form.value)
+            .subscribe(
+                (data : any ) => {
+                    if (data.success == true) {                   
+                        this.toast_message("Success", "Description has been updated successfully");
+                    } else {
+                        this.errorMessages = data.error_messages;
+                        this.toast_message("Error", this.errorMessages);                 
+                    }
+                },
+
+                (err : HttpErrorResponse) => {
+                    this.errorMessages = 'Oops! Something Went Wrong';
+                    this.toast_message("Error", this.errorMessages);
+                }
+            );
+    }
+
   user_profile_fn(url, object) {
   
       this.requestService.getMethod(url, object)

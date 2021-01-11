@@ -387,25 +387,6 @@ toast_message(heading, message) {
     });
 }
 
-updateDescriptionFn(form : NgForm) {
-    this.requestService.postMethod('updateUserDescription', form.value)
-        .subscribe(
-            (data : any ) => {
-                if (data.success == true) {                   
-                    this.toast_message("Success", "Description has been updated successfully");
-                } else {
-                    this.errorMessages = data.error_messages;
-                    this.toast_message("Error", this.errorMessages);                 
-                }
-            },
-
-            (err : HttpErrorResponse) => {
-                this.errorMessages = 'Oops! Something Went Wrong';
-                this.toast_message("Error", this.errorMessages);
-            }
-        );
-}
-
 sweetTreatFormFn(form : NgForm) {
     
     if (form.value['title'] == undefined || form.value['title'] == '' || form.value['title'] == null) {
