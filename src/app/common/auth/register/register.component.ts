@@ -27,12 +27,13 @@ export class RegisterComponent implements AfterViewInit{
     uType : string; //The user is streamer / viewer
     user_availability : string;
     formstep : string;
+    maxDob : string;
 
     constructor(private userService : UserService, private router : Router, private route : ActivatedRoute) { 
         this.formstep = '';
-        this.errorMessages = '';       
-        this.id_proof_image = "../../../../assets/img/pro-img.jpg";
-        this.holding_id_proof_image = "../../../../assets/img/pro-img.jpg";
+        this.errorMessages = '';
+        this.id_proof_image = "../../../../assets/img/id_card.jpg";
+        this.holding_id_proof_image = "../../../../assets/img/holding_id.jpg";
         this.user_availability = "";
 
         this.model = {
@@ -67,6 +68,7 @@ export class RegisterComponent implements AfterViewInit{
     
         };
         this.uType = 'creator';
+        this.maxDob = '2005-01-01';
 
     }
 
