@@ -131,14 +131,19 @@
          <div class="chat-box mt-3">
            <div *ngFor="let chat_message of chat_messages">
             <!-- <div class="w-100"><p class="p-2 bg-sent">hi</p></div> -->
+            <div *ngIf="chat_message.user_tip_notification == '0'">
               <div *ngIf="chat_message.type != 'vu'" class="media-left">
                 <img
                   src="{{ chat_message.userpicture }}"
                   class="media-object media1"
                 />
               </div>
-              <h5 class="media-heading">{{ chat_message.username }}</h5> 
-            <div class="w-100"><p class="p-2 bg-sent">{{chat_message.message}}</p></div>  
+            </div>
+              <h5 class="media-heading" *ngIf="chat_message.user_tip_notification == '0'">{{ chat_message.username }}</h5>
+              <div class="w-100" *ngIf="chat_message.user_tip_notification == '1'">
+                  <p class="p-2 text-center bg-primary">{{chat_message.message}}</p>
+              </div>
+              <div class="w-100" *ngIf="chat_message.user_tip_notification == '0'"><p class="p-2 bg-sent">{{chat_message.message}}</p></div>
             <!-- <div *ngIf="chat_message.type == 'vu'" class="w-100"><p class="p-2 bg-receive">{{chat_message.message}}</p></div> -->
           </div>
          </div>
@@ -165,6 +170,8 @@
                       (click)="sendMessage(messageContent)"
                       class="btn btn-sm btn-primary ml-2"><i class="fa fa-paper-plane"></i></button>
                     </span> 
+
+                    <!-- <button (click)="test()">test</button> -->
                   </div>
                 </form>
               </div>
