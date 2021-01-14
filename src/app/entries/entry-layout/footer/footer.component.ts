@@ -97,6 +97,7 @@ export class EntryFooterComponent implements AfterViewInit,OnDestroy{
             this.requestService.postMethod("user/notifications", {skip : 0}) 
             .subscribe(
                 (data : any) => {
+                    console.log(data);
                     if (data.success == true) {
                         this.notifications = data.data;
                     } else {

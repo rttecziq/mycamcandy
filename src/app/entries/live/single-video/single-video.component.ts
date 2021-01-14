@@ -20,6 +20,8 @@ import { Event } from '../../../common/services/model/event';
 import { ChatSocketService } from '../../../common/services/chat-socket.service';
 import { JoinVideo } from '../../../models/join-video';
 
+import { Constant } from '../../../constant/Constant';
+
 declare var $: any;
 
 declare var RTCMultiConnection: any;
@@ -154,6 +156,14 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
   candiesChecker: any;
   show_type_price: any;
 
+  // Notifications
+  test_message : string;
+  bellNotificationStatus : any;
+  notifications_types : any;
+  notifications : any[];
+  loggedIn_ID : string;
+  user_tip_notify : number;
+
   constructor(
     myElement: ElementRef,
     private requestService: RequestService,
@@ -171,6 +181,21 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
 
     localStorage.setItem('navigateWindow', this.navigateWindow);
 
+    this.test_message = 'temp';
+    this.notifications = [];
+    this.user_tip_notify = 0;
+    this.notifications_types = {
+      'LIVE_STREAM_STARTED' : Constant.LIVE_STREAM_STARTED,
+      'USER_FOLLOW' : Constant.USER_FOLLOW,
+      'USER_JOIN_VIDEO' : Constant.USER_JOIN_VIDEO,
+      'USER_GROUP_ADD' : Constant.USER_GROUP_ADD,
+      'USER_GIFT' : Constant.USER_GIFT,
+      'USER_TIP' : Constant.USER_TIP,
+      'ALBUM_BUY' : Constant.ALBUM_BUY,
+      'SWEET_TREAT_BUY' : Constant.SWEET_TREAT_BUY,
+      'NEW_MESSAGE' : Constant.NEW_MESSAGE
+    };
+    
     this.video_details = {
       title: '',
       type: '',
@@ -223,6 +248,15 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
 
       this.singleVideoDetail('single_video', details);
     });
+
+    // Notification
+    this.loggedIn_ID = (localStorage.getItem('userId') != '' && localStorage.getItem('userId') != null && localStorage.getItem('userId') != undefined) ? localStorage.getItem('userId') : '';
+    
+    if (this.loggedIn_ID) {
+      this.bellNotificationStatus = setInterval(()=>{
+        this.gift_tip_notifications();
+      }, 10 * 1000);
+    }
 
     this.chat_messages = [];
 
@@ -464,6 +498,43 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
         }
       );
   }
+
+  /*Notification functions starts here*/
+      gift_tip_notifications() {
+        this.requestService.postMethod("get/giftTipNotifications", "") 
+        .subscribe(
+            (data : any) => {
+                if (data.success == true) {
+                    this.notifications = [];
+                    this.notifications = data.notifications;
+                    console.log(this.notifications);
+                    if(data.cnt > 0) {
+                      this.user_tip_notify = 1;
+                      this.notifications.forEach(element => {
+                          this.sendMessage(element['notification']);
+                      });
+                      this.user_tip_notify = 0;
+                    }
+
+                }
+            },
+            (err : HttpErrorResponse) => {
+                this.errorMessages = 'Oops! Something Went Wrong';
+                $.toast({
+                    heading: 'Error',
+                    text: this.errorMessages,
+                // icon: 'error',
+                    position: 'top-right',
+                    stack: false,
+                    textAlign: 'left',
+                    loader : false,
+                    showHideTransition: 'slide'
+                });
+            }
+        );
+      }
+
+  /*notification functions ends here*/
 
   // ......................................................
   // .......................UI Code........................
@@ -930,7 +1001,10 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
     this.ioConnection = this.chatSocketService
       .onMessage()
       .subscribe((message: any) => {
-        console.log(message,'message')
+        var pair = {user_tip_notification: this.user_tip_notify};
+        message = {...message, ...pair};
+
+        console.log(message,'messagex')
         this.chat_messages.push(message);
       });
 
@@ -962,6 +1036,8 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
       message: message,
 
       type: 'uv', // viewer To streamer
+
+      user_tip_notification : this.user_tip_notify,
 
       live_video_id: this.video_id,
 
@@ -1104,6 +1180,7 @@ export class SingleVideoComponent implements OnInit, OnDestroy {
     clearInterval(this.snapshot_capture);
     clearInterval(this.candiesChecker);
     clearInterval(this.clockTimer);
+    clearInterval(this.bellNotificationStatus);
    
     const details = { video_id: this.video_id, private_video_id: this.livePrivateRequestId };
 

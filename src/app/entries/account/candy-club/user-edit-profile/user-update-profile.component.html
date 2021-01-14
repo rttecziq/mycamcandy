@@ -1,121 +1,12 @@
 <div class="container-fluid profile-background">
-  <div class="mb-3">    
-     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 mt-3">
-      <div class="profile-primary-div">
-         <div class="row">
-           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-               <a routerLink="/candy-club/{{username}}/followers">
-                  <button class="btn-followers">Followers<br>{{no_of_followers}}</button>
-               </a>
-           </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-               <a routerLink="/candy-club/{{username}}/followings">
-                  <button class="btn-following">Following<br>{{no_of_followings}}</button>
-               </a>
-            </div>
-         </div>
-         <ul class="list-group user-profile-list">
-           <a routerLink="/candy-club/{{username}}/about" [routerLinkActive]="['active']"><li class="list-group-item" ><i class="fa fa-user float-left" aria-hidden="true"></i> <span class="link">About</span></li></a>
-           <a routerLink="/candy-club/{{username}}/activity" [routerLinkActive]="['active']"><li class="list-group-item"><i class=" fa fa-pencil-square-o float-left" aria-hidden="true"></i>  <span class="link">Activity</span></li></a>
-           <a routerLink="/candy-club/{{username}}/messages" [routerLinkActive]="['active']"><li class="list-group-item"><i class="fa fa-envelope float-left" aria-hidden="true"></i>  <span class="link">Message</span></li></a>
-           <a routerLink="/candy-club/{{username}}/earning-history" [routerLinkActive]="['active']"><li class="list-group-item"><i class="fa fa-envelope float-left" aria-hidden="true"></i>  <span class="link">Performer Earning History</span></li></a>
-           <!-- <a href="#"><li class="list-group-item"><i class="fa fa-video-camera float-left" aria-hidden="true"></i>  <span class="link">Live Cam</span></li></a> 
-           <a href="#"><li class="list-group-item"><i class="fa fa-file-photo-o float-left" aria-hidden="true"></i>  <span class="link">My Fan Club Photos</span></li></a>
-           <a href="#"><li class="list-group-item"><i class="fa fa-file-video-o float-left" aria-hidden="true"></i>  <span class="link">My Fan Club Videos</span></li></a>-->
-           <a routerLink="/candy-club/{{username}}/my-fan-club" [routerLinkActive]="['active']"><li class="list-group-item"><i class="fa fa-id-card-o float-left" aria-hidden="true"></i>  <span class="link">My Fan Club Member</span></li></a>
-           <a routerLink="/candy-club/{{username}}/free-show-photo" [routerLinkActive]="['active']"><li class="list-group-item"><i class="fa fa-file-photo-o float-left" aria-hidden="true"></i>  <span class="link">My Free Show Photos</span></li></a>
-           <a routerLink="/candy-club/{{username}}/nude-show-photo" [routerLinkActive]="['active']"><li class="list-group-item"><i class="fa fa-file-photo-o float-left" aria-hidden="true"></i>  <span class="link">My Nude Show Photos</span></li></a>
-           <a routerLink="/candy-club/{{username}}/recorded-video" [routerLinkActive]="['active']"><li class="list-group-item"><i class="fa fa-file-video-o float-left" aria-hidden="true"></i>  <span class="link">My Recorded Videos</span></li></a>
-           <a routerLink="/candy-club/{{username}}/top-model" [routerLinkActive]="['active']"><li class="list-group-item"><i class="fa fa-users float-left" aria-hidden="true"></i>  <span class="link">Top Models</span></li></a>
-         </ul>
-       </div>
-     </div> 
-     <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 mt-3">
-        <div class="img-container user-cover">
-           <div *ngIf="user_cover_picture">
-              <img [src]="user_cover_picture" class="img-responsive user-cover-photo w-100">
-              <div class="top-left cover-menu">
-               <ul>
-                   <li><a href="#">31 <br> Candy Albums</a></li>
-                   <li><a routerLink="/candy-club/{{username}}/collection">6 <br> Candy Collections</a></li>
-                   <li><a routerLink="/candy-club/{{username}}/sweet-treat">13 <br> Sweet Treats</a></li>
-                   <li class="float-right text-center" style="display: inline-block;">
-                     <button class="btn btn-sm btn-info">
-                       <img src="/assets/img/model/iconfinder_179_Upload_183298.png" height="25" width="25">
-                     </button><br>
-                     <div class="text-light">Upload Albums</div>
-                   </li>
-                   <li class="float-right text-center" style="display: inline-block;">
-                     <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#collection_model" class="pointer">
-                       <img src="/assets/img/model/iconfinder_add-item_57905.png" height="25" width="25">
-                     </button><br>
-                     <div class="text-light">Add Collections</div>
-                   </li> 
-                <li class="float-right text-center" style="display: inline-block;">
-                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#sweet_treat_model" class="pointer">
-                   <img src="/assets/img/model/Gift_Box-36-128.png" height="25" width="25">
-                 </button><br>
-                 <div class="text-light">Add Sweet Treats</div>
-               </li>
-               </ul>
-             </div>
-              <div class="centered">
 
-                <div class="dropdown">
-                  <a class="dropdown-toggle" role="button" type="button" data-toggle="dropdown"><i class="fa fa-camera upload-button-cover-pic"></i>
-                  </a>
-                  <ul class="dropdown-menu">              
-                    <li>
-                      <input type="file" id="file-1" class="inputfile inputfile-2 d-none mycover" accept="image/png,image/jpeg" data-multiple-caption="{count} files selected" (change)="handleCoverPicture($event.target.files)"/>
-                      <a (click)="openCoverFile()" role="button">Change Picture</a></li>
+   <!--Common user's profile tab -->
+  <user-profile-tabs></user-profile-tabs>
 
-                      <li><a role="button" (click)="removeCoverPicture()">Remove Picture</a></li>
-                  </ul>
-                </div>  
-                               
-              </div>
-              
-           </div>
-        </div>
-        <div class="user-row">
-           <div class="row">
-              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                 <div class="user-pic">
-                    <div *ngIf="user_profile_picture">
-                       <img [src]="user_profile_picture" class="img-responsive img-circle profile-picture">
-                    </div>
-                    <div class="p-image">
-                       <div class="dropdown">
-                        <a class="dropdown-toggle" role="button" type="button" data-toggle="dropdown"><i class="fa fa-camera upload-button-cover-pic"></i>
-                        </a>
-                        <ul class="dropdown-menu">              
-                          <li>
-                            <input type="file" id="file-2" class="inputfile inputfile-2 d-none myprofile" accept="image/png,image/jpeg" data-multiple-caption="{count} files selected" (change)="handleProfilePicture($event.target.files)"/>
-                            <a (click)="openProfileFile()" role="button">Change Picture</a></li>
-                          <li><a role="button" (click)="removeProfilePicture()">Remove Picture</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                 </div>
-              </div>
-            <form id="form4" #updateDescriptionForm="ngForm" (ngSubmit)="updateDescriptionFn(updateDescriptionForm)">
-              <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                 <div class="username">
-                     <a routerLink="/candy-club/{{username}}">
-                       <h3>{{ username }}  <i class="fa fa-circle" style="font-size: 16px;color: #0bb30b;"></i></h3>
-                    </a>
-                 </div>
-                 <div class="actions float-right">
-                 <input type="submit" value="submit" /> 
-                 <!-- <i class="fa fa-check text-info" aria-hidden="true" style="font-size:28px"></i> -->
-                 </div>
-                 <div class="form-group">
-                    <textarea class="form-control" placeholder="Description" [(ngModel)]="description" name="description"></textarea>
-                 </div>
-              </div>
-            </form>
-           </div>
-        </div>
+  <div class="row mt-5 mb-5">    
+     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
+     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+        
         <form class="black-text user-row" id="form3" #updateProfileForm="ngForm" (ngSubmit)="updateModelProfileFn(updateProfileForm)">
                
          <div class="row">
