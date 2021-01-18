@@ -153,8 +153,8 @@ constructor(private requestService : RequestService, private router : Router, pr
         wish_list : "",
 
         // color scheme
-        profile_text_color : "#000",
-        profile_bg_color : "#fff",
+        profile_text_color : "#885907",
+        profile_bg_color : "#fafccf",
 
         // category
         //category : [],
