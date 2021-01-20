@@ -58,7 +58,16 @@ export class ModelDashboardComponent implements OnInit {
     this.likeUsers = [];
     this.channel_list = [];
     this.GiftErr = "";
+
+    this.sliders = [
+      {img: "https://via.placeholder.com/1368x400"},
+      {img: "https://via.placeholder.com/1368x400"},
+      {img: "https://via.placeholder.com/1368x400"},
+      {img: "https://via.placeholder.com/1368x400"}
+    ];
+
   }
+  slideConfig = {"slidesToShow": 1, "slidesToScroll": 1,autoplay: true,autoplaySpeed: 2000,speed: 1500};
 
   ngOnInit() {
     this.channel_list_fn("channel/list", "");
@@ -66,13 +75,16 @@ export class ModelDashboardComponent implements OnInit {
     this.model_total_candies_fn("modelTotalCandies", this.model_id);
     this.top_model_fn("topModel", this.model_id);
     this.model_giftFn("modelGiftReceiveList", this.model_id);
-    this.customJs();
+  }
+
+  afterChange(e) {
+    console.log('afterChange');
   }
 
   ngAfterViewInit(){
     let data1={type:'profile'};
     this.sliderFn('getModelSlider', data1);
-    // Load Logged In User Profile    
+    // Load Logged In User Profile  
     let data={user_id:this.userId,listActivityData:'getActivitiesList'};
       this.getActivities('userActivities',data);
   }
@@ -214,7 +226,8 @@ export class ModelDashboardComponent implements OnInit {
     this.requestService.postMethod(url,object) 
     .subscribe((data : any) => {
       if (data.success == true) {
-        this.sliders = data.data;
+  //COMMENTED TEMPORARY AS DATA NOT AVAILABLE FROM API
+        //this.sliders = data.data;
       } else {
           this.errorMessages = data.error_messages;
           this.toast_message("Error", this.errorMessages);
@@ -424,23 +437,6 @@ export class ModelDashboardComponent implements OnInit {
         loader : false,
         showHideTransition: 'slide'
     });
-  }
-
-  customJs() {
-    setTimeout (() => {
-      $('.owl-carousel').slick({
-        loop:true,
-        autoplay:true,
-        infinite: true,
-        fade: true,
-        speed: 500,
-        prevArrow: false,
-        nextArrow: false,
-        pauseOnHover:false,
-        autoWidth:false,
-        focusOnSelect: false
-      });
-    }, 2000);
   }
 
 }

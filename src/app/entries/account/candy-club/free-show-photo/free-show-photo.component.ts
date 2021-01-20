@@ -17,6 +17,7 @@ export class FreeShowPhotoComponent implements AfterViewInit  {
   loader : boolean;
   photo_lists : any[];
   app_url : string;
+  user_id : string;
 
   skipCount : number;
   datasAvailable : number;
@@ -29,6 +30,8 @@ export class FreeShowPhotoComponent implements AfterViewInit  {
 
     this.skipCount = 0;
     this.datasAvailable = 0;
+
+    this.user_id = (localStorage.getItem('userId') != '' && localStorage.getItem('userId') != null && localStorage.getItem('userId') != undefined) ? localStorage.getItem('userId') : '';
 
     let detail = {show_type:"Free",skip : 0};
     this.free_show_photo_list("recorded_photos/list", detail);
@@ -271,6 +274,68 @@ export class FreeShowPhotoComponent implements AfterViewInit  {
 showMore() {
   let detail = {show_type:"Free",skip:this.skipCount};
   this.free_show_photo_list("recorded_photos/list", detail);
+}
+
+deletePicture(snapshot_id:number) {
+  // if($event.target.checked) {
+    let object = {user_id:this.user_id,picture_id:snapshot_id,type:'delete'};
+
+    if(confirm("Are you sure ?")) {      
+      this.requestService.postMethod("fan_vip_club_photo_add_delete",object)
+      .subscribe(
+          (data : any) => {
+              if (data.success == true) {
+                this.toast_message("Success", data.message);
+                  this.photo_lists.forEach(function(item, index, object) {
+                    if(item.id == snapshot_id) {
+                      object.splice(index, 1);
+                    }
+                  });
+
+              } else {
+                //$event.target.checked = false;
+                this.errorMessages = data.error_messages;
+                this.toast_message("Error", this.errorMessages);   
+              }
+          },
+          (err : HttpErrorResponse) => {
+              this.errorMessages = 'Oops! Something Went Wrong';
+              this.toast_message("Error", this.errorMessages);
+          }
+      );
+    }
+ // }
+}
+
+selectPicture(snapshot_id:number) {
+  // if($event.target.checked) {
+    let object = {user_id:this.user_id,picture_id:snapshot_id,type:'select'};
+
+    if(confirm("You are selecting this picture for your subscription user. Want to proceed ?")) {      
+      this.requestService.postMethod("fan_vip_club_photo_add_delete",object)
+      .subscribe(
+          (data : any) => {
+              if (data.success == true) {
+                this.toast_message("Success", data.message);
+                  this.photo_lists.forEach(function(item, index, object) {
+                    if(item.id == snapshot_id) {
+                      object.splice(index, 1);
+                    }
+                  });
+
+              } else {
+                //$event.target.checked = false;
+                this.errorMessages = data.error_messages;
+                this.toast_message("Error", this.errorMessages);   
+              }
+          },
+          (err : HttpErrorResponse) => {
+              this.errorMessages = 'Oops! Something Went Wrong';
+              this.toast_message("Error", this.errorMessages);
+          }
+      );
+    }
+ // }
 }
 
 }

@@ -1,0 +1,206 @@
+<div class="container-fluid profile-background">
+  
+	<!--Common user's profile tab -->
+	<user-profile-tabs></user-profile-tabs>
+		
+	
+	<div class="row mt-5 mb-5">
+		<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"></div>
+		<div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+			<div class="profile-secondary-div">
+				
+				<div class="clears mb-3"></div>
+				<div *ngIf="featured_album_list.length > 0">
+					<div class="album d-flex mt-3">
+						<h3>My Featured Candy Albums</h3>
+					</div>
+					<div class="clears mb-3"></div>
+					<div class="row album-row">
+						<div class="featured_album p-2em">
+							<ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
+								<div ngxSlickItem *ngFor="let f_album of featured_album_list" class="slide">
+									<div (click)="st_shop_details('album', f_album.id)" role="button">
+										<div class="img-container">
+											  <img src="{{ f_album.album_cover_image }}" alt="" width="100%">
+											  <div class="overlay"></div>
+											  <div class="top-left"><i class="fa fa-play-circle"></i></div>
+											  <div class="centered" *ngIf="f_album.password != ''"><i class="fa fa-lock"></i></div>
+										</div>
+										<div class="d-flex">
+											<p class="title small">{{f_album.title}}</p>
+											<p class="candies small ml-auto">{{f_album.candies}} candies</p>
+										</div>
+									</div>
+								</div>
+							</ngx-slick>
+			
+							<!-- <button (click)="slickModal.slickNext()">Next</button>
+							<button (click)="slickModal.slickPrev()">Prev</button> -->
+							<!-- <div class="item" *ngFor="let f_album of featured_album_list">
+								<div (click)="st_shop_details('album', f_album.id)" role="button">
+									<div class="img-container">
+										<img [src]="f_album.album_cover_image" class="img-responsive w-100">
+										<div class="overlay"></div>
+										<div class="top-left"><i class="fa fa-play-circle"></i></div>
+										<div class="centered" *ngIf="f_album.password != ''"><i class="fa fa-lock"></i></div>
+									</div>
+									<div class="d-flex">
+										<p class="title small">{{f_album.title}}</p>
+										<p class="candies small ml-auto">{{f_album.candies}} candies</p>
+									</div>
+								</div>
+							</div> -->
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="album d-flex mt-3">
+					<h3>My Candy Albums</h3>
+					<div class="ml-auto mt-2">
+		                <a routerLink="/candy-club/{{model.username}}/album" class="btn btn-default" *ngIf="album_list.length > 0">{{album_list.length}} All</a>
+		            </div>
+				</div>
+				<div class="clears mb-3"></div>
+				<div class="row album-row">
+					<div class="col-lg-12 p-2em">
+						<ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
+							<div ngxSlickItem *ngFor="let album of album_list" class="slide">
+								<div (click)="st_shop_details('album', album.id)" role="button">
+									<div class="img-container">
+										  <img src="{{ album.album_cover_image }}" alt="" width="100%">
+										  <div class="overlay"></div>
+										  <div class="top-left"><i class="fa fa-play-circle"></i></div>
+										  <div class="centered" *ngIf="album.password != ''"><i class="fa fa-lock"></i></div>
+									</div>
+									<div class="d-flex">
+										<p class="title small">{{album.title}}</p>
+										<p class="candies small ml-auto">{{album.candies}} candies</p>
+									</div>
+								</div>
+							</div>
+						</ngx-slick>
+		
+						<!-- <button (click)="slickModal.slickNext()">Next</button>
+						<button (click)="slickModal.slickPrev()">Prev</button> -->
+						<!-- <div class="candy-albums-one">
+						    <div class="item" *ngFor="let album of album_list">
+								<div (click)="st_shop_details('album', album.id)" role="button">
+									<div class="img-container">
+										<img [src]="album.album_cover_image" class="img-responsive">
+										<div class="overlay"></div>
+										<div class="top-left"><i class="fa fa-play-circle"></i></div>
+										<div class="centered" *ngIf="album.password != ''"><i class="fa fa-lock"></i></div>
+									</div>
+									<div class="d-flex">
+										<p class="title small">{{album.title}}</p>
+										<p class="candies small ml-auto">{{album.candies}} candies</p>
+									</div>
+								</div>
+							</div>
+						</div> -->
+
+						<!-- <div class="candy-albums-two">
+							<div class="item">
+									<img src="../../../../../assets/img/model-profile/profile_pic.jpg" class="img-responsive"/>
+							</div>
+
+						</div> -->
+					</div>
+					<div class="col-lg-12 col-md-12" *ngIf="album_list.length > 0"> <a routerLink="/candy-club/{{model.username}}/album" type="button" class="btn-default btn btn-sm mt-2" id="showAll" style="width: 100%">Show All {{album_list.length}} Albums</a></div>
+				</div>
+
+
+				<div class="album d-flex mt-3">
+					<h3>My Candy Collections</h3>
+				</div>
+				<div class="clears mb-3"></div>
+				<div class="row album-row">
+					<div class="col-lg-12">
+						<div class="candy-collection p-2em" *ngIf="collection_list.length > 0">
+							<!-- <div class="item" *ngFor="let cl of collection_list">
+								<div (click)="st_shop_details('collection', cl.id)" role="button">
+									<div class="img-container">
+										<img [src]="cl.featured_image" class="img-responsive">
+										<div class="overlay"></div>
+										<div class="top-left"><i class="fa fa-play-circle"></i></div>
+									</div>
+									<div class="d-flex">
+										<p class="title small">{{cl.title}}</p>
+										<p class="candies small ml-auto">{{cl.candies}} candies</p>
+									</div>
+								</div>
+							</div> -->
+							<ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
+								<div ngxSlickItem *ngFor="let cl of collection_list" class="slide">
+									<div (click)="st_shop_details('collection', cl.id)" role="button">
+										<div class="img-container">
+											  <img src="{{ cl.featured_image }}" alt="" width="100%">
+											  <div class="overlay"></div>
+											  <div class="top-left"><i class="fa fa-play-circle"></i></div>
+										</div>
+										<div class="d-flex">
+											<p class="title small">{{cl.title}}</p>
+											<p class="candies small ml-auto">{{cl.candies}} candies</p>
+										</div>
+									</div>
+								</div>
+							</ngx-slick>
+			
+							<!-- <button (click)="slickModal.slickNext()">Next</button>
+							<button (click)="slickModal.slickPrev()">Prev</button> -->
+						</div>
+					</div>
+					<div class="col-lg-12 col-md-12" *ngIf="collection_list.length > 0"> <a  routerLink="/candy-club/{{model.username}}/collection" type="button" class="btn-default btn btn-sm mt-2" id="showAll" style="width: 100%">Show All {{collection_list.length }} Collections</a></div>
+				</div>
+
+
+				<div class="album d-flex mt-3">
+					<h3>My Sweet Treats</h3>
+				</div>
+				<div class="clears mb-3"></div>
+					<div class="row album-row">
+						<div class="col-lg-12">
+							<div class="sweet-treat p-2em" *ngIf="st_list.length > 0">
+								<!-- <div class="item" *ngFor="let st of st_list">
+									<div (click)="st_shop_details('sweet-treat', st.id)" role="button">
+										<div class="img-container">
+											<img [src]="st.featured_image" class="img-responsive">
+											<div class="overlay"></div>
+											<div class="top-left"><i class="fa fa-play-circle"></i></div>
+										</div>
+										<div class="d-flex">
+											<p class="title small">{{st.title}}</p>
+											<p class="candies small ml-auto">{{st.candies}} candies</p>
+										</div>
+									</div>
+								</div> -->
+								<ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)">
+									<div ngxSlickItem *ngFor="let st of st_list" class="slide">
+										<div (click)="st_shop_details('sweet-treat', st.id)" role="button">
+											<div class="img-container">
+												  <img src="{{ st.featured_image }}" alt="" width="100%">
+												  <div class="overlay"></div>
+												  <div class="top-left"><i class="fa fa-play-circle"></i></div>
+											</div>
+											<div class="d-flex">
+												<p class="title small">{{st.title}}</p>
+												<p class="candies small ml-auto">{{st.candies}} candies</p>
+											</div>
+										</div>
+									</div>
+								</ngx-slick>
+				
+								<!-- <button (click)="slickModal.slickNext()">Next</button>
+								<button (click)="slickModal.slickPrev()">Prev</button> -->
+							</div>
+						</div>
+						<div class="col-lg-12 col-md-12" *ngIf="st_list.length > 0"> <a  routerLink="/candy-club/{{model.username}}/sweet-treat" type="button" class="btn-default btn btn-sm mt-2" id="showAll" style="width: 100%">Show All {{st_list.length}} Sweet Treats</a></div>
+					</div>
+				
+			</div>
+		</div>
+	  </div>
+
+</div>

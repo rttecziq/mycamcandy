@@ -1,4 +1,5 @@
 /*********recorded video Start**********/
+.mt-1{margin-top:.5rem;}
 .mt-5{margin-top: 3rem;}
 .p-3{padding: 2rem;}
 .mb-5{margin-bottom: 3rem;}
@@ -7,6 +8,15 @@
 .mt-2{margin-top: 1rem;}
 .text-center{text-align: center;}
 .recorded-video{padding-left: 20px;padding-right: 20px;}
+
+.d-flex{display:flex;}
+.float-left{float:left;}
+.float-right{float:right;}
+.cstm-padding{padding:.2rem .5rem;}
+.hover-display .accept-delete{display:none;height:40px;}
+.hover-display:hover .accept-delete{display:block;}
+.parent-accept-delete{height:40px;}
+
 .recorded-video .nav-tabs > li > a{
   color: #fff!important;
 }

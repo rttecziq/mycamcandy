@@ -7,6 +7,7 @@ import { EntryRoutingModule } from './entry.routing';
 import {AppService} from './../app.service';
 
 import { EntryComponent } from './entry.component';
+import { SlickModule } from 'ngx-slick';
 
 import { EntryLayoutComponent } from './entry-layout/entry-layout.component';
 import { MainLayoutComponent } from './entry-layout/main-layout/main.layout.component';
@@ -153,6 +154,7 @@ import { CollectionDetailsComponent } from './account/candy-club/collection/coll
 import { ViewUserProfileComponent } from './view-user-profile/view-user-profile.component';
 import { UserFollowersComponent } from './view-user-profile/user-followers/user-followers.component';
 import { UserFollowingsComponent } from './view-user-profile/user-followings/user-followings.component';
+import { MySweetShopComponent } from './account/candy-club/my-sweet-shop/my-sweet-shop.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -264,6 +266,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ViewUserProfileComponent,
         UserFollowersComponent,
         UserFollowingsComponent,
+        MySweetShopComponent,
     ],
     imports: [
         CommonModule,
@@ -279,6 +282,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatInputModule,
         MatRippleModule,
         MatNativeDateModule,
+        SlickModule.forRoot(),
         NgMultiSelectDropDownModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
