@@ -159,32 +159,61 @@ export class NudeShowPhotoComponent implements AfterViewInit {
           })
         });
 
-        // toggle price button
-        
+        // toggle price button        
         $('body').on('click', '#togglePrice', function(e){
             $('span#addPrice').toggle();
         });
 
-        // Add price
-        $('body').on('click', '.addPrice', function(e){
+        $('body').on('keyup','input.price',function(e){
+          $('.price').val(this.value);
+        });
 
-          //alert($('.price').val());
+       // Add price
+       $('body').on('click', '.addPrice', function(e) {
 
-          //alert($(this).val());
+        var price = '';
+        price = $('.price').val();
+        var pattern = /^\d+$/;
 
-        //   $.ajax({
-        //   type:'POST',
-        // url: environment.apiUrl + 'showPostLike/' + post_id + '/nudeshow',
-        // data:'user_id='+user_id,
-        // success:function(data) {
-        //             console.log(data)
-        //   $('div.lg-current .commentLikeDetails').html(data.text);
-        //   $('.likeValue').html(data.like);
-        //   $('.s_likeIconFI').hide();
-        //   $('.showLikes').css("display", "block");
-        // }
-        // })
+        if(price == '' || price == '0' || price == undefined || price == null || (pattern.test(price) == false )) {
+          $.toast({
+            heading: "Error",
+            text: "Enter valid price",
+            position: 'top-right',
+            stack: false,
+            textAlign: 'left',
+            loader : false,
+            showHideTransition: 'slide'
+          });
+          return false;
+        }
+
+        var pic_data = {
+            price : price,
+            type : 'Nude',
+            picture_id : post_id,
+            model_id : user_id
+        }
+
+        $.ajax({
+          type:'POST',
+          url: environment.apiUrl + 'setShowPrice',
+          data: pic_data,
+          success:function(data) {
+              $('span#addPrice').toggle();
+              $.toast({
+                heading: "Success",
+                text: "Price Added Successfully",
+                position: 'top-right',
+                stack: false,
+                textAlign: 'left',
+                loader : false,
+                showHideTransition: 'slide'
+            });
+          }
+        })
       });
+
 
 
         $('body').on('click', ".s_likeComment", function (e) { 

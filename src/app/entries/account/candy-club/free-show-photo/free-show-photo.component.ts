@@ -159,32 +159,58 @@ export class FreeShowPhotoComponent implements AfterViewInit  {
           })
         });
 
-        // toggle price button
-        
+        // toggle price button        
         $('body').on('click', '#togglePrice', function(e){
             $('span#addPrice').toggle();
         });
 
+        $('body').on('keyup','input.price',function(e){
+          $('.price').val(this.value);
+        });
+
         // Add price
-        $('body').on('click', '.addPrice', function(e){
+        $('body').on('click', '.addPrice', function(e) {
+          var price = $('.price').val();
+          var pattern = /^\d+$/;
 
-          //alert($('.price').val());
+          if(price == '' || price == 0 || price == undefined || price == null || (pattern.test(price) == false )) {
+            $.toast({
+              heading: "Error",
+              text: "Enter valid price",
+              position: 'top-right',
+              stack: false,
+              textAlign: 'left',
+              loader : false,
+              showHideTransition: 'slide'
+            });
+            return false;
+          }
 
-          //alert($(this).val());
+          var pic_data = {
+              price : price,
+              type : 'Free',
+              picture_id : post_id,
+              model_id : user_id
+          }
 
-        //   $.ajax({
-        //   type:'POST',
-        // url: environment.apiUrl + 'showPostLike/' + post_id + '/freeshow',
-        // data:'user_id='+user_id,
-        // success:function(data) {
-        //             console.log(data)
-        //   $('div.lg-current .commentLikeDetails').html(data.text);
-        //   $('.likeValue').html(data.like);
-        //   $('.s_likeIconFI').hide();
-        //   $('.showLikes').css("display", "block");
-        // }
-        // })
-      });
+          $.ajax({
+            type:'POST',
+            url: environment.apiUrl + 'setShowPrice',
+            data: pic_data,
+            success:function(data) {
+                $('span#addPrice').toggle();
+                $.toast({
+                  heading: "Success",
+                  text: "Price Added Successfully",
+                  position: 'top-right',
+                  stack: false,
+                  textAlign: 'left',
+                  loader : false,
+                  showHideTransition: 'slide'
+              });
+            }
+          })
+        });
 
 
         $('body').on('click', ".s_likeComment", function (e) { 
@@ -269,73 +295,73 @@ export class FreeShowPhotoComponent implements AfterViewInit  {
 
     );
 
-}
+  }
 
-showMore() {
-  let detail = {show_type:"Free",skip:this.skipCount};
-  this.free_show_photo_list("recorded_photos/list", detail);
-}
+  showMore() {
+    let detail = {show_type:"Free",skip:this.skipCount};
+    this.free_show_photo_list("recorded_photos/list", detail);
+  }
 
-deletePicture(snapshot_id:number) {
-  // if($event.target.checked) {
-    let object = {user_id:this.user_id,picture_id:snapshot_id,type:'delete'};
+  deletePicture(snapshot_id:number) {
+    // if($event.target.checked) {
+      let object = {user_id:this.user_id,picture_id:snapshot_id,type:'delete'};
 
-    if(confirm("Are you sure ?")) {      
-      this.requestService.postMethod("fan_vip_club_photo_add_delete",object)
-      .subscribe(
-          (data : any) => {
-              if (data.success == true) {
-                this.toast_message("Success", data.message);
-                  this.photo_lists.forEach(function(item, index, object) {
-                    if(item.id == snapshot_id) {
-                      object.splice(index, 1);
-                    }
-                  });
+      if(confirm("Are you sure ?")) {      
+        this.requestService.postMethod("fan_vip_club_photo_add_delete",object)
+        .subscribe(
+            (data : any) => {
+                if (data.success == true) {
+                  this.toast_message("Success", data.message);
+                    this.photo_lists.forEach(function(item, index, object) {
+                      if(item.id == snapshot_id) {
+                        object.splice(index, 1);
+                      }
+                    });
 
-              } else {
-                //$event.target.checked = false;
-                this.errorMessages = data.error_messages;
-                this.toast_message("Error", this.errorMessages);   
-              }
-          },
-          (err : HttpErrorResponse) => {
-              this.errorMessages = 'Oops! Something Went Wrong';
-              this.toast_message("Error", this.errorMessages);
-          }
-      );
-    }
- // }
-}
+                } else {
+                  //$event.target.checked = false;
+                  this.errorMessages = data.error_messages;
+                  this.toast_message("Error", this.errorMessages);   
+                }
+            },
+            (err : HttpErrorResponse) => {
+                this.errorMessages = 'Oops! Something Went Wrong';
+                this.toast_message("Error", this.errorMessages);
+            }
+        );
+      }
+  // }
+  }
 
-selectPicture(snapshot_id:number) {
-  // if($event.target.checked) {
-    let object = {user_id:this.user_id,picture_id:snapshot_id,type:'select'};
+  selectPicture(snapshot_id:number) {
+    // if($event.target.checked) {
+      let object = {user_id:this.user_id,picture_id:snapshot_id,type:'select'};
 
-    if(confirm("You are selecting this picture for your subscription user. Want to proceed ?")) {      
-      this.requestService.postMethod("fan_vip_club_photo_add_delete",object)
-      .subscribe(
-          (data : any) => {
-              if (data.success == true) {
-                this.toast_message("Success", data.message);
-                  this.photo_lists.forEach(function(item, index, object) {
-                    if(item.id == snapshot_id) {
-                      object.splice(index, 1);
-                    }
-                  });
+      if(confirm("You are selecting this picture for your subscription user. Want to proceed ?")) {      
+        this.requestService.postMethod("fan_vip_club_photo_add_delete",object)
+        .subscribe(
+            (data : any) => {
+                if (data.success == true) {
+                  this.toast_message("Success", data.message);
+                    this.photo_lists.forEach(function(item, index, object) {
+                      if(item.id == snapshot_id) {
+                        object.splice(index, 1);
+                      }
+                    });
 
-              } else {
-                //$event.target.checked = false;
-                this.errorMessages = data.error_messages;
-                this.toast_message("Error", this.errorMessages);   
-              }
-          },
-          (err : HttpErrorResponse) => {
-              this.errorMessages = 'Oops! Something Went Wrong';
-              this.toast_message("Error", this.errorMessages);
-          }
-      );
-    }
- // }
-}
+                } else {
+                  //$event.target.checked = false;
+                  this.errorMessages = data.error_messages;
+                  this.toast_message("Error", this.errorMessages);   
+                }
+            },
+            (err : HttpErrorResponse) => {
+                this.errorMessages = 'Oops! Something Went Wrong';
+                this.toast_message("Error", this.errorMessages);
+            }
+        );
+      }
+  // }
+  }
 
 }
