@@ -1,30 +1,24 @@
 <div class="dashboard-bg">
-  <!-- <div class="owl-carousel owl-theme">
-     <div class="item"><img src="../../../../../assets/img/model/b1.jpg" class="img-responsive"></div>
-     <div class="item"><img src="../../../../../assets/img/model/b2.jpg" class="img-responsive"></div>
-     <div class="item"><img src="../../../../../assets/img/model/b3.jpg" class="img-responsive"></div>
-     <div class="item"><img src="../../../../../assets/img/model/b4.jpg" class="img-responsive"></div>
-  </div> -->
-  <div class="owl-carousel home-slider" *ngIf="sliders.length > 0">
-      <div *ngFor="let slider of sliders">
-         <div class="item item-1" [style.background]="'url(' + slider.img + ')'">
-         </div>
-      </div>
-  </div>
+  <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig" (afterChange)="afterChange($event)" style="margin-left: -10px;margin-right: -10px;">
+   <div ngxSlickItem *ngFor="let slide of sliders" class="slide">
+         <img src="{{ slide.img }}" alt="" width="100%">
+   </div>
+</ngx-slick>
+
 </div>
 <div class="dashboard-image">
   <div class="container-fluid">
      <div class="row">
         <div class="col-md-3 col-sm-3 col-xs-12">
            <div class="dashboard-img" *ngIf="profile_picture">
-              <a href="#/candy-club/{{username}}"><img [src]="profile_picture" alt="" class="img-responsive" /> </a>
+              <a routerLink="/candy-club/{{username}}"><img [src]="profile_picture" alt="" class="img-responsive" /> </a>
            </div>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12 center-text">
            <h3>{{model_of_the_months.wish}}</h3>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-12 center-text">
-           <a href="#/candy-club/{{username}}" class="rotatemodel">{{username}}</a>
+           <a routerLink="/candy-club/{{username}}" class="rotatemodel">{{username}}</a>
         </div>
         <div class="col-md-3 col-sm-12 col-xs-12">
            <div class="dashbroadcast">
@@ -374,8 +368,11 @@
                      <div class="media-left">
                         <img [src]="top_model.chat_picture" class="media-object" style="width:60px">
                      </div>
-                     <div class="media-body">
+                     <div class="media-body" *ngIf="username != top_model.name">
                         <a routerLink="/candy-club/model/{{top_model.name}}" class="media-heading bold">{{top_model.name | titlecase}}</a>
+                     </div>
+                     <div class="media-body" *ngIf="username == top_model.name">
+                        <a routerLink="/candy-club/{{top_model.name}}" class="media-heading bold">{{top_model.name | titlecase}}</a>
                      </div>
                  </div>
               </div>

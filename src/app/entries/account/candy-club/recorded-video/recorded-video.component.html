@@ -9,47 +9,52 @@
       <div class="row">
         <div class="recorded-video">
           <h2 class="text-center p-3">MY RECORDED VIDEOS</h2>
-          <div class="col-lg-12 col-md-12 col-sm-12 mt-3" *ngIf="recorded_video_lists.length">
+          <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
 
-            <!-- <ul class="nav nav-tabs">
-              <li class="btn btn-sm btn-tab active"><a data-toggle="tab" href="#tab1">Recorded Video Lists</a></li>
-              <li class="btn btn-sm btn-tab"><a data-toggle="tab" href="#tab2">Select And Delete Videos</a></li>
-            </ul> -->
-
-            <div class="tab-content mt-3 mb-3 rec-videos">
-              <div id="tab1" class="tab-pane fade in active">
-                <div class="video-scroll">
-                  <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3" *ngFor="let video of recorded_video_lists">
-                      <a *ngIf="video" (click)="showPopup(video)" data-toggle="modal" data-target="#videoModel">
-                        <img [src]="video.snapshot" class="img-responsive">
-                        <!-- <video controls (click)="toggleVideo()" #videoPlayer>
-                          <source [src]="app_url+'/video_capture/'+video.model_id+'/'+video.video_name" type="video/mp4" />
-                          Browser not supported
-                        </video> -->
-                      </a>
-                    </div>
+            <div *ngIf="recorded_video_lists.length" id="lightgallery">
+              <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 hover-display" *ngFor="let video of recorded_video_lists; let i = index;">
+                <div class="item" attr.data-poster="assets/img/video-icon.png" attr.data-html="#video{{i}}" class="item" data-sub-html='<div class="fb-comments s_comntPanlars_M" data-width="400" data-numposts="0"></div>'>
+                  <img [src]="video.snapshot" class="img-responsive">
+                  <input type="hidden" value="{{video.id}}" id="post_{{i}}"/>
+                </div>
+                <div class="parent-accept-delete">
+                  <div class="accept-delete">
+                    <span class="btn btn-sm btn-danger cstm-padding mt-1 float-left" (click)="deleteVideo(video.id)"><i class="fa fa-trash"></i></span>
+                    <span class="btn btn-sm btn-success cstm-padding mt-1 float-right" (click)="selectVideo(video.id)"><i class="fa fa-check"></i></span>
                   </div>
                 </div>
               </div>
-              <!-- <div id="tab2" class="tab-pane fade">
+            </div>
+
+            <div *ngFor="let video of recorded_video_lists; let i = index" class="col-xs-6 col-sm-4 col-md-3">
+              <div style="display:none;" id="video{{i}}">
+                <video class="lg-video-object lg-html5" controls preload="none">
+                  <source src="{{app_url+'/video_capture/'+video.model_id+'/'+video.video_name}}" type="video/mp4">
+                  Your browser does not support HTML5 video.
+                </video>
+              </div>
+            </div>
+
+            <!-- <div class="tab-content mt-3 mb-3 rec-videos">
+              <div id="tab1" class="tab-pane fade in active">
                 <div class="video-scroll">
                   <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-2" *ngFor="let video of recorded_video_lists">
-                      <div *ngIf="video">
-                      <video controls>
-                          <source [src]="app_url+'/video_capture/'+video.model_id+'/'+video.video_name" type="video/mp4" />
-                          Browser not supported
-                        </video>
-                          <input type="checkbox" class="form-control" name="" id="" value="">
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3 hover-display" *ngFor="let video of recorded_video_lists">
+                      <a *ngIf="video" (click)="showPopup(video)" data-toggle="modal" data-target="#videoModel">
+                        <img [src]="video.snapshot" class="img-responsive">
+                      </a>
+                      <div class="parent-accept-delete">
+                        <div class="accept-delete">
+                          <span class="btn btn-sm btn-danger cstm-padding mt-1 float-left" (click)="deleteVideo(video.id)"><i class="fa fa-trash"></i></span>
+                          <span class="btn btn-sm btn-success cstm-padding mt-1 float-right" (click)="selectVideo(video.id)"><i class="fa fa-check"></i></span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                  <button class="btn btn-primary mt-3">Delete Videos</button>
-              </div> -->
-            </div>
+            </div> -->
 
           </div>
         </div>
@@ -82,57 +87,6 @@
                 </video>
 
             </div>
-            <!-- <div class="col-lg-4 col-md-4 mt-3 bg-light">
-              <div class="media mt-3">
-                 <div class="media-left">
-                    <a href="#">
-                    <img class="media-object photo-profile rounded-circle" src="images/smily.gif" width="50" height="50" alt="...">
-                    </a>
-                 </div>
-                 <div class="media-body">                    
-                       <h5 class="media-heading" style="margin-bottom: 0;">&nbsp;&nbsp;<a href="#" class="anchor-username">Model</a></h5>
-                    <a href="#" class="anchor-time">&nbsp;&nbsp;December 21, 2020</a>
-                 </div>
-              </div>
-              <div class="post-footer-option mt-5">
-                 <div class="like-user-list">
-                   <i class="fa fa-thumbs-up"></i> You.
-                 </div>
-                  <ul class="list-unstyled mt-3">
-                     <li><input type="text" class="text-input" name=""></li>
-                     <li><a href="#" class="ml-4 btn-addprice"><i class="fa fa-plus font-23"></i> Add Price</a></li>
-                  </ul>
-                  <div class="price-section">
-                    <div class="price-form-div p-3">
-                      <form class="form-inline text-center">
-                        <div class="input-group">
-                          <label class="bold">Sell Price</label>
-                          <input type="text" class="text-input" name="">
-                          <div class="input-group-btn">
-                            <input type="submit" name="" class="btn btn-success" value="Save">
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-               </div>
-
-               <div class="control-video-footer mt-5">
-                 <div class="media">
-                     <div class="media-left">
-                        <a href="#">
-                        <img class="media-object photo-profile rounded-circle" src="images/smily.gif" width="50" height="50" alt="...">
-                        </a>
-                     </div>
-                     <div class="media-body">
-                        <form method="POST">
-                           <textarea class="form-control comment-textarea" name="comment" id="comment" rows="2"></textarea>
-                         </form>
-                     </div>
-                  </div>
-                 
-               </div>
-            </div> -->
           </div>
         </div>
       </div>

@@ -8,14 +8,19 @@
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
       <div class="row">
         <div class="my_free_show_photos">
-          <h3 class="text-center">My Free Show Photos</h3>
+          <h3 class="text-center mb-5">My Free Show Photos</h3>
 
             <div *ngIf="photo_lists.length" id="lightgallery">
-              <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 mt-3" *ngFor="let photo of photo_lists; let i = index;">
+              <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 hover-display" *ngFor="let photo of photo_lists; let i = index;">
                 <div attr.data-src="{{app_url}}{{photo.image_name}}" class="item" data-sub-html='<div class="fb-comments s_comntPanlars_M" data-width="400" data-numposts="0"></div>'>
                   <img [src]="app_url + photo.image_name" class="img-responsive">
                   <input type="hidden" value="{{photo.id}}" id="post_{{i}}"/>
-                  <!-- <input type="checkbox" name="" id=""> -->
+                </div>
+                <div class="parent-accept-delete">
+                  <div class="accept-delete">
+                    <span class="btn btn-sm btn-danger cstm-padding mt-1 float-left" (click)="deletePicture(photo.id)"><i class="fa fa-trash"></i></span>
+                    <span class="btn btn-sm btn-success cstm-padding mt-1 float-right" (click)="selectPicture(photo.id)"><i class="fa fa-check"></i></span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -38,14 +43,7 @@
             <img class="noresult-img img-responsive" src="../../../assets/img/no-result.gif">
         </div>
     </div>
-      <!-- <ul class="pagination mt-5 mb-5 p-3" style="display: flex;">
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">Next</a></li>
-          <li><a href="#">View All</a></li>
-      </ul> -->
+
     </div>
   </div>
 
