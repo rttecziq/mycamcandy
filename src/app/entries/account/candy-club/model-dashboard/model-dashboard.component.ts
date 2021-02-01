@@ -59,12 +59,12 @@ export class ModelDashboardComponent implements OnInit {
     this.channel_list = [];
     this.GiftErr = "";
 
-    this.sliders = [
-      {img: "https://via.placeholder.com/1368x400"},
-      {img: "https://via.placeholder.com/1368x400"},
-      {img: "https://via.placeholder.com/1368x400"},
-      {img: "https://via.placeholder.com/1368x400"}
-    ];
+    // this.sliders = [
+    //   {img: "https://via.placeholder.com/1368x400"},
+    //   {img: "https://via.placeholder.com/1368x400"},
+    //   {img: "https://via.placeholder.com/1368x400"},
+    //   {img: "https://via.placeholder.com/1368x400"}
+    // ];
 
   }
   slideConfig = {"slidesToShow": 1, "slidesToScroll": 1,autoplay: true,autoplaySpeed: 2000,speed: 1500};
@@ -78,12 +78,11 @@ export class ModelDashboardComponent implements OnInit {
   }
 
   afterChange(e) {
-    console.log('afterChange');
+    //console.log('afterChange');
   }
 
   ngAfterViewInit(){
-    let data1={type:'profile'};
-    this.sliderFn('getModelSlider', data1);
+    this.sliderFn('getModelSlider', {type:'profile'});
     // Load Logged In User Profile  
     let data={user_id:this.userId,listActivityData:'getActivitiesList'};
       this.getActivities('userActivities',data);
@@ -99,7 +98,7 @@ export class ModelDashboardComponent implements OnInit {
         (data : any ) => {
             if (data.success == true) {
                 this.channel_list = data.data;
-                console.log(this.channel_list);
+                //console.log(this.channel_list);
             } else {
                 this.errorMessages = data.error_messages;
                 this.toast_message("Error", this.errorMessages);
@@ -226,8 +225,7 @@ export class ModelDashboardComponent implements OnInit {
     this.requestService.postMethod(url,object) 
     .subscribe((data : any) => {
       if (data.success == true) {
-  //COMMENTED TEMPORARY AS DATA NOT AVAILABLE FROM API
-        //this.sliders = data.data;
+        this.sliders = data.data;
       } else {
           this.errorMessages = data.error_messages;
           this.toast_message("Error", this.errorMessages);
@@ -253,7 +251,7 @@ export class ModelDashboardComponent implements OnInit {
       if (data.success == true) {
           this.toast_message("Success", "Activities updated successfully");
           this.activities = data.data;
-          console.log(this.likeUsers);
+          //console.log(this.likeUsers);
       } else {
         this.errorMessages = data.error_messages;
         this.toast_message("Error", this.errorMessages);
@@ -278,7 +276,7 @@ export class ModelDashboardComponent implements OnInit {
       if (data.success == true) {
           this.toast_message("Success", "Activities deleted successfully");
           this.activities = data.data;
-          console.log(this.likeUsers);
+          //console.log(this.likeUsers);
       } else {
         this.errorMessages = data.error_messages;
         this.toast_message("Error", this.errorMessages);

@@ -21,7 +21,7 @@
 								<div ngxSlickItem *ngFor="let f_album of featured_album_list" class="slide">
 									<div (click)="st_shop_details('album', f_album.id)" role="button">
 										<div class="img-container">
-											  <img src="{{ f_album.album_cover_image }}" alt="" width="100%">
+											  <img src="{{ f_album.thumb }}" alt="" width="100%">
 											  <div class="overlay"></div>
 											  <div class="top-left"><i class="fa fa-play-circle"></i></div>
 											  <div class="centered" *ngIf="f_album.password != ''"><i class="fa fa-lock"></i></div>
@@ -69,7 +69,7 @@
 							<div ngxSlickItem *ngFor="let album of album_list" class="slide">
 								<div (click)="st_shop_details('album', album.id)" role="button">
 									<div class="img-container">
-										  <img src="{{ album.album_cover_image }}" alt="" width="100%">
+										  <img src="{{ album.thumb }}" alt="" width="100%">
 										  <div class="overlay"></div>
 										  <div class="top-left"><i class="fa fa-play-circle"></i></div>
 										  <div class="centered" *ngIf="album.password != ''"><i class="fa fa-lock"></i></div>

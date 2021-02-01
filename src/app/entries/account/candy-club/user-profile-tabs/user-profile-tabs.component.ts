@@ -9,6 +9,7 @@ import { sweetTreat } from '../../../../models/sweet-treat';
 import { Collection } from '../../../../models/collection';
 import { Album } from '../../../../models/album';
 import heic2any from "heic2any";
+import { promise } from 'protractor';
 
 declare var $: any ;
 
@@ -147,14 +148,13 @@ export class UserProfileTabsComponent implements AfterViewInit {
       $.getScript('../../../../assets/js/form.js',function(){
       });
       $.getScript('../../../../assets/js/lightbox.min.js',function(){
-      }); */
-      $.getScript('../../../../assets/js/heic2any.js',function(){
-    });
+      });
+    */
       // Load Logged In User Profile
   
       setTimeout(()=>{  
           this.user_profile_fn("userDetails", "");
-          this.model_collection_fn("listCollection", "");  
+          this.model_collection_fn("listCollection", "");
       }, 1000);
   
   }
@@ -431,7 +431,7 @@ collectionFormFn(form : NgForm) {
         );
 }
 
-albumUploadFormFn(form : NgForm) {
+async albumUploadFormFn(form : NgForm) {
     
     let formData = new FormData();
 
@@ -506,13 +506,17 @@ albumUploadFormFn(form : NgForm) {
     if(this.album_photo) {
 
         for (let i = 0; i < this.album_photo.length; i++) {
-            const file = this.album_photo[i];
-            
-            if (!file.type.match('image') && file.name.split('.').pop().toLowerCase() != 'heic') {
-                continue;
+
+            if(this.album_photo[i].name.split('.').pop().toLowerCase() == 'heic') {
+                // Display preloader of HEIC Conversion
+                let file : any;
+                file = await this.imageSelected(this.album_photo[i]);
+                formData.append("photo[]", file, file['name']);
+            } else {
+                formData.append("photo[]", this.album_photo[i], this.album_photo[i]['name']);
             }
 
-            formData.append("photo[]", file, file['name']);
+            // Remove Heic conversion preloader and show uploading preloader
         }
     }
 
@@ -528,24 +532,16 @@ albumUploadFormFn(form : NgForm) {
     }
 
     formData.append('album_cover_image', form.value['album_cover_image']);
-    
-    
 
     this.requestService.uploadAlbum('addAlbum', formData)
         .subscribe(
             (data : any ) => {
                 if (data.success === true) {
-                    // console.log(data);
-                    this.toast_message("Success", "Album added successfully");
-                    //if(data.data) {
-                        // hide popup of album upload
-                        // show popup heic conversion
-                        // for (let i = 0; i < 1; i++) {
-                        //     this.heic_conversion(data.data[i]);
-                        // }
-                    //}
                     $('#album_model_close').click();
-                    this.router.navigate(['/candy-club/'+this.username+'/album']);
+                    this.toast_message("Success", "Album added successfully");
+                    setTimeout(() => {
+                        this.router.navigate(['/candy-club/'+this.username+'/album']);
+                    }, 500);
                 } else {
                     this.errorMessages = data.error_messages;
                     this.toast_message("Error", this.errorMessages);                    
@@ -559,43 +555,39 @@ albumUploadFormFn(form : NgForm) {
         );
 }
 
-// heic conversion
-    heic_conversion(image_url) {
-        //console.log(image_url);
-                    //../../../../assets/img/2.heic
-                    // { mode: 'no-cors' }
-        //http://mycamcandy-server.local/uploads/album/11/heic/6c4f196756173e0c688424c83a17785bd53868d4.heic
-        fetch("https://alexcorvi.github.io/heic2any/demo/1.heic", { mode: 'no-cors' })
-        .then((res) => res.blob())
-        .then((blob) => heic2any({ blob, toType: "image/jpeg",quality: 0.7 }))
-        .then((conversionResult) => {
+async imageSelected(picture) {
 
-            var url = URL.createObjectURL(conversionResult);
-           // console.log('i am undefined '+url);
-            var xhr = new XMLHttpRequest;
-            xhr.responseType = 'blob';
-            //console.log('before onload');
-            xhr.onload = (event: any) => { 
-                let recoveredBlob = xhr.response;        
-                let reader = new FileReader;
-                reader.onload = (event: any) => {
-                let blobAsDataUrl = reader.result;
-               // console.log('blobAsDataUrl: '+blobAsDataUrl);
-                };
+    return new Promise((resolve)=>{
+        setTimeout(() => {
+            let f:File; 
+            f = picture;
 
-                reader.readAsDataURL(recoveredBlob);
-                //console.log('recoveredBlob: '+recoveredBlob);
+            if (!f) {
+                console.log('error occured');
+                return false;
+            }
+        
+            let blob:Blob = f;
+            let file:File = f;  
+            let convProm:Promise<any>;
+            
+            convProm = heic2any({blob,toType:"image/jpeg",quality:1}).then((jpgBlob:Blob) => {
+            let newName = f.name.replace(/\.[^/.]+$/, ".jpg");
+            file = this.blobToFile(jpgBlob,newName);
+            resolve(file);
 
-            };
+            }).catch(err => {
+                console.log(err);
+            });
+        }, 500);
+    })
 
-            xhr.open('GET', url);
-            xhr.send();
-
-        })
-        .catch((e) => {
-           // console.log(e);
-        });
-    }
+  }
+  
+  
+   blobToFile = (theBlob: Blob, fileName:string): File => {
+    return new File([theBlob], fileName, { lastModified: new Date().getTime(), type: theBlob.type })
+  }
 
 // logout
 logout() {
